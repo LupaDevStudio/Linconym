@@ -1,0 +1,28 @@
+[build-system]
+requires = ["Kivy==2.1.0"]
+build-backend = "Buildozer"
+
+[tool.pylint]
+recursive = "y"
+load-plugins = "pylint_report"
+ignore-patterns = ["draft*", "venv", "build", "dist", "old*"]
+disable = [
+    "wrong-import-position",
+    "no-member",
+    "no-name-in-module",
+    "too-many-instance-attributes",
+]
+
+[tool.pylint.basic]
+# Add names that will always be accepted by pylint
+good-names = ["i", "j", "k", "x", "y", "_"]
+
+[tool.pylint.reports]
+output-format = "pylint_report.CustomJsonReporter"
+reports = "y"
+
+# [tool.pytest.ini_options]
+# addopts = "--ignore=.buildozer --cov-report html:reports/coverage --cov-report xml --cov"
+
+# To generate html report with pytlint : python -m pylint . | pylint_report > reports/linting/report.html
+# To generate html reports with pytest : pytest . --ignore=.buildozer --cov-report html:reports/coverage --cov-report xml --cov

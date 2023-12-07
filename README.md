@@ -9,18 +9,11 @@ This game is licensed under the [Creative Commons Attribution-NonCommercial-Shar
 
 ## Gameplay
 
-Try to reach your destination by navigating from word to word !
-
-You are given at the beginning of the game two words, your start and your destination. You then have to combine words to try to get as close as possible from your destination.
-
-For example :
-
-King - Man + Woman gives 95% similarity with Queen.
 
 
 ## Distribution
 
-This game is available on the PlayStore and on Github.
+This game is available on the PlayStore.
 
 ## Authors
 
