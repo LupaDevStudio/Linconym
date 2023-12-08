@@ -4,7 +4,7 @@ build-backend = "Buildozer"
 
 [tool.pylint]
 recursive = "y"
-load-plugins = "pylint_report"
+# load-plugins = "pylint_report"
 ignore-patterns = ["draft*", "venv", "build", "dist", "old*"]
 disable = [
     "wrong-import-position",
@@ -17,9 +17,9 @@ disable = [
 # Add names that will always be accepted by pylint
 good-names = ["i", "j", "k", "x", "y", "_"]
 
-[tool.pylint.reports]
-output-format = "pylint_report.CustomJsonReporter"
-reports = "y"
+# [tool.pylint.reports]
+# output-format = "pylint_report.CustomJsonReporter"
+# reports = "y"
 
 # [tool.pytest.ini_options]
 # addopts = "--ignore=.buildozer --cov-report html:reports/coverage --cov-report xml --cov"
