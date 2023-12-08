@@ -1,7 +1,35 @@
 {
     "1": {
-        "start_word": "",
-        "end_word": "",
-        "solution": ""
+        "start_word": "link",
+        "end_word": "pink",
+        "solution": [
+            "link",
+            "pink"
+        ]
+    },
+    "2": {
+        "start_word": "pink",
+        "end_word": "pin",
+        "solution": [
+            "pink",
+            "pin"
+        ]
+    },
+    "3": {
+        "start_word": "pin",
+        "end_word": "pain",
+        "solution": [
+            "pin",
+            "pain"
+        ]
+    },
+    "4": {
+        "start_word": "pain",
+        "end_word": "rain",
+        "solution": [
+            "pain",
+            "rain",
+            "brain"
+        ]
     }
 }
