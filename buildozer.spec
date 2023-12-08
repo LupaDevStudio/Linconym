@@ -29,15 +29,15 @@ source.exclude_dirs = test, bin, .buildozer, data/collection, data/collection_co
 source.exclude_patterns = data.json, *.gitignore, requirements.txt, draft_*
 
 # (str) Application versioning (method 1)
-version = 1.0.0
+# version = 1.0.0
 
 # (str) Application versioning (method 2)
-# version.regex = __version__ = ['"](.*)['"]
-# version.filename = %(source.dir)s/main.py
+version.regex = __version__ = ['"](.*)['"]
+version.filename = tools/constants.py
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,androidstorage4kivy
+requirements = python3, kivy, androidstorage4kivy
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -240,7 +240,7 @@ android.gradle_dependencies = com.google.android.gms:play-services-ads:22.5.0, a
 #android.wakelock = False
 
 # (list) Android application meta-data to set (key=value format)
-android.meta_data = com.google.android.gms.ads.APPLICATION_ID=ca-app-pub-2909842258525517~8955683251
+android.meta_data = com.google.android.gms.ads.APPLICATION_ID=ca-app-pub-3940256099942544~3347511713
 
 # (list) Android library project to add (will be added in the
 # project.properties automatically.)
