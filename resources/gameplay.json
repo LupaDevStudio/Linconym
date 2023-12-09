@@ -1,35 +1,47 @@
 {
-    "1": {
-        "start_word": "link",
-        "end_word": "pink",
-        "solution": [
-            "link",
-            "pink"
-        ]
-    },
-    "2": {
-        "start_word": "pink",
-        "end_word": "pin",
-        "solution": [
-            "pink",
-            "pin"
-        ]
-    },
-    "3": {
-        "start_word": "pin",
-        "end_word": "pain",
-        "solution": [
-            "pin",
-            "pain"
-        ]
-    },
-    "4": {
-        "start_word": "pain",
-        "end_word": "rain",
-        "solution": [
-            "pain",
-            "rain",
-            "brain"
-        ]
+    "Act1": {
+        "name": "Act 1 : Tutorial",
+        "1": {
+            "start_word": "link",
+            "end_word": "pink",
+            "10k_sol": 2,
+            "375k_sol": 2
+        },
+        "2": {
+            "start_word": "pink",
+            "end_word": "pin"
+        },
+        "3": {
+            "start_word": "pin",
+            "end_word": "pain"
+        },
+        "4": {
+            "start_word": "pain",
+            "end_word": "brain"
+        },
+        "5": {
+            "start_word": "brain",
+            "end_word": "crane"
+        },
+        "6": {
+            "start_word": "crane",
+            "end_word": "chain"
+        },
+        "7": {
+            "start_word": "chain",
+            "end_word": "name"
+        },
+        "8": {
+            "start_word": "name",
+            "end_word": "chance"
+        },
+        "9": {
+            "start_word": "chance",
+            "end_word": "heart"
+        },
+        "10": {
+            "start_word": "heart",
+            "end_word": "tree"
+        }
     }
 }
