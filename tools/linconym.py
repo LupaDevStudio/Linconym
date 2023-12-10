@@ -7,7 +7,8 @@ Module containing the core of Linconym.
 ###############
 
 from tools.path import (
-    PATH_GAMEPLAY
+    PATH_GAMEPLAY,
+    PATH_RESOURCES_FOLDER
 )
 from tools.constants import (
     ENGLISH_WORDS_DICTS,
@@ -15,7 +16,8 @@ from tools.constants import (
 )
 from tools.basic_tools import (
     dichotomy,
-    save_json_file
+    save_json_file,
+    load_json_file
 )
 
 #################
@@ -236,8 +238,31 @@ def find_solutions(start_word: str, end_word: str, english_words: list = ENGLISH
     return solution
 
 
+def fill_daily_games_with_solutions():
+    DAILY_DICT = load_json_file(PATH_RESOURCES_FOLDER + "daily_games.json")
+    for date in DAILY_DICT:
+        start_word = DAILY_DICT[date]["start_word"]
+        end_word = DAILY_DICT[date]["end_word"]
+        if "simplest_solution" not in date:
+            for resolution in ENGLISH_WORDS_DICTS:
+                solution = find_solutions(
+                    start_word=start_word,
+                    end_word=end_word,
+                    english_words=ENGLISH_WORDS_DICTS[resolution])
+                if solution is not None:
+                    DAILY_DICT[date]["simplest_solution"] = solution
+                    break
+        if "best_solution" not in date:
+            if resolution != "375k":
+                solution = find_solutions(
+                    start_word=start_word,
+                    end_word=end_word,
+                    english_words=ENGLISH_WORDS_DICTS["375k"])
+            DAILY_DICT[date]["best_solution"] = solution
+    save_json_file(PATH_RESOURCES_FOLDER + "daily_games.json", DAILY_DICT)
+
+
 def fill_gameplay_dict_with_solutions():
-    print(GAMEPLAY_DICT)
     for act in GAMEPLAY_DICT:
         for level in GAMEPLAY_DICT[act]:
             if level == "name":
@@ -245,8 +270,8 @@ def fill_gameplay_dict_with_solutions():
             start_word = GAMEPLAY_DICT[act][level]["start_word"]
             end_word = GAMEPLAY_DICT[act][level]["end_word"]
             for resolution in ENGLISH_WORDS_DICTS:
-                print(resolution)
                 if f"{resolution}_sol" not in GAMEPLAY_DICT[act][level]:
+                    print(resolution)
                     solution = find_solutions(
                         start_word=start_word,
                         end_word=end_word,
@@ -340,3 +365,4 @@ class Game():
 
 if __name__ == "__main__":
     fill_gameplay_dict_with_solutions()
+    fill_daily_games_with_solutions()
