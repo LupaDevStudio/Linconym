@@ -20,7 +20,10 @@ PATH_MUSICS = PATH_RESOURCES_FOLDER + "musics/"
 PATH_FONTS = PATH_RESOURCES_FOLDER + "fonts/"
 PATH_GAMEPLAY = PATH_RESOURCES_FOLDER + "gameplay.json"
 PATH_PALETTES = PATH_RESOURCES_FOLDER + "palette.json"
-PATH_WORDS = PATH_RESOURCES_FOLDER + "english_words_370k.txt"
+PATH_WORDS_375K = PATH_RESOURCES_FOLDER + "english_words_375k.txt"
+PATH_WORDS_10K = PATH_RESOURCES_FOLDER + "english_words_10k.txt"
+PATH_WORDS_34K = PATH_RESOURCES_FOLDER + "english_words_34k.txt"
+PATH_WORDS_88K = PATH_RESOURCES_FOLDER + "english_words_88k.txt"
 
 # Path for the fonts
 PATH_TEXT_FONT = PATH_FONTS + "Oxanium-ExtraBold.ttf"

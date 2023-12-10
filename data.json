@@ -14,8 +14,8 @@
     "settings": {
         "sound_volume": 0.5,
         "music_volume": 0.5,
-        "current_background": "",
+        "current_background_theme": "",
         "current_music": "",
-        "current_palette": ""
+        "current_palette_theme": ""
     }
 }

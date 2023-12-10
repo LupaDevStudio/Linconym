@@ -6,9 +6,17 @@ Module containing the core of Linconym.
 ### Imports ###
 ###############
 
-from time import time
-from tools.constants import ENGLISH_WORDS
-from tools.basic_tools import dichotomy
+from tools.path import (
+    PATH_GAMEPLAY
+)
+from tools.constants import (
+    ENGLISH_WORDS_DICTS,
+    GAMEPLAY_DICT
+)
+from tools.basic_tools import (
+    dichotomy,
+    save_json_file
+)
 
 #################
 ### Functions ###
@@ -30,7 +38,7 @@ def is_in_english_words(word: str):
         True if the word is in the dictionnary, False otherwise.
     """
 
-    return dichotomy(word, ENGLISH_WORDS) is not None
+    return dichotomy(word, ENGLISH_WORDS_DICTS["375k"]) is not None
 
 
 def count_different_letters(word1: str, word2: str):
@@ -128,9 +136,9 @@ def is_valid(new_word: str, current_word: str, skip_in_english_words: bool = Fal
     return valid_bool
 
 
-def find_all_next_words(current_word: str):
+def find_all_next_words(current_word: str, english_words):
     next_words = []
-    for word in ENGLISH_WORDS:
+    for word in english_words:
         if is_valid(word, current_word, skip_in_english_words=True):
             next_words.append(word)
 
@@ -143,95 +151,6 @@ def convert_position_to_wordlist(position: tuple, position_to_word_id, words_fou
         word = words_found[position_to_word_id[position[:i]]]
         wordlist.append(word)
     return wordlist
-
-
-def find_solutions(start_word: str, end_word: str):
-    start_position = (0,)
-    position_to_word_id = {start_position: 0}
-    words_found = [start_word]
-    pile = [start_position]
-
-    not_found = True
-
-    while len(pile) != 0 and not_found:
-        current_position = pile.pop(0)
-        current_word = words_found[position_to_word_id[current_position]]
-        print(current_word)
-        print(current_position)
-        next_words = find_all_next_words(current_word)
-        new_word_id = 0
-        for word in next_words:
-            if word not in words_found or word == end_word:
-                new_position = current_position + (new_word_id,)
-                position_to_word_id[new_position] = len(words_found)
-                words_found.append(word)
-                new_word_id += 1
-                if word == end_word:
-                    not_found = False
-                    final_position = new_position
-                else:
-                    pile.append(new_position)
-
-    solution = []
-    for i in range(1, len(final_position) + 1):
-        word = words_found[position_to_word_id[final_position[:i]]]
-        solution.append(word)
-
-    return solution
-
-
-def find_solutions_v2(start_word, end_word):
-    start_position = (0,)
-    position_to_word_id = {start_position: 0}
-    words_found = [start_word]
-    pile = {}
-
-    for i in range(len(end_word) + 1):
-        pile[i] = []
-
-    pile[0].append(start_position)
-
-    not_found = True
-
-    while not_found:
-        current_position = None
-        for i in range(len(end_word), -1, -1):
-            if len(pile[i]) > 0:
-                current_nb_common_letters = i
-                current_position = pile[i].pop(0)
-                break
-
-        if current_position is None:
-            return ValueError("No link found")
-
-        current_word = words_found[position_to_word_id[current_position]]
-        print(current_word, i)
-        print(current_position)
-        next_words = find_all_next_words(current_word)
-        # print(len(next_words))
-        new_word_id = 0
-
-        for word in next_words:
-            if word not in words_found or word == end_word:
-                temp_nb_common_letters = count_common_letters(word, end_word)
-                new_position = current_position + (new_word_id,)
-                position_to_word_id[new_position] = len(words_found)
-                words_found.append(word)
-                new_word_id += 1
-                if word == end_word:
-                    # not_found = False
-                    final_position = new_position
-                    print(convert_position_to_wordlist(
-                        final_position, position_to_word_id, words_found))
-                else:
-                    pile[temp_nb_common_letters].append(new_position)
-
-    solution = []
-    for i in range(1, len(final_position) + 1):
-        word = words_found[position_to_word_id[final_position[:i]]]
-        solution.append(word)
-
-    return solution
 
 
 def insert_in_sorted_list(item, sorted_list):
@@ -257,7 +176,7 @@ def insert_in_sorted_list(item, sorted_list):
     return new_list
 
 
-def find_solutions_v3(start_word, end_word):
+def find_solutions(start_word: str, end_word: str, english_words: list = ENGLISH_WORDS_DICTS["375k"]):
 
     start_position = (0,)
     position_to_word_id = {start_position: 0}
@@ -280,12 +199,12 @@ def find_solutions_v3(start_word, end_word):
                 break
 
         if current_position is None:
-            return ValueError("No link found")
+            return None
 
         current_word = words_found[position_to_word_id[current_position]]
         # print(current_word, i)
         # print(current_position)
-        next_words = find_all_next_words(current_word)
+        next_words = find_all_next_words(current_word, english_words)
         # print(len(next_words))
         new_word_id = 0
 
@@ -297,7 +216,7 @@ def find_solutions_v3(start_word, end_word):
                 words_found.append(word)
                 new_word_id += 1
                 if word == end_word:
-                    # not_found = False
+                    not_found = False
                     final_position = new_position
                     print(convert_position_to_wordlist(
                         final_position, position_to_word_id, words_found))
@@ -315,6 +234,30 @@ def find_solutions_v3(start_word, end_word):
         solution.append(word)
 
     return solution
+
+
+def fill_gameplay_dict_with_solutions():
+    print(GAMEPLAY_DICT)
+    for act in GAMEPLAY_DICT:
+        for level in GAMEPLAY_DICT[act]:
+            if level == "name":
+                continue
+            start_word = GAMEPLAY_DICT[act][level]["start_word"]
+            end_word = GAMEPLAY_DICT[act][level]["end_word"]
+            for resolution in ENGLISH_WORDS_DICTS:
+                print(resolution)
+                if f"{resolution}_sol" not in GAMEPLAY_DICT[act][level]:
+                    solution = find_solutions(
+                        start_word=start_word,
+                        end_word=end_word,
+                        english_words=ENGLISH_WORDS_DICTS[resolution])
+                    if solution is not None:
+                        GAMEPLAY_DICT[act][level][f"{resolution}_sol"] = len(
+                            solution)
+                    else:
+                        GAMEPLAY_DICT[act][level][f"{resolution}_sol"] = None
+
+    save_json_file(PATH_GAMEPLAY, GAMEPLAY_DICT)
 
 #############
 ### Class ###
@@ -396,5 +339,4 @@ class Game():
 
 
 if __name__ == "__main__":
-    # print(find_all_next_words("monkey"))
-    print(find_solutions_v3("dinosaur", "monkey"))
+    fill_gameplay_dict_with_solutions()

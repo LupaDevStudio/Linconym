@@ -26,7 +26,11 @@ from kivy import platform
 
 from tools.path import (
     PATH_USER_DATA,
-    PATH_WORDS
+    PATH_WORDS_10K,
+    PATH_WORDS_34K,
+    PATH_WORDS_88K,
+    PATH_WORDS_375K,
+    PATH_GAMEPLAY
 )
 from tools.basic_tools import (
     load_json_file,
@@ -149,7 +153,33 @@ INTERSTITIAL = ""
 ### Words loading ###
 
 
-with open(PATH_WORDS) as file:
-    ENGLISH_WORDS = []
+with open(PATH_WORDS_10K) as file:
+    ENGLISH_WORDS_10K = []
     for i, line in enumerate(file):
-        ENGLISH_WORDS.append(line.replace("\n", ""))
+        ENGLISH_WORDS_10K.append(line.replace("\n", ""))
+
+with open(PATH_WORDS_34K) as file:
+    ENGLISH_WORDS_34K = []
+    for i, line in enumerate(file):
+        ENGLISH_WORDS_34K.append(line.replace("\n", ""))
+
+with open(PATH_WORDS_88K) as file:
+    ENGLISH_WORDS_88K = []
+    for i, line in enumerate(file):
+        ENGLISH_WORDS_88K.append(line.replace("\n", ""))
+
+with open(PATH_WORDS_375K) as file:
+    ENGLISH_WORDS_375K = []
+    for i, line in enumerate(file):
+        ENGLISH_WORDS_375K.append(line.replace("\n", ""))
+
+ENGLISH_WORDS_DICTS = {
+    "10k": ENGLISH_WORDS_10K,
+    "34k": ENGLISH_WORDS_34K,
+    "88k": ENGLISH_WORDS_88K,
+    "375k": ENGLISH_WORDS_375K
+}
+
+### Levels ###
+
+GAMEPLAY_DICT = load_json_file(PATH_GAMEPLAY)
