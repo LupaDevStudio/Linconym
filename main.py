@@ -10,12 +10,11 @@ Main module of Linconym.
 
 ### Python imports ###
 
-import os
-import platform
-os_name = platform.system()
-if os_name == "Windows":
-    os.environ['KIVY_TEXT'] = 'pil'
-print("Python packages loaded")
+# import os
+# import platform
+# os_name = platform.system()
+# if os_name == "Windows":
+#     os.environ['KIVY_TEXT'] = 'pil'
 
 ### Kivy imports ###
 
@@ -28,7 +27,6 @@ from kivy.uix.screenmanager import ScreenManager, NoTransition, Screen
 from kivy.uix.widget import Widget
 from kivy.core.window import Window
 from kivy.clock import Clock
-print("Kivy packages loaded")
 
 ### Module imports ###
 
@@ -42,8 +40,6 @@ from tools.constants import (
     MSAA_LEVEL
 )
 import screens.opening
-
-print("Local packages loaded")
 
 
 ###############
@@ -63,7 +59,6 @@ class WindowManager(ScreenManager):
         current_screen = Screen(name="temp")
         self.add_widget(current_screen)
         self.current = "temp"
-        print("WindowManager initialised")
 
 
 class MainApp(App, Widget):
@@ -121,4 +116,5 @@ class MainApp(App, Widget):
 
 # Run the application
 if __name__ == "__main__":
+    Window.size = (480, 854)
     MainApp().run()

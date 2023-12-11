@@ -14,7 +14,7 @@
     "settings": {
         "sound_volume": 0.5,
         "music_volume": 0.5,
-        "current_background_theme": "",
+        "current_background_theme": "japanese_1",
         "current_music": "",
         "current_palette_theme": ""
     }

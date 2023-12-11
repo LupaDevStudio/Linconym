@@ -1,7 +1,9 @@
 {
-    "theme_1": {
+    "japanese_1": {
         "primary": "",
         "secondary": "",
-        "image": ""
+        "image": "pagode.jpg",
+        "price": 0,
+        "name": ""
     }
 }

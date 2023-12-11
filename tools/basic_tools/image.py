@@ -52,6 +52,12 @@ def get_image_size(file_path):
     return (img.width, img.height)
 
 
+class MockImageMetadata():
+    def __init__(self, width, height) -> None:
+        self.width = width
+        self.height = height
+
+
 def get_image_metadata(file_path):
     """
     Return an `Image` object for a given img file content - no external
@@ -63,7 +69,11 @@ def get_image_metadata(file_path):
     Returns:
         Image: (path, type, file_size, width, height)
     """
-    size = os.path.getsize(file_path)
+    try:
+        size = os.path.getsize(file_path)
+    except FileNotFoundError:
+        print(f"Warning, {file_path} not found")
+        return MockImageMetadata(100, 100)
 
     # be explicit with open arguments - we need binary mode
     with io.open(file_path, "rb") as input:

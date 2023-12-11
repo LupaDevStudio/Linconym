@@ -30,7 +30,8 @@ from tools.path import (
     PATH_WORDS_34K,
     PATH_WORDS_88K,
     PATH_WORDS_375K,
-    PATH_GAMEPLAY
+    PATH_GAMEPLAY,
+    PATH_THEMES
 )
 from tools.basic_tools import (
     load_json_file,
@@ -137,8 +138,14 @@ class ColorPalette():
         self.PRIMARY = (0, 0, 0, 1)
         self.SECONDARY = (0, 0, 0, 1)
 
+### Graphics ###
+
 
 TEXT_FONT_COLOR = (0, 0, 0, 1)
+TITLE_FONT_SIZE = 45
+TITLE_OUTLINE_WIDTH = 2
+TITLE_OUTLINE_COLOR = (1, 1, 1, 1)
+BOTTOM_BAR_HEIGHT = 0.12
 
 ### Musics ###
 
@@ -183,3 +190,7 @@ ENGLISH_WORDS_DICTS = {
 ### Levels ###
 
 GAMEPLAY_DICT = load_json_file(PATH_GAMEPLAY)
+
+### Themes ###
+
+THEMES_DICT = load_json_file(PATH_THEMES)
