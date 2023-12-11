@@ -8,6 +8,7 @@ class ImageButton(ButtonBehavior, Image):
         self.release_function = release_function
         self.source = source
         self.fit_mode = "contain"
+        self.always_release = True
 
     def on_press(self):
         self.opacity = 0.8
