@@ -8,7 +8,10 @@ Module to create the bottom bar with the buttons.
 
 ### Kivy imports ###
 from kivy.uix.relativelayout import RelativeLayout
-from kivy.properties import ListProperty, StringProperty, ObjectProperty
+from kivy.properties import (
+    StringProperty,
+    ObjectProperty
+)
 
 ### Local imports ###
 from tools.kivy_tools import ImageButton
@@ -21,7 +24,7 @@ from tools.kivy_tools import ImageButton
 class BottomBar(RelativeLayout):
     background_color = (0, 0, 0, 0.5)
     separation_color = (1, 1, 1, 1)
-    selected_color = (1, 0, 0, 1)
+    selected_color = (0.3, 0.3, 0.3, 0.7)
     separation_height = 3
     button_width = 0.15
     button_height = 0.7
