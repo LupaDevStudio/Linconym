@@ -43,3 +43,19 @@ class BottomBar(RelativeLayout):
                 (self.ids[self.selected + "_button"].size_hint[0] * 1.2,
                  self.ids[self.selected + "_button"].size_hint[1] * 1.2)
         return super().on_kv_post(base_widget)
+
+    def open_home(self):
+        if self.selected != "home":
+            self.parent.manager.current = "home"
+
+    def open_settings(self):
+        if self.selected != "settings":
+            self.parent.manager.current = "settings"
+
+    def open_customization(self):
+        if self.selected != "customization":
+            self.parent.manager.current = "customization"
+
+    def open_profile(self):
+        if self.selected != "profile":
+            self.parent.manager.current = "profile"
