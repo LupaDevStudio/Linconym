@@ -1,8 +1,17 @@
 # Todo
 
-indice pour dire en combien de coups c'est possible
-quantité d'XP par niveau ?
-définir l'XP autrement
-clean les bases ?
-toute l'XP sur les chemins à +1 ou +2 selon le nombre de mots 
-Bouger le bouton history dans le daily mode
+## Design
+
+- [ ] add the link to the lupadevstudio website
+
+## Back
+
+## Front
+
+## Ideas
+
+- [ ] add a hint system to indicate the number of words used by the best solution
+- [ ] rethink the system of xp obtained for each level
+  - [ ] maybe give all xp for paths that are longer than the best solution
+- [ ] study the problem of cleaning the data bases from all names
+- [ ] move the history button in the daily mode screen
