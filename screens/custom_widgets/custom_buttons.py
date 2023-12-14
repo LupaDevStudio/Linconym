@@ -1,0 +1,59 @@
+"""
+Module to create custom buttons with round transparent white background.
+"""
+
+###############
+### Imports ###
+###############
+
+### Kivy imports ###
+from kivy.uix.widget import Widget
+from kivy.uix.behaviors import ButtonBehavior
+from kivy.properties import (
+    StringProperty,
+    NumericProperty
+)
+
+### Local imports ###
+from tools.path import (
+    PATH_TEXT_FONT
+)
+from tools.constants import (
+    CUSTOM_BUTTON_BACKGROUND_COLOR,
+    MAIN_BUTTON_FONT_SIZE
+)
+
+#############
+### Class ###
+#############
+
+
+class CustomButton(ButtonBehavior, Widget):
+
+    background_color = CUSTOM_BUTTON_BACKGROUND_COLOR
+    text = StringProperty()
+    text_filling_ratio = NumericProperty()
+    font_size = NumericProperty()
+
+    def __init__(
+            self,
+            text="",
+            text_font_name=PATH_TEXT_FONT,
+            text_filling_ratio=0.8,
+            font_size=MAIN_BUTTON_FONT_SIZE,
+            release_function=lambda: 1 + 1,
+            **kwargs):
+        super().__init__(**kwargs)
+        self.release_function = release_function
+        self.always_release = True
+        self.text_font_name = text_font_name
+        self.text = text
+        self.text_filling_ratio = text_filling_ratio
+        self.font_size = font_size
+
+    def on_press(self):
+        self.opacity = 0.8
+
+    def on_release(self):
+        self.release_function()
+        self.opacity = 1
