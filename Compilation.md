@@ -15,15 +15,15 @@
 ### Creation of the app signing key
 
 ```bash
-keytool -genkey -v -keystore ~/keystores/Postrias.keystore -alias Postrias -keyalg RSA -keysize 2048 -validity 10000
-keytool -importkeystore -srckeystore ~/keystores/Postrias.keystore -destkeystore ~/keystores/Postrias.keystore -deststoretype pkcs12
+keytool -genkey -v -keystore ~/keystores/Linconym.keystore -alias Linconym -keyalg RSA -keysize 2048 -validity 10000
+keytool -importkeystore -srckeystore ~/keystores/Linconym.keystore -destkeystore ~/keystores/Linconym.keystore -deststoretype pkcs12
 ```
 
 ### Compilation of a release version
 
 ```bash
-export P4A_RELEASE_KEYALIAS="Postrias"
-export P4A_RELEASE_KEYSTORE=~/keystores/Postrias.keystore
+export P4A_RELEASE_KEYALIAS="Linconym"
+export P4A_RELEASE_KEYSTORE=~/keystores/Linconym.keystore
 export P4A_RELEASE_KEYSTORE_PASSWD=
 export P4A_RELEASE_KEYALIAS_PASSWD=
 python -m buildozer android release

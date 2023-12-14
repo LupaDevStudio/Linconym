@@ -8,14 +8,6 @@ Main module of Linconym.
 ###############
 
 
-### Python imports ###
-
-# import os
-# import platform
-# os_name = platform.system()
-# if os_name == "Windows":
-#     os.environ['KIVY_TEXT'] = 'pil'
-
 ### Kivy imports ###
 
 # Disable back arrow
@@ -23,7 +15,11 @@ from kivy.config import Config
 Config.set('kivy', 'exit_on_escape', '0')
 
 from kivy.app import App
-from kivy.uix.screenmanager import ScreenManager, NoTransition, Screen
+from kivy.uix.screenmanager import (
+    ScreenManager,
+    NoTransition,
+    Screen,
+)
 from kivy.uix.widget import Widget
 from kivy.core.window import Window
 from kivy.clock import Clock

@@ -9,9 +9,9 @@
 #:import BOTTOM_BAR_HEIGHT tools.constants.BOTTOM_BAR_HEIGHT
 
 
-<HomeScreen>:
+<FreeModeScreen>:
     Label:
-        text: "Linconym"
+        text: "Free Mode"
         font_name: PATH_TITLE_FONT
         font_size: TITLE_FONT_SIZE * root.font_ratio
         pos_hint: {"center_x":0.5, "center_y":0.9}
@@ -24,12 +24,3 @@
         pos_hint: {"bottom":0,"left":0}
         selected: "home"
 
-    CustomButton:
-        size_hint: (0.5,0.1)
-        pos_hint: {"center_x":0.5, "center_y":0.6}
-        text:"Free Mode"
-
-    CustomButton:
-        size_hint: (0.5,0.1)
-        pos_hint: {"center_x":0.5, "center_y":0.45}
-        text:"Daily Mode"
