@@ -29,6 +29,9 @@ from tools.constants import (
 
 
 class CustomButton(ButtonBehavior, Widget):
+    """
+    A custom button with a white round rectangle background.
+    """
 
     background_color = CUSTOM_BUTTON_BACKGROUND_COLOR
     text = StringProperty()

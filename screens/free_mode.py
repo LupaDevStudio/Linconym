@@ -13,10 +13,6 @@ from tools.constants import (
     USER_DATA,
     THEMES_DICT
 )
-from screens.custom_widgets import (
-    BottomBar,
-    CustomButton
-)
 from tools.kivy_tools import (
     ImprovedScreen,
     ImageButton

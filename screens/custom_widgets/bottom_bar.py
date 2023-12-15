@@ -22,6 +22,9 @@ from tools.kivy_tools import ImageButton
 
 
 class BottomBar(RelativeLayout):
+    """
+    Class to create a bottom bar to quickly select a screen.
+    """
     background_color = (0, 0, 0, 0.5)
     separation_color = (1, 1, 1, 1)
     selected_color = (0.3, 0.3, 0.3, 0.7)
@@ -31,9 +34,6 @@ class BottomBar(RelativeLayout):
     selected = StringProperty()
     selected_rect_pos = ObjectProperty((0, 0))
     selected_rect_size = ObjectProperty((0, 0))
-
-    def __init__(self, **kw):
-        super().__init__(**kw)
 
     def on_kv_post(self, base_widget):
         if self.selected + "_button" in self.ids.keys():
@@ -45,17 +45,29 @@ class BottomBar(RelativeLayout):
         return super().on_kv_post(base_widget)
 
     def open_home(self):
+        """
+        Open the home screen.
+        """
         if self.selected != "home":
             self.parent.manager.current = "home"
 
     def open_settings(self):
+        """
+        Open the settings screen.
+        """
         if self.selected != "settings":
             self.parent.manager.current = "settings"
 
     def open_customization(self):
+        """
+        Open the customization screen.
+        """
         if self.selected != "customization":
             self.parent.manager.current = "customization"
 
     def open_profile(self):
+        """
+        Open the profile screen.
+        """
         if self.selected != "profile":
             self.parent.manager.current = "profile"

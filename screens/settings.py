@@ -13,13 +13,8 @@ from tools.constants import (
     USER_DATA,
     THEMES_DICT
 )
-from screens.custom_widgets import (
-    BottomBar,
-    CustomButton
-)
 from tools.kivy_tools import (
     ImprovedScreen,
-    ImageButton
 )
 
 
@@ -29,6 +24,9 @@ from tools.kivy_tools import (
 
 
 class SettingsScreen(ImprovedScreen):
+    """
+    Class to manage the settings screen.
+    """
 
     def __init__(self, **kwargs) -> None:
         current_background_theme = USER_DATA.settings["current_background_theme"]

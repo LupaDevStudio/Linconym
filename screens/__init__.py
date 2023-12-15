@@ -6,6 +6,10 @@ Package to manage the screens of the application
 ### Imports ###
 ###############
 
+from screens.custom_widgets import (
+    BottomBar,
+    CustomButton
+)
 from screens.home import HomeScreen
 from screens.profile import ProfileScreen
 from screens.customization import CustomizationScreen
