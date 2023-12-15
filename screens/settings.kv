@@ -11,7 +11,7 @@
 
 <SettingsScreen>:
     Label:
-        text: "TO DO"
+        text: "Settings"
         font_name: PATH_TITLE_FONT
         font_size: TITLE_FONT_SIZE * root.font_ratio
         pos_hint: {"center_x":0.5, "center_y":0.9}
@@ -24,3 +24,8 @@
         pos_hint: {"bottom":0,"left":0}
         selected: "settings"
 
+    CustomLabel:
+        size_hint: (0.7,0.3)
+        pos_hint: {"center_x":0.5, "center_y":0.4}
+        title:"Credits"
+        content:"This game has been developped by LupaDevStudio."
