@@ -34,3 +34,9 @@ class HomeScreen(ImprovedScreen):
             back_image_path=PATH_BACKGROUNDS +
             THEMES_DICT[current_background_theme]["image"],
             **kwargs)
+
+    def open_free_mode(self):
+        """
+        Open the free mode screen.
+        """
+        self.manager.current = "free_mode"

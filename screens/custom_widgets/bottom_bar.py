@@ -48,26 +48,22 @@ class BottomBar(RelativeLayout):
         """
         Open the home screen.
         """
-        if self.selected != "home":
-            self.parent.manager.current = "home"
+        self.parent.manager.current = "home"
 
     def open_settings(self):
         """
         Open the settings screen.
         """
-        if self.selected != "settings":
-            self.parent.manager.current = "settings"
+        self.parent.manager.current = "settings"
 
     def open_customization(self):
         """
         Open the customization screen.
         """
-        if self.selected != "customization":
-            self.parent.manager.current = "customization"
+        self.parent.manager.current = "customization"
 
     def open_profile(self):
         """
         Open the profile screen.
         """
-        if self.selected != "profile":
-            self.parent.manager.current = "profile"
+        self.parent.manager.current = "profile"

@@ -59,7 +59,8 @@ class OpeningScreen(ImprovedScreen):
             HomeScreen,
             SettingsScreen,
             ProfileScreen,
-            CustomizationScreen
+            CustomizationScreen,
+            FreeModeScreen
         )
 
         screen_files = [file for file in os.listdir(
@@ -76,6 +77,7 @@ class OpeningScreen(ImprovedScreen):
         self.SettingsScreen = SettingsScreen
         self.ProfileScreen = ProfileScreen
         self.CustomizationScreen = CustomizationScreen
+        self.FreeModeScreen = FreeModeScreen
 
         Clock.schedule_once(self.load_other_screens)
 
@@ -93,4 +95,6 @@ class OpeningScreen(ImprovedScreen):
         self.manager.add_widget(profile_screen)
         customization_screen = self.CustomizationScreen(name="customization")
         self.manager.add_widget(customization_screen)
+        free_mode_screen = self.FreeModeScreen(name="free_mode")
+        self.manager.add_widget(free_mode_screen)
         Clock.schedule_once(self.switch_to_menu)
