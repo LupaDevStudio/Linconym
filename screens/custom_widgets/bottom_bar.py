@@ -42,6 +42,9 @@ class BottomBar(RelativeLayout):
             self.selected_rect_size = \
                 (self.ids[self.selected + "_button"].size_hint[0] * 1.2,
                  self.ids[self.selected + "_button"].size_hint[1] * 1.2)
+        else:
+            self.selected_rect_pos = self.ids["home_button"].pos_hint
+            self.selected_rect_size = (0, 0)
         return super().on_kv_post(base_widget)
 
     def open_home(self):

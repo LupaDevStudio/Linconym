@@ -1,6 +1,6 @@
 {
     "Act1": {
-        "name": "Act 1 : Tutorial",
+        "name": "Act 1 - Tutorial",
         "1": {
             "start_word": "link",
             "end_word": "pink",
@@ -81,5 +81,20 @@
             "88k_sol": 3,
             "375k_sol": 3
         }
+    },
+    "Act2": {
+        "name": "Act 2 - Haunted Forest"
+    },
+    "Act3": {
+        "name": "Act 3 - The Cruise"
+    },
+    "Act4": {
+        "name": "Act 4 - Space Exploration"
+    },
+    "Act5": {
+        "name": "Act 5 - Around the World"
+    },
+    "Act6": {
+        "name": "Act 6 - My Little Poney"
     }
 }
