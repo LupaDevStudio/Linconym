@@ -24,7 +24,8 @@ from tools.path import (
 from tools.constants import (
     CUSTOM_BUTTON_BACKGROUND_COLOR,
     MAIN_BUTTON_FONT_SIZE,
-    OPACITY_ON_BUTTON_PRESS
+    OPACITY_ON_BUTTON_PRESS,
+    ACT_BUTTON_FONT_SIZE
 )
 
 #############
@@ -41,7 +42,7 @@ class ActButton(ButtonBehavior, RelativeLayout):
     act_title = StringProperty()
     completion_text = StringProperty()
     font_size = NumericProperty()
-    font_ratio = NumericProperty(1)
+    font_ratio = NumericProperty()
     nb_levels = NumericProperty()
     nb_completed_levels = NumericProperty()
     nb_stars = NumericProperty()
@@ -55,7 +56,7 @@ class ActButton(ButtonBehavior, RelativeLayout):
             nb_stars: Literal[0, 1, 2, 3] = None,
             parent=None,
             text_font_name=PATH_TEXT_FONT,
-            font_size=MAIN_BUTTON_FONT_SIZE,
+            font_size=ACT_BUTTON_FONT_SIZE,
             release_function=lambda: 1 + 1,
             font_ratio=None,
             **kwargs):
@@ -74,6 +75,7 @@ class ActButton(ButtonBehavior, RelativeLayout):
             self.font_ratio = font_ratio
 
         super().__init__(**kwargs)
+        print(self.ids.act_title_label.font_size)
         self.release_function = release_function
         self.always_release = True
         self.text_font_name = text_font_name
@@ -86,6 +88,7 @@ class ActButton(ButtonBehavior, RelativeLayout):
             self.nb_completed_levels) + "/" + str(self.nb_levels)
 
     def on_press(self):
+        print(self.ids.act_title_label.font_size)
         self.opacity = OPACITY_ON_BUTTON_PRESS
 
     def on_release(self):

@@ -38,13 +38,9 @@ class FreeModeScreen(ImprovedScreen):
             back_image_path=PATH_BACKGROUNDS +
             THEMES_DICT[current_background_theme]["image"],
             **kwargs)
+        self.ACT_BUTTON_DICT = {}
+        self.on_resize()
         self.fill_scrollview()
-
-    def on_pre_enter(self, *args):
-        for act in self.ACT_BUTTON_DICT:
-            self.ACT_BUTTON_DICT[act].font_ratio = self.font_ratio
-            self.ACT_BUTTON_DICT[act].opacity = 1
-        return super().on_pre_enter(*args)
 
     def on_resize(self, *args):
         for act in self.ACT_BUTTON_DICT:
@@ -52,11 +48,6 @@ class FreeModeScreen(ImprovedScreen):
         return super().on_resize(*args)
 
     def fill_scrollview(self):
-        # Create the layout
-        # scrollview_layout = GridLayout(cols=1, row_force_default=True, row_default_height=50,
-        #                                pos_hint={'center_x': .5}, size_hint=(None, None))
-        # scrollview_layout.bind(minimum_size=scrollview_layout.setter('size'))
-        # scrollview_layout.bind(height=scrollview_layout.setter('top'))
         scrollview_layout = self.ids["scrollview_layout"]
         # Load the widgets
         self.ACT_BUTTON_DICT = {}
@@ -72,8 +63,6 @@ class FreeModeScreen(ImprovedScreen):
                 nb_levels=nb_levels,
                 nb_completed_levels=nb_completed_levels,
                 nb_stars=0,
-                font_ratio=self.font_ratio,
-                opacity=0)
+                font_ratio=self.font_ratio)
             self.ACT_BUTTON_DICT[act] = current_act_button
             scrollview_layout.add_widget(self.ACT_BUTTON_DICT[act])
-        # self.ids["scrollview"].add_widget(scrollview_layout)

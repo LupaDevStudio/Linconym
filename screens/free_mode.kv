@@ -25,40 +25,15 @@
         pos_hint: {"bottom":0,"left":0}
         selected: "none"
 
-    # ActButton:
-    #     size_hint: (0.7,0.15)
-    #     pos_hint:{"center_x":0.5,"center_y":0.5}
-    #     nb_stars: 2
-    #     nb_levels: 10
-    #     nb_completed_levels: 8
-    #     act_title: "Act 1 - Tutorial"
-
     ScrollView:
         id: scrollview
         pos_hint: {"center_x":0.5, "center_y":0.475}
         size_hint: (1,0.7)
         do_scroll_x: False
 
-        
-        
         MyScrollViewLayout:
             id: scrollview_layout
             cols:1
             spacing:40
             height:0.2*root.height * len(GAMEPLAY_DICT)
-            # size_hint: (0.8, None)
             padding: (0.05*root.width, 0,0.05*root.width,40)
-            # size_hint: (None,None)
-            # size: self.minimum_size
-            # top:self.height
-            # # pos: (100,0)
-            # pos_hint: {"center_x":0.5}
-
-            # # Background
-            # canvas.before:
-            #     Color:
-            #         rgba: (1,0,0)
-            #     RoundedRectangle:
-            #         pos:self.pos
-            #         size:self.size
-            #         radius:[40,]
