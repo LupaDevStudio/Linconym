@@ -29,7 +29,7 @@ class ThreeStars(RelativeLayout):
     star_color_dict = {1: star_one_color,
                        2: star_two_color,
                        3: star_three_color}
-    stars_number = NumericProperty()
+    nb_stars = NumericProperty()
     primary_color = ListProperty([0.5, 0.5, 0.5, 1.])
     secondary_color = ListProperty([1., 1., 1., 1.])
 
@@ -42,24 +42,24 @@ class ThreeStars(RelativeLayout):
         self.primary_color = primary_color
         self.secondary_color = secondary_color
 
-        self.bind(stars_number=self.change_stars_number)
+        self.bind(nb_stars=self.change_nb_stars)
         super().__init__(**kwargs)
 
-    def change_stars_number(self, base_widget, value):
+    def change_nb_stars(self, base_widget, value):
         """
         Change the number of stars displayed.
         """
 
-        # self.stars_number = stars_number
-        if self.stars_number > 0:
+        # self.nb_stars = nb_stars
+        if self.nb_stars > 0:
             self.star_one_color = self.primary_color
         else:
             self.star_one_color = self.secondary_color
-        if self.stars_number > 1:
+        if self.nb_stars > 1:
             self.star_two_color = self.primary_color
         else:
             self.star_two_color = self.secondary_color
-        if self.stars_number > 2:
+        if self.nb_stars > 2:
             self.star_three_color = self.primary_color
         else:
             self.star_three_color = self.secondary_color

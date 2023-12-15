@@ -7,6 +7,7 @@
 #:import PATH_TEXT_FONT tools.path.PATH_TEXT_FONT
 #:import TEXT_FONT_COLOR tools.constants.TEXT_FONT_COLOR
 #:import BOTTOM_BAR_HEIGHT tools.constants.BOTTOM_BAR_HEIGHT
+#:import GAMEPLAY_DICT tools.constants.GAMEPLAY_DICT
 
 
 <FreeModeScreen>:
@@ -22,12 +23,17 @@
     BottomBar:
         size_hint: (1, BOTTOM_BAR_HEIGHT)
         pos_hint: {"bottom":0,"left":0}
-        selected: "home"
+        selected: "none"
 
-    ActButton:
-        size_hint: (0.7,0.15)
-        pos_hint:{"center_x":0.5,"center_y":0.5}
-        stars_number: 2
-        nb_levels: 10
-        nb_completed_levels: 8
-        act_title: "Act 1 - Tutorial"
+    ScrollView:
+        id: scrollview
+        pos_hint: {"center_x":0.5, "center_y":0.475}
+        size_hint: (1,0.7)
+        do_scroll_x: False
+
+        MyScrollViewLayout:
+            id: scrollview_layout
+            cols:1
+            spacing:40
+            height:0.2*root.height * len(GAMEPLAY_DICT)
+            padding: (0.05*root.width, 0,0.05*root.width,40)
