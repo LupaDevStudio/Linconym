@@ -5,26 +5,20 @@
 
     # Star one
     Image:
-        id: star_one_contour
-        pos_hint: {"center_x":0.125,"center_y":0.5}
-        size_hint: (0.25,1)
-        source: PATH_IMAGES + "star.png"
-        fit_mode: "contain"
-    Image:
         id: star_one
         pos_hint: {"center_x":0.125,"center_y":0.5}
         size_hint: (0.25,1)
         source: PATH_IMAGES + "star_full.png"
         fit_mode: "contain"
         color: root.star_one_color
+    Image:
+        id: star_one_contour
+        pos_hint: {"center_x":0.125,"center_y":0.5}
+        size_hint: (0.25,1)
+        source: PATH_IMAGES + "star3.png"
+        fit_mode: "contain"
 
     # Star two
-    Image:
-        id: star_two_contour
-        pos_hint: {"center_x":0.5,"center_y":0.5}
-        size_hint: (0.25,1)
-        source: PATH_IMAGES + "star.png"
-        fit_mode: "contain"
     Image:
         id: star_two
         pos_hint: {"center_x":0.5,"center_y":0.5}
@@ -32,14 +26,14 @@
         source: PATH_IMAGES + "star_full.png"
         fit_mode: "contain"
         color: root.star_two_color
+    Image:
+        id: star_two_contour
+        pos_hint: {"center_x":0.5,"center_y":0.5}
+        size_hint: (0.25,1)
+        source: PATH_IMAGES + "star3.png"
+        fit_mode: "contain"
 
     # Star three
-    Image:
-        id: star_three_contour
-        pos_hint: {"center_x":0.875,"center_y":0.5}
-        size_hint: (0.25,1)
-        source: PATH_IMAGES + "star.png"
-        fit_mode: "contain"
     Image:
         id: star_three_contour
         pos_hint: {"center_x":0.875,"center_y":0.5}
@@ -47,3 +41,9 @@
         source: PATH_IMAGES + "star_full.png"
         fit_mode: "contain"
         color: root.star_three_color
+    Image:
+        id: star_three_contour
+        pos_hint: {"center_x":0.875,"center_y":0.5}
+        size_hint: (0.25,1)
+        source: PATH_IMAGES + "star3.png"
+        fit_mode: "contain"

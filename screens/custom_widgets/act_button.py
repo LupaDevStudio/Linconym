@@ -1,5 +1,5 @@
 """
-Module to create custom buttons with round transparent white background.
+Module to create the act button.
 """
 
 ###############
@@ -7,7 +7,7 @@ Module to create custom buttons with round transparent white background.
 ###############
 
 ### Kivy imports ###
-from kivy.uix.widget import Widget
+from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import (
     StringProperty,
@@ -29,21 +29,22 @@ from tools.constants import (
 #############
 
 
-class CustomButton(ButtonBehavior, Widget):
+class ActButton(ButtonBehavior, RelativeLayout):
     """
     A custom button with a white round rectangle background.
     """
 
     background_color = CUSTOM_BUTTON_BACKGROUND_COLOR
-    text = StringProperty()
-    text_filling_ratio = NumericProperty()
+    act_title = StringProperty()
+    completion_text = StringProperty()
     font_size = NumericProperty()
+    nb_levels = NumericProperty()
+    nb_completed_levels = NumericProperty()
+    stars_number = NumericProperty()
 
     def __init__(
             self,
-            text="",
             text_font_name=PATH_TEXT_FONT,
-            text_filling_ratio=0.8,
             font_size=MAIN_BUTTON_FONT_SIZE,
             release_function=lambda: 1 + 1,
             **kwargs):
@@ -51,9 +52,12 @@ class CustomButton(ButtonBehavior, Widget):
         self.release_function = release_function
         self.always_release = True
         self.text_font_name = text_font_name
-        self.text = text
-        self.text_filling_ratio = text_filling_ratio
         self.font_size = font_size
+        self.bind(nb_completed_levels=self.update_nb_completed_levels)
+
+    def update_nb_completed_levels(self, base_widget, value):
+        self.completion_text = str(
+            self.nb_completed_levels) + "/" + str(self.nb_levels)
 
     def on_press(self):
         self.opacity = OPACITY_ON_BUTTON_PRESS

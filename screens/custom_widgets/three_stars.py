@@ -7,7 +7,6 @@ Module to create three stars with a certain filling ratio
 ###############
 
 ### Kivy imports ###
-from kivy.uix.widget import Widget
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.properties import (
     NumericProperty,
@@ -20,6 +19,9 @@ from kivy.properties import (
 
 
 class ThreeStars(RelativeLayout):
+    """
+    Class to create a widget with three stars that can be turn on and off.
+    """
 
     star_one_color = ListProperty([0.5, 0.5, 0.5, 1.])
     star_two_color = ListProperty([0.5, 0.5, 0.5, 1.])
