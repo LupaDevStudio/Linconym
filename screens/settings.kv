@@ -24,8 +24,46 @@
         pos_hint: {"bottom":0,"left":0}
         selected: "settings"
 
-    CustomLabel:
-        size_hint: (0.7,0.3)
-        pos_hint: {"center_x":0.5, "center_y":0.4}
+    Label:
+        text: "Music volume"
+        font_name: PATH_TITLE_FONT
+        font_size: 20 * root.font_ratio
+        pos_hint: {"center_x":0.5, "center_y":0.8}
+        outline_width: TITLE_OUTLINE_WIDTH
+        outline_color: TITLE_OUTLINE_COLOR
+        color: TEXT_FONT_COLOR
+
+    CustomSlider:
+        slider_value: 0.5
+        size_hint: (0.7, 0.08)
+        pos_hint: {"center_x":0.5, "center_y":0.72}
+
+    Label:
+        text: "Sound effects volume"
+        font_name: PATH_TITLE_FONT
+        font_size: 20 * root.font_ratio
+        pos_hint: {"center_x":0.5, "center_y":0.6}
+        outline_width: TITLE_OUTLINE_WIDTH
+        outline_color: TITLE_OUTLINE_COLOR
+        color: TEXT_FONT_COLOR
+
+    CustomSlider:
+        slider_value: 0.5
+        size_hint: (0.7, 0.08)
+        pos_hint: {"center_x":0.5, "center_y":0.52}
+
+    CustomContentLabel:
+        size_hint: (0.8,0.2)
+        pos_hint: {"center_x":0.5, "center_y":0.3}
+        font_ratio: root.font_ratio
         title:"Credits"
-        content:"This game has been developped by LupaDevStudio."
+        content:"This game has been developed by LupaDevStudio.\n\nClick here to see the full list."
+    
+    Label:
+        text: root.version_text
+        font_name: PATH_TITLE_FONT
+        font_size: 17 * root.font_ratio
+        pos_hint: {"center_x":0.5, "center_y":0.15}
+        outline_width: TITLE_OUTLINE_WIDTH
+        outline_color: TITLE_OUTLINE_COLOR
+        color: TEXT_FONT_COLOR

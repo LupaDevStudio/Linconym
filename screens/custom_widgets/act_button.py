@@ -23,7 +23,6 @@ from tools.path import (
 )
 from tools.constants import (
     CUSTOM_BUTTON_BACKGROUND_COLOR,
-    MAIN_BUTTON_FONT_SIZE,
     OPACITY_ON_BUTTON_PRESS,
     ACT_BUTTON_FONT_SIZE
 )
@@ -75,7 +74,6 @@ class ActButton(ButtonBehavior, RelativeLayout):
             self.font_ratio = font_ratio
 
         super().__init__(**kwargs)
-        print(self.ids.act_title_label.font_size)
         self.release_function = release_function
         self.always_release = True
         self.text_font_name = text_font_name
@@ -88,7 +86,6 @@ class ActButton(ButtonBehavior, RelativeLayout):
             self.nb_completed_levels) + "/" + str(self.nb_levels)
 
     def on_press(self):
-        print(self.ids.act_title_label.font_size)
         self.opacity = OPACITY_ON_BUTTON_PRESS
 
     def on_release(self):
