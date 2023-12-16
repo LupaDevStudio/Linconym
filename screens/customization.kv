@@ -11,7 +11,7 @@
 
 <CustomizationScreen>:
     Label:
-        text: "TO DO"
+        text: "Customization"
         font_name: PATH_TITLE_FONT
         font_size: TITLE_FONT_SIZE * root.font_ratio
         pos_hint: {"center_x":0.5, "center_y":0.9}
@@ -24,3 +24,9 @@
         pos_hint: {"bottom":0,"left":0}
         selected: "customization"
 
+    CustomizationThemeLayout:
+        theme_title: "Tutorial"
+        size_hint: (0.8, 0.2)
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        font_size: 20
+        font_ratio: root.font_ratio
