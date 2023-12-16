@@ -6,7 +6,6 @@
     },
     "history": {},
     "items": {
-        "coins": 0,
         "unlocked_backgrounds": [],
         "unlocked_palettes": [],
         "unlocked_musics": []
@@ -17,5 +16,11 @@
         "current_background_theme": "japanese_1",
         "current_music": "",
         "current_palette_theme": ""
+    },
+    "user_profile": {
+        "status": "Beginner",
+        "level": 1,
+        "experience": 0,
+        "coins": 0
     }
 }

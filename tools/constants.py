@@ -96,6 +96,7 @@ class UserData():
         self.history = data["history"]
         self.settings = data["settings"]
         self.items = data["items"]
+        self.user_profile = data["user_profile"]
 
     def save_changes(self) -> None:
         """
@@ -117,6 +118,7 @@ class UserData():
         data["history"] = self.history
         data["settings"] = self.settings
         data["items"] = self.items
+        data["user_profile"] = self.user_profile
 
         # Save this dictionary
         save_json_file(
@@ -150,12 +152,13 @@ CONTENT_LABEL_FONT_SIZE = 17
 ACT_BUTTON_FONT_SIZE = 25
 BOTTOM_BAR_HEIGHT = 0.12
 CUSTOM_BUTTON_BACKGROUND_COLOR = (1, 1, 1, 0.7)
+MAIN_COLOR = (1, 0, 0, 1)
+SECOND_COLOR = (0, 0, 0, 1)
 OPACITY_ON_BUTTON_PRESS = 0.8
 
 ### Musics ###
 
 SOUND_LIST = []
-
 
 ### Ads code ###
 
@@ -163,7 +166,6 @@ REWARD_INTERSTITIAL = ""
 INTERSTITIAL = ""
 
 ### Words loading ###
-
 
 with open(PATH_WORDS_10K) as file:
     ENGLISH_WORDS_10K = []

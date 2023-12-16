@@ -24,11 +24,33 @@
         pos_hint: {"bottom":0,"left":0}
         selected: "profile"
 
+    # Status and level
     Label:
         text: root.user_status
         font_name: PATH_TITLE_FONT
         font_size: 20 * root.font_ratio
         pos_hint: {"center_x":0.7, "center_y":0.8}
+        size_hint: (0.4, 0.1)
+        text_size: self.size
         outline_width: TITLE_OUTLINE_WIDTH
         outline_color: TITLE_OUTLINE_COLOR
         color: TEXT_FONT_COLOR
+        halign: "left"
+    Label:
+        text: root.user_level
+        font_name: PATH_TITLE_FONT
+        font_size: 20 * root.font_ratio
+        pos_hint: {"center_x":0.7, "center_y":0.75}
+        size_hint: (0.4, 0.1)
+        text_size: self.size
+        outline_width: TITLE_OUTLINE_WIDTH
+        outline_color: TITLE_OUTLINE_COLOR
+        color: TEXT_FONT_COLOR
+        halign: "left"
+
+    CustomProgressBar:
+        main_color: (1, 1, 0, 1)
+        background_color: (0, 0, 0, 1)
+        value: 0.7
+        size_hint: (0.3, 0.025)
+        pos_hint: {"center_x": 0.25, "center_y":0.6}

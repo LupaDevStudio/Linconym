@@ -35,6 +35,7 @@ class ProfileScreen(ImprovedScreen):
     """
 
     user_status = StringProperty()
+    user_level = StringProperty()
 
     def __init__(self, **kwargs) -> None:
         current_background_theme = USER_DATA.settings["current_background_theme"]
@@ -42,3 +43,6 @@ class ProfileScreen(ImprovedScreen):
             back_image_path=PATH_BACKGROUNDS +
             THEMES_DICT[current_background_theme]["image"],
             **kwargs)
+        
+        self.user_status = USER_DATA.user_profile["status"]
+        self.user_level = "Level " + str(USER_DATA.user_profile["level"])
