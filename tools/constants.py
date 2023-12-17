@@ -22,7 +22,7 @@ import os
 
 from kivy import platform
 
-### Module imports ###
+### Local imports ###
 
 from tools.path import (
     PATH_USER_DATA,

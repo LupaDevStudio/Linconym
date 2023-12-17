@@ -1,26 +1,24 @@
 #:kivy 2.2.1
 
-<CustomButton>:
+<BuyButton>:
 
     # Background
     canvas.before:
         Color:
             rgba: self.background_color
         RoundedRectangle:
-            pos:self.pos
+            pos:(0,0)
             size:self.size
-            radius:[self.radius,]
+            radius:[20,]
 
-    # Main text
+    # Button title
     Label:
-        text: root.text
+        text: root.button_title
+        pos_hint: { "center_x":0.5,"center_y":0.8}
+        size_hint: (1,0.7)
+        text_size: (root.width*0.8,None)
         font_size: root.font_ratio * root.font_size
-        pos: root.pos
-        size: root.size
-        shorten: False
-        text_size: (root.width*root.text_filling_ratio,None)
         font_name: root.text_font_name
         halign: "center"
         valign: "center"
-        line_height: 1
         color: (0,0,0,1)

@@ -14,7 +14,7 @@ from kivy.properties import (
     NumericProperty
 )
 
-### Module imports ###
+### Local imports ###
 
 from tools.constants import (
     CUSTOM_BUTTON_BACKGROUND_COLOR

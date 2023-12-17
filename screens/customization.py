@@ -53,6 +53,6 @@ class CustomizationScreen(ImprovedScreen):
             current_act_button = ThemeLayout(
                 theme_title=theme_title,
                 source=PATH_BACKGROUNDS + THEMES_DICT[theme]["image"],
-                font_ratio=self.font_ratio)
+                font_ratio=self.font_ratio*0.8)
             self.THEME_LAYOUT_DICT[theme] = current_act_button
             scrollview_layout.add_widget(self.THEME_LAYOUT_DICT[theme])

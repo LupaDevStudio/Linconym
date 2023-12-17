@@ -10,7 +10,7 @@ Module to create the profile screen.
 
 from kivy.properties import StringProperty
 
-### Module imports ###
+### Local imports ###
 
 from tools.path import (
     PATH_BACKGROUNDS

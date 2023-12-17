@@ -15,7 +15,7 @@ from kivy.properties import (
     BooleanProperty
 )
 
-### Module imports ###
+### Local imports ###
 
 from tools.path import (
     PATH_TEXT_FONT
@@ -44,6 +44,8 @@ class ThemeLayout(Image):
     second_color = ObjectProperty()
     has_bought_image = BooleanProperty()
     has_bought_colors = BooleanProperty()
+    is_using_image = BooleanProperty()
+    is_using_colors = BooleanProperty()
 
     def __init__(
             self,
@@ -54,6 +56,8 @@ class ThemeLayout(Image):
             second_color=SECOND_COLOR,
             has_bought_image:bool = False,
             has_bought_colors:bool = False,
+            is_using_image:bool = False,
+            is_using_colors:bool = False,
             font_ratio=None,
             **kwargs):
 
@@ -68,4 +72,5 @@ class ThemeLayout(Image):
         self.second_color = second_color
         self.has_bought_image = has_bought_image
         self.has_bought_colors = has_bought_colors
-
+        self.is_using_image = is_using_image
+        self.is_using_colors = is_using_colors

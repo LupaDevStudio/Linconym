@@ -11,3 +11,4 @@ from screens.custom_widgets.custom_slider import CustomSlider
 from screens.custom_widgets.bottom_bar import BottomBar
 from screens.custom_widgets.act_button import ActButton
 from screens.custom_widgets.theme_layout import ThemeLayout
+from screens.custom_widgets.buy_button import BuyButton

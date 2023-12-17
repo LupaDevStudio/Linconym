@@ -7,9 +7,11 @@ Module to create the act button.
 ###############
 
 ### Python imports ###
+
 from typing import Literal
 
 ### Kivy imports ###
+
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import (
@@ -18,6 +20,7 @@ from kivy.properties import (
 )
 
 ### Local imports ###
+
 from tools.path import (
     PATH_TEXT_FONT
 )
@@ -53,7 +56,6 @@ class ActButton(ButtonBehavior, RelativeLayout):
             nb_levels: int = None,
             nb_completed_levels: int = None,
             nb_stars: Literal[0, 1, 2, 3] = None,
-            parent=None,
             text_font_name=PATH_TEXT_FONT,
             font_size=ACT_BUTTON_FONT_SIZE,
             release_function=lambda: 1 + 1,
@@ -68,8 +70,6 @@ class ActButton(ButtonBehavior, RelativeLayout):
             self.nb_completed_levels = nb_completed_levels
         if nb_stars is not None:
             self.nb_stars = nb_stars
-        if parent is not None:
-            self.parent = parent
         if font_ratio is not None:
             self.font_ratio = font_ratio
 

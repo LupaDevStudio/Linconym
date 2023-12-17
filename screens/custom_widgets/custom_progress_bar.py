@@ -15,7 +15,7 @@ from kivy.properties import (
     ObjectProperty
 )
 
-### Module imports ###
+### Local imports ###
 
 from tools.constants import (
     MAIN_COLOR,

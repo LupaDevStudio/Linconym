@@ -1,27 +1,35 @@
 """
-Module to create custom buttons with round transparent white background.
+Module to create buy and enable buttons
 """
+
 
 ###############
 ### Imports ###
 ###############
 
+### Python imports ###
+
+from typing import Literal
+
 ### Kivy imports ###
-from kivy.uix.widget import Widget
+
+from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import (
     StringProperty,
-    NumericProperty
+    NumericProperty,
+    BooleanProperty
 )
 
 ### Local imports ###
+
 from tools.path import (
     PATH_TEXT_FONT
 )
 from tools.constants import (
     CUSTOM_BUTTON_BACKGROUND_COLOR,
-    MAIN_BUTTON_FONT_SIZE,
-    OPACITY_ON_BUTTON_PRESS
+    OPACITY_ON_BUTTON_PRESS,
+    ACT_BUTTON_FONT_SIZE
 )
 
 #############
@@ -29,35 +37,44 @@ from tools.constants import (
 #############
 
 
-class CustomButton(ButtonBehavior, Widget):
+class BuyButton(ButtonBehavior, RelativeLayout):
     """
-    A custom button with a white round rectangle background.
+    A button for the customization screen to buy images or colors.
     """
 
     background_color = CUSTOM_BUTTON_BACKGROUND_COLOR
-    text = StringProperty()
-    text_filling_ratio = NumericProperty()
+    button_title = StringProperty()
     font_size = NumericProperty()
     font_ratio = NumericProperty(1)
-    radius = NumericProperty(40)
+    text_font_name = StringProperty(PATH_TEXT_FONT)
+    has_bought = BooleanProperty()
+    is_using = BooleanProperty()
+    price = NumericProperty()
 
     def __init__(
             self,
-            text="",
+            button_title: str = None,
             text_font_name=PATH_TEXT_FONT,
-            text_filling_ratio=0.8,
-            font_size=MAIN_BUTTON_FONT_SIZE,
+            font_size=ACT_BUTTON_FONT_SIZE,
+            has_bought:bool = False,
+            is_using: bool = False,
+            price: int = 0,
             release_function=lambda: 1 + 1,
             font_ratio=None,
             **kwargs):
+
+        if button_title is not None:
+            self.button_title = button_title
         if font_ratio is not None:
             self.font_ratio = font_ratio
-        super().__init__(**kwargs)
+
         self.release_function = release_function
-        self.always_release = True
+        self.has_bought = has_bought
+        self.is_using = is_using
+        self.price = price
+
+        super().__init__(**kwargs)
         self.text_font_name = text_font_name
-        self.text = text
-        self.text_filling_ratio = text_filling_ratio
         self.font_size = font_size
 
     def on_press(self):
@@ -66,3 +83,4 @@ class CustomButton(ButtonBehavior, Widget):
     def on_release(self):
         self.release_function()
         self.opacity = 1
+

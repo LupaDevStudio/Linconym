@@ -10,7 +10,7 @@ Module to create the settings screen.
 
 from kivy.properties import StringProperty
 
-### Module imports ###
+### Local imports ###
 
 from tools.constants import (
     USER_DATA,
