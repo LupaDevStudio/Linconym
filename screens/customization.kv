@@ -7,6 +7,7 @@
 #:import PATH_TEXT_FONT tools.path.PATH_TEXT_FONT
 #:import TEXT_FONT_COLOR tools.constants.TEXT_FONT_COLOR
 #:import BOTTOM_BAR_HEIGHT tools.constants.BOTTOM_BAR_HEIGHT
+#:import THEMES_DICT tools.constants.THEMES_DICT
 
 
 <CustomizationScreen>:
@@ -24,9 +25,24 @@
         pos_hint: {"bottom":0,"left":0}
         selected: "customization"
 
-    CustomizationThemeLayout:
-        theme_title: "Tutorial"
-        size_hint: (0.8, 0.2)
-        pos_hint: {"center_x": 0.5, "center_y": 0.5}
-        font_size: 20
-        font_ratio: root.font_ratio
+    # ThemeLayout:
+    #     theme_title: "Tutorial"
+    #     size_hint: (0.8, 0.2)
+    #     pos_hint: {"center_x": 0.5, "center_y": 0.5}
+    #     font_size: 20
+    #     font_ratio: root.font_ratio
+    #     source: 'resources/images/backgrounds/lake_sunset.jpg'
+    #     fit_mode: 'cover'
+
+    ScrollView:
+        id: scrollview
+        pos_hint: {"center_x":0.5, "center_y":0.475}
+        size_hint: (1,0.7)
+        do_scroll_x: False
+
+        MyScrollViewLayout:
+            id: scrollview_layout
+            cols:1
+            spacing:40
+            height:0.2*root.height * len(THEMES_DICT)
+            padding: (0.05*root.width, 10,0.05*root.width,40)

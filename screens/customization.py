@@ -16,6 +16,7 @@ from tools.constants import (
 from tools.kivy_tools import (
     ImprovedScreen,
 )
+from screens.custom_widgets import ThemeLayout
 
 
 #############
@@ -34,3 +35,24 @@ class CustomizationScreen(ImprovedScreen):
             back_image_path=PATH_BACKGROUNDS +
             THEMES_DICT[current_background_theme]["image"],
             **kwargs)
+        self.THEME_LAYOUT_DICT = {}
+        self.on_resize()
+        self.fill_scrollview()
+
+    def on_resize(self, *args):
+        for act in self.THEME_LAYOUT_DICT:
+            self.THEME_LAYOUT_DICT[act].font_ratio = self.font_ratio
+        return super().on_resize(*args)
+
+    def fill_scrollview(self):
+        scrollview_layout = self.ids["scrollview_layout"]
+        # Load the widgets
+        self.THEME_LAYOUT_DICT = {}
+        for theme in THEMES_DICT:
+            theme_title = THEMES_DICT[theme]["name"]
+            current_act_button = ThemeLayout(
+                theme_title=theme_title,
+                source=PATH_BACKGROUNDS + THEMES_DICT[theme]["image"],
+                font_ratio=self.font_ratio)
+            self.THEME_LAYOUT_DICT[theme] = current_act_button
+            scrollview_layout.add_widget(self.THEME_LAYOUT_DICT[theme])

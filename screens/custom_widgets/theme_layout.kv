@@ -1,0 +1,50 @@
+#:kivy 2.2.1
+#:import TITLE_OUTLINE_WIDTH tools.constants.TITLE_OUTLINE_WIDTH
+#:import TITLE_OUTLINE_COLOR tools.constants.TITLE_OUTLINE_COLOR
+#:set OUTLINE_RECTANGLE 6
+
+<-ThemeLayout>:
+
+    fit_mode: "cover"
+
+    canvas:
+        Color:
+            rgba: self.color
+        StencilPush
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [40]
+        StencilUse
+        Rectangle:
+            texture: self.texture
+            size: self.norm_image_size
+            pos: self.center_x - self.norm_image_size[0] / 2., self.center_y - self.norm_image_size[1] / 2.
+        StencilUnUse
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [40]
+        StencilPop
+
+    canvas.before:
+        Color:
+            rgba: (0, 0, 0, 1)
+        RoundedRectangle:
+            pos: (self.pos[0]-OUTLINE_RECTANGLE//2, self.pos[1]-OUTLINE_RECTANGLE//2)
+            size: (self.size[0]+OUTLINE_RECTANGLE,self.size[1]+OUTLINE_RECTANGLE)
+            radius: [43]
+
+    RelativeLayout:
+        pos: root.pos
+        size: root.size
+        # Theme title
+        Label:
+            text: root.theme_title
+            pos_hint: { "center_x":0.25,"center_y":0.75}
+            size_hint: (0.4,0.5)
+            font_size: root.font_ratio * root.font_size
+            font_name: root.text_font_name
+            outline_width: TITLE_OUTLINE_WIDTH
+            outline_color: TITLE_OUTLINE_COLOR
+            color: (0,0,0,1)
