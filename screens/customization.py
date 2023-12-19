@@ -51,6 +51,8 @@ class CustomizationScreen(ImprovedScreen):
         for theme in THEMES_DICT:
             theme_title = THEMES_DICT[theme]["name"]
             image_price = THEMES_DICT[theme]["image_price"]
+            primary_color = THEMES_DICT[theme]["primary"]
+            secondary_color = THEMES_DICT[theme]["secondary"]
             if theme in USER_DATA.unlocked_themes:
                 has_bought_image = USER_DATA.unlocked_themes[theme]["image"]
                 has_bought_colors = USER_DATA.unlocked_themes[theme]["colors"]
@@ -75,7 +77,9 @@ class CustomizationScreen(ImprovedScreen):
                 has_bought_image=has_bought_image,
                 is_using_image=is_using_image,
                 has_bought_colors=has_bought_colors,
-                is_using_colors=is_using_colors)
+                is_using_colors=is_using_colors,
+                primary_color=primary_color,
+                secondary_color=secondary_color)
             current_theme_button.update_display()
             self.THEME_LAYOUT_DICT[theme] = current_theme_button
             scrollview_layout.add_widget(self.THEME_LAYOUT_DICT[theme])

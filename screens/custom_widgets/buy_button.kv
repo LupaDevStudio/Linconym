@@ -46,16 +46,17 @@
     Label:
         id: price_label
         text: root.price_text
-        pos_hint: { "center_x":0.4,"center_y":0.4}
+        size_hint: (0.1,0.3)
+        pos_hint: { "right":0.4,"center_y":0.4}
         font_size: root.font_ratio * root.font_size
         font_name: root.text_font_name
-        halign: "left"
+        halign: "right"
         valign: "center"
         color: (0,0,0,1)
     
     Image:
         id: coins_image
         source: PATH_IMAGES + "coins.png"
-        pos_hint: { "center_x":0.7,"center_y":0.4}
+        pos_hint: { "center_x":0.75,"center_y":0.4}
         size_hint: (0.3,0.3)
         fit_mode: "contain"

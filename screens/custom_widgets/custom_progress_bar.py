@@ -32,17 +32,17 @@ class CustomProgressBar(Widget):
     A custom button with a white round rectangle background.
     """
 
-    main_color = ObjectProperty()
+    primary_color = ObjectProperty()
     background_color = ObjectProperty()
 
     def __init__(
             self,
             value=0.5,
-            main_color=MAIN_COLOR,
+            primary_color=MAIN_COLOR,
             background_color=SECOND_COLOR,
             **kwargs):
         super().__init__(**kwargs)
 
-        self.main_color = main_color
+        self.primary_color = primary_color
         self.background_color = background_color
         self.value = value

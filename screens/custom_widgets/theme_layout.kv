@@ -80,16 +80,36 @@
             has_bought: root.has_bought_colors
             is_using: root.is_using_colors
         
-        # Widget:
-        #     id: primary_color_bubble
-        #     size_hint: (None,0.15)
-        #     pos_hint: {"center_x":0.8, "center_y":0.33}
-        #     canvas.before:
-        #         Color:
-        #             rgba: (0,0,0,1)
-        #         Ellipse:
-        #             pos: (0,0)
-        #             size: self.size
-        #         Line:
-        #             ellipse:(0,0,self.width,self.height)
-        #             width: 1.5
+        Widget:
+            id: primary_color_bubble
+            pos_hint: {"center_x":0.94, "center_y":0.66}
+            size_hint: (None,0.25)
+            width: self.height
+            canvas:
+                Color:
+                    rgba: root.primary_color
+                Ellipse:
+                    pos: self.pos
+                    size: self.size
+                Color:
+                    rgba: (0,0,0,1)
+                Line:
+                    ellipse:(self.x,self.y,self.width,self.height)
+                    width: 1.5
+        
+        Widget:
+            id: secondary_color_bubble
+            pos_hint: {"center_x":0.94, "center_y":0.33}
+            size_hint: (None,0.25)
+            width: self.height
+            canvas:
+                Color:
+                    rgba: root.secondary_color
+                Ellipse:
+                    pos: self.pos
+                    size: self.size
+                Color:
+                    rgba: (0,0,0,1)
+                Line:
+                    ellipse:(self.x,self.y,self.width,self.height)
+                    width: 1.5

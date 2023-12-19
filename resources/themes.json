@@ -1,31 +1,63 @@
 {
     "japanese_1": {
-        "primary": "",
-        "secondary": "",
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
         "image": "pagode.jpg",
         "image_price": 100,
-        "colors_price": 0,
+        "colors_price": 200,
         "name": "Cerisier"
     },
     "lake": {
-        "primary": "",
-        "secondary": "",
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
         "image": "lake_sunset.jpg",
-        "image_price": 0,
-        "colors_price": 0,
+        "image_price": 2100,
+        "colors_price": 4000,
         "name": "Coucher de soleil"
     },
     "japanese_2": {
-        "primary": "",
-        "secondary": "",
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
         "image": "japanese_garden.jpg",
-        "image_price": 0,
+        "image_price": 10000,
         "colors_price": 0,
         "name": "Garden"
     },
     "japanese_3": {
-        "primary": "",
-        "secondary": "",
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
         "image": "japanese_garden_2.jpg",
         "image_price": 0,
         "colors_price": 0,
