@@ -54,10 +54,12 @@ class ThemeLayout(Image):
             font_size=CUSTOMIZATION_LAYOUT_FONT_SIZE,
             main_color=MAIN_COLOR,
             second_color=SECOND_COLOR,
-            has_bought_image:bool = False,
-            has_bought_colors:bool = False,
-            is_using_image:bool = False,
-            is_using_colors:bool = False,
+            has_bought_image: bool = False,
+            has_bought_colors: bool = False,
+            is_using_image: bool = False,
+            is_using_colors: bool = False,
+            image_price: int = 0,
+            colors_price: int = 0,
             font_ratio=None,
             **kwargs):
 
@@ -74,3 +76,12 @@ class ThemeLayout(Image):
         self.has_bought_colors = has_bought_colors
         self.is_using_image = is_using_image
         self.is_using_colors = is_using_colors
+
+        self.image_price = image_price
+        self.colors_price = colors_price
+
+    def update_display(self):
+        self.ids["buy_image_button"].price = self.image_price
+        self.ids["buy_image_button"].update_display()
+        self.ids["buy_colors_button"].price = self.colors_price
+        self.ids["buy_colors_button"].update_display()

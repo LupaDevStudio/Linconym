@@ -61,6 +61,7 @@
             radius:10
 
         BuyButton:
+            id: buy_image_button
             button_title: "Image"
             pos_hint: {"center_x":0.475,"center_y":0.5}
             size_hint: (0.25,0.8)
@@ -70,6 +71,7 @@
             is_using: root.is_using_image
 
         BuyButton:
+            id: buy_colors_button
             button_title: "Colors"
             pos_hint: {"center_x":0.75,"center_y":0.5}
             size_hint: (0.25,0.8)
@@ -77,3 +79,17 @@
             font_ratio: root.font_ratio
             has_bought: root.has_bought_colors
             is_using: root.is_using_colors
+        
+        # Widget:
+        #     id: primary_color_bubble
+        #     size_hint: (None,0.15)
+        #     pos_hint: {"center_x":0.8, "center_y":0.33}
+        #     canvas.before:
+        #         Color:
+        #             rgba: (0,0,0,1)
+        #         Ellipse:
+        #             pos: (0,0)
+        #             size: self.size
+        #         Line:
+        #             ellipse:(0,0,self.width,self.height)
+        #             width: 1.5

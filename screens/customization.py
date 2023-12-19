@@ -30,10 +30,10 @@ class CustomizationScreen(ImprovedScreen):
     """
 
     def __init__(self, **kwargs) -> None:
-        current_background_theme = USER_DATA.settings["current_background_theme"]
+        current_theme_image = USER_DATA.settings["current_theme_image"]
         super().__init__(
             back_image_path=PATH_BACKGROUNDS +
-            THEMES_DICT[current_background_theme]["image"],
+            THEMES_DICT[current_theme_image]["image"],
             **kwargs)
         self.THEME_LAYOUT_DICT = {}
         self.on_resize()
@@ -50,9 +50,32 @@ class CustomizationScreen(ImprovedScreen):
         self.THEME_LAYOUT_DICT = {}
         for theme in THEMES_DICT:
             theme_title = THEMES_DICT[theme]["name"]
-            current_act_button = ThemeLayout(
+            image_price = THEMES_DICT[theme]["image_price"]
+            if theme in USER_DATA.unlocked_themes:
+                has_bought_image = USER_DATA.unlocked_themes[theme]["image"]
+                has_bought_colors = USER_DATA.unlocked_themes[theme]["colors"]
+                if USER_DATA.settings["current_theme_image"] == theme:
+                    is_using_image = True
+                else:
+                    is_using_image = False
+                if USER_DATA.settings["current_theme_colors"] == theme:
+                    is_using_colors = True
+                else:
+                    is_using_colors = False
+            else:
+                has_bought_image = False
+                has_bought_colors = False
+                is_using_image = False
+                is_using_colors = False
+            current_theme_button = ThemeLayout(
                 theme_title=theme_title,
                 source=PATH_BACKGROUNDS + THEMES_DICT[theme]["image"],
-                font_ratio=self.font_ratio*0.8)
-            self.THEME_LAYOUT_DICT[theme] = current_act_button
+                font_ratio=self.font_ratio * 0.8,
+                image_price=image_price,
+                has_bought_image=has_bought_image,
+                is_using_image=is_using_image,
+                has_bought_colors=has_bought_colors,
+                is_using_colors=is_using_colors)
+            current_theme_button.update_display()
+            self.THEME_LAYOUT_DICT[theme] = current_theme_button
             scrollview_layout.add_widget(self.THEME_LAYOUT_DICT[theme])

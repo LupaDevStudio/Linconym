@@ -95,7 +95,7 @@ class UserData():
         self.daily_mode = data["daily_mode"]
         self.history = data["history"]
         self.settings = data["settings"]
-        self.items = data["items"]
+        self.unlocked_themes = data["unlocked_themes"]
         self.user_profile = data["user_profile"]
 
     def save_changes(self) -> None:
@@ -117,7 +117,7 @@ class UserData():
         data["daily_mode"] = self.daily_mode
         data["history"] = self.history
         data["settings"] = self.settings
-        data["items"] = self.items
+        data["unlocked_themes"] = self.unlocked_themes
         data["user_profile"] = self.user_profile
 
         # Save this dictionary

@@ -50,13 +50,14 @@ class BuyButton(ButtonBehavior, RelativeLayout):
     has_bought = BooleanProperty()
     is_using = BooleanProperty()
     price = NumericProperty()
+    price_text = StringProperty()
 
     def __init__(
             self,
             button_title: str = None,
             text_font_name=PATH_TEXT_FONT,
             font_size=ACT_BUTTON_FONT_SIZE,
-            has_bought:bool = False,
+            has_bought: bool = False,
             is_using: bool = False,
             price: int = 0,
             release_function=lambda: 1 + 1,
@@ -72,10 +73,31 @@ class BuyButton(ButtonBehavior, RelativeLayout):
         self.has_bought = has_bought
         self.is_using = is_using
         self.price = price
+        self.price_text = str(self.price)
 
         super().__init__(**kwargs)
         self.text_font_name = text_font_name
         self.font_size = font_size
+
+        # Bind the price to update the value in real time
+        self.bind(price=self.update_price)
+
+    def update_price(self, base_widget, value):
+        self.price_text = str(self.price)
+
+    def update_display(self):
+        if self.has_bought:
+            self.ids["price_label"].opacity = 0
+            self.ids["coins_image"].opacity = 0
+            self.ids["selection_circle"].opacity = 1
+        else:
+            self.ids["price_label"].opacity = 1
+            self.ids["coins_image"].opacity = 1
+            self.ids["selection_circle"].opacity = 0
+        if self.is_using:
+            self.ids["activated_image"].opacity = 1
+        else:
+            self.ids["activated_image"].opacity = 0
 
     def on_press(self):
         self.opacity = OPACITY_ON_BUTTON_PRESS
@@ -83,4 +105,3 @@ class BuyButton(ButtonBehavior, RelativeLayout):
     def on_release(self):
         self.release_function()
         self.opacity = 1
-

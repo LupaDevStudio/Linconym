@@ -33,10 +33,10 @@ from screens.custom_widgets import ActButton
 class FreeModeScreen(ImprovedScreen):
 
     def __init__(self, **kwargs) -> None:
-        current_background_theme = USER_DATA.settings["current_background_theme"]
+        current_theme_image = USER_DATA.settings["current_theme_image"]
         super().__init__(
             back_image_path=PATH_BACKGROUNDS +
-            THEMES_DICT[current_background_theme]["image"],
+            THEMES_DICT[current_theme_image]["image"],
             **kwargs)
         self.ACT_BUTTON_DICT = {}
         self.on_resize()

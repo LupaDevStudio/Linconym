@@ -5,17 +5,22 @@
         "end_word": ""
     },
     "history": {},
-    "items": {
-        "unlocked_backgrounds": [],
-        "unlocked_palettes": [],
-        "unlocked_musics": []
+    "unlocked_themes": {
+        "japanese_1": {
+            "image": true,
+            "colors": false
+        },
+        "japanese_2": {
+            "image": false,
+            "colors": true
+        }
     },
     "settings": {
         "sound_volume": 0.5,
         "music_volume": 0.5,
-        "current_background_theme": "japanese_1",
+        "current_theme_image": "japanese_1",
         "current_music": "",
-        "current_palette_theme": ""
+        "current_theme_colors": ""
     },
     "user_profile": {
         "status": "Beginner",

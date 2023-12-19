@@ -3,28 +3,32 @@
         "primary": "",
         "secondary": "",
         "image": "pagode.jpg",
-        "price": 0,
+        "image_price": 100,
+        "colors_price": 0,
         "name": "Cerisier"
     },
     "lake": {
         "primary": "",
         "secondary": "",
         "image": "lake_sunset.jpg",
-        "price": 0,
+        "image_price": 0,
+        "colors_price": 0,
         "name": "Coucher de soleil"
     },
     "japanese_2": {
         "primary": "",
         "secondary": "",
         "image": "japanese_garden.jpg",
-        "price": 0,
+        "image_price": 0,
+        "colors_price": 0,
         "name": "Garden"
     },
     "japanese_3": {
         "primary": "",
         "secondary": "",
         "image": "japanese_garden_2.jpg",
-        "price": 0,
+        "image_price": 0,
+        "colors_price": 0,
         "name": "Garden 2"
     }
 }
