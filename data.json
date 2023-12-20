@@ -5,27 +5,38 @@
         "end_word": ""
     },
     "history": {},
+    "settings": {
+        "sound_volume": 0.5,
+        "music_volume": 0.5,
+        "current_theme_image": "lake",
+        "current_music": "",
+        "current_theme_colors": ""
+    },
     "unlocked_themes": {
         "japanese_1": {
+            "image": true,
+            "colors": true
+        },
+        "lake": {
             "image": true,
             "colors": false
         },
         "japanese_2": {
             "image": false,
             "colors": true
+        },
+        "japanese_3": {
+            "image": true,
+            "colors": false
         }
     },
-    "settings": {
-        "sound_volume": 0.5,
-        "music_volume": 0.5,
-        "current_theme_image": "japanese_1",
-        "current_music": "",
-        "current_theme_colors": ""
+    "unlocked_musics": {
+        "music_name": true
     },
     "user_profile": {
         "status": "Beginner",
         "level": 1,
         "experience": 0,
-        "coins": 0
+        "coins": 1800
     }
 }

@@ -96,6 +96,7 @@ class UserData():
         self.history = data["history"]
         self.settings = data["settings"]
         self.unlocked_themes = data["unlocked_themes"]
+        self.unlocked_musics = data["unlocked_musics"]
         self.user_profile = data["user_profile"]
 
     def save_changes(self) -> None:
@@ -118,12 +119,40 @@ class UserData():
         data["history"] = self.history
         data["settings"] = self.settings
         data["unlocked_themes"] = self.unlocked_themes
+        data["unlocked_musics"] = self.unlocked_musics
         data["user_profile"] = self.user_profile
 
         # Save this dictionary
         save_json_file(
             file_path=PATH_USER_DATA,
             dict_to_save=data)
+
+    def change_theme_image(self, theme):
+        USER_DATA.settings["current_theme_image"] = theme
+        self.save_changes()
+
+    def buy_item(self, theme, item_type, price):
+        if self.user_profile["coins"] >= price:
+            self.user_profile["coins"] = self.user_profile["coins"] - price
+            if item_type == "music":
+                self.unlocked_musics[theme] = True
+            elif item_type == "image":
+                if theme not in self.unlocked_themes:
+                    self.unlocked_themes[theme] = {
+                        "image": False,
+                        "colors": False}
+                self.unlocked_themes[theme]["image"] = True
+            elif item_type == "colors":
+                if theme not in self.unlocked_themes:
+                    self.unlocked_themes[theme] = {
+                        "image": False,
+                        "colors": False}
+                self.unlocked_themes[theme]["colors"] = True
+            else:
+                raise ValueError("Unrecognized item type.")
+            self.save_changes()
+            return True
+        return False
 
 
 USER_DATA = UserData()

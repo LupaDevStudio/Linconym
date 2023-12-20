@@ -25,7 +25,9 @@ from tools.path import (
 from tools.constants import (
     MAIN_COLOR,
     SECOND_COLOR,
-    CUSTOMIZATION_LAYOUT_FONT_SIZE
+    CUSTOMIZATION_LAYOUT_FONT_SIZE,
+    USER_DATA,
+    THEMES_DICT
 )
 
 #############
@@ -51,49 +53,75 @@ class ThemeLayout(Image):
 
     def __init__(
             self,
-            theme_title: str = "",
+            theme_key: str = "",
             text_font_name=PATH_TEXT_FONT,
             font_size=CUSTOMIZATION_LAYOUT_FONT_SIZE,
-            primary_color=MAIN_COLOR,
-            secondary_color=SECOND_COLOR,
-            has_bought_image: bool = False,
-            has_bought_colors: bool = False,
-            is_using_image: bool = False,
-            is_using_colors: bool = False,
-            image_price: int = 0,
-            colors_price: int = 0,
             font_ratio=None,
             **kwargs):
 
-        self.theme_title = theme_title
         if font_ratio is not None:
             self.font_ratio = font_ratio
 
-        self.primary_color = primary_color
-        self.secondary_color = secondary_color
+        if theme_key not in THEMES_DICT:
+            theme_key = THEMES_DICT.keys()[0]
+
+        self.theme_key = theme_key
+        self.theme_title = THEMES_DICT[theme_key]["name"]
+        self.image_price = THEMES_DICT[theme_key]["image_price"]
+        self.colors_price = THEMES_DICT[theme_key]["colors_price"]
+        self.primary_color = THEMES_DICT[theme_key]["primary"]
+        self.secondary_color = THEMES_DICT[theme_key]["secondary"]
+
+        self.update_variables()
 
         super().__init__(**kwargs)
         self.text_font_name = text_font_name
         self.font_size = font_size
 
-        self.has_bought_image = has_bought_image
-        self.has_bought_colors = has_bought_colors
-        self.is_using_image = is_using_image
-        self.is_using_colors = is_using_colors
-
-        self.image_price = image_price
-        self.colors_price = colors_price
+    def update_variables(self):
+        if self.theme_key in USER_DATA.unlocked_themes:
+            self.has_bought_image = USER_DATA.unlocked_themes[self.theme_key]["image"]
+            self.has_bought_colors = USER_DATA.unlocked_themes[self.theme_key]["colors"]
+            if USER_DATA.settings["current_theme_image"] == self.theme_key:
+                self.is_using_image = True
+            else:
+                self.is_using_image = False
+            if USER_DATA.settings["current_theme_colors"] == self.theme_key:
+                self.is_using_colors = True
+            else:
+                self.is_using_colors = False
+        else:
+            self.has_bought_image = False
+            self.has_bought_colors = False
+            self.is_using_image = False
+            self.is_using_colors = False
 
     def update_display(self):
+        self.update_variables()
         self.ids["buy_image_button"].price = self.image_price
         self.ids["buy_image_button"].update_display()
         self.ids["buy_colors_button"].price = self.colors_price
         self.ids["buy_colors_button"].update_display()
 
     def click_image(self):
-        print("image")
-        pass
+        if not self.has_bought_image:
+            bought_sucessfully = USER_DATA.buy_item(
+                self.theme_key, "image", self.image_price)
+            if bought_sucessfully:
+                self.get_root_window().children[0].get_screen(
+                    "customization").update_coins()
+                self.has_bought_image = True
+            self.update_display()
+        elif self.has_bought_image and not self.is_using_image:
+            USER_DATA.change_theme_image(self.theme_key)
+            self.get_root_window().children[0].get_screen(
+                "customization").update_theme_layouts_display()
 
     def click_colors(self):
-        print("colors")
-        pass
+        if not self.has_bought_colors:
+            USER_DATA.buy_item(self.theme_key, "colors", self.colors_price)
+            self.get_root_window().children[0].get_screen(
+                "customization").update_coins()
+        elif not self.is_using_colors:
+            pass
+        self.update_display()
