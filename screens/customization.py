@@ -6,6 +6,12 @@ Module to create the customization screen.
 ### Imports ###
 ###############
 
+### Kivy imports ###
+from kivy.properties import (
+    NumericProperty
+)
+
+### Local imports ###
 from tools.path import (
     PATH_BACKGROUNDS
 )
@@ -29,6 +35,8 @@ class CustomizationScreen(ImprovedScreen):
     Class to manage the customization screen.
     """
 
+    coins_count = NumericProperty()
+
     def __init__(self, **kwargs) -> None:
         current_theme_image = USER_DATA.settings["current_theme_image"]
         super().__init__(
@@ -38,6 +46,10 @@ class CustomizationScreen(ImprovedScreen):
         self.THEME_LAYOUT_DICT = {}
         self.on_resize()
         self.fill_scrollview()
+
+    def on_pre_enter(self, *args):
+        self.coins_count = USER_DATA.user_profile["coins"] + 10000
+        return super().on_pre_enter(*args)
 
     def on_resize(self, *args):
         for act in self.THEME_LAYOUT_DICT:

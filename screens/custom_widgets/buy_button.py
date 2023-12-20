@@ -74,6 +74,7 @@ class BuyButton(ButtonBehavior, RelativeLayout):
         self.is_using = is_using
         self.price = price
         self.price_text = str(self.price)
+        self.always_release = True
 
         super().__init__(**kwargs)
         self.text_font_name = text_font_name

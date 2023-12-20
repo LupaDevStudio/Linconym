@@ -89,3 +89,11 @@ class ThemeLayout(Image):
         self.ids["buy_image_button"].update_display()
         self.ids["buy_colors_button"].price = self.colors_price
         self.ids["buy_colors_button"].update_display()
+
+    def click_image(self):
+        print("image")
+        pass
+
+    def click_colors(self):
+        print("colors")
+        pass

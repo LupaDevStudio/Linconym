@@ -1,0 +1,41 @@
+#:kivy 2.2.1
+#:import PATH_IMAGES tools.path.PATH_IMAGES
+
+<CoinsCounter>:
+
+    # Background
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            pos:(0,0)
+            size:self.size
+            radius:[30,]
+
+    # Counter
+    Label:
+        text: root.coins_count_text
+        font_size: root.font_ratio * root.font_size
+        pos_hint: {"center_x":0.5, "center_y":0.5}
+        size_hint: (1, None)
+        font_name: root.text_font_name
+        line_height: 1
+        color: (0,0,0,1)
+
+    # Coins image
+    Image:
+        source: PATH_IMAGES + "coins.png"
+        pos_hint: {"center_x":0.2,"center_y":0.5}
+        size_hint: (None,0.6)
+        width: self.height
+        fit_mode: "contain"
+
+    # Plus
+    Label:
+        text: "+"
+        font_size: root.font_ratio * root.font_size * 1.6
+        pos_hint: {"center_x":0.85, "center_y":0.5}
+        size_hint: (1, None)
+        font_name: root.text_font_name
+        line_height: 1
+        color: (0,0,0,1)

@@ -25,15 +25,23 @@
         pos_hint: {"bottom":0,"left":0}
         selected: "customization"
 
+    # Coins counter
+    CoinsCounter:
+        size_hint: (0.6, 0.07)
+        pos_hint: {"center_x":0.5, "center_y":0.83}
+        font_ratio: root.font_ratio
+        coins_count: root.coins_count
+
+    # Theme scrollview
     ScrollView:
         id: scrollview
-        pos_hint: {"center_x":0.5, "center_y":0.475}
-        size_hint: (1,0.7)
+        pos_hint: {"center_x":0.5, "center_y":0.44}
+        size_hint: (1,0.63)
         do_scroll_x: False
 
         MyScrollViewLayout:
             id: scrollview_layout
             cols:1
             spacing:40
-            height:0.2*root.height * len(THEMES_DICT)
+            height:0.2*root.height * len(THEMES_DICT)*1.05
             padding: (0.05*root.width, 10,0.05*root.width,40)
