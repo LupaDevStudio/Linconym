@@ -46,3 +46,9 @@ class ProfileScreen(ImprovedScreen):
 
         self.user_status = USER_DATA.user_profile["status"]
         self.user_level = "Level " + str(USER_DATA.user_profile["level"])
+
+    def on_enter(self, *args):
+        current_theme_image = USER_DATA.settings["current_theme_image"]
+        self.set_back_image_path(
+            PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
+        return super().on_enter(*args)

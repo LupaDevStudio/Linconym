@@ -35,6 +35,12 @@ class HomeScreen(ImprovedScreen):
             THEMES_DICT[current_theme_image]["image"],
             **kwargs)
 
+    def on_enter(self, *args):
+        current_theme_image = USER_DATA.settings["current_theme_image"]
+        self.set_back_image_path(
+            PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
+        return super().on_enter(*args)
+
     def open_free_mode(self):
         """
         Open the free mode screen.
