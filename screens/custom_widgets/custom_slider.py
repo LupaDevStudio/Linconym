@@ -31,14 +31,18 @@ class CustomSlider(RelativeLayout):
     """
 
     background_color = CUSTOM_BUTTON_BACKGROUND_COLOR
-    slider_value = NumericProperty()
+    value = NumericProperty()
 
     def __init__(
             self,
-            on_value_change=None,
-            slider_value=0,
+            value=0,
             **kwargs):
         super().__init__(**kwargs)
-        self.slider_value = slider_value
-        if not on_value_change is None:
-            self.ids.my_slider.bind(value=on_value_change)
+        self.value = value
+
+    def on_kv_post(self, base_widget):
+        self.ids.my_slider.bind(value=self.on_value_change)
+        return super().on_kv_post(base_widget)
+
+    def on_value_change(self, base_widget, value):
+        self.value = value

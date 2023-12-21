@@ -119,9 +119,15 @@ class ThemeLayout(Image):
 
     def click_colors(self):
         if not self.has_bought_colors:
-            USER_DATA.buy_item(self.theme_key, "colors", self.colors_price)
-            self.get_root_window().children[0].get_screen(
-                "customization").update_coins()
-        elif not self.is_using_colors:
-            pass
+            bought_sucessfully = USER_DATA.buy_item(
+                self.theme_key, "colors", self.colors_price)
+            if bought_sucessfully:
+                self.get_root_window().children[0].get_screen(
+                    "customization").update_coins()
+                self.has_bought_colors = True
+            self.update_display()
+        elif self.has_bought_colors and not self.is_using_colors:
+            USER_DATA.change_theme_colors(self.theme_key)
         self.update_display()
+        self.get_root_window().children[0].get_screen(
+            "customization").update_theme_layouts_display()

@@ -131,6 +131,10 @@ class UserData():
         USER_DATA.settings["current_theme_image"] = theme
         self.save_changes()
 
+    def change_theme_colors(self, theme):
+        USER_DATA.settings["current_theme_colors"] = theme
+        self.save_changes()
+
     def buy_item(self, theme, item_type, price):
         if self.user_profile["coins"] >= price:
             self.user_profile["coins"] = self.user_profile["coins"] - price
@@ -186,6 +190,7 @@ SECOND_COLOR = (0, 0, 0, 1)
 OPACITY_ON_BUTTON_PRESS = 0.8
 CUSTOMIZATION_LAYOUT_FONT_SIZE = 20
 COINS_COUNT_FONT_SIZE = 22
+POS_HINT_BACK_ARROW = {"x":0.02, "top":0.99}
 
 ### Musics ###
 

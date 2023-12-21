@@ -8,6 +8,7 @@
 #:import TEXT_FONT_COLOR tools.constants.TEXT_FONT_COLOR
 #:import BOTTOM_BAR_HEIGHT tools.constants.BOTTOM_BAR_HEIGHT
 #:import GAMEPLAY_DICT tools.constants.GAMEPLAY_DICT
+#:import POS_HINT_BACK_ARROW tools.constants.POS_HINT_BACK_ARROW
 
 
 <FreeModeScreen>:
@@ -19,6 +20,14 @@
         outline_width: TITLE_OUTLINE_WIDTH
         outline_color: TITLE_OUTLINE_COLOR
         color: TEXT_FONT_COLOR
+
+    RoundedButtonImage:
+        image_path: PATH_IMAGES + "left_arrow.png"
+        pos_hint: POS_HINT_BACK_ARROW
+        size_hint: (0.1, None)
+        height: self.width
+        colors: root.primary_color
+        on_release: root.go_backwards()
 
     BottomBar:
         size_hint: (1, BOTTOM_BAR_HEIGHT)
