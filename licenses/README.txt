@@ -1,1 +1,0 @@
-This folder contains the licenses of all libraries and assets used by this application.

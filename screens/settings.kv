@@ -7,6 +7,7 @@
 #:import PATH_TEXT_FONT tools.path.PATH_TEXT_FONT
 #:import TEXT_FONT_COLOR tools.constants.TEXT_FONT_COLOR
 #:import BOTTOM_BAR_HEIGHT tools.constants.BOTTOM_BAR_HEIGHT
+#:import USER_DATA tools.constants.USER_DATA
 
 
 <SettingsScreen>:
@@ -34,6 +35,10 @@
         color: TEXT_FONT_COLOR
 
     CustomSlider:
+        id: music_slider
+        min: 0
+        max: 1
+        value: USER_DATA.settings["music_volume"]
         slider_value: 0.5
         size_hint: (0.7, 0.08)
         pos_hint: {"center_x":0.5, "center_y":0.72}
@@ -48,7 +53,10 @@
         color: TEXT_FONT_COLOR
 
     CustomSlider:
-        slider_value: 0.5
+        id: sound_slider
+        min: 0
+        max: 1
+        value: USER_DATA.settings["sound_volume"]
         size_hint: (0.7, 0.08)
         pos_hint: {"center_x":0.5, "center_y":0.52}
 

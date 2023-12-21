@@ -16,6 +16,9 @@ from tools.constants import (
 from tools.kivy_tools import (
     ImprovedScreen
 )
+from tools import (
+    music_mixer
+)
 
 
 #############
@@ -36,6 +39,9 @@ class HomeScreen(ImprovedScreen):
             **kwargs)
 
     def on_enter(self, *args):
+        current_music = USER_DATA.settings["current_music"]
+        if music_mixer.musics[current_music].state == "stop":
+            music_mixer.play(current_music, loop=True)
         current_theme_image = USER_DATA.settings["current_theme_image"]
         self.set_back_image_path(
             PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
