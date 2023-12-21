@@ -10,7 +10,8 @@ Package to manage the screens of the application
 from screens.custom_widgets import (
     BottomBar,
     CustomButton,
-    ThreeStars
+    ThreeStars,
+    ColoredRoundedButton
 )
 
 # Import the screens

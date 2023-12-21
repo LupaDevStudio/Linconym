@@ -13,3 +13,5 @@ from screens.custom_widgets.act_button import ActButton
 from screens.custom_widgets.buy_button import BuyButton
 from screens.custom_widgets.coins_count import CoinsCounter
 from screens.custom_widgets.theme_layout import ThemeLayout
+from screens.custom_widgets.colored_rounded_button import ColoredRoundedButton
+
