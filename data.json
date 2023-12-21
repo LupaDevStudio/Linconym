@@ -10,7 +10,7 @@
         "music_volume": 0.5,
         "current_theme_image": "lake",
         "current_music": "",
-        "current_theme_colors": ""
+        "current_theme_colors": "japanese_1"
     },
     "unlocked_themes": {
         "japanese_1": {
@@ -27,7 +27,7 @@
         },
         "japanese_3": {
             "image": true,
-            "colors": false
+            "colors": true
         }
     },
     "unlocked_musics": {

@@ -66,8 +66,6 @@ class CustomizationScreen(ImprovedScreen):
         for theme in self.THEME_LAYOUT_DICT:
             self.THEME_LAYOUT_DICT[theme].update_display()
         current_theme_image = USER_DATA.settings["current_theme_image"]
-        # self.set_back_image_path(
-        #     PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
         self.manager.change_all_background_images(
             PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
 

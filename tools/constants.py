@@ -131,6 +131,10 @@ class UserData():
         USER_DATA.settings["current_theme_image"] = theme
         self.save_changes()
 
+    def change_theme_colors(self, theme):
+        USER_DATA.settings["current_theme_colors"] = theme
+        self.save_changes()
+
     def buy_item(self, theme, item_type, price):
         if self.user_profile["coins"] >= price:
             self.user_profile["coins"] = self.user_profile["coins"] - price
