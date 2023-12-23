@@ -155,30 +155,24 @@ def convert_position_to_wordlist(position: tuple, position_to_word_id, words_fou
     return wordlist
 
 
-def insert_in_sorted_list(item, sorted_list):
-    a = 0
-    b = len(sorted_list) - 1
-    c = (a + b) // 2
-    if item > sorted_list[b]:
-        return None
-    while sorted_list[c] != item and b - a > 1:
-        if sorted_list[c] > item:
-            b = c
-        else:
-            a = c
-        c = (a + b) // 2
-    idx_to_insert = c
-    if item > sorted_list[idx_to_insert]:
-        new_list = sorted_list[:idx_to_insert + 1] + \
-            [item] + sorted_list[idx_to_insert + 1:]
-    else:
-        new_list = sorted_list[:idx_to_insert] + \
-            [item] + sorted_list[idx_to_insert:]
-
-    return new_list
-
-
 def find_solutions(start_word: str, end_word: str, english_words: list = ENGLISH_WORDS_DICTS["375k"]):
+    """
+    Find solutions for the given start and end words by using a score based on proximity to the end word.
+
+    Parameters
+    ----------
+    start_word : str
+        Start word.
+    end_word : str
+        End word.
+    english_words : list, optional
+        Database to use to create the path, by default ENGLISH_WORDS_DICTS["375k"]
+
+    Returns
+    -------
+    list
+        Path between the two words.
+    """
 
     start_position = (0,)
     position_to_word_id = {start_position: 0}
@@ -348,6 +342,14 @@ class Game():
         self.current_word = self.words_found[self.position_to_word_id[self.current_position]]
 
     def submit_word(self, new_word: str):
+        """
+        Add a new word to the history if it is valid.
+
+        Parameters
+        ----------
+        new_word : str
+            New word to verify and add.
+        """
         if is_valid(new_word):
 
             # Compute the new position
