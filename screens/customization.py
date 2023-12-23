@@ -8,7 +8,8 @@ Module to create the customization screen.
 
 ### Kivy imports ###
 from kivy.properties import (
-    NumericProperty
+    NumericProperty,
+    ColorProperty
 )
 
 ### Local imports ###
@@ -36,6 +37,7 @@ class CustomizationScreen(ImprovedScreen):
     """
 
     coins_count = NumericProperty()
+    primary_color = ColorProperty((0, 0, 0, 1))
 
     def __init__(self, **kwargs) -> None:
         current_theme_image = USER_DATA.settings["current_theme_image"]
@@ -55,6 +57,10 @@ class CustomizationScreen(ImprovedScreen):
         for act in self.THEME_LAYOUT_DICT:
             self.THEME_LAYOUT_DICT[act].font_ratio = self.font_ratio
         return super().on_resize(*args)
+
+    def go_backwards(self):
+        # TODO to change
+        self.manager.current = "home"
 
     def update_coins(self):
         self.coins_count = USER_DATA.user_profile["coins"]

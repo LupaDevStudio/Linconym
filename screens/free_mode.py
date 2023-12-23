@@ -7,9 +7,12 @@ Module to create the home screen.
 ###############
 
 ### Kivy imports ###
-from kivy.core.window import Window
-from kivy.uix.gridlayout import GridLayout
-from kivy.properties import NumericProperty
+
+from kivy.properties import (
+    ColorProperty
+)
+
+### Local imports ###
 
 from tools.path import (
     PATH_BACKGROUNDS
@@ -20,10 +23,11 @@ from tools.constants import (
     GAMEPLAY_DICT
 )
 from tools.kivy_tools import (
-    ImprovedScreen,
+    ImprovedScreen
 )
-from screens.custom_widgets import ActButton
-
+from screens.custom_widgets import (
+    ActButton
+)
 
 #############
 ### Class ###
@@ -31,6 +35,8 @@ from screens.custom_widgets import ActButton
 
 
 class FreeModeScreen(ImprovedScreen):
+
+    primary_color = ColorProperty((0, 0, 0, 1))
 
     def __init__(self, **kwargs) -> None:
         current_theme_image = USER_DATA.settings["current_theme_image"]
@@ -52,6 +58,9 @@ class FreeModeScreen(ImprovedScreen):
         for act in self.ACT_BUTTON_DICT:
             self.ACT_BUTTON_DICT[act].font_ratio = self.font_ratio
         return super().on_resize(*args)
+
+    def go_backwards(self):
+        self.manager.current = "home"
 
     def fill_scrollview(self):
         scrollview_layout = self.ids["scrollview_layout"]

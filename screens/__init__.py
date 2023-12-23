@@ -11,7 +11,8 @@ from screens.custom_widgets import (
     BottomBar,
     CustomButton,
     ThreeStars,
-    SideImageButton
+    SideImageButton,
+    RoundedButtonImage
 )
 
 # Import the screens
