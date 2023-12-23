@@ -239,6 +239,9 @@ def find_solutions(start_word: str, end_word: str, english_words: list = ENGLISH
 
 
 def fill_daily_games_with_solutions():
+    """
+    Fill all the empty lines of the daily games json with the solutions.
+    """
     DAILY_DICT = load_json_file(PATH_RESOURCES_FOLDER + "daily_games.json")
     for date in DAILY_DICT:
         start_word = DAILY_DICT[date]["start_word"]
@@ -263,6 +266,9 @@ def fill_daily_games_with_solutions():
 
 
 def fill_gameplay_dict_with_solutions():
+    """
+    Fill all the empty lines of the gameplay dict with the solutions.
+    """
     for act in GAMEPLAY_DICT:
         for level in GAMEPLAY_DICT[act]:
             if level == "name":

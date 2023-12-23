@@ -40,14 +40,14 @@
         max: 1
         value: USER_DATA.settings["music_volume"]
         slider_value: 0.5
-        size_hint: (0.7, 0.08)
-        pos_hint: {"center_x":0.5, "center_y":0.72}
+        size_hint: (0.7, 0.06)
+        pos_hint: {"center_x":0.5, "center_y":0.74}
 
     Label:
         text: "Sound effects volume"
         font_name: PATH_TITLE_FONT
         font_size: 20 * root.font_ratio
-        pos_hint: {"center_x":0.5, "center_y":0.6}
+        pos_hint: {"center_x":0.5, "center_y":0.65}
         outline_width: TITLE_OUTLINE_WIDTH
         outline_color: TITLE_OUTLINE_COLOR
         color: TEXT_FONT_COLOR
@@ -57,16 +57,23 @@
         min: 0
         max: 1
         value: USER_DATA.settings["sound_volume"]
-        size_hint: (0.7, 0.08)
-        pos_hint: {"center_x":0.5, "center_y":0.52}
+        size_hint: (0.7, 0.06)
+        pos_hint: {"center_x":0.5, "center_y":0.59}
 
     CustomContentLabel:
         size_hint: (0.8,0.2)
-        pos_hint: {"center_x":0.5, "center_y":0.3}
+        pos_hint: {"center_x":0.5, "center_y":0.425}
         font_ratio: root.font_ratio
         title:"Credits"
         content:"This game has been developed by LupaDevStudio.\n\nClick here to see the full list."
-    
+
+    SideImageButton:
+        size_hint: (0.8,0.1)
+        pos_hint: {"center_x":0.5, "center_y":0.24}
+        text: "Visit our website"
+        side_image_source: PATH_IMAGES + "lupa_logo.png"
+        font_ratio: root.font_ratio
+
     Label:
         text: root.version_text
         font_name: PATH_TITLE_FONT
