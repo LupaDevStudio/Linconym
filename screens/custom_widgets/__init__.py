@@ -5,6 +5,7 @@ Package to manage the custom widgets included in the screens.
 
 from screens.custom_widgets.three_stars import ThreeStars
 from screens.custom_widgets.custom_button import CustomButton
+from screens.custom_widgets.side_image_button import SideImageButton
 from screens.custom_widgets.custom_content_label import CustomContentLabel
 from screens.custom_widgets.custom_progress_bar import CustomProgressBar
 from screens.custom_widgets.custom_slider import CustomSlider
