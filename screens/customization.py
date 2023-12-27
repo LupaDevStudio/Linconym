@@ -103,9 +103,15 @@ class CustomizationScreen(ImprovedScreen):
         """
         # Change the image of the background
         if self.opacity_state == "main":
-            self.second_back_image_path = PATH_BACKGROUNDS + new_image
+            self.set_back_image_path(
+                back_image_path=PATH_BACKGROUNDS+new_image,
+                mode="second"
+            )
         elif self.opacity_state == "second":
-            self.back_image_path = PATH_BACKGROUNDS + new_image
+            self.set_back_image_path(
+                back_image_path=PATH_BACKGROUNDS+new_image,
+                mode="main"
+            )
 
         # Schedule the change of the opacity to have a smooth transition
         Clock.schedule_interval(self.change_background_opacity, 1/FPS)
