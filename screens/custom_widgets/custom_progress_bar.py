@@ -12,14 +12,7 @@ from kivy.uix.widget import (
     Widget
 )
 from kivy.properties import (
-    ObjectProperty
-)
-
-### Local imports ###
-
-from tools.constants import (
-    MAIN_COLOR,
-    SECOND_COLOR
+    ColorProperty
 )
 
 #############
@@ -32,17 +25,18 @@ class CustomProgressBar(Widget):
     A custom button with a white round rectangle background.
     """
 
-    primary_color = ObjectProperty()
-    background_color = ObjectProperty()
+    primary_color = ColorProperty()
+    secondary_color = ColorProperty()
 
     def __init__(
             self,
             value=0.5,
-            primary_color=MAIN_COLOR,
-            background_color=SECOND_COLOR,
             **kwargs):
         super().__init__(**kwargs)
 
-        self.primary_color = primary_color
-        self.background_color = background_color
+        self.bind(primary_color = self.my_function)
+        self.bind(secondary_color = self.my_function)
         self.value = value
+
+    def my_function(self, base_widget, value):
+        pass

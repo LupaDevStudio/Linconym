@@ -13,6 +13,7 @@ from screens.custom_widgets.bottom_bar import BottomBar
 from screens.custom_widgets.act_button import ActButton
 from screens.custom_widgets.buy_button import BuyButton
 from screens.custom_widgets.coins_count import CoinsCounter
+from screens.custom_widgets.experience_count import ExperienceCounter
 from screens.custom_widgets.theme_layout import ThemeLayout
 from screens.custom_widgets.rounded_button_image import RoundedButtonImage
 

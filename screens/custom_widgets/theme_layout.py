@@ -23,8 +23,6 @@ from tools.path import (
     PATH_TEXT_FONT
 )
 from tools.constants import (
-    MAIN_COLOR,
-    SECOND_COLOR,
     CUSTOMIZATION_LAYOUT_FONT_SIZE,
     USER_DATA,
     THEMES_DICT

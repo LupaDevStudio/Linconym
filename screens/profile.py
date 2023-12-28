@@ -8,7 +8,10 @@ Module to create the profile screen.
 
 ### Kivy imports ###
 
-from kivy.properties import StringProperty
+from kivy.properties import (
+    StringProperty,
+    NumericProperty
+)
 
 ### Local imports ###
 
@@ -36,6 +39,8 @@ class ProfileScreen(ImprovedScreen):
 
     user_status = StringProperty()
     user_level = StringProperty()
+    coins_count = NumericProperty()
+    theme_colors = StringProperty()
 
     def __init__(self, **kwargs) -> None:
         current_theme_image = USER_DATA.settings["current_theme_image"]
@@ -46,9 +51,15 @@ class ProfileScreen(ImprovedScreen):
 
         self.user_status = USER_DATA.user_profile["status"]
         self.user_level = "Level " + str(USER_DATA.user_profile["level"])
+        self.theme_colors = USER_DATA.settings["current_theme_colors"]
+
+    def on_pre_enter(self, *args):
+        self.coins_count = USER_DATA.user_profile["coins"]
+        return super().on_pre_enter(*args)
 
     def on_enter(self, *args):
         current_theme_image = USER_DATA.settings["current_theme_image"]
+        self.theme_colors = USER_DATA.settings["current_theme_colors"]
         self.set_back_image_path(
             PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
         return super().on_enter(*args)
