@@ -40,15 +40,15 @@
         "coins": 1800
     },
     "boosters": {
-        "dict_ads": {
+        "ads": {
             "1": true,
-            "2": false,
-            "3": false
+            "2": true,
+            "3": true
         },
-        "dict_buy": {
-            "1": false,
-            "2": false,
-            "3": false
+        "buy": {
+            "1": true,
+            "2": true,
+            "3": true
         }
     }
 }

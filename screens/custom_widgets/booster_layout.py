@@ -6,6 +6,8 @@ Module to create the act button.
 ### Imports ###
 ###############
 
+from functools import partial
+
 ### Kivy imports ###
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.properties import (
@@ -82,3 +84,12 @@ class BoosterLayout(RelativeLayout):
             elif counter == 2:
                 self.third_color = element["color"]
                 self.third_disable = element["disable_button"]
+        self.ids.first_circle.release_function = partial(self.choose_item, 1)
+        self.ids.second_circle.release_function = partial(self.choose_item, 2)
+        self.ids.third_circle.release_function = partial(self.choose_item, 3)
+
+    def choose_item(self, number):
+        if self.mode == "ads":
+            self.parent.see_ad(number)
+        elif self.mode == "buy":
+            self.parent.buy_booster(number)

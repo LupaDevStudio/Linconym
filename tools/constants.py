@@ -139,7 +139,7 @@ class UserData():
         self.save_changes()
 
     def change_boosters(self, mode: Literal["ads", "buy"], number):
-        USER_DATA.boosters[mode][number] = True
+        USER_DATA.boosters[mode][str(number)] = True
         self.save_changes()
 
     def buy_item(self, theme, item_type, price):

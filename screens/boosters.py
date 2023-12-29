@@ -68,9 +68,9 @@ class BoostersScreen(ImprovedScreen):
         self.manager.current = self.former_screen
 
     def build_list_ads(self):
-        self.list_ads = {}
-        for ad in USER_DATA.boosters["dict_ads"]:
-            if USER_DATA.boosters["dict_ads"][ad]:
+        self.list_ads = []
+        for ad in USER_DATA.boosters["ads"]:
+            if USER_DATA.boosters["ads"][ad]:
                 self.list_ads.append({
                     "color": self.secondary_color,
                     "disable_button": True
@@ -82,8 +82,9 @@ class BoostersScreen(ImprovedScreen):
                 })
 
     def build_list_buy(self):
-        for buy in USER_DATA.boosters["dict_buy"]:
-            if USER_DATA.boosters["dict_buy"][buy]:
+        self.list_buy = []
+        for buy in USER_DATA.boosters["buy"]:
+            if USER_DATA.boosters["buy"][buy]:
                 self.list_buy.append({
                     "color": self.secondary_color,
                     "disable_button": True
