@@ -58,6 +58,8 @@ class CustomizationScreen(ImprovedScreen):
 
     def on_pre_enter(self, *args):
         self.coins_count = USER_DATA.user_profile["coins"]
+        current_theme_image = USER_DATA.settings["current_theme_image"]
+        self.primary_color = THEMES_DICT[current_theme_image]["primary"]
         return super().on_pre_enter(*args)
 
     def on_resize(self, *args):
@@ -68,6 +70,10 @@ class CustomizationScreen(ImprovedScreen):
     def go_backwards(self):
         # TODO to change
         self.manager.current = "home"
+
+    def go_to_boosters(self):
+        self.manager.get_screen("boosters").former_screen = "customization"
+        self.manager.current = "boosters"
 
     def update_coins(self):
         self.coins_count = USER_DATA.user_profile["coins"]

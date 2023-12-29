@@ -50,6 +50,7 @@ class FreeModeScreen(ImprovedScreen):
 
     def on_enter(self, *args):
         current_theme_image = USER_DATA.settings["current_theme_image"]
+        self.primary_color = THEMES_DICT[current_theme_image]["primary"]
         self.set_back_image_path(
             PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
         return super().on_enter(*args)

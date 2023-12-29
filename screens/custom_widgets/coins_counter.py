@@ -11,7 +11,8 @@ from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import (
     StringProperty,
-    NumericProperty
+    NumericProperty,
+    BooleanProperty
 )
 
 ### Local imports ###
@@ -39,11 +40,12 @@ class CoinsCounter(ButtonBehavior, RelativeLayout):
     coins_count = NumericProperty(-1)
     font_size = NumericProperty()
     font_ratio = NumericProperty(1)
+    display_plus = BooleanProperty(True)
+    disable_button = BooleanProperty(False)
 
     def __init__(
             self,
             coins_count: int = 0,
-            button_mode=True,
             text_font_name=PATH_TEXT_FONT,
             font_size=COINS_COUNT_FONT_SIZE,
             release_function=lambda: 1 + 1,
@@ -52,22 +54,26 @@ class CoinsCounter(ButtonBehavior, RelativeLayout):
         if font_ratio is not None:
             self.font_ratio = font_ratio
         super().__init__(**kwargs)
-        self.button_mode = button_mode
         self.release_function = release_function
         self.always_release = True
         self.bind(coins_count=self.update_coins_count)
+        self.bind(display_plus=self.bind_function)
+        self.bind(disable_button=self.bind_function)
         self.coins_count = coins_count
         self.text_font_name = text_font_name
         self.font_size = font_size
+
+    def bind_function(self, base_widget, value):
+        pass
 
     def update_coins_count(self, base_widget, value):
         self.coins_count_text = str(self.coins_count)
 
     def on_press(self):
-        if self.button_mode:
+        if not self.disable_button:
             self.opacity = OPACITY_ON_BUTTON_PRESS
 
     def on_release(self):
-        if self.button_mode:
+        if not self.disable_button:
             self.release_function()
             self.opacity = 1
