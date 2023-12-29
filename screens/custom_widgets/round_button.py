@@ -32,10 +32,11 @@ from tools.constants import (
 
 class RoundButton(ButtonBehavior, RelativeLayout):
     """
-    A custom button with a white round rectangle background.
+    A round button with a colored background and a label.
     """
 
     color = ColorProperty([1,1,1,1])
+    line_width = NumericProperty(1)
     text = StringProperty()
     text_filling_ratio = NumericProperty()
     font_size = NumericProperty()
@@ -61,6 +62,7 @@ class RoundButton(ButtonBehavior, RelativeLayout):
         self.text_filling_ratio = text_filling_ratio
         self.font_size = font_size
         self.bind(disable_button=self.bind_function)
+        self.bind(line_width=self.bind_function)
 
     def bind_function(self, base_widget, value):
         pass

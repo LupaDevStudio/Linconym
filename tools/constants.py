@@ -17,6 +17,7 @@ MOBILE_MODE : bool
 ### Python imports ###
 
 import os
+from typing import Literal
 
 ### Kivy imports ###
 
@@ -98,6 +99,7 @@ class UserData():
         self.unlocked_themes = data["unlocked_themes"]
         self.unlocked_musics = data["unlocked_musics"]
         self.user_profile = data["user_profile"]
+        self.boosters = data["boosters"]
 
     def save_changes(self) -> None:
         """
@@ -121,6 +123,7 @@ class UserData():
         data["unlocked_themes"] = self.unlocked_themes
         data["unlocked_musics"] = self.unlocked_musics
         data["user_profile"] = self.user_profile
+        data["boosters"] = self.boosters
 
         # Save this dictionary
         save_json_file(
@@ -133,6 +136,10 @@ class UserData():
 
     def change_theme_colors(self, theme):
         USER_DATA.settings["current_theme_colors"] = theme
+        self.save_changes()
+
+    def change_boosters(self, mode: Literal["ads", "buy"], number):
+        USER_DATA.boosters[mode][number] = True
         self.save_changes()
 
     def buy_item(self, theme, item_type, price):

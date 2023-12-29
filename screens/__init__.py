@@ -15,7 +15,8 @@ from screens.custom_widgets import (
     RoundedButtonImage,
     ExperienceCounter,
     CircleIconButton,
-    RoundButton
+    RoundButton,
+    BoosterLayout
 )
 
 # Import the screens

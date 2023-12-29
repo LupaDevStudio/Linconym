@@ -41,3 +41,19 @@
         coins_count: root.coins_count
         display_plus: False
         disable_button: True
+
+    # Ads boosters
+    BoosterLayout:
+        mode: "ads"
+        booster_title: "Watch ads videos"
+        pos_hint: {"center_x": 0.5, "center_y": 0.6}
+        size_hint: 0.8, 0.25
+        list_ads_buy: root.list_ads
+
+    # Buy boosters
+    BoosterLayout:
+        mode: "buy"
+        booster_title: "Purchases"
+        pos_hint: {"center_x": 0.5, "center_y": 0.3}
+        size_hint: 0.8, 0.25
+        list_ads_buy: root.list_buy

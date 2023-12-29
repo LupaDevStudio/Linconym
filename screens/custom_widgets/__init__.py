@@ -18,3 +18,4 @@ from screens.custom_widgets.theme_layout import ThemeLayout
 from screens.custom_widgets.rounded_button_image import RoundedButtonImage
 from screens.custom_widgets.circle_icon_button import CircleIconButton
 from screens.custom_widgets.round_button import RoundButton
+from screens.custom_widgets.booster_layout import BoosterLayout

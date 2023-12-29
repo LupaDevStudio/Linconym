@@ -1,0 +1,55 @@
+#:kivy 2.2.1
+
+<BoosterLayout>:
+
+    # Background
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            pos:(0,0)
+            size:self.size
+            radius:[40,]
+
+
+    # Booster title
+    Label:
+        text: root.booster_title
+        pos_hint: {"center_x":0.5,"center_y":0.85}
+        size_hint: (0.8,0.2)
+        font_size: root.font_ratio * root.font_size * 1.3
+        text_size: (self.width,None)
+        font_name: root.text_font_name
+        color: (0,0,0,1)
+        halign: "center"
+        valign: "center"
+
+    # First circle
+    RoundButton:
+        id: first_circle
+        pos_hint: {"center_x":0.2, "center_y":0.475}
+        size_hint: (0.2,None)
+        height: self.width
+        color: root.first_color
+        disable_button: root.first_disable
+        line_width: 2
+    
+    # Second circle
+    RoundButton:
+        id: second_circle
+        pos_hint: {"center_x":0.5, "center_y":0.475}
+        size_hint: (0.2,None)
+        height: self.width
+        color: root.second_color
+        disable_button: root.second_disable
+        line_width: 2
+
+    # Third circle
+    RoundButton:
+        id: third_circle
+        pos_hint: {"center_x":0.8, "center_y":0.475}
+        size_hint: (0.2,None)
+        height: self.width
+        color: root.third_color
+        disable_button: root.third_disable
+        line_width: 2
