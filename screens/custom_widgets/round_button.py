@@ -7,16 +7,21 @@ Module to create custom buttons with round transparent white background.
 ###############
 
 ### Kivy imports ###
-
-from kivy.uix.image import Image
+from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import (
+    StringProperty,
+    NumericProperty,
+    ColorProperty,
     BooleanProperty
 )
 
 ### Local imports ###
-
+from tools.path import (
+    PATH_TEXT_FONT
+)
 from tools.constants import (
+    MAIN_BUTTON_FONT_SIZE,
     OPACITY_ON_BUTTON_PRESS
 )
 
@@ -25,20 +30,36 @@ from tools.constants import (
 #############
 
 
-class CircleIconButton(ButtonBehavior, Image):
+class RoundButton(ButtonBehavior, RelativeLayout):
     """
     A custom button with a white round rectangle background.
     """
 
-    disable_button = BooleanProperty()
+    color = ColorProperty([1,1,1,1])
+    text = StringProperty()
+    text_filling_ratio = NumericProperty()
+    font_size = NumericProperty()
+    font_ratio = NumericProperty(1)
+    disable_button = BooleanProperty(False)
 
     def __init__(
             self,
+            text="",
+            text_font_name=PATH_TEXT_FONT,
+            text_filling_ratio=0.8,
+            font_size=MAIN_BUTTON_FONT_SIZE,
             release_function=lambda: 1 + 1,
+            font_ratio=None,
             **kwargs):
+        if font_ratio is not None:
+            self.font_ratio = font_ratio
         super().__init__(**kwargs)
-        self.always_release = True
         self.release_function = release_function
+        self.always_release = True
+        self.text_font_name = text_font_name
+        self.text = text
+        self.text_filling_ratio = text_filling_ratio
+        self.font_size = font_size
         self.bind(disable_button=self.bind_function)
 
     def bind_function(self, base_widget, value):
@@ -52,4 +73,3 @@ class CircleIconButton(ButtonBehavior, Image):
         if not self.disable_button:
             self.release_function()
             self.opacity = 1
-

@@ -1,0 +1,25 @@
+#:kivy 2.2.1
+#:set OUTLINE_INSIDE_RECTANGLE 6
+
+<RoundButton>:
+
+    canvas:
+        Color:
+            rgba: root.color
+        Ellipse:
+            pos: (0,0)
+            size: self.size
+        Color:
+            rgba: (0,0,0,1)
+        Line:
+            ellipse:(0,0,self.width,self.height)
+            width: 1.5
+
+    # Main text
+    Label:
+        text: root.text
+        size: root.size
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        font_size: root.font_ratio * root.font_size
+        font_name: root.text_font_name
+        color: (0,0,0,1)

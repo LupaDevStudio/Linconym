@@ -1,5 +1,6 @@
 #:kivy 2.2.1
-#:set OUTLINE_RECTANGLE 6
+#:set OUTLINE_INSIDE_RECTANGLE 6
+#:set OUTLINE_OUTSIDE_RECTANGLE 16
 
 <-CircleIconButton>:
 
@@ -9,8 +10,14 @@
         Color:
             rgba: (0,0,0,1)
         RoundedRectangle:
-            pos: (self.pos[0]-OUTLINE_RECTANGLE//2, self.pos[1]-OUTLINE_RECTANGLE//2)
-            size: (self.size[0]+OUTLINE_RECTANGLE, self.size[1]+OUTLINE_RECTANGLE)
+            pos: (self.pos[0]-OUTLINE_OUTSIDE_RECTANGLE//2, self.pos[1]-OUTLINE_OUTSIDE_RECTANGLE//2)
+            size: (self.size[0]+OUTLINE_OUTSIDE_RECTANGLE, self.size[1]+OUTLINE_OUTSIDE_RECTANGLE)
+            radius: [100]
+        Color:
+            rgba: (1,1,1,1)
+        RoundedRectangle:
+            pos: (self.pos[0]-OUTLINE_INSIDE_RECTANGLE//2, self.pos[1]-OUTLINE_INSIDE_RECTANGLE//2)
+            size: (self.size[0]+OUTLINE_INSIDE_RECTANGLE, self.size[1]+OUTLINE_INSIDE_RECTANGLE)
             radius: [100]
 
     canvas:

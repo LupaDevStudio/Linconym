@@ -81,37 +81,19 @@
             has_bought: root.has_bought_colors
             is_using: root.is_using_colors
             release_function: root.click_colors
-        
-        Widget:
+
+        RoundButton:
             id: primary_color_bubble
             pos_hint: {"center_x":0.94, "center_y":0.66}
             size_hint: (None,0.25)
             width: self.height
-            canvas:
-                Color:
-                    rgba: root.primary_color
-                Ellipse:
-                    pos: self.pos
-                    size: self.size
-                Color:
-                    rgba: (0,0,0,1)
-                Line:
-                    ellipse:(self.x,self.y,self.width,self.height)
-                    width: 1.5
-        
-        Widget:
+            color: root.primary_color
+            disable_button: True
+      
+        RoundButton:
             id: secondary_color_bubble
             pos_hint: {"center_x":0.94, "center_y":0.33}
             size_hint: (None,0.25)
-            width: self.height
-            canvas:
-                Color:
-                    rgba: root.secondary_color
-                Ellipse:
-                    pos: self.pos
-                    size: self.size
-                Color:
-                    rgba: (0,0,0,1)
-                Line:
-                    ellipse:(self.x,self.y,self.width,self.height)
-                    width: 1.5
+            width: self.height  
+            color: root.secondary_color
+            disable_button: True
