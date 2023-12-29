@@ -1,8 +1,17 @@
 #:kivy 2.2.1
+#:set OUTLINE_RECTANGLE 6
 
 <-CircleIconButton>:
 
     fit_mode: "cover" # the image will be cropped at the right spot
+
+    canvas.before:
+        Color:
+            rgba: (0,0,0,1)
+        RoundedRectangle:
+            pos: (self.pos[0]-OUTLINE_RECTANGLE//2, self.pos[1]-OUTLINE_RECTANGLE//2)
+            size: (self.size[0]+OUTLINE_RECTANGLE, self.size[1]+OUTLINE_RECTANGLE)
+            radius: [100]
 
     canvas:
         Color:

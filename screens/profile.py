@@ -37,7 +37,7 @@ class ProfileScreen(ImprovedScreen):
     Class to manage the screen that contains the profile information.
     """
 
-    user_status = StringProperty()
+    user_status = StringProperty(USER_DATA.user_profile["status"])
     user_level = StringProperty()
     coins_count = NumericProperty()
     theme_colors = StringProperty()

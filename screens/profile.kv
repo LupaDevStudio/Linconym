@@ -28,8 +28,8 @@
     # Badge for the status
     CircleIconButton:
         source: PATH_BADGES + root.user_status + ".png"
-        pos_hint: {"center_x":0.25, "center_y":0.75}
-        size_hint: (0.2, None)
+        pos_hint: {"center_x":0.2, "center_y":0.75}
+        size_hint: (0.25, None)
         height: self.width
         disable_button: True
 
@@ -38,8 +38,8 @@
         text: root.user_status
         font_name: PATH_TITLE_FONT
         font_size: 20 * root.font_ratio
-        pos_hint: {"center_x":0.7, "center_y":0.8}
-        size_hint: (0.4, 0.1)
+        pos_hint: {"x":0.4, "center_y":0.825}
+        size_hint: (0.25, 0.1)
         text_size: self.size
         outline_width: TITLE_OUTLINE_WIDTH
         outline_color: TITLE_OUTLINE_COLOR
@@ -49,18 +49,18 @@
         text: root.user_level
         font_name: PATH_TITLE_FONT
         font_size: 20 * root.font_ratio
-        pos_hint: {"center_x":0.7, "center_y":0.75}
-        size_hint: (0.4, 0.1)
+        pos_hint: {"x":0.675, "center_y":0.825}
+        size_hint: (0.25, 0.1)
         text_size: self.size
         outline_width: TITLE_OUTLINE_WIDTH
         outline_color: TITLE_OUTLINE_COLOR
         color: TEXT_FONT_COLOR
-        halign: "left"
+        halign: "right"
 
     # Experience counter
     ExperienceCounter:
-        size_hint: (0.4, 0.07)
-        pos_hint: {"center_x":0.25, "center_y":0.6}
+        size_hint: (0.525, 0.07)
+        pos_hint: {"x":0.4, "center_y":0.72}
         font_ratio: root.font_ratio
         experience_left: 10
         percentage_experience: 0.7
@@ -68,7 +68,7 @@
 
     # Coins counter
     CoinsCounter:
-        size_hint: (0.45, 0.07)
-        pos_hint: {"center_x":0.725, "center_y":0.6}
+        size_hint: (0.6, 0.07)
+        pos_hint: {"center_x":0.5, "center_y":0.61}
         font_ratio: root.font_ratio
         coins_count: root.coins_count
