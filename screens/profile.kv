@@ -1,5 +1,6 @@
 #:kivy 2.2.1
 #:import PATH_IMAGES tools.path.PATH_IMAGES
+#:import PATH_BADGES tools.path.PATH_BADGES
 #:import PATH_TITLE_FONT tools.path.PATH_TITLE_FONT
 #:import TITLE_FONT_SIZE tools.constants.TITLE_FONT_SIZE
 #:import TITLE_OUTLINE_WIDTH tools.constants.TITLE_OUTLINE_WIDTH
@@ -23,6 +24,14 @@
         size_hint: (1, BOTTOM_BAR_HEIGHT)
         pos_hint: {"bottom":0,"left":0}
         selected: "profile"
+
+    # Badge for the status
+    CircleIconButton:
+        source: PATH_BADGES + root.user_status + ".png"
+        pos_hint: {"center_x":0.25, "center_y":0.75}
+        size_hint: (0.2, None)
+        height: self.width
+        disable_button: True
 
     # Status and level
     Label:

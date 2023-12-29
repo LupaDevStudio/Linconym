@@ -18,7 +18,7 @@ from kivy.app import App
 from kivy.uix.screenmanager import (
     ScreenManager,
     NoTransition,
-    Screen,
+    Screen
 )
 from kivy.uix.widget import Widget
 from kivy.core.window import Window
@@ -27,7 +27,7 @@ from kivy.clock import Clock
 ### Local imports ###
 
 from tools.path import (
-    PATH_IMAGES,
+    PATH_IMAGES
 )
 from tools.constants import (
     MOBILE_MODE,

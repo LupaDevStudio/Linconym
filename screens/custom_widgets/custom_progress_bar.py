@@ -34,9 +34,9 @@ class CustomProgressBar(Widget):
             **kwargs):
         super().__init__(**kwargs)
 
-        self.bind(primary_color = self.my_function)
-        self.bind(secondary_color = self.my_function)
+        self.bind(primary_color = self.bind_function)
+        self.bind(secondary_color = self.bind_function)
         self.value = value
 
-    def my_function(self, base_widget, value):
+    def bind_function(self, base_widget, value):
         pass

@@ -13,7 +13,8 @@ from screens.custom_widgets import (
     ThreeStars,
     SideImageButton,
     RoundedButtonImage,
-    ExperienceCounter
+    ExperienceCounter,
+    CircleIconButton
 )
 
 # Import the screens
