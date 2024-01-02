@@ -1,4 +1,6 @@
 #:kivy 2.2.1
+#:import PATH_TITLE_FONT tools.path.PATH_TITLE_FONT
+#:set AMOUNT_FONT_SIZE 15
 
 <BoosterLayout>:
 
@@ -28,28 +30,55 @@
     RoundButton:
         id: first_circle
         pos_hint: {"center_x":0.2, "center_y":0.475}
-        size_hint: (0.2,None)
-        height: self.width
+        size_hint: (None,0.4)
+        width: self.height
         color: root.first_color
         disable_button: root.first_disable
         line_width: 2
-    
+        text: root.first_text
+        font_ratio: root.font_ratio
+    Label:
+        text: root.first_amount_text
+        pos_hint: {"center_x":0.2, "center_y": 0.15}
+        size_hint: (0.2, 0.1)
+        color: (0,0,0,1)
+        font_name: PATH_TITLE_FONT
+        font_size: root.font_ratio * AMOUNT_FONT_SIZE
+
     # Second circle
     RoundButton:
         id: second_circle
         pos_hint: {"center_x":0.5, "center_y":0.475}
-        size_hint: (0.2,None)
-        height: self.width
+        size_hint: (None,0.4)
+        width: self.height
         color: root.second_color
         disable_button: root.second_disable
         line_width: 2
+        text: root.second_text
+        font_ratio: root.font_ratio
+    Label:
+        text: root.second_amount_text
+        pos_hint: {"center_x":0.5, "center_y": 0.15}
+        size_hint: (0.2, 0.1)
+        color: (0,0,0,1)
+        font_name: PATH_TITLE_FONT
+        font_size: root.font_ratio * AMOUNT_FONT_SIZE
 
     # Third circle
     RoundButton:
         id: third_circle
         pos_hint: {"center_x":0.8, "center_y":0.475}
-        size_hint: (0.2,None)
-        height: self.width
+        size_hint: (None,0.4)
+        width: self.height
         color: root.third_color
         disable_button: root.third_disable
         line_width: 2
+        text: root.third_text
+        font_ratio: root.font_ratio
+    Label:
+        text: root.third_amount_text
+        pos_hint: {"center_x":0.8, "center_y": 0.15}
+        size_hint: (0.2, 0.1)
+        color: (0,0,0,1)
+        font_name: PATH_TITLE_FONT
+        font_size: root.font_ratio * AMOUNT_FONT_SIZE

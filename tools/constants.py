@@ -99,7 +99,7 @@ class UserData():
         self.unlocked_themes = data["unlocked_themes"]
         self.unlocked_musics = data["unlocked_musics"]
         self.user_profile = data["user_profile"]
-        self.boosters = data["boosters"]
+        self.ads = data["ads"]
 
     def save_changes(self) -> None:
         """
@@ -123,7 +123,7 @@ class UserData():
         data["unlocked_themes"] = self.unlocked_themes
         data["unlocked_musics"] = self.unlocked_musics
         data["user_profile"] = self.user_profile
-        data["boosters"] = self.boosters
+        data["ads"] = self.ads
 
         # Save this dictionary
         save_json_file(
@@ -138,8 +138,8 @@ class UserData():
         USER_DATA.settings["current_theme_colors"] = theme
         self.save_changes()
 
-    def change_boosters(self, mode: Literal["ads", "buy"], number):
-        USER_DATA.boosters[mode][str(number)] = True
+    def change_boosters(self, number):
+        USER_DATA.ads[str(number)] = True
         self.save_changes()
 
     def buy_item(self, theme, item_type, price):
@@ -182,6 +182,7 @@ class ColorPalette():
 
 ### Graphics ###
 
+
 TEXT_FONT_COLOR = (0, 0, 0, 1)
 TITLE_FONT_SIZE = 45
 TITLE_OUTLINE_WIDTH = 2
@@ -195,7 +196,7 @@ OPACITY_ON_BUTTON_PRESS = 0.8
 CUSTOMIZATION_LAYOUT_FONT_SIZE = 20
 COINS_COUNT_FONT_SIZE = 22
 EXPERIENCE_FONT_SIZE = 15
-POS_HINT_BACK_ARROW = {"x":0.02, "top":0.99}
+POS_HINT_BACK_ARROW = {"x": 0.02, "top": 0.99}
 RATE_CHANGE_OPACITY = 0.05
 
 ### Musics ###
@@ -204,8 +205,30 @@ SOUND_LIST = []
 
 ### Ads code ###
 
+DICT_AMOUNT_ADS = {
+    "1": 100,
+    "2": 50,
+    "3": 30
+}
 REWARD_INTERSTITIAL = ""
 INTERSTITIAL = ""
+
+### Buy items ###
+
+DICT_AMOUNT_BUY = {
+    "1": {
+        "amount": 1000,
+        "price": 1
+    },
+    "2": {
+        "amount": 6000,
+        "price": 5
+    },
+    "3": {
+        "amount": 15000,
+        "price": 10
+    }
+}
 
 ### Words loading ###
 

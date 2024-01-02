@@ -21,7 +21,7 @@ from tools.path import (
     PATH_TEXT_FONT
 )
 from tools.constants import (
-    MAIN_BUTTON_FONT_SIZE,
+    CONTENT_LABEL_FONT_SIZE,
     OPACITY_ON_BUTTON_PRESS
 )
 
@@ -35,7 +35,7 @@ class RoundButton(ButtonBehavior, RelativeLayout):
     A round button with a colored background and a label.
     """
 
-    color = ColorProperty([1,1,1,1])
+    color = ColorProperty([1, 1, 1, 1])
     line_width = NumericProperty(1)
     text = StringProperty()
     text_filling_ratio = NumericProperty()
@@ -48,7 +48,7 @@ class RoundButton(ButtonBehavior, RelativeLayout):
             text="",
             text_font_name=PATH_TEXT_FONT,
             text_filling_ratio=0.8,
-            font_size=MAIN_BUTTON_FONT_SIZE,
+            font_size=CONTENT_LABEL_FONT_SIZE,
             release_function=lambda: 1 + 1,
             font_ratio=None,
             **kwargs):
