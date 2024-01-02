@@ -15,6 +15,7 @@ PATH_SCREENS = "screens/"
 
 # Path for the resources
 PATH_IMAGES = PATH_RESOURCES_FOLDER + "images/"
+PATH_TEMP_IMAGES = PATH_IMAGES + "temp/"
 PATH_BACKGROUNDS = PATH_IMAGES + "backgrounds/"
 PATH_BADGES = PATH_IMAGES + "badges/"
 PATH_SOUNDS = PATH_RESOURCES_FOLDER + "sounds/"

@@ -58,8 +58,8 @@ class CustomizationScreen(ImprovedScreen):
 
     def on_pre_enter(self, *args):
         self.coins_count = USER_DATA.user_profile["coins"]
-        current_theme_image = USER_DATA.settings["current_theme_image"]
-        self.primary_color = THEMES_DICT[current_theme_image]["primary"]
+        current_theme_colors = USER_DATA.settings["current_theme_colors"]
+        self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
         return super().on_pre_enter(*args)
 
     def on_resize(self, *args):
@@ -84,25 +84,30 @@ class CustomizationScreen(ImprovedScreen):
         """
         for theme in self.THEME_LAYOUT_DICT:
             self.THEME_LAYOUT_DICT[theme].update_display()
+
         current_theme_image = USER_DATA.settings["current_theme_image"]
         new_image = THEMES_DICT[current_theme_image]["image"]
 
-        # Change the background image smoothly for this screen
-        self.change_background(new_image)
+        current_theme_colors = USER_DATA.settings["current_theme_colors"]
+        self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
 
-        # Change the background image for all screens except this one
-        self.manager.change_all_background_images(
-            PATH_BACKGROUNDS + new_image)
+        if self.back_image_path != PATH_BACKGROUNDS + new_image:
+            # Change the background image smoothly for this screen
+            self.change_background(new_image)
+
+            # Change the background image for all screens except this one
+            self.manager.change_all_background_images(
+                PATH_BACKGROUNDS + new_image)
 
     def change_background(self, new_image: str):
         """
         Change smoothly of background image.
-        
+
         Parameters
         ----------
         new_image : str
             Name of the new image to set as background.
-        
+
         Returns
         -------
         None
@@ -110,17 +115,17 @@ class CustomizationScreen(ImprovedScreen):
         # Change the image of the background
         if self.opacity_state == "main":
             self.set_back_image_path(
-                back_image_path=PATH_BACKGROUNDS+new_image,
+                back_image_path=PATH_BACKGROUNDS + new_image,
                 mode="second"
             )
         elif self.opacity_state == "second":
             self.set_back_image_path(
-                back_image_path=PATH_BACKGROUNDS+new_image,
+                back_image_path=PATH_BACKGROUNDS + new_image,
                 mode="main"
             )
 
         # Schedule the change of the opacity to have a smooth transition
-        Clock.schedule_interval(self.change_background_opacity, 1/FPS)
+        Clock.schedule_interval(self.change_background_opacity, 1 / FPS)
 
     def fill_scrollview(self):
         scrollview_layout = self.ids["scrollview_layout"]
