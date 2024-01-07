@@ -60,7 +60,7 @@ class OpeningScreen(ImprovedScreen):
             SettingsScreen,
             ProfileScreen,
             CustomizationScreen,
-            FreeModeScreen,
+            ClassicModeScreen,
             BoostersScreen
         )
 
@@ -78,7 +78,7 @@ class OpeningScreen(ImprovedScreen):
         self.SettingsScreen = SettingsScreen
         self.ProfileScreen = ProfileScreen
         self.CustomizationScreen = CustomizationScreen
-        self.FreeModeScreen = FreeModeScreen
+        self.FreeModeScreen = ClassicModeScreen
         self.BoostersScreen = BoostersScreen
 
         Clock.schedule_once(self.load_other_screens)

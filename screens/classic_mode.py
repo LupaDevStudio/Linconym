@@ -34,7 +34,7 @@ from screens.custom_widgets import (
 #############
 
 
-class FreeModeScreen(ImprovedScreen):
+class ClassicModeScreen(ImprovedScreen):
 
     primary_color = ColorProperty((0, 0, 0, 1))
 

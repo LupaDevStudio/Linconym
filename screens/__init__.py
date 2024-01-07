@@ -24,5 +24,5 @@ from screens.home import HomeScreen
 from screens.profile import ProfileScreen
 from screens.customization import CustomizationScreen
 from screens.settings import SettingsScreen
-from screens.free_mode import FreeModeScreen
+from screens.classic_mode import ClassicModeScreen
 from screens.boosters import BoostersScreen
