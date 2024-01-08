@@ -91,8 +91,8 @@ class SettingsScreen(ImprovedScreen):
             map(convert_1_to_255, THEMES_DICT[current_theme_color]["secondary"]))
         current_save_int = random.randint(0, 1e9)
         self.save_int = current_save_int
-        generate_spinner_texture(primary_color=current_secondary_color,
-                                 secondary_color=current_primary_color,
+        generate_spinner_texture(primary_color=current_primary_color,
+                                 secondary_color=current_secondary_color,
                                  save_int=current_save_int)
         self.ids["sound_slider"].update_textures(save_int=current_save_int)
         self.ids["music_slider"].update_textures(save_int=current_save_int)

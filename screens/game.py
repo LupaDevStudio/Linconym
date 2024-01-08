@@ -1,10 +1,19 @@
 """
-Module to create the levels screen.
+Module to create the game screen.
 """
 
 ###############
 ### Imports ###
 ###############
+
+### Kivy imports ###
+
+from kivy.properties import (
+    StringProperty,
+    NumericProperty
+)
+
+### Local imports ###
 
 from tools.path import (
     PATH_BACKGROUNDS
@@ -20,16 +29,18 @@ from tools import (
     music_mixer
 )
 
-
 #############
 ### Class ###
 #############
 
 
-class LevelsScreen(ImprovedScreen):
+class GameScreen(ImprovedScreen):
     """
-    Class to manage the levels screen which allow the user to select a level inside an act.
+    Class to manage the game screen.
     """
+
+    current_level_name = StringProperty()
+    nb_stars = NumericProperty()
 
     def __init__(self, **kwargs) -> None:
         current_theme_image = USER_DATA.settings["current_theme_image"]
@@ -40,8 +51,14 @@ class LevelsScreen(ImprovedScreen):
         self.current_act_id = ""
 
     def on_enter(self, *args):
+        temp = self.current_act_id.replace("Act", "")
+        self.current_level_name = "Act " + temp + " – " + "1"
+        self.load_game_play()
+        self.load_game_user()
         return super().on_enter(*args)
-    
-    def open_game_screen(self):
-        self.manager.get_screen("game").current_act_id = self.current_act_id
-        self.manager.current = "game"
+
+    def load_game_play(self):
+        pass
+
+    def load_game_user(self):
+        pass

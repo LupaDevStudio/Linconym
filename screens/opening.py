@@ -63,7 +63,8 @@ class OpeningScreen(ImprovedScreen):
             ClassicModeScreen,
             BoostersScreen,
             LevelsScreen,
-            CustomizationScreen
+            CustomizationScreen,
+            GameScreen
         )
 
         screen_files = [file for file in os.listdir(
@@ -84,6 +85,7 @@ class OpeningScreen(ImprovedScreen):
         self.BoostersScreen = BoostersScreen
         self.LevelsScreen = LevelsScreen
         self.CustomizationScreen = CustomizationScreen
+        self.GameScreen = GameScreen
 
         Clock.schedule_once(self.load_other_screens)
 
@@ -107,6 +109,8 @@ class OpeningScreen(ImprovedScreen):
         self.manager.add_widget(boosters_screen)
         levels_screen = self.LevelsScreen(name="levels")
         self.manager.add_widget(levels_screen)
+        game_screen = self.GameScreen(name="game")
+        self.manager.add_widget(game_screen)
         customization_screen = self.CustomizationScreen(name="customization")
         self.manager.add_widget(customization_screen)
         Clock.schedule_once(self.switch_to_menu)
