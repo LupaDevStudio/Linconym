@@ -77,8 +77,8 @@ class ClassicModeScreen(ImprovedScreen):
         for act in GAMEPLAY_DICT:
             act_title = GAMEPLAY_DICT[act]["name"]
             nb_levels = len(GAMEPLAY_DICT[act]) - 1
-            if act in USER_DATA.free_mode:
-                nb_completed_levels = USER_DATA.free_mode[act]
+            if act in USER_DATA.classic_mode:
+                nb_completed_levels = USER_DATA.classic_mode[act]
             else:
                 nb_completed_levels = 0
             current_act_button = ActButton(

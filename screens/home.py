@@ -47,8 +47,8 @@ class HomeScreen(ImprovedScreen):
             PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
         return super().on_enter(*args)
 
-    def open_free_mode(self):
+    def open_classic_mode(self):
         """
-        Open the free mode screen.
+        Open the classic mode screen.
         """
         self.manager.current = "classic_mode"
