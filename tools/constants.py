@@ -60,7 +60,7 @@ BACK_ARROW_SIZE = 0.2
 # Create the user data json if it does not exist
 if not os.path.exists(PATH_USER_DATA):
     default_user_data = {
-        "free_mode": {},
+        "classic_mode": {},
         "daily_mode": {
             "start_word": "",
             "end_word": ""
@@ -92,7 +92,7 @@ class UserData():
 
     def __init__(self) -> None:
         data = load_json_file(PATH_USER_DATA)
-        self.free_mode = data["free_mode"]
+        self.classic_mode = data["classic_mode"]
         self.daily_mode = data["daily_mode"]
         self.history = data["history"]
         self.settings = data["settings"]
@@ -116,7 +116,7 @@ class UserData():
 
         # Create the dictionary of data
         data = {}
-        data["free_mode"] = self.free_mode
+        data["classic_mode"] = self.classic_mode
         data["daily_mode"] = self.daily_mode
         data["history"] = self.history
         data["settings"] = self.settings
@@ -183,22 +183,29 @@ class ColorPalette():
 ### Graphics ###
 
 
-TEXT_FONT_COLOR = (0, 0, 0, 1)
+# Font sizes
 TITLE_FONT_SIZE = 45
-TITLE_OUTLINE_WIDTH = 2
-TITLE_OUTLINE_COLOR = (1, 1, 1, 1)
 MAIN_BUTTON_FONT_SIZE = 30
 CONTENT_LABEL_FONT_SIZE = 17
 ACT_BUTTON_FONT_SIZE = 25
-BOTTOM_BAR_HEIGHT = 0.12
-CUSTOM_BUTTON_BACKGROUND_COLOR = (1, 1, 1, 0.7)
-OPACITY_ON_BUTTON_PRESS = 0.8
 CUSTOMIZATION_LAYOUT_FONT_SIZE = 20
 COINS_COUNT_FONT_SIZE = 22
 EXPERIENCE_FONT_SIZE = 15
+LEVEL_ID_FONT_SIZE = 22
+
+TEXT_FONT_COLOR = (0, 0, 0, 1)
+TITLE_OUTLINE_WIDTH = 2
+TITLE_OUTLINE_COLOR = (1, 1, 1, 1)
+BOTTOM_BAR_HEIGHT = 0.12
+CUSTOM_BUTTON_BACKGROUND_COLOR = (1, 1, 1, 0.7)
+OPACITY_ON_BUTTON_PRESS = 0.8
 POS_HINT_BACK_ARROW = {"x": 0.02, "top": 0.99}
 RATE_CHANGE_OPACITY = 0.05
-LEVEL_ID_FONT_SIZE = 22
+
+MAX_NB_LEVELS_PER_BRANCH = 5
+LEVEL_BUTTON_SIZE_HINT = 0.15
+LEVEL_BUTTON_SIDE_OFFSET = 0.1025
+LEVEL_BUTTON_SPACING = 0.05
 
 ### Musics ###
 
