@@ -23,7 +23,6 @@ from tools.constants import (
     OPACITY_ON_BUTTON_PRESS,
     MAX_NB_LEVELS_PER_BRANCH,
     LEVEL_BUTTON_SIZE_HINT,
-    LEVEL_BUTTON_SIDE_OFFSET,
     LEVEL_BUTTON_SPACING
 )
 
@@ -77,8 +76,8 @@ class LevelBranch(RelativeLayout):
 
     def compute_level_button_coords(self, local_id):
         if self.branch_id % 2 == 0:
-            center_x = LEVEL_BUTTON_SIDE_OFFSET + (LEVEL_BUTTON_SIZE_HINT + LEVEL_BUTTON_SIDE_OFFSET) * \
-                local_id + LEVEL_BUTTON_SIZE_HINT / 2
+            # center_x = LEVEL_BUTTON_SIDE_OFFSET + (LEVEL_BUTTON_SIZE_HINT + LEVEL_BUTTON_SIDE_OFFSET) * \
+            #     local_id + LEVEL_BUTTON_SIZE_HINT / 2
             center_y = ...
         else:
             center_x = ...
