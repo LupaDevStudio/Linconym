@@ -42,14 +42,10 @@
         release_function: root.go_to_boosters
 
     # Theme scrollview
-    ScrollView:
+    CustomScrollview:
         id: scrollview
         pos_hint: {"center_x":0.49, "center_y":0.44}
         size_hint: (0.98,0.63)
-        do_scroll_x: False
-        bar_margin: 0
-        bar_width: 6
-        scroll_type:['bars', 'content']
         bar_color: root.primary_color
         bar_inactive_color: root.secondary_color
 
@@ -57,5 +53,5 @@
             id: scrollview_layout
             cols:1
             spacing:40
-            height:0.2*root.height * len(THEMES_DICT)*1.05
+            height:0.2*root.height * len(THEMES_DICT)*1.08
             padding: (0.05*root.width, 10,0.05*root.width,40)
