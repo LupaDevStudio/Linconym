@@ -1,0 +1,34 @@
+#:kivy 2.2.1
+#:import PATH_TEXT_FONT tools.path.PATH_TEXT_FONT
+#:import LEVEL_ID_FONT_SIZE tools.constants.LEVEL_ID_FONT_SIZE
+
+<LevelButton>:
+
+    Widget:
+        opacity: 0.8
+        size: root.size
+        pos: (0,0)
+        canvas.before:
+            Color:
+                rgba: self.parent.primary_color
+            RoundedRectangle:
+                pos:(0,0)
+                size:self.size
+                radius:[15,]
+    
+    Label:
+        id: level_label
+        text: root.level_label_text
+        pos_hint: {"center_x":0.5, "center_y":0.65}
+        font_size: LEVEL_ID_FONT_SIZE * root.font_ratio
+        font_name: PATH_TEXT_FONT
+
+
+    # Stars
+    ThreeStars:
+        id: three_stars
+        pos_hint: {"center_x":0.5, "center_y":0.25}
+        size_hint: (0.8,0.45)
+        nb_stars: root.nb_stars
+
+# <LevelLeftBranch>:

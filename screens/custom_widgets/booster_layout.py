@@ -39,7 +39,7 @@ class BoosterLayout(RelativeLayout):
     """
 
     background_color = CUSTOM_BUTTON_BACKGROUND_COLOR
-    mode = StringProperty() # can be "ads" or "buy"
+    mode = StringProperty()  # can be "ads" or "buy"
     booster_title = StringProperty()
     font_size = NumericProperty()
     font_ratio = NumericProperty(1)
@@ -51,6 +51,12 @@ class BoosterLayout(RelativeLayout):
     first_disable = BooleanProperty()
     second_disable = BooleanProperty()
     third_disable = BooleanProperty()
+    first_text = StringProperty()
+    second_text = StringProperty()
+    third_text = StringProperty()
+    first_amount_text = StringProperty()
+    second_amount_text = StringProperty()
+    third_amount_text = StringProperty()
 
     def __init__(
             self,
@@ -78,12 +84,21 @@ class BoosterLayout(RelativeLayout):
             if counter == 0:
                 self.first_color = element["color"]
                 self.first_disable = element["disable_button"]
+                if "price" in element:
+                    self.first_text = str(element["price"]) + "€"
+                self.first_amount_text = str(element["amount"])
             elif counter == 1:
                 self.second_color = element["color"]
                 self.second_disable = element["disable_button"]
+                if "price" in element:
+                    self.second_text = str(element["price"]) + "€"
+                self.second_amount_text = str(element["amount"])
             elif counter == 2:
                 self.third_color = element["color"]
                 self.third_disable = element["disable_button"]
+                if "price" in element:
+                    self.third_text = str(element["price"]) + "€"
+                self.third_amount_text = str(element["amount"])
         self.ids.first_circle.release_function = partial(self.choose_item, 1)
         self.ids.second_circle.release_function = partial(self.choose_item, 2)
         self.ids.third_circle.release_function = partial(self.choose_item, 3)

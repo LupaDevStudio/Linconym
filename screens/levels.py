@@ -1,5 +1,5 @@
 """
-Module to create the customization screen.
+Module to create the levels screen.
 """
 
 ###############
@@ -26,9 +26,9 @@ from tools import (
 #############
 
 
-class CustomizationScreen(ImprovedScreen):
+class LevelsScreen(ImprovedScreen):
     """
-    Class to manage the customization screen which allows the user to choose between themes or music.
+    Class to manage the levels screen which allow the user to select a level inside an act.
     """
 
     def __init__(self, **kwargs) -> None:
@@ -37,12 +37,7 @@ class CustomizationScreen(ImprovedScreen):
             back_image_path=PATH_BACKGROUNDS +
             THEMES_DICT[current_theme_image]["image"],
             **kwargs)
+        self.current_act_id = ""
 
     def on_enter(self, *args):
         return super().on_enter(*args)
-
-    def open_musics_screen(self, *_):
-        pass
-
-    def open_themes_screen(self, *_):
-        self.manager.current = "themes"

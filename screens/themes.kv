@@ -7,13 +7,12 @@
 #:import PATH_TEXT_FONT tools.path.PATH_TEXT_FONT
 #:import TEXT_FONT_COLOR tools.constants.TEXT_FONT_COLOR
 #:import BOTTOM_BAR_HEIGHT tools.constants.BOTTOM_BAR_HEIGHT
-#:import GAMEPLAY_DICT tools.constants.GAMEPLAY_DICT
+#:import THEMES_DICT tools.constants.THEMES_DICT
 #:import POS_HINT_BACK_ARROW tools.constants.POS_HINT_BACK_ARROW
 
-
-<FreeModeScreen>:
+<ThemesScreen>:
     Label:
-        text: "Free Mode"
+        text: "Themes"
         font_name: PATH_TITLE_FONT
         font_size: TITLE_FONT_SIZE * root.font_ratio
         pos_hint: {"center_x":0.5, "center_y":0.9}
@@ -34,15 +33,25 @@
         pos_hint: {"bottom":0,"left":0}
         selected: "none"
 
-    ScrollView:
+    # Coins counter
+    CoinsCounter:
+        size_hint: (0.6, 0.07)
+        pos_hint: {"center_x":0.5, "center_y":0.81}
+        font_ratio: root.font_ratio
+        coins_count: root.coins_count
+        release_function: root.go_to_boosters
+
+    # Theme scrollview
+    CustomScrollview:
         id: scrollview
-        pos_hint: {"center_x":0.5, "center_y":0.475}
-        size_hint: (1,0.7)
-        do_scroll_x: False
+        pos_hint: {"center_x":0.49, "center_y":0.44}
+        size_hint: (0.98,0.63)
+        bar_color: root.primary_color
+        bar_inactive_color: root.secondary_color
 
         MyScrollViewLayout:
             id: scrollview_layout
             cols:1
             spacing:40
-            height:0.2*root.height * len(GAMEPLAY_DICT)
-            padding: (0.05*root.width, 0,0.05*root.width,40)
+            height:0.2*root.height * len(THEMES_DICT)*1.08
+            padding: (0.05*root.width, 10,0.05*root.width,40)

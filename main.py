@@ -7,6 +7,8 @@ Main module of Linconym.
 ### Imports ###
 ###############
 
+### Python imports ###
+import os
 
 ### Kivy imports ###
 
@@ -27,7 +29,8 @@ from kivy.clock import Clock
 ### Local imports ###
 
 from tools.path import (
-    PATH_IMAGES
+    PATH_IMAGES,
+    PATH_TEMP_IMAGES
 )
 from tools.constants import (
     MOBILE_MODE,
@@ -57,7 +60,7 @@ class WindowManager(ScreenManager):
 
     def change_all_background_images(self, new_image_path):
         for screen_name in self.screen_names:
-            if screen_name != "temp" and screen_name != "customization":
+            if screen_name != "temp" and screen_name != "themes":
                 screen = self.get_screen(screen_name)
                 screen.set_back_image_path(new_image_path)
 
@@ -97,6 +100,13 @@ class MainApp(App, Widget):
         current_screen_name = self.root_window.children[0].current
         self.root_window.children[0].get_screen(current_screen_name).refresh()
         return super().on_resume()
+
+    def on_stop(self):
+        temp_images_list = os.listdir(PATH_TEMP_IMAGES)
+        for temp_image in temp_images_list:
+            if temp_image.endswith(".png"):
+                os.remove(PATH_TEMP_IMAGES + temp_image)
+        return super().on_stop()
 
     def on_start(self):
         if MOBILE_MODE:
