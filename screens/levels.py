@@ -37,6 +37,7 @@ class LevelsScreen(ImprovedScreen):
             back_image_path=PATH_BACKGROUNDS +
             THEMES_DICT[current_theme_image]["image"],
             **kwargs)
+        self.current_act_id = ""
 
     def on_enter(self, *args):
         return super().on_enter(*args)

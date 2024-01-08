@@ -11,7 +11,7 @@
 
 <LevelsScreen>:
     Label:
-        text: "Linconym"
+        text: "Classic Mode"
         font_name: PATH_TITLE_FONT
         font_size: TITLE_FONT_SIZE * root.font_ratio
         pos_hint: {"center_x":0.5, "center_y":0.9}
@@ -23,3 +23,11 @@
         size_hint: (1, BOTTOM_BAR_HEIGHT)
         pos_hint: {"bottom":0,"left":0}
         selected: "none"
+
+    LevelButton:
+        pos_hint: {"center_x":0.5, "center_y":0.5}
+        size_hint: (0.15, None)
+        height: self.width*0.8
+        font_ratio: root.font_ratio
+
+

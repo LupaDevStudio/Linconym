@@ -6,6 +6,10 @@ Module to create the home screen.
 ### Imports ###
 ###############
 
+### Python imports ###
+
+from functools import partial
+
 ### Kivy imports ###
 
 from kivy.properties import (
@@ -82,6 +86,11 @@ class ClassicModeScreen(ImprovedScreen):
                 nb_levels=nb_levels,
                 nb_completed_levels=nb_completed_levels,
                 nb_stars=0,
-                font_ratio=self.font_ratio)
+                font_ratio=self.font_ratio,
+                release_function=partial(self.open_levels_screen, act))
             self.ACT_BUTTON_DICT[act] = current_act_button
             scrollview_layout.add_widget(self.ACT_BUTTON_DICT[act])
+
+    def open_levels_screen(self, act_id):
+        self.manager.get_screen("levels").current_act_id = act_id
+        self.manager.current = "levels"

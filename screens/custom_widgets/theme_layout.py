@@ -1,5 +1,5 @@
 """
-Module to create the act button.
+Module to create the theme selection layout.
 """
 
 ###############
@@ -35,7 +35,7 @@ from tools.constants import (
 
 class ThemeLayout(Image):
     """
-    A layout to display the customization to buy.
+    A layout to select the image or the colors of a theme.
     """
 
     theme_title = StringProperty()
@@ -77,6 +77,9 @@ class ThemeLayout(Image):
         self.font_size = font_size
 
     def update_variables(self):
+        """
+        Update the variables to indicate if a component is selected or unlocked.
+        """
         if self.theme_key in USER_DATA.unlocked_themes:
             self.has_bought_image = USER_DATA.unlocked_themes[self.theme_key]["image"]
             self.has_bought_colors = USER_DATA.unlocked_themes[self.theme_key]["colors"]
@@ -102,6 +105,9 @@ class ThemeLayout(Image):
         self.ids["buy_colors_button"].update_display()
 
     def click_image(self):
+        """
+        Function to select the image of the theme.
+        """
         if not self.has_bought_image:
             bought_sucessfully = USER_DATA.buy_item(
                 self.theme_key, "image", self.image_price)
@@ -116,6 +122,9 @@ class ThemeLayout(Image):
                 "themes").update_theme_layouts_display()
 
     def click_colors(self):
+        """
+        Function to select the colors of the theme.
+        """
         if not self.has_bought_colors:
             bought_sucessfully = USER_DATA.buy_item(
                 self.theme_key, "colors", self.colors_price)

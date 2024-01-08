@@ -92,13 +92,14 @@ class ThemesScreen(ImprovedScreen):
         current_theme_colors = USER_DATA.settings["current_theme_colors"]
         self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
 
-        # if self.back_image_path != PATH_BACKGROUNDS + new_image:
-        # Change the background image smoothly for this screen
-        self.change_background(new_image)
+        if (self.back_image_path != PATH_BACKGROUNDS + new_image and self.opacity_state == "main") \
+                or (self.second_back_image_path != PATH_BACKGROUNDS + new_image and self.opacity_state == "second"):
+            # Change the background image smoothly for this screen
+            self.change_background(new_image)
 
-        # Change the background image for all screens except this one
-        self.manager.change_all_background_images(
-            PATH_BACKGROUNDS + new_image)
+            # Change the background image for all screens except this one
+            self.manager.change_all_background_images(
+                PATH_BACKGROUNDS + new_image)
 
     def change_background(self, new_image: str):
         """
