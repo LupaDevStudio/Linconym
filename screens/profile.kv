@@ -1,6 +1,5 @@
 #:kivy 2.2.1
 #:import PATH_IMAGES tools.path.PATH_IMAGES
-#:import PATH_BADGES tools.path.PATH_BADGES
 #:import PATH_TITLE_FONT tools.path.PATH_TITLE_FONT
 #:import TITLE_FONT_SIZE tools.constants.TITLE_FONT_SIZE
 #:import TITLE_OUTLINE_WIDTH tools.constants.TITLE_OUTLINE_WIDTH
@@ -27,7 +26,7 @@
 
     # Badge for the status
     CircleIconButton:
-        source: PATH_BADGES + root.user_status + ".png"
+        source: root.user_status_image
         pos_hint: {"center_x":0.2, "center_y":0.75}
         size_hint: (0.25, None)
         height: self.width
