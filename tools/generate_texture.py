@@ -48,8 +48,9 @@ def generate_spinner_cirle(primary_color, secondary_color, save_int=0):
     """
     spinner_texture = PIL_Image.new("RGBA", (256, 256), (0, 0, 0, 0))
     draw = ImageDraw.Draw(spinner_texture)
-    draw.ellipse((0, 0, 256, 256), fill=primary_color,
-                 outline=secondary_color, width=SPINNER_CIRCLE_OUTSIDE_WIDTH)
+    # draw.ellipse((0, 0, 256, 256), fill=primary_color,
+    #              outline=secondary_color, width=SPINNER_CIRCLE_OUTSIDE_WIDTH)
+    draw.ellipse((0, 0, 256, 256), fill=primary_color)
     draw.ellipse((128 - INNER_SPINNER_CIRCLE_RADIUS // 2, 128 - INNER_SPINNER_CIRCLE_RADIUS //
                  2, 128 + INNER_SPINNER_CIRCLE_RADIUS // 2, 128 + INNER_SPINNER_CIRCLE_RADIUS // 2), fill=secondary_color)
     spinner_texture.save(PATH_TEMP_IMAGES + f"circle_{save_int}.png")
@@ -74,16 +75,16 @@ def generate_spinner_rectangle(primary_color, secondary_color, save_int=0):
     draw = ImageDraw.Draw(spinner_texture)
     draw.rectangle((0,
                    128 - SPINNER_RECTANGLE_HEIGHT // 2, 256, 128 + SPINNER_RECTANGLE_HEIGHT // 2), fill=secondary_color)
-    draw.rectangle((0,
-                    128 - SPINNER_RECTANGLE_HEIGHT // 2 - SPINNER_RECTANGLE_OUTSIDE_WIDTH // 2,
-                    256,
-                    128 - SPINNER_RECTANGLE_HEIGHT // 2 + SPINNER_RECTANGLE_OUTSIDE_WIDTH // 2),
-                   fill=primary_color)
-    draw.rectangle((0,
-                    128 + SPINNER_RECTANGLE_HEIGHT // 2 - SPINNER_RECTANGLE_OUTSIDE_WIDTH // 2,
-                    256,
-                    128 + SPINNER_RECTANGLE_HEIGHT // 2 + SPINNER_RECTANGLE_OUTSIDE_WIDTH // 2),
-                   fill=primary_color)
+    # draw.rectangle((0,
+    #                 128 - SPINNER_RECTANGLE_HEIGHT // 2 - SPINNER_RECTANGLE_OUTSIDE_WIDTH // 2,
+    #                 256,
+    #                 128 - SPINNER_RECTANGLE_HEIGHT // 2 + SPINNER_RECTANGLE_OUTSIDE_WIDTH // 2),
+    #                fill=primary_color)
+    # draw.rectangle((0,
+    #                 128 + SPINNER_RECTANGLE_HEIGHT // 2 - SPINNER_RECTANGLE_OUTSIDE_WIDTH // 2,
+    #                 256,
+    #                 128 + SPINNER_RECTANGLE_HEIGHT // 2 + SPINNER_RECTANGLE_OUTSIDE_WIDTH // 2),
+    #                fill=primary_color)
     spinner_texture.save(PATH_TEMP_IMAGES + f"rectangle_{save_int}.png")
 
 
