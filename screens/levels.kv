@@ -7,12 +7,11 @@
 #:import PATH_TEXT_FONT tools.path.PATH_TEXT_FONT
 #:import TEXT_FONT_COLOR tools.constants.TEXT_FONT_COLOR
 #:import BOTTOM_BAR_HEIGHT tools.constants.BOTTOM_BAR_HEIGHT
-#:import MAIN_BUTTON_FONT_SIZE tools.constants.MAIN_BUTTON_FONT_SIZE
 
 
-<CustomizationScreen>:
+<LevelsScreen>:
     Label:
-        text: "Customization"
+        text: "Linconym"
         font_name: PATH_TITLE_FONT
         font_size: TITLE_FONT_SIZE * root.font_ratio
         pos_hint: {"center_x":0.5, "center_y":0.9}
@@ -23,20 +22,4 @@
     BottomBar:
         size_hint: (1, BOTTOM_BAR_HEIGHT)
         pos_hint: {"bottom":0,"left":0}
-        selected: "customization"
-
-    SideImageButton:
-        size_hint: (0.65,0.1)
-        pos_hint: {"center_x":0.5, "center_y":0.6}
-        text:"Themes"
-        font_size: root.font_ratio * MAIN_BUTTON_FONT_SIZE
-        side_image_source: PATH_IMAGES + "paint.png"
-        release_function: root.open_themes_screen
-
-    SideImageButton:
-        size_hint: (0.65,0.1)
-        pos_hint: {"center_x":0.5, "center_y":0.45}
-        text:"Musics"
-        font_size: root.font_ratio * MAIN_BUTTON_FONT_SIZE
-        side_image_source: PATH_IMAGES + "musical_note.png"
-        release_function: root.open_musics_screen
+        selected: "none"

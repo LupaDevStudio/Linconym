@@ -1,0 +1,61 @@
+#:kivy 2.2.1
+#:import PATH_IMAGES tools.path.PATH_IMAGES
+#:import PATH_TITLE_FONT tools.path.PATH_TITLE_FONT
+#:import TITLE_FONT_SIZE tools.constants.TITLE_FONT_SIZE
+#:import TITLE_OUTLINE_WIDTH tools.constants.TITLE_OUTLINE_WIDTH
+#:import TITLE_OUTLINE_COLOR tools.constants.TITLE_OUTLINE_COLOR
+#:import PATH_TEXT_FONT tools.path.PATH_TEXT_FONT
+#:import TEXT_FONT_COLOR tools.constants.TEXT_FONT_COLOR
+#:import BOTTOM_BAR_HEIGHT tools.constants.BOTTOM_BAR_HEIGHT
+#:import THEMES_DICT tools.constants.THEMES_DICT
+#:import POS_HINT_BACK_ARROW tools.constants.POS_HINT_BACK_ARROW
+
+<ThemesScreen>:
+    Label:
+        text: "Themes"
+        font_name: PATH_TITLE_FONT
+        font_size: TITLE_FONT_SIZE * root.font_ratio
+        pos_hint: {"center_x":0.5, "center_y":0.9}
+        outline_width: TITLE_OUTLINE_WIDTH
+        outline_color: TITLE_OUTLINE_COLOR
+        color: TEXT_FONT_COLOR
+
+    RoundedButtonImage:
+        image_path: PATH_IMAGES + "left_arrow.png"
+        pos_hint: POS_HINT_BACK_ARROW
+        size_hint: (0.1, None)
+        height: self.width
+        colors: root.primary_color
+        on_release: root.go_backwards()
+
+    BottomBar:
+        size_hint: (1, BOTTOM_BAR_HEIGHT)
+        pos_hint: {"bottom":0,"left":0}
+        selected: "none"
+
+    # Coins counter
+    CoinsCounter:
+        size_hint: (0.6, 0.07)
+        pos_hint: {"center_x":0.5, "center_y":0.81}
+        font_ratio: root.font_ratio
+        coins_count: root.coins_count
+        release_function: root.go_to_boosters
+
+    # Theme scrollview
+    ScrollView:
+        id: scrollview
+        pos_hint: {"center_x":0.49, "center_y":0.44}
+        size_hint: (0.98,0.63)
+        do_scroll_x: False
+        bar_margin: 0
+        bar_width: 6
+        scroll_type:['bars', 'content']
+        bar_color: root.primary_color
+        bar_inactive_color: root.secondary_color
+
+        MyScrollViewLayout:
+            id: scrollview_layout
+            cols:1
+            spacing:40
+            height:0.2*root.height * len(THEMES_DICT)*1.05
+            padding: (0.05*root.width, 10,0.05*root.width,40)

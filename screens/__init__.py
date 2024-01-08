@@ -22,7 +22,9 @@ from screens.custom_widgets import (
 # Import the screens
 from screens.home import HomeScreen
 from screens.profile import ProfileScreen
-from screens.customization import CustomizationScreen
+from screens.themes import ThemesScreen
 from screens.settings import SettingsScreen
 from screens.classic_mode import ClassicModeScreen
 from screens.boosters import BoostersScreen
+from screens.levels import LevelsScreen
+from screens.customization import CustomizationScreen

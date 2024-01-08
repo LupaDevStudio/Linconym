@@ -51,4 +51,4 @@ class HomeScreen(ImprovedScreen):
         """
         Open the free mode screen.
         """
-        self.manager.current = "free_mode"
+        self.manager.current = "classic_mode"

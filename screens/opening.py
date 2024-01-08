@@ -59,9 +59,11 @@ class OpeningScreen(ImprovedScreen):
             HomeScreen,
             SettingsScreen,
             ProfileScreen,
-            CustomizationScreen,
+            ThemesScreen,
             ClassicModeScreen,
-            BoostersScreen
+            BoostersScreen,
+            LevelsScreen,
+            CustomizationScreen
         )
 
         screen_files = [file for file in os.listdir(
@@ -77,9 +79,11 @@ class OpeningScreen(ImprovedScreen):
         self.HomeScreen = HomeScreen
         self.SettingsScreen = SettingsScreen
         self.ProfileScreen = ProfileScreen
-        self.CustomizationScreen = CustomizationScreen
-        self.FreeModeScreen = ClassicModeScreen
+        self.ThemesScreen = ThemesScreen
+        self.ClassicModeScreen = ClassicModeScreen
         self.BoostersScreen = BoostersScreen
+        self.LevelsScreen = LevelsScreen
+        self.CustomizationScreen = CustomizationScreen
 
         Clock.schedule_once(self.load_other_screens)
 
@@ -95,10 +99,14 @@ class OpeningScreen(ImprovedScreen):
         self.manager.add_widget(settings_screen)
         profile_screen = self.ProfileScreen(name="profile")
         self.manager.add_widget(profile_screen)
-        customization_screen = self.CustomizationScreen(name="customization")
-        self.manager.add_widget(customization_screen)
-        free_mode_screen = self.FreeModeScreen(name="free_mode")
-        self.manager.add_widget(free_mode_screen)
+        themes_screen = self.ThemesScreen(name="themes")
+        self.manager.add_widget(themes_screen)
+        classic_mode_screen = self.ClassicModeScreen(name="classic_mode")
+        self.manager.add_widget(classic_mode_screen)
         boosters_screen = self.BoostersScreen(name="boosters")
         self.manager.add_widget(boosters_screen)
+        levels_screen = self.LevelsScreen(name="levels")
+        self.manager.add_widget(levels_screen)
+        customization_screen = self.CustomizationScreen(name="customization")
+        self.manager.add_widget(customization_screen)
         Clock.schedule_once(self.switch_to_menu)
