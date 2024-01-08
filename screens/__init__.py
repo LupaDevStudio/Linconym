@@ -28,3 +28,4 @@ from screens.classic_mode import ClassicModeScreen
 from screens.boosters import BoostersScreen
 from screens.levels import LevelsScreen
 from screens.customization import CustomizationScreen
+from screens.game import GameScreen
