@@ -48,11 +48,12 @@ class GameScreen(ImprovedScreen):
             back_image_path=PATH_BACKGROUNDS +
             THEMES_DICT[current_theme_image]["image"],
             **kwargs)
-        self.current_act_id = ""
+        self.current_act_id: str
+        self.current_level_id: str
 
     def on_enter(self, *args):
         temp = self.current_act_id.replace("Act", "")
-        self.current_level_name = "Act " + temp + " – " + "1"
+        self.current_level_name = "Act " + temp + " – " + self.current_level_id
         self.load_game_play()
         self.load_game_user()
         return super().on_enter(*args)

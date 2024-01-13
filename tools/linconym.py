@@ -372,5 +372,6 @@ class Game():
 
 
 if __name__ == "__main__":
-    fill_gameplay_dict_with_solutions()
-    fill_daily_games_with_solutions()
+    # fill_gameplay_dict_with_solutions()
+    # fill_daily_games_with_solutions()
+    find_solutions("king", "head", ENGLISH_WORDS_DICTS["10k"])
