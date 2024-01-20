@@ -77,7 +77,23 @@ class GameScreen(ImprovedScreen):
         self.current_level_name = "Act " + temp + " – " + self.current_level_id
         self.load_game_play()
         self.load_game_user()
+        self.build_word()
+        self.check_disable_keyboard()
         return super().on_enter(*args)
+
+    def check_disable_keyboard(self):
+
+        # Disable the back button if we have nothing to delete
+        if len(self.current_word) == 0:
+            self.ids.keyboard_layout.disable_delete_button()
+        else:
+            self.ids.keyboard_layout.activate_delete_button()
+
+        # Disable the letters is the word is already filled
+        if len(self.current_word) >= len(self.previous_word) + 2:
+            self.ids.keyboard_layout.disable_letters()
+        else:
+            self.ids.keyboard_layout.activate_letters()
 
     def touch_letter(self, letter):
         """
@@ -99,6 +115,9 @@ class GameScreen(ImprovedScreen):
         # Add the new letter to the current word
         else:
             self.current_word += letter
+
+        # Disable the keyboard in consequence
+        self.check_disable_keyboard()
 
         # Rebuild the display of the word
         self.build_word()
