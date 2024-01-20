@@ -20,4 +20,6 @@ from screens.custom_widgets.rounded_button_image import RoundedButtonImage
 from screens.custom_widgets.circle_icon_button import CircleIconButton
 from screens.custom_widgets.round_button import RoundButton
 from screens.custom_widgets.booster_layout import BoosterLayout
+from screens.custom_widgets.colored_rounded_button import ColoredRoundedButton
+from screens.custom_widgets.keyboard_layout import KeyboardLayout
 from screens.custom_widgets.levels_branchs import (LevelButton)

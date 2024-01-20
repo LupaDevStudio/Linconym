@@ -25,3 +25,12 @@
         pos_hint: {"center_x":0.25, "center_y":0.8}
         size_hint: (0.3, 0.075)
         nb_stars: root.nb_stars
+
+    # Keyboard
+    KeyboardLayout:
+        id: keyboard_layout
+        pos_hint: {"x": 0.05, "center_y": 0.25}
+        size_hint: (0.9, 0.2)
+        touch_function: root.touch_letter
+        touch_color: root.primary_color
+        background_color: root.secondary_color
