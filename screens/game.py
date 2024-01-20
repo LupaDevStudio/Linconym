@@ -80,12 +80,14 @@ class GameScreen(ImprovedScreen):
         Parameters
         ----------
         letter : str
-            Letter pressed. Can be any letter in capital or "BACK".
+            Letter pressed. Can be any letter in capital or "DELETE".
         
         Returns
         -------
         None
         """
+        if letter == "DELETE":
+            pass
         print(letter)
 
     def load_game_play(self):

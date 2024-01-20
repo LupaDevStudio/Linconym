@@ -23,15 +23,16 @@ from kivy.properties import (
 ### Local imports ###
 
 from tools.path import (
-    PATH_TEXT_FONT
+    PATH_TEXT_FONT,
+    PATH_IMAGES
 )
 from tools.constants import (
     CUSTOMIZATION_LAYOUT_FONT_SIZE,
-    THEMES_DICT,
     LETTER_FONT_SIZE
 )
 from screens.custom_widgets import (
-    ColoredRoundedButton
+    ColoredRoundedButton,
+    ColoredRoundedButtonImage
 )
 
 #############
@@ -157,18 +158,17 @@ class KeyboardLayout(RelativeLayout):
             counter += 1
 
         # BACK key
-        back_key = ColoredRoundedButton(
-            text="BACK",
+        back_key = ColoredRoundedButtonImage(
+            image_path=PATH_IMAGES + "delete.png",
             background_color=self.background_color,
             touch_color=self.touch_color,
             pos_hint={
                 "x": third_margin+counter*self.horizontal_padding+counter*self.size_letter,
                 "y": 0},
-            font_size=LETTER_FONT_SIZE,
             font_ratio=self.font_ratio,
             size_hint=(self.size_letter*2+self.horizontal_padding, height_letter),
-            color_label=(1,1,1,1),
-            on_release=partial(self.touch_letter, "BACK")
+            color_image=(1,1,1,1),
+            on_release=partial(self.touch_letter, "DELETE")
         )
         self.add_widget(back_key)
 
