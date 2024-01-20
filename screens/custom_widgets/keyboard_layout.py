@@ -120,7 +120,7 @@ class KeyboardLayout(RelativeLayout):
                 size_hint=(self.size_letter, height_letter),
                 color_label=(1,1,1,1),
                 outline_color=(1,1,1,1),
-                on_release=partial(self.touch_letter, letter)
+                release_function=partial(self.touch_letter, letter)
             )
             self.add_widget(colored_rounded_button)
             self.list_letter_keys.append(colored_rounded_button)
@@ -141,7 +141,7 @@ class KeyboardLayout(RelativeLayout):
                 size_hint=(self.size_letter, height_letter),
                 color_label=(1,1,1,1),
                 outline_color=(1,1,1,1),
-                on_release=partial(self.touch_letter, letter)
+                release_function=partial(self.touch_letter, letter)
             )
             self.add_widget(colored_rounded_button)
             self.list_letter_keys.append(colored_rounded_button)
@@ -162,7 +162,7 @@ class KeyboardLayout(RelativeLayout):
                 size_hint=(self.size_letter, height_letter),
                 color_label=(1,1,1,1),
                 outline_color=(1,1,1,1),
-                on_release=partial(self.touch_letter, letter)
+                release_function=partial(self.touch_letter, letter)
             )
             self.add_widget(colored_rounded_button)
             self.list_letter_keys.append(colored_rounded_button)
@@ -179,24 +179,26 @@ class KeyboardLayout(RelativeLayout):
             font_ratio=self.font_ratio,
             size_hint=(self.size_letter*2+self.horizontal_padding, height_letter),
             color_image=(1,1,1,1),
-            on_release=partial(self.touch_letter, "DELETE")
+            release_function=partial(self.touch_letter, "DELETE")
         )
         self.add_widget(self.delete_key)
 
     def disable_delete_button(self):
-        self.delete_key.disable_button = True
         self.delete_key.background_color = DISABLE_BUTTON_COLOR
+        self.delete_key.disable_button = True
 
     def activate_delete_button(self):
         self.delete_key.disable_button = False
         self.delete_key.background_color = self.background_color
 
     def disable_letters(self):
+        letter_key: ColoredRoundedButton
         for letter_key in self.list_letter_keys:
-            letter_key.disable_button = True
             letter_key.background_color = DISABLE_BUTTON_COLOR
+            letter_key.disable_button = True
 
     def activate_letters(self):
+        letter_key: ColoredRoundedButton
         for letter_key in self.list_letter_keys:
             letter_key.disable_button = False
             letter_key.background_color = self.background_color

@@ -66,23 +66,21 @@ class ColoredRoundedButton(ButtonBehavior, RelativeLayout):
         self.text_filling_ratio = text_filling_ratio
         self.font_size = font_size
 
-        self.bind(disable_button=self.my_function)
-        self.bind(color_label=self.my_function)
-        self.bind(background_color=self.my_function)
-        self.bind(touch_color=self.my_function)
-        self.bind(outline_color=self.my_function)
+        self.bind(disable_button=self.bind_function)
+        self.bind(color_label=self.bind_function)
+        self.bind(background_color=self.bind_function)
+        self.bind(touch_color=self.bind_function)
+        self.bind(outline_color=self.bind_function)
 
-    def my_function(self, base_widget, value):
+    def bind_function(self, base_widget, value):
         pass
 
     def on_press(self):
         if not self.disable_button:
             self.temp_color = self.background_color
             self.background_color = self.touch_color
-            # self.opacity = OPACITY_ON_BUTTON_PRESS
 
     def on_release(self):
         if not self.disable_button:
-            self.release_function()
             self.background_color = self.temp_color
-            # self.opacity = 1
+            self.release_function()
