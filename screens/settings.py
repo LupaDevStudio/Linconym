@@ -51,28 +51,6 @@ class SettingsScreen(ImprovedScreen):
 
     version_text = StringProperty()
 
-    # def add_sliders(self):
-    #     self.sound_slider = CustomSlider(
-    #         min=0,
-    #         max=1,
-    #         value=USER_DATA.settings["sound_volume"],
-    #         size_hint=(0.7, 0.06),
-    #         pos_hint={"center_x": 0.5, "center_y": 0.59})
-    #     self.add_widget(self.sound_slider)
-    #     self.sound_slider.bind(value=self.update_sound_volume)
-    #     self.music_slider = CustomSlider(
-    #         min=0,
-    #         max=1,
-    #         value=USER_DATA.settings["sound_volume"],
-    #         size_hint=(0.7, 0.06),
-    #         pos_hint={"center_x": 0.5, "center_y": 0.59})
-    #     self.add_widget(self.music_slider)
-    #     self.music_slider.bind(value=self.update_music_volume)
-
-    # def destroy_sliders(self):
-    #     self.remove_widget(self.sound_slider)
-    #     self.remove_widget(self.music_slider)
-
     def __init__(self, **kwargs) -> None:
         current_theme_image = USER_DATA.settings["current_theme_image"]
         self.version_text = "Version " + str(__version__)

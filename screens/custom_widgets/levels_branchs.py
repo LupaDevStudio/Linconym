@@ -6,18 +6,27 @@ Module to create the levels tree for the levels screen.
 ### Imports ###
 ###############
 
+### Python imports ###
+
+from math import ceil
+
 ### Kivy imports ###
 
+from kivy.uix.widget import Widget
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import (
     NumericProperty,
     BooleanProperty,
     ColorProperty,
-    StringProperty
+    StringProperty,
+    ListProperty
 )
 
 ### Local imports ###
+
+from tools.kivy_tools.tools_kivy import MyScrollViewLayout
+
 from tools.constants import (
     USER_DATA,
     GAMEPLAY_DICT,
@@ -25,13 +34,23 @@ from tools.constants import (
     MAX_NB_LEVELS_PER_BRANCH,
     LEVEL_BUTTON_SIZE_HINT,
     LEVEL_BUTTON_SPACING,
-    LEVEL_BUTTON_SIDE_OFFSET
+    LEVEL_BUTTON_SIDE_OFFSET,
+    LEVEL_BUTTON_RELATIVE_HEIGHT
 )
 
 
 ###############
 ### Classes ###
 ###############
+
+
+class StraightBranch(Widget):
+    color = ColorProperty()
+
+
+class CurveBranchTop(Widget):
+    color = ColorProperty()
+
 
 class LevelButton(ButtonBehavior, RelativeLayout):
 
@@ -73,6 +92,8 @@ class LevelButton(ButtonBehavior, RelativeLayout):
 class LevelBranch(RelativeLayout):
 
     font_ratio = NumericProperty()
+    primary_color = ColorProperty((0.5, 0.5, 0.5, 1))
+    secondary_color = ColorProperty((0.2, 0.2, 0.2, 1))
 
     def __init__(
             self,
@@ -110,7 +131,7 @@ class LevelBranch(RelativeLayout):
         else:
             center_x = 1 - (LEVEL_BUTTON_SIDE_OFFSET + (LEVEL_BUTTON_SIZE_HINT + LEVEL_BUTTON_SPACING) *
                             local_id + LEVEL_BUTTON_SIZE_HINT / 2)
-            if local_id == 0:
+            if local_id + 1 < MAX_NB_LEVELS_PER_BRANCH:
                 pos_hint["top"] = 1
             else:
                 pos_hint["y"] = 0
@@ -126,6 +147,7 @@ class LevelBranch(RelativeLayout):
         self.local_nb_levels = min(
             nb_levels - self.branch_id * MAX_NB_LEVELS_PER_BRANCH, 4)
         for local_id in range(self.local_nb_levels):
+            # Create the level button
             level_id = local_id + 1 + self.branch_id * MAX_NB_LEVELS_PER_BRANCH
             level_key = str(level_id)
             level_pos_hint = self.compute_level_button_pos_hint(local_id)
@@ -139,5 +161,65 @@ class LevelBranch(RelativeLayout):
                                        is_unlocked=level_is_unlocked,
                                        nb_stars=level_nb_stars,
                                        pos_hint=level_pos_hint,
-                                       size_hint=(LEVEL_BUTTON_SIZE_HINT, 0.4))
+                                       size_hint=(LEVEL_BUTTON_SIZE_HINT, LEVEL_BUTTON_RELATIVE_HEIGHT))
             self.add_widget(level_button)
+            # Create the branch
+            if level_id < nb_levels:
+
+                if level_is_unlocked:
+                    branch_color = self.primary_color
+                else:
+                    branch_color = self.secondary_color
+                if self.branch_id % 2 == 0:
+                    if local_id + 2 < MAX_NB_LEVELS_PER_BRANCH:
+                        branch_size_hint = (
+                            LEVEL_BUTTON_SPACING, LEVEL_BUTTON_RELATIVE_HEIGHT)
+                        branch_pos_hint = {
+                            "center_x": level_pos_hint["center_x"] + LEVEL_BUTTON_SPACING / 2 + LEVEL_BUTTON_SIZE_HINT / 2}
+                        branch_pos_hint["top"] = level_pos_hint["top"]
+                        branch = StraightBranch(
+                            size_hint=branch_size_hint,
+                            pos_hint=branch_pos_hint,
+                            color=branch_color)
+                    elif local_id + 2 == MAX_NB_LEVELS_PER_BRANCH:
+                        branch_pos_hint = {
+                            "x": level_pos_hint["center_x"] + LEVEL_BUTTON_SIZE_HINT / 2,
+                            "top": level_pos_hint["top"] - LEVEL_BUTTON_RELATIVE_HEIGHT / 2}
+                        branch_size_hint = (
+                            LEVEL_BUTTON_SPACING + LEVEL_BUTTON_SIZE_HINT / 2, LEVEL_BUTTON_RELATIVE_HEIGHT / 2 + (1 - 2 * LEVEL_BUTTON_RELATIVE_HEIGHT))
+                        branch = CurveBranchTop(
+                            size_hint=branch_size_hint,
+                            pos_hint=branch_pos_hint,
+                            color=branch_color)
+                    else:
+                        continue
+                    self.add_widget(branch)
+                else:
+                    pass
+
+
+class LevelLayout(MyScrollViewLayout):
+
+    font_ratio = NumericProperty()
+    primary_color = ColorProperty((0.5, 0.5, 0.5, 1))
+    secondary_color = ColorProperty((0.2, 0.2, 0.2, 1))
+    nb_branches = NumericProperty()
+
+    def __init__(
+            self,
+            act_id="Act1",
+            **kw):
+        super().__init__(**kw)
+        self.act_id = act_id
+        self.cols = 1
+        self.spacing = 40
+        self.build_layout()
+
+    def build_layout(self):
+        nb_levels = len(GAMEPLAY_DICT[self.act_id]) - 1
+        self.nb_branches = ceil(nb_levels / MAX_NB_LEVELS_PER_BRANCH)
+        for branch_id in range(self.nb_branches):
+            level_branch = LevelBranch(
+                act_id=self.act_id,
+                branch_id=branch_id)
+            self.add_widget(level_branch)

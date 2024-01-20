@@ -31,4 +31,33 @@
         size_hint: (0.8,0.45)
         nb_stars: root.nb_stars
 
-# <LevelLeftBranch>:
+<StraightBranch>:
+    # canvas.before:
+    #     Color:
+    #         rgba: (1,1,1,0.5)
+    #     Rectangle:
+    #         pos:self.pos
+    #         size:self.size
+    canvas:
+        Color:
+            rgba: self.color
+        Line:
+            # points: [(self.x,self.top),(self.right,self.top),(self.x,self.y),(self.right,self.y)]
+            points: [self.x, self.center_y,self.right, self.center_y]
+            width: 2
+            cap: "none"
+
+<CurveBranchTop>:
+    # canvas.before:
+    #     Color:
+    #         rgba: (1,1,1,0.5)
+    #     Rectangle:
+    #         pos:self.pos
+    #         size:self.size
+    canvas:
+        Color:
+            rgba: self.color
+        Line:
+            width: 2
+            bezier: [self.x, self.top,self.center_x, self.top,self.center_x, self.y]
+            cap: "none"
