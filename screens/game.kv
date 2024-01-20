@@ -1,13 +1,10 @@
 #:kivy 2.2.1
-#:import PATH_IMAGES tools.path.PATH_IMAGES
 #:import PATH_TITLE_FONT tools.path.PATH_TITLE_FONT
 #:import TITLE_FONT_SIZE tools.constants.TITLE_FONT_SIZE
 #:import TITLE_OUTLINE_WIDTH tools.constants.TITLE_OUTLINE_WIDTH
 #:import TITLE_OUTLINE_COLOR tools.constants.TITLE_OUTLINE_COLOR
-#:import PATH_TEXT_FONT tools.path.PATH_TEXT_FONT
+#:import LETTER_FONT_SIZE tools.constants.LETTER_FONT_SIZE
 #:import TEXT_FONT_COLOR tools.constants.TEXT_FONT_COLOR
-#:import BOTTOM_BAR_HEIGHT tools.constants.BOTTOM_BAR_HEIGHT
-
 
 <GameScreen>:
     Label:
@@ -25,6 +22,18 @@
         pos_hint: {"center_x":0.25, "center_y":0.8}
         size_hint: (0.3, 0.075)
         nb_stars: root.nb_stars
+
+    # Previous word
+    ColoredRoundedButton:
+        text: root.previous_word
+        background_color: (1,1,1,1)
+        pos_hint: {"center_x": 0.5,"y": 0.425}
+        font_ratio: root.font_ratio
+        font_size: LETTER_FONT_SIZE
+        size_hint: (len(root.previous_word)*0.05, 0.05)
+        color_label: (0,0,0,1)
+        outline_color: root.secondary_color
+        disable_button: True
 
     # Keyboard
     KeyboardLayout:

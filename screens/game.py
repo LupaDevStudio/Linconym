@@ -108,7 +108,6 @@ class GameScreen(ImprovedScreen):
         -------
         None
         """
-        print(letter)
         # Delete the last letter of the current word
         if letter == "DELETE":
             self.current_word = self.current_word[:-1]
