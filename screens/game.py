@@ -73,6 +73,18 @@ class GameScreen(ImprovedScreen):
         return super().on_enter(*args)
 
     def touch_letter(self, letter):
+        """
+        React when a letter of the keyboard is released.
+        
+        Parameters
+        ----------
+        letter : str
+            Letter pressed. Can be any letter in capital or "BACK".
+        
+        Returns
+        -------
+        None
+        """
         print(letter)
 
     def load_game_play(self):
