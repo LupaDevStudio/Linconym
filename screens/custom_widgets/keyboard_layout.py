@@ -108,12 +108,13 @@ class KeyboardLayout(RelativeLayout):
                 background_color=self.background_color,
                 touch_color=self.touch_color,
                 pos_hint={
-                    "x": first_margin+counter*self.horizontal_padding+counter*self.size_letter,
+                    "x": first_margin+counter*(self.horizontal_padding+self.size_letter),
                     "y": 2*vertical_padding + 2*height_letter},
                 font_size=LETTER_FONT_SIZE,
                 font_ratio=self.font_ratio,
                 size_hint=(self.size_letter, height_letter),
                 color_label=(1,1,1,1),
+                outline_color=(1,1,1,1),
                 on_release=partial(self.touch_letter, letter)
             )
             self.add_widget(colored_rounded_button)
@@ -127,12 +128,13 @@ class KeyboardLayout(RelativeLayout):
                 background_color=self.background_color,
                 touch_color=self.touch_color,
                 pos_hint={
-                    "x": second_margin+counter*self.horizontal_padding+counter*self.size_letter,
+                    "x": second_margin+counter*(self.horizontal_padding+self.size_letter),
                     "y": vertical_padding + height_letter},
                 font_size=LETTER_FONT_SIZE,
                 font_ratio=self.font_ratio,
                 size_hint=(self.size_letter, height_letter),
                 color_label=(1,1,1,1),
+                outline_color=(1,1,1,1),
                 on_release=partial(self.touch_letter, letter)
             )
             self.add_widget(colored_rounded_button)
@@ -146,12 +148,13 @@ class KeyboardLayout(RelativeLayout):
                 background_color=self.background_color,
                 touch_color=self.touch_color,
                 pos_hint={
-                    "x": third_margin+counter*self.horizontal_padding+counter*self.size_letter,
+                    "x": third_margin+counter*(self.horizontal_padding+self.size_letter),
                     "y": 0},
                 font_size=LETTER_FONT_SIZE,
                 font_ratio=self.font_ratio,
                 size_hint=(self.size_letter, height_letter),
                 color_label=(1,1,1,1),
+                outline_color=(1,1,1,1),
                 on_release=partial(self.touch_letter, letter)
             )
             self.add_widget(colored_rounded_button)
@@ -163,7 +166,7 @@ class KeyboardLayout(RelativeLayout):
             background_color=self.background_color,
             touch_color=self.touch_color,
             pos_hint={
-                "x": third_margin+counter*self.horizontal_padding+counter*self.size_letter,
+                "x": third_margin+counter*(self.horizontal_padding+self.size_letter),
                 "y": 0},
             font_ratio=self.font_ratio,
             size_hint=(self.size_letter*2+self.horizontal_padding, height_letter),

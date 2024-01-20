@@ -38,6 +38,7 @@ class ColoredRoundedButton(ButtonBehavior, RelativeLayout):
 
     background_color = ColorProperty()
     touch_color = ColorProperty()
+    outline_color = ColorProperty()
     text = StringProperty()
     text_filling_ratio = NumericProperty()
     font_size = NumericProperty()
@@ -69,6 +70,7 @@ class ColoredRoundedButton(ButtonBehavior, RelativeLayout):
         self.bind(color_label=self.my_function)
         self.bind(background_color=self.my_function)
         self.bind(touch_color=self.my_function)
+        self.bind(outline_color=self.my_function)
 
     def my_function(self, base_widget, value):
         pass
