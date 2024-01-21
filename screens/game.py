@@ -37,6 +37,9 @@ from tools import (
 from screens import (
     ColoredRoundedButton
 )
+from tools.linconym import (
+    is_valid
+)
 
 #############
 ### Class ###
@@ -52,8 +55,10 @@ class GameScreen(ImprovedScreen):
     nb_stars = NumericProperty()
     primary_color = ColorProperty((0, 0, 0, 1))
     secondary_color = ColorProperty((0, 0, 0, 1))
-    previous_word = StringProperty("BOY")
-    current_word = StringProperty("J")
+    start_word = StringProperty("BOY")
+    current_word = StringProperty("")
+    new_word = StringProperty("")
+    end_word = StringProperty("GIRL")
     list_widgets_letters = []
 
     def __init__(self, **kwargs) -> None:
@@ -66,6 +71,9 @@ class GameScreen(ImprovedScreen):
         self.current_level_id: str
 
     def on_pre_enter(self, *args):
+        # Initialise the current word
+        self.current_word = self.start_word
+
         current_theme_colors = USER_DATA.settings["current_theme_colors"]
         self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
         self.secondary_color = THEMES_DICT[current_theme_colors]["secondary"]
@@ -79,21 +87,43 @@ class GameScreen(ImprovedScreen):
         self.load_game_user()
         self.build_word()
         self.check_disable_keyboard()
+        self.check_enable_submit_button()
         return super().on_enter(*args)
 
     def check_disable_keyboard(self):
 
         # Disable the back button if we have nothing to delete
-        if len(self.current_word) == 0:
+        if len(self.new_word) == 0:
             self.ids.keyboard_layout.disable_delete_button()
         else:
             self.ids.keyboard_layout.activate_delete_button()
 
         # Disable the letters is the word is already filled
-        if len(self.current_word) >= len(self.previous_word) + 2:
+        if len(self.new_word) >= len(self.current_word) + 1:
             self.ids.keyboard_layout.disable_letters()
         else:
             self.ids.keyboard_layout.activate_letters()
+
+    def check_enable_submit_button(self):
+        """
+        Enable the submit button if the word entered is valid.
+        
+        Parameters
+        ----------
+        None
+        
+        Returns
+        -------
+        None
+        """
+        if is_valid(
+            new_word=self.new_word.lower(),
+            current_word=self.current_word.lower()):
+            self.ids.submit_button.opacity = 1
+            self.ids.submit_button.disable_button = False
+        else:
+            self.ids.submit_button.opacity = 0
+            self.ids.submit_button.disable_button = True
 
     def touch_letter(self, letter):
         """
@@ -110,23 +140,24 @@ class GameScreen(ImprovedScreen):
         """
         # Delete the last letter of the current word
         if letter == "DELETE":
-            self.current_word = self.current_word[:-1]
+            self.new_word = self.new_word[:-1]
         
         # Add the new letter to the current word
         else:
-            self.current_word += letter
+            self.new_word += letter
 
-        # Disable the keyboard in consequence
+        # Disable/Enable the keyboard and the submit button in consequence
         self.check_disable_keyboard()
+        self.check_enable_submit_button()
 
         # Rebuild the display of the word
         self.build_word()
 
     def build_word(self):
         x_center = 0.5
-        number_mandatory_letters = len(self.previous_word)
+        number_mandatory_letters = len(self.current_word) - 1
         number_letters = number_mandatory_letters + 2
-        next_letter_counter = len(self.current_word)
+        next_letter_counter = len(self.new_word)
         horizontal_padding = 0.02
         size_letter = 0.07
         height_letter = 0.05
@@ -152,7 +183,7 @@ class GameScreen(ImprovedScreen):
             
             # Determine the content of the letter
             try:
-                letter = self.current_word[counter_letter]
+                letter = self.new_word[counter_letter]
             except:
                 letter = ""
 
@@ -185,11 +216,37 @@ class GameScreen(ImprovedScreen):
         pass
 
     def submit_word(self):
-        print(self.current_word)
+        print("TODO rajouter le nouveau mot dans l'arbre. Ce nouveau mot est forcément valide (on le sait), cela a déjà été vérifié avec la présence ou non du submit button.")
+
+        # Change the current and new word
+        if not self.check_level_complete():
+            self.current_word = self.new_word
+            self.new_word = ""
+
+            # Enable the keyboard and disable the submit button
+            self.build_word()
+            self.check_disable_keyboard()
+            self.check_enable_submit_button()
+        else:
+            # TODO disable whole keyboard and submit button
+            self.current_word = self.start_word
+
+    def check_level_complete(self):
+        # The level is complete
+        if self.new_word == self.end_word:
+            print("TODO YOU WIN")
+            self.enable_right_arrow()
+            return True
+        return False
+
+    def enable_right_arrow(self):
+        # Enable the right arrow to go to the next level
+        self.ids.right_arrow.opacity = 1
+        self.ids.right_arrow.disable_button = False
 
     def go_backwards(self):
         self.manager.get_screen("levels").current_act_id = self.current_act_id
         self.manager.current = "levels"
 
     def go_to_next_level(self):
-        pass
+        print("TODO go to next level if possible")
