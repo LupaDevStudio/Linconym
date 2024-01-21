@@ -375,4 +375,4 @@ if __name__ == "__main__":
     # fill_gameplay_dict_with_solutions()
     # fill_daily_games_with_solutions()
     # print(is_valid("boy", "joy"))
-    find_solutions("king", "head", ENGLISH_WORDS_DICTS["10k"])
+    find_solutions("boy", "girl", ENGLISH_WORDS_DICTS["10k"])

@@ -53,14 +53,21 @@ class ClassicModeScreen(ImprovedScreen):
         self.on_resize()
         self.fill_scrollview()
 
-    def on_enter(self, *args):
+    def on_pre_enter(self, *args):
         current_theme_image = USER_DATA.settings["current_theme_image"]
         current_theme_colors = USER_DATA.settings["current_theme_colors"]
         self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
         self.secondary_color = THEMES_DICT[current_theme_colors]["secondary"]
         self.set_back_image_path(
             PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
-        return super().on_enter(*args)
+        for act in self.ACT_BUTTON_DICT:
+            self.ACT_BUTTON_DICT[act].primary_color = self.primary_color
+            self.ACT_BUTTON_DICT[act].secondary_color = self.secondary_color
+        return super().on_pre_enter(*args)
+
+    # def on_leave(self, *args):
+    #     self.ids["scrollview_layout"].clear_widgets
+    #     return super().on_leave(*args)
 
     def on_resize(self, *args):
         for act in self.ACT_BUTTON_DICT:
@@ -85,9 +92,11 @@ class ClassicModeScreen(ImprovedScreen):
                 act_title=act_title,
                 nb_levels=nb_levels,
                 nb_completed_levels=nb_completed_levels,
-                nb_stars=0,
+                nb_stars=2,
                 font_ratio=self.font_ratio,
-                release_function=partial(self.open_levels_screen, act))
+                release_function=partial(self.open_levels_screen, act),
+                primary_color=self.primary_color,
+                secondary_color=self.secondary_color)
             self.ACT_BUTTON_DICT[act] = current_act_button
             scrollview_layout.add_widget(self.ACT_BUTTON_DICT[act])
 

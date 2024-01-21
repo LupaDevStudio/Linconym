@@ -16,7 +16,8 @@ from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import (
     StringProperty,
-    NumericProperty
+    NumericProperty,
+    ColorProperty
 )
 
 ### Local imports ###
@@ -49,6 +50,8 @@ class ActButton(ButtonBehavior, RelativeLayout):
     nb_completed_levels = NumericProperty()
     nb_stars = NumericProperty()
     text_font_name = StringProperty(PATH_TEXT_FONT)
+    primary_color = ColorProperty((1, 1, 1, 1))
+    secondary_color = ColorProperty((0.5, 0.5, 0.5, 1))
 
     def __init__(
             self,
