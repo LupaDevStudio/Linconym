@@ -91,6 +91,11 @@ class GameScreen(ImprovedScreen):
         self.check_enable_submit_button()
         return super().on_enter(*args)
 
+    def on_pre_leave(self, *args):
+        self.ids.keyboard_layout.destroy_keyboard()        
+
+        return super().on_leave(*args)
+
     def check_disable_keyboard(self):
 
         # Disable the back button if we have nothing to delete
@@ -255,7 +260,6 @@ class GameScreen(ImprovedScreen):
     def disable_submit_button(self):
         self.ids.submit_button.opacity = 0
         self.ids.submit_button.disable_button = True
-        print(self.ids.submit_button.opacity)
 
     def go_backwards(self):
         self.manager.get_screen("levels").current_act_id = self.current_act_id

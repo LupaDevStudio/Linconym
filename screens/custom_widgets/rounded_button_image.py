@@ -46,9 +46,11 @@ class RoundedButtonImage(ButtonBehavior, RelativeLayout):
             self,
             image_path:str="",
             colors=(0, 0, 0, 1),
+            release_function=lambda: 1 + 1,
             **kwargs):
         super().__init__(**kwargs)
 
+        self.release_function = release_function
         self.image_path = image_path
         self.colors = colors
         self.always_release = True
@@ -63,4 +65,5 @@ class RoundedButtonImage(ButtonBehavior, RelativeLayout):
 
     def on_release(self):
         if not self.disable_button:
+            self.release_function()
             self.opacity = 1
