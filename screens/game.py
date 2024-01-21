@@ -183,3 +183,13 @@ class GameScreen(ImprovedScreen):
 
     def load_game_user(self):
         pass
+
+    def submit_word(self):
+        print(self.current_word)
+
+    def go_backwards(self):
+        self.manager.get_screen("levels").current_act_id = self.current_act_id
+        self.manager.current = "levels"
+
+    def go_to_next_level(self):
+        pass

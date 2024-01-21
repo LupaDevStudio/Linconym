@@ -1,10 +1,12 @@
 #:kivy 2.2.1
 #:import PATH_TITLE_FONT tools.path.PATH_TITLE_FONT
+#:import PATH_IMAGES tools.path.PATH_IMAGES
 #:import TITLE_FONT_SIZE tools.constants.TITLE_FONT_SIZE
 #:import TITLE_OUTLINE_WIDTH tools.constants.TITLE_OUTLINE_WIDTH
 #:import TITLE_OUTLINE_COLOR tools.constants.TITLE_OUTLINE_COLOR
 #:import LETTER_FONT_SIZE tools.constants.LETTER_FONT_SIZE
 #:import TEXT_FONT_COLOR tools.constants.TEXT_FONT_COLOR
+#:import POS_HINT_BACK_ARROW tools.constants.POS_HINT_BACK_ARROW
 
 <GameScreen>:
     Label:
@@ -15,6 +17,15 @@
         outline_width: TITLE_OUTLINE_WIDTH
         outline_color: TITLE_OUTLINE_COLOR
         color: TEXT_FONT_COLOR
+
+    # Left arrow
+    RoundedButtonImage:
+        image_path: PATH_IMAGES + "left_arrow.png"
+        pos_hint: POS_HINT_BACK_ARROW
+        size_hint: (0.1, None)
+        height: self.width
+        colors: root.primary_color
+        on_release: root.go_backwards()
 
     # Stars
     ThreeStars:
@@ -44,3 +55,24 @@
         touch_color: root.primary_color
         background_color: root.secondary_color
         font_ratio: root.font_ratio
+
+    # Submit button
+    CustomButton:
+        id: submit_button
+        size_hint: (0.25,0.05)
+        pos_hint: {"center_x":0.5, "y":0.025}
+        text: "Submit"
+        release_function: root.submit_word
+        font_ratio: root.font_ratio
+        font_size: 15
+        radius: 15
+
+    # Right arrow
+    RoundedButtonImage:
+        id: right_arrow
+        image_path: PATH_IMAGES + "right_arrow.png"
+        pos_hint: {"right": 0.98, "center_y": 0.05}
+        size_hint: (None, 0.05)
+        width: self.height
+        colors: root.primary_color
+        on_release: root.go_to_next_level()

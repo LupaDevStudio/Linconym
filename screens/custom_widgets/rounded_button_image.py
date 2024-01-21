@@ -40,7 +40,7 @@ class RoundedButtonImage(ButtonBehavior, RelativeLayout):
     image_path = StringProperty()
     colors = ObjectProperty()
     radius = NumericProperty(20)
-    disable_button = BooleanProperty()
+    disable_button = BooleanProperty(False)
 
     def __init__(
             self,
