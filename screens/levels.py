@@ -52,10 +52,16 @@ class LevelsScreen(ImprovedScreen):
         current_theme_colors = USER_DATA.settings["current_theme_colors"]
         self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
         self.secondary_color = THEMES_DICT[current_theme_colors]["secondary"]
+        self.ids.level_layout.act_id = self.current_act_id
+        self.ids.level_layout.build_layout()
         return super().on_pre_enter(*args)
 
     def on_enter(self, *args):
         return super().on_enter(*args)
+
+    def on_leave(self, *args):
+        self.ids.level_layout.clear_widgets()
+        return super().on_leave(*args)
 
     def open_game_screen(self):
         self.manager.get_screen("game").current_act_id = self.current_act_id
