@@ -9,6 +9,7 @@ Module to create the game screen.
 ### Python imports ###
 
 from functools import partial
+from typing import Literal
 
 ### Kivy imports ###
 
@@ -58,7 +59,7 @@ class GameScreen(ImprovedScreen):
     start_word = StringProperty("BOY")
     current_word = StringProperty("")
     new_word = StringProperty("")
-    end_word = StringProperty("GIRL")
+    end_word = StringProperty("TOYS")
     list_widgets_letters = []
 
     def __init__(self, **kwargs) -> None:
@@ -119,11 +120,9 @@ class GameScreen(ImprovedScreen):
         if is_valid(
             new_word=self.new_word.lower(),
             current_word=self.current_word.lower()):
-            self.ids.submit_button.opacity = 1
-            self.ids.submit_button.disable_button = False
+            self.enable_submit_button()
         else:
-            self.ids.submit_button.opacity = 0
-            self.ids.submit_button.disable_button = True
+            self.disable_submit_button()
 
     def touch_letter(self, letter):
         """
@@ -227,26 +226,43 @@ class GameScreen(ImprovedScreen):
             self.build_word()
             self.check_disable_keyboard()
             self.check_enable_submit_button()
-        else:
-            # TODO disable whole keyboard and submit button
-            self.current_word = self.start_word
 
     def check_level_complete(self):
         # The level is complete
         if self.new_word == self.end_word:
-            print("TODO YOU WIN")
-            self.enable_right_arrow()
+            print("TODO YOU WIN afficher la popup")
+            self.current_word = self.start_word
+            self.ids.keyboard_layout.disable_whole_keyboard()
+            self.disable_submit_button()
+            self.enable_arrow(mode="right")
             return True
         return False
 
-    def enable_right_arrow(self):
+    def enable_arrow(self, mode: Literal["left", "right"]):
         # Enable the right arrow to go to the next level
-        self.ids.right_arrow.opacity = 1
-        self.ids.right_arrow.disable_button = False
+        if mode == "right":
+            self.ids.right_arrow.opacity = 1
+            self.ids.right_arrow.disable_button = False
+        # Enable the left arrow to go to the next level
+        if mode == "left":
+            self.ids.left_arrow.opacity = 1
+            self.ids.left_arrow.disable_button = False
+
+    def enable_submit_button(self):
+        self.ids.submit_button.opacity = 1
+        self.ids.submit_button.disable_button = False
+
+    def disable_submit_button(self):
+        self.ids.submit_button.opacity = 0
+        self.ids.submit_button.disable_button = True
+        print(self.ids.submit_button.opacity)
 
     def go_backwards(self):
         self.manager.get_screen("levels").current_act_id = self.current_act_id
         self.manager.current = "levels"
+
+    def go_to_previous_level(self):
+        print("TODO go to previous level if possible")
 
     def go_to_next_level(self):
         print("TODO go to next level if possible")

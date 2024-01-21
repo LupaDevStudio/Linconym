@@ -203,5 +203,9 @@ class KeyboardLayout(RelativeLayout):
             letter_key.disable_button = False
             letter_key.background_color = self.background_color
 
+    def disable_whole_keyboard(self):
+        self.disable_delete_button()
+        self.disable_letters()
+
     def touch_letter(self, letter, *args):
         self.touch_function(letter)

@@ -67,6 +67,18 @@
         font_size: 15
         radius: 15
 
+    # Left arrow
+    RoundedButtonImage:
+        id: left_arrow
+        image_path: PATH_IMAGES + "left_arrow.png"
+        pos_hint: {"x": 0.02, "center_y": 0.05}
+        size_hint: (None, 0.05)
+        width: self.height
+        colors: root.primary_color
+        on_release: root.go_to_previous_level()
+        opacity: 0
+        disable_button: True
+
     # Right arrow
     RoundedButtonImage:
         id: right_arrow
