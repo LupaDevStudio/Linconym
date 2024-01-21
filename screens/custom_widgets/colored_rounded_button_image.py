@@ -18,12 +18,9 @@ from kivy.properties import (
 )
 
 ### Local imports ###
+
 from tools.path import (
     PATH_TEXT_FONT
-)
-from tools.constants import (
-    MAIN_BUTTON_FONT_SIZE,
-    OPACITY_ON_BUTTON_PRESS
 )
 
 #############
@@ -31,28 +28,23 @@ from tools.constants import (
 #############
 
 
-class ColoredRoundedButton(ButtonBehavior, RelativeLayout):
+class ColoredRoundedButtonImage(ButtonBehavior, RelativeLayout):
     """
-    A custom button with a colored round rectangle background.
+    A custom button with a colored round rectangle background and an image in it.
     """
 
     background_color = ColorProperty()
     touch_color = ColorProperty()
-    outline_color = ColorProperty()
-    text = StringProperty()
+    image_path = StringProperty()
     text_filling_ratio = NumericProperty()
     font_size = NumericProperty()
     font_ratio = NumericProperty(1)
     disable_button = BooleanProperty(False)
-    color_label = ColorProperty()
+    color_image = ColorProperty()
     text_font_name = StringProperty(PATH_TEXT_FONT)
 
     def __init__(
             self,
-            text="",
-            text_font_name=PATH_TEXT_FONT,
-            text_filling_ratio=0.8,
-            font_size=MAIN_BUTTON_FONT_SIZE,
             release_function=lambda: 1 + 1,
             font_ratio=None,
             **kwargs):
@@ -61,16 +53,12 @@ class ColoredRoundedButton(ButtonBehavior, RelativeLayout):
         super().__init__(**kwargs)
         self.release_function = release_function
         self.always_release = True
-        self.text_font_name = text_font_name
-        self.text = text
-        self.text_filling_ratio = text_filling_ratio
-        self.font_size = font_size
 
         self.bind(disable_button=self.bind_function)
-        self.bind(color_label=self.bind_function)
+        self.bind(color_image=self.bind_function)
         self.bind(background_color=self.bind_function)
         self.bind(touch_color=self.bind_function)
-        self.bind(outline_color=self.bind_function)
+        self.bind(image_path=self.bind_function)
 
     def bind_function(self, base_widget, value):
         pass

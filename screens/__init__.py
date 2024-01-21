@@ -18,7 +18,8 @@ from screens.custom_widgets import (
     RoundButton,
     BoosterLayout,
     ColoredRoundedButton,
-    KeyboardLayout
+    KeyboardLayout,
+    ColoredRoundedButtonImage
 )
 
 # Import the screens

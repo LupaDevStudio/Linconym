@@ -23,15 +23,17 @@ from kivy.properties import (
 ### Local imports ###
 
 from tools.path import (
-    PATH_TEXT_FONT
+    PATH_TEXT_FONT,
+    PATH_IMAGES
 )
 from tools.constants import (
     CUSTOMIZATION_LAYOUT_FONT_SIZE,
-    THEMES_DICT,
-    LETTER_FONT_SIZE
+    LETTER_FONT_SIZE,
+    DISABLE_BUTTON_COLOR
 )
 from screens.custom_widgets import (
-    ColoredRoundedButton
+    ColoredRoundedButton,
+    ColoredRoundedButtonImage
 )
 
 #############
@@ -53,6 +55,8 @@ class KeyboardLayout(RelativeLayout):
     touch_color = ColorProperty([0, 0, 0, 1])
     type_keyboard = StringProperty("QWERTY")
     touch_function = ObjectProperty()
+    delete_key = None
+    list_letter_keys = []
 
     def __init__(
             self,
@@ -81,6 +85,8 @@ class KeyboardLayout(RelativeLayout):
         self.size_letter = (1 - self.horizontal_padding*9)/10 # because maximum of 9 letters in line
 
     def build_keyboard(self):
+        self.list_letter_keys = []
+
         vertical_padding = 0.05
         height_letter = (1-vertical_padding*3) / 3
 
@@ -107,15 +113,17 @@ class KeyboardLayout(RelativeLayout):
                 background_color=self.background_color,
                 touch_color=self.touch_color,
                 pos_hint={
-                    "x": first_margin+counter*self.horizontal_padding+counter*self.size_letter,
+                    "x": first_margin+counter*(self.horizontal_padding+self.size_letter),
                     "y": 2*vertical_padding + 2*height_letter},
                 font_size=LETTER_FONT_SIZE,
                 font_ratio=self.font_ratio,
                 size_hint=(self.size_letter, height_letter),
                 color_label=(1,1,1,1),
-                on_release=partial(self.touch_letter, letter)
+                outline_color=(1,1,1,1),
+                release_function=partial(self.touch_letter, letter)
             )
             self.add_widget(colored_rounded_button)
+            self.list_letter_keys.append(colored_rounded_button)
             counter += 1
 
         # Second line
@@ -126,15 +134,17 @@ class KeyboardLayout(RelativeLayout):
                 background_color=self.background_color,
                 touch_color=self.touch_color,
                 pos_hint={
-                    "x": second_margin+counter*self.horizontal_padding+counter*self.size_letter,
+                    "x": second_margin+counter*(self.horizontal_padding+self.size_letter),
                     "y": vertical_padding + height_letter},
                 font_size=LETTER_FONT_SIZE,
                 font_ratio=self.font_ratio,
                 size_hint=(self.size_letter, height_letter),
                 color_label=(1,1,1,1),
-                on_release=partial(self.touch_letter, letter)
+                outline_color=(1,1,1,1),
+                release_function=partial(self.touch_letter, letter)
             )
             self.add_widget(colored_rounded_button)
+            self.list_letter_keys.append(colored_rounded_button)
             counter += 1
 
         # Third line
@@ -145,32 +155,53 @@ class KeyboardLayout(RelativeLayout):
                 background_color=self.background_color,
                 touch_color=self.touch_color,
                 pos_hint={
-                    "x": third_margin+counter*self.horizontal_padding+counter*self.size_letter,
+                    "x": third_margin+counter*(self.horizontal_padding+self.size_letter),
                     "y": 0},
                 font_size=LETTER_FONT_SIZE,
                 font_ratio=self.font_ratio,
                 size_hint=(self.size_letter, height_letter),
                 color_label=(1,1,1,1),
-                on_release=partial(self.touch_letter, letter)
+                outline_color=(1,1,1,1),
+                release_function=partial(self.touch_letter, letter)
             )
             self.add_widget(colored_rounded_button)
+            self.list_letter_keys.append(colored_rounded_button)
             counter += 1
 
         # BACK key
-        back_key = ColoredRoundedButton(
-            text="BACK",
+        self.delete_key = ColoredRoundedButtonImage(
+            image_path=PATH_IMAGES + "delete.png",
             background_color=self.background_color,
             touch_color=self.touch_color,
             pos_hint={
-                "x": third_margin+counter*self.horizontal_padding+counter*self.size_letter,
+                "x": third_margin+counter*(self.horizontal_padding+self.size_letter),
                 "y": 0},
-            font_size=LETTER_FONT_SIZE,
             font_ratio=self.font_ratio,
             size_hint=(self.size_letter*2+self.horizontal_padding, height_letter),
-            color_label=(1,1,1,1),
-            on_release=partial(self.touch_letter, "BACK")
+            color_image=(1,1,1,1),
+            release_function=partial(self.touch_letter, "DELETE")
         )
-        self.add_widget(back_key)
+        self.add_widget(self.delete_key)
+
+    def disable_delete_button(self):
+        self.delete_key.background_color = DISABLE_BUTTON_COLOR
+        self.delete_key.disable_button = True
+
+    def activate_delete_button(self):
+        self.delete_key.disable_button = False
+        self.delete_key.background_color = self.background_color
+
+    def disable_letters(self):
+        letter_key: ColoredRoundedButton
+        for letter_key in self.list_letter_keys:
+            letter_key.background_color = DISABLE_BUTTON_COLOR
+            letter_key.disable_button = True
+
+    def activate_letters(self):
+        letter_key: ColoredRoundedButton
+        for letter_key in self.list_letter_keys:
+            letter_key.disable_button = False
+            letter_key.background_color = self.background_color
 
     def touch_letter(self, letter, *args):
         self.touch_function(letter)
