@@ -85,11 +85,23 @@ class KeyboardLayout(RelativeLayout):
         self.size_letter = (1 - self.horizontal_padding*9)/10 # because maximum of 9 letters in line
 
     def build_keyboard(self):
+        """
+        Add the different letters and the delete button in the keyboard layout.
+        
+        Parameters
+        ----------
+        None
+        
+        Returns
+        -------
+        Nonee
+        """
         self.list_letter_keys = []
 
         vertical_padding = 0.05
         height_letter = (1-vertical_padding*3) / 3
 
+        # Define the type of the keyboard
         if self.type_keyboard == "QWERTY":
             first_line_letters = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
             second_line_letters = ["A", "S", "D", "F", "G", "H", "J", "K", "L"]
@@ -168,7 +180,7 @@ class KeyboardLayout(RelativeLayout):
             self.list_letter_keys.append(colored_rounded_button)
             counter += 1
 
-        # BACK key
+        # DELETE key
         self.delete_key = ColoredRoundedButtonImage(
             image_path=PATH_IMAGES + "delete.png",
             background_color=self.background_color,
@@ -183,29 +195,127 @@ class KeyboardLayout(RelativeLayout):
         )
         self.add_widget(self.delete_key)
 
+    def destroy_keyboard(self):
+        """
+        Remove all the keys of the keyboard.
+        
+        Parameters
+        ----------
+        None
+        
+        Returns
+        -------
+        None
+        """
+        for letter in self.list_letter_keys:
+            self.remove_widget(letter)
+        self.remove_widget(self.delete_key)
+
     def disable_delete_button(self):
+        """
+        Disable the delete button.
+        
+        Parameters
+        ----------
+        None
+        
+        Returns
+        -------
+        None
+        """
         self.delete_key.background_color = DISABLE_BUTTON_COLOR
         self.delete_key.disable_button = True
 
     def activate_delete_button(self):
+        """
+        Enable the delete button.
+        
+        Parameters
+        ----------
+        None
+        
+        Returns
+        -------
+        None
+        """
         self.delete_key.disable_button = False
         self.delete_key.background_color = self.background_color
 
     def disable_letters(self):
+        """
+        Disable the buttons of the letters.
+        
+        Parameters
+        ----------
+        None
+        
+        Returns
+        -------
+        None
+        """
         letter_key: ColoredRoundedButton
         for letter_key in self.list_letter_keys:
             letter_key.background_color = DISABLE_BUTTON_COLOR
             letter_key.disable_button = True
 
     def activate_letters(self):
+        """
+        Enable the buttons of the letters.
+        
+        Parameters
+        ----------
+        None
+        
+        Returns
+        -------
+        None
+        """
         letter_key: ColoredRoundedButton
         for letter_key in self.list_letter_keys:
             letter_key.disable_button = False
             letter_key.background_color = self.background_color
 
     def disable_whole_keyboard(self):
+        """
+        Disable the whole keyboard.
+        
+        Parameters
+        ----------
+        None
+        
+        Returns
+        -------
+        None
+        """
         self.disable_delete_button()
         self.disable_letters()
 
+    def activate_whole_keyboard(self):
+        """
+        Activate the whole keyboard.
+        
+        Parameters
+        ----------
+        None
+        
+        Returns
+        -------
+        None
+        """
+        self.activate_letters()
+        self.activate_delete_button()
+
     def touch_letter(self, letter, *args):
+        """
+        Activate the function when a letter is pressed in the keyboard.
+        
+        Parameters
+        ----------
+        letter : string
+            Letter, it can be a capital letter or "DELETE"
+        
+        Returns
+        -------
+        None
+        """
         self.touch_function(letter)

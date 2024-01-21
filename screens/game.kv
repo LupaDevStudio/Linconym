@@ -75,7 +75,7 @@
         size_hint: (None, 0.05)
         width: self.height
         colors: root.primary_color
-        on_release: root.go_to_previous_level()
+        release_function: root.go_to_previous_level
         opacity: 0
         disable_button: True
 
@@ -87,6 +87,6 @@
         size_hint: (None, 0.05)
         width: self.height
         colors: root.primary_color
-        on_release: root.go_to_next_level()
+        release_function: root.go_to_next_level
         opacity: 0
         disable_button: True
