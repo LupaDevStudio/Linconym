@@ -10,7 +10,7 @@
         pos: (0,0)
         canvas.before:
             Color:
-                rgba: self.parent.primary_color
+                rgba: self.parent.primary_color if self.parent.is_unlocked else self.parent.secondary_color
             RoundedRectangle:
                 pos:(0,0)
                 size:self.size

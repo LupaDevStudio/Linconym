@@ -86,6 +86,11 @@ class LevelButton(ButtonBehavior, RelativeLayout):
         self.level_id = level_id
         self.level_label_text = str(level_id)
         self.nb_stars = nb_stars
+        self.bind(is_unlocked=self.update_status)
+        self.update_status()
+
+    def update_status(self, value=None, base_widget=None):
+        self.disable_button = not (self.is_unlocked)
 
     def on_press(self):
         if not self.disable_button:
@@ -209,7 +214,10 @@ class LevelBranch(RelativeLayout):
                                        is_unlocked=level_is_unlocked,
                                        nb_stars=level_nb_stars,
                                        pos_hint=level_pos_hint,
-                                       size_hint=(LEVEL_BUTTON_SIZE_HINT, LEVEL_BUTTON_RELATIVE_HEIGHT))
+                                       size_hint=(
+                                           LEVEL_BUTTON_SIZE_HINT, LEVEL_BUTTON_RELATIVE_HEIGHT),
+                                       primary_color=self.primary_color,
+                                       secondary_color=self.secondary_color)
             self.add_widget(level_button)
             # Create the branch
             if level_id < nb_levels:
@@ -283,7 +291,6 @@ class LevelLayout(MyScrollViewLayout):
         self.act_id = act_id
         self.cols = 1
         self.spacing = 0
-        self.build_layout()
 
     def build_layout(self):
         nb_levels = len(GAMEPLAY_DICT[self.act_id]) - 1
@@ -291,5 +298,7 @@ class LevelLayout(MyScrollViewLayout):
         for branch_id in range(self.nb_branches):
             level_branch = LevelBranch(
                 act_id=self.act_id,
-                branch_id=branch_id)
+                branch_id=branch_id,
+                primary_color=self.primary_color,
+                secondary_color=self.secondary_color)
             self.add_widget(level_branch)
