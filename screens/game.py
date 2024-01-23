@@ -79,6 +79,8 @@ class GameScreen(ImprovedScreen):
         self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
         self.secondary_color = THEMES_DICT[current_theme_colors]["secondary"]
         self.ids.keyboard_layout.build_keyboard()
+
+        self.nb_stars = USER_DATA.classic_mode[self.current_act_id][self.current_level_id]["nb_stars"]
         return super().on_pre_enter(*args)
 
     def on_enter(self, *args):
@@ -92,7 +94,7 @@ class GameScreen(ImprovedScreen):
         return super().on_enter(*args)
 
     def on_pre_leave(self, *args):
-        self.ids.keyboard_layout.destroy_keyboard()        
+        self.ids.keyboard_layout.destroy_keyboard()
 
         return super().on_leave(*args)
 
@@ -113,18 +115,18 @@ class GameScreen(ImprovedScreen):
     def check_enable_submit_button(self):
         """
         Enable the submit button if the word entered is valid.
-        
+
         Parameters
         ----------
         None
-        
+
         Returns
         -------
         None
         """
         if is_valid(
-            new_word=self.new_word.lower(),
-            current_word=self.current_word.lower()):
+                new_word=self.new_word.lower(),
+                current_word=self.current_word.lower()):
             self.enable_submit_button()
         else:
             self.disable_submit_button()
@@ -132,12 +134,12 @@ class GameScreen(ImprovedScreen):
     def touch_letter(self, letter):
         """
         React when a letter of the keyboard is released.
-        
+
         Parameters
         ----------
         letter : str
             Letter pressed. Can be any letter in capital or "DELETE".
-        
+
         Returns
         -------
         None
@@ -145,7 +147,7 @@ class GameScreen(ImprovedScreen):
         # Delete the last letter of the current word
         if letter == "DELETE":
             self.new_word = self.new_word[:-1]
-        
+
         # Add the new letter to the current word
         else:
             self.new_word += letter
@@ -169,7 +171,8 @@ class GameScreen(ImprovedScreen):
 
         # Adapt the size of the letters if there are too many
         if number_letters >= 11:
-            size_letter = (0.95 - (number_letters-1)*horizontal_padding)/number_letters
+            size_letter = (0.95 - (number_letters - 1) *
+                           horizontal_padding) / number_letters
             margin_left = 0.025
 
         # Remove the previous widgets
@@ -184,7 +187,7 @@ class GameScreen(ImprovedScreen):
                 outline_color = self.primary_color
             else:
                 outline_color = self.secondary_color
-            
+
             # Determine the content of the letter
             try:
                 letter = self.new_word[counter_letter]
@@ -193,19 +196,22 @@ class GameScreen(ImprovedScreen):
 
             # Determine the x position of the letter
             if number_letters % 2 == 0:
-                x_position = margin_left + x_center + (counter_letter-number_letters/2+0.5)*horizontal_padding + (counter_letter-number_letters/2)*size_letter
+                x_position = margin_left + x_center + \
+                    (counter_letter - number_letters / 2 + 0.5) * horizontal_padding + \
+                    (counter_letter - number_letters / 2) * size_letter
             else:
-                x_position = margin_left + x_center + (counter_letter-number_letters/2)*size_letter + (counter_letter-number_letters/2-0.5)*horizontal_padding
+                x_position = margin_left + x_center + (counter_letter - number_letters / 2) * size_letter + (
+                    counter_letter - number_letters / 2 - 0.5) * horizontal_padding
 
             # Create the letter widget
             letter_widget = ColoredRoundedButton(
                 text=letter,
-                background_color=(1,1,1,1),
-                pos_hint={"x": x_position,"y": 0.35},
+                background_color=(1, 1, 1, 1),
+                pos_hint={"x": x_position, "y": 0.35},
                 font_size=LETTER_FONT_SIZE,
                 font_ratio=self.font_ratio,
                 size_hint=(size_letter, height_letter),
-                color_label=(0,0,0,1),
+                color_label=(0, 0, 0, 1),
                 outline_color=outline_color,
                 disable_button=True
             )
@@ -254,11 +260,11 @@ class GameScreen(ImprovedScreen):
             self.ids.left_arrow.disable_button = False
 
     def enable_submit_button(self):
-        self.ids.submit_button.opacity = 1
+        # self.ids.submit_button.opacity = 1
         self.ids.submit_button.disable_button = False
 
     def disable_submit_button(self):
-        self.ids.submit_button.opacity = 0
+        # self.ids.submit_button.opacity = 0
         self.ids.submit_button.disable_button = True
 
     def go_backwards(self):
