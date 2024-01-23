@@ -297,18 +297,18 @@ class Game():
     def __init__(self, start_word: str, end_word: str) -> None:
         self.start_word = start_word
         self.end_word = end_word
-        self.current_position = (0,)
+        self.current_position = "0"
         self.position_to_word_id = {self.current_position: 0}
         self.words_found = [start_word]
         self.current_word = start_word
 
-    def get_nb_next_words(self, position: tuple):
+    def get_nb_next_words(self, position: str):
         """
         Get the number of words deriving directly from the given position
 
         Parameters
         ----------
-        position : tuple
+        position : str
             Position to use.
 
         Returns
@@ -328,13 +328,13 @@ class Game():
 
         return nb_next_words
 
-    def change_position(self, new_position: tuple):
+    def change_position(self, new_position: str):
         """
         Change the position of the cursor from one word to another
 
         Parameters
         ----------
-        new_position : tuple
+        new_position : str
             New position to set.
         """
 
@@ -354,7 +354,7 @@ class Game():
 
             # Compute the new position
             new_word_id = self.get_nb_next_words(self.current_position)
-            new_position = self.current_position + (new_word_id,)
+            new_position = self.current_position + "," + str(new_word_id)
 
             # Add the word to the list of words found
             self.position_to_word_id[new_position] = len(self.words_found)
