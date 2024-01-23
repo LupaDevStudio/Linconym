@@ -23,7 +23,6 @@ from tools.path import (
 )
 from tools.constants import (
     MAIN_BUTTON_FONT_SIZE,
-    OPACITY_ON_BUTTON_PRESS
 )
 
 #############
@@ -65,15 +64,6 @@ class ColoredRoundedButton(ButtonBehavior, RelativeLayout):
         self.text = text
         self.text_filling_ratio = text_filling_ratio
         self.font_size = font_size
-
-        self.bind(disable_button=self.bind_function)
-        self.bind(color_label=self.bind_function)
-        self.bind(background_color=self.bind_function)
-        self.bind(touch_color=self.bind_function)
-        self.bind(outline_color=self.bind_function)
-
-    def bind_function(self, base_widget, value):
-        pass
 
     def on_press(self):
         if not self.disable_button:
