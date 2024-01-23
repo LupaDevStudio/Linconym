@@ -7,20 +7,21 @@
     do_scroll_x: True
     do_scroll_y: True
 
-    canvas.before:
+    canvas.after:
         Color:
             rgba: (0,0,0,0.5)
         Rectangle:
-            pos: (0,0)
+            pos: self.pos
             size: self.size
         Color:
             rgba: (1,1,1,1)
         Line:
-            points: [0,0,self.width,0]
+            points: [self.pos[0],self.pos[1]-3,self.pos[0] + self.width,self.pos[1]-3]
             width: 2
         Line:
-            points: [0,self.height,self.width,self.height]
+            points: [self.pos[0],self.pos[1]+self.height,self.pos[0] + self.width,self.pos[1]+self.height]
             width: 2
 
 <TreeLayout>:
+
     
