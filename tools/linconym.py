@@ -25,7 +25,7 @@ from tools.basic_tools import (
 #################
 
 
-def is_in_english_words(word: str):
+def is_in_english_words(word: str) -> bool:
     """
     Indicates whether a word belongs to the english words dictionnary or not.
 
@@ -43,7 +43,7 @@ def is_in_english_words(word: str):
     return dichotomy(word, ENGLISH_WORDS_DICTS["375k"]) is not None
 
 
-def count_different_letters(word1: str, word2: str):
+def count_different_letters(word1: str, word2: str) -> int:
     """
     Count the number of different letters between two words.
 
@@ -78,7 +78,7 @@ def count_different_letters(word1: str, word2: str):
     return nb_different_letters
 
 
-def count_common_letters(word1: str, word2: str):
+def count_common_letters(word1: str, word2: str) -> int:
     res = len(word1) - count_different_letters(word1, word2)
     # TEMP
     res += (len(word2) - len(word1)) // 2
@@ -87,7 +87,7 @@ def count_common_letters(word1: str, word2: str):
     return res
 
 
-def is_valid(new_word: str, current_word: str, skip_in_english_words: bool = False):
+def is_valid(new_word: str, current_word: str, skip_in_english_words: bool = False) -> bool:
     """
     Determine whether a word is valid or not to be submitted.
 
@@ -97,6 +97,8 @@ def is_valid(new_word: str, current_word: str, skip_in_english_words: bool = Fal
         New word to check.
     current_word : str
         Current word.
+    skip_in_english_words : bool = False
+        If True, a word doesn't need to be in any dictionary to be valid (i.e., in_english_words() is not called here).
 
     Returns
     -------
@@ -292,19 +294,23 @@ def fill_gameplay_dict_with_solutions():
 class Game():
     """
     Class to manage all actions and variables during a game of Linconym.
+    Its member variables represent a tree of words, the root of which is the start word of the game.
+    Its member variables also include a cursor "pointing" to one node in particular: new words submitted by the user
+    may be added as children of the node "pointed to" by this cursor if they are valid successors.
     """
 
     def __init__(self, start_word: str, end_word: str) -> None:
         self.start_word = start_word
         self.end_word = end_word
-        self.current_position = (0,)
+        self.current_position = (0,) # (0,) is a one-element tuple while (0) is just an int
         self.position_to_word_id = {self.current_position: 0}
         self.words_found = [start_word]
         self.current_word = start_word
 
-    def get_nb_next_words(self, position: tuple):
+    def get_nb_next_words(self, position: tuple) -> int:
         """
-        Get the number of words deriving directly from the given position
+        Get the number of words deriving directly from the given position.
+        In tree jargon, get the number of children of the node corresponding to the input position.
 
         Parameters
         ----------
@@ -328,9 +334,9 @@ class Game():
 
         return nb_next_words
 
-    def change_position(self, new_position: tuple):
+    def change_position(self, new_position: tuple) -> None:
         """
-        Change the position of the cursor from one word to another
+        Change the position of the cursor from one word (node) to another.
 
         Parameters
         ----------
@@ -340,8 +346,29 @@ class Game():
 
         self.current_position = new_position
         self.current_word = self.words_found[self.position_to_word_id[self.current_position]]
+    
+    def is_valid_and_new(self, new_word: str, skip_dictionary_check: bool = False) -> bool:
+        """
+        Checks whether a new word wasn't previously found and is a valid successor to the current word.
 
-    def submit_word(self, new_word: str):
+        Parameters
+        ----------
+        new_word: str
+            New word to be checked.
+        skip_dictionary_check: bool = False
+            If True, new_word can be valid even if it isn't in any dictionary.
+
+        Returns
+        -------
+        bool
+            True if new_word wasn't previously found and is valid, False otherwise.
+        """
+
+        word_is_valid: bool = is_valid(new_word, self.current_word, skip_dictionary_check)
+        word_is_new: bool = not(new_word in self.words_found)
+        return word_is_valid and word_is_new
+
+    def submit_word(self, new_word: str) -> None:
         """
         Add a new word to the history if it is valid.
 
@@ -350,7 +377,8 @@ class Game():
         new_word : str
             New word to verify and add.
         """
-        if is_valid(new_word):
+
+        if self.is_valid_and_new(new_word):
 
             # Compute the new position
             new_word_id = self.get_nb_next_words(self.current_position)
