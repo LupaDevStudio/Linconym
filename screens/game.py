@@ -78,6 +78,8 @@ class GameScreen(ImprovedScreen):
         current_theme_colors = USER_DATA.settings["current_theme_colors"]
         self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
         self.secondary_color = THEMES_DICT[current_theme_colors]["secondary"]
+        self.transparent_secondary_color = [
+            self.secondary_color[0], self.secondary_color[1], self.secondary_color[2], 0.3]
         self.ids.keyboard_layout.build_keyboard()
 
         self.nb_stars = USER_DATA.classic_mode[self.current_act_id][self.current_level_id]["nb_stars"]
@@ -186,7 +188,10 @@ class GameScreen(ImprovedScreen):
             if counter_letter == next_letter_counter:
                 outline_color = self.primary_color
             else:
-                outline_color = self.secondary_color
+                if counter_letter >= number_mandatory_letters:
+                    outline_color = self.transparent_secondary_color
+                else:
+                    outline_color = self.secondary_color
 
             # Determine the content of the letter
             try:
@@ -207,7 +212,7 @@ class GameScreen(ImprovedScreen):
             letter_widget = ColoredRoundedButton(
                 text=letter,
                 background_color=(1, 1, 1, 1),
-                pos_hint={"x": x_position, "y": 0.35},
+                pos_hint={"x": x_position, "y": 0.275},
                 font_size=LETTER_FONT_SIZE,
                 font_ratio=self.font_ratio,
                 size_hint=(size_letter, height_letter),

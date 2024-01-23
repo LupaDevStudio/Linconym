@@ -8,6 +8,8 @@
 
 ## Front
 
+- [ ] Create the tree display layout
+
 ## Ideas
 
 - [ ] add a hint system to indicate the number of words used by the best solution

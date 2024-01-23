@@ -1,0 +1,26 @@
+#:kivy 2.2.1
+
+<TreeScrollview>:
+    bar_margin: 0
+    bar_width: 6
+    scroll_type:['bars', 'content']
+    do_scroll_x: True
+    do_scroll_y: True
+
+    canvas.before:
+        Color:
+            rgba: (0,0,0,0.5)
+        Rectangle:
+            pos: (0,0)
+            size: self.size
+        Color:
+            rgba: (1,1,1,1)
+        Line:
+            points: [0,0,self.width,0]
+            width: 2
+        Line:
+            points: [0,self.height,self.width,self.height]
+            width: 2
+
+<TreeLayout>:
+    
