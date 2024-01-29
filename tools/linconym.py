@@ -12,7 +12,9 @@ from tools.path import (
 )
 from tools.constants import (
     ENGLISH_WORDS_DICTS,
-    GAMEPLAY_DICT
+    GAMEPLAY_DICT,
+    USER_DATA,
+    XP_SCALE
 )
 from tools.basic_tools import (
     dichotomy,
@@ -299,22 +301,63 @@ class Game():
     may be added as children of the node "pointed to" by this cursor if they are valid successors.
     """
 
-    def __init__(self, start_word: str, end_word: str) -> None:
-        self.start_word = start_word
-        self.end_word = end_word
-        self.current_position = (0,) # (0,) is a one-element tuple while (0) is just an int
-        self.position_to_word_id = {self.current_position: 0}
-        self.words_found = [start_word]
-        self.current_word = start_word
+    def __init__(self, start_word: str, end_word: str, quest_word: str = None, act_name: str = "Act1", lvl_name: str = "1") -> None:
+        self.start_word: str = start_word
+        self.end_word: str = end_word
+        self.quest_word: str = quest_word
+        self.act_name = act_name
+        self.lvl_name = lvl_name
+        self.current_position: tuple[int] = (0,) # (0,) is a one-element tuple while (0) is just an int
+        self.position_to_word_id = {self.current_position: 0} # A dictionary to map a tuple[int] position to the index of its word in the words_found list[str]
+        self.words_found: list[str] = [start_word]
+        self.current_word: str = start_word
 
-    def get_nb_next_words(self, position: tuple) -> int:
+    def get_word(self, position: tuple[int]) -> str:
+        """
+        Get the word at given position.
+
+        Parameters
+        ----------
+        position : tuple[int]
+            Position to use.
+
+        Returns
+        -------
+        str
+            Word at given position.
+        """
+
+        return self.words_found[self.position_to_word_id[position]]
+    
+    def get_word_path(self, position: tuple[int]) -> list[str]:
+        """
+        Get a list of the words forming the path to the given position.
+
+        Parameters
+        ----------
+        position : tuple[int]
+            Position to use.
+
+        Returns
+        -------
+        list[str]
+            List of words leading to given position.
+        """
+
+        word_path: list[str] = []
+        for i in range(len(position)):
+            previous_pos: tuple[int] = position[:(i+1)]
+            word_path += [self.get_word(previous_pos)]
+        return word_path
+
+    def get_nb_next_words(self, position: tuple[int]) -> int:
         """
         Get the number of words deriving directly from the given position.
         In tree jargon, get the number of children of the node corresponding to the input position.
 
         Parameters
         ----------
-        position : tuple
+        position : tuple[int]
             Position to use.
 
         Returns
@@ -334,22 +377,28 @@ class Game():
 
         return nb_next_words
 
-    def change_position(self, new_position: tuple) -> None:
+    def change_position(self, new_position: tuple[int]) -> None:
         """
         Change the position of the cursor from one word (node) to another.
 
         Parameters
         ----------
-        new_position : tuple
+        new_position : tuple[int]
             New position to set.
         """
 
         self.current_position = new_position
-        self.current_word = self.words_found[self.position_to_word_id[self.current_position]]
+        self.current_word = self.get_word(self.current_position)
     
     def is_valid_and_new(self, new_word: str, skip_dictionary_check: bool = False) -> bool:
         """
-        Checks whether a new word wasn't previously found and is a valid successor to the current word.
+        Checks whether a new word is absent from the WHOLE tree and is a valid successor to the current word.
+        This is probably not the right method to use to check user input, because if a word is used as a part of a very long path, 
+        then it cannot be used to create a shorter path anymore.
+
+        Example: in a level asking to go from "sea" to "shell", the path "sea, seal, sell, shell" is the shortest. However, if the user already
+        built the path "sea, tea, teal, seal", then they won't be able to create the shortest path anymore: all they can do is pick up from the 
+        word "seal" in their already-way-too-long current path. 
 
         Parameters
         ----------
@@ -367,6 +416,27 @@ class Game():
         word_is_valid: bool = is_valid(new_word, self.current_word, skip_dictionary_check)
         word_is_new: bool = not(new_word in self.words_found)
         return word_is_valid and word_is_new
+    
+    def is_valid_and_new_in_path(self, new_word: str, skip_dictionary_check: bool = False) -> bool:
+        """
+        Checks whether a new word is absent from the path leading to the current word and is a valid successor to the current word.
+
+        Parameters
+        ----------
+        new_word: str
+            New word to be checked.
+        skip_dictionary_check: bool = False
+            If True, new_word can be valid even if it isn't in any dictionary.
+
+        Returns
+        -------
+        bool
+            True if new_word isn't in the path leading to the current word and is valid, False otherwise.
+        """
+
+        word_is_valid: bool = is_valid(new_word, self.current_word, skip_dictionary_check)
+        word_is_new_in_path: bool = not(new_word in self.get_word_path(self.current_position))
+        return word_is_valid and word_is_new_in_path
 
     def submit_word(self, new_word: str) -> None:
         """
@@ -378,7 +448,7 @@ class Game():
             New word to verify and add.
         """
 
-        if self.is_valid_and_new(new_word):
+        if self.is_valid_and_new_in_path(new_word):
 
             # Compute the new position
             new_word_id = self.get_nb_next_words(self.current_position)
@@ -397,6 +467,65 @@ class Game():
 
         else:
             print("Word not valid")
+    
+    def award_stars_xp(self, nb_words_10k: int, nb_words_300k: int) -> None:
+        # Only receive stars and xp if the level was completed
+        if (self.current_word == self.end_word):
+            solution_found: list[str] = self.get_word_path(self.current_position)
+
+            # Stars: one for finishing the level, one for doing as good as the 10k dictionary solution, and one for doing better
+            nb_stars: int = 1
+            nb_words_found: int = len(solution_found)
+            if (nb_words_found >= nb_words_10k):
+                nb_stars += 1
+            if (nb_words_found > nb_words_10k):
+                nb_stars += 1
+            
+            # xp: get a percentage of a certain constant amount depending on proximity to the 300k dictionary solution...
+            xp_fraction: float = nb_words_found / nb_words_300k
+            if (xp_fraction > 1):
+                xp_fraction = 1.0
+            # ... and get a bonus for passing through the quest word
+            quest_word_done: bool = ((self.quest_word != None) and (self.quest_word in solution_found))
+
+            # save level progress (TEMP: only for classic mode, should probably make subclasses for classic and daily mode)
+            # save stars
+            STARS_KEY: str = "nb_stars"
+            if (STARS_KEY in USER_DATA.classic_mode[self.act_name][self.lvl_name]):
+                if (USER_DATA.classic_mode[self.act_name][self.lvl_name][STARS_KEY] < nb_stars):
+                    USER_DATA.classic_mode[self.act_name][self.lvl_name][STARS_KEY] = nb_stars
+            else:
+                USER_DATA.classic_mode[self.act_name][self.lvl_name][STARS_KEY] = nb_stars
+            # save number of words
+            NB_WORDS_KEY: str = "best_solution_nb_words"
+            nb_words_previous_best: int = 0
+            if (NB_WORDS_KEY in USER_DATA.classic_mode[self.act_name][self.lvl_name]):
+                nb_words_previous_best = USER_DATA.classic_mode[self.act_name][self.lvl_name][NB_WORDS_KEY]
+                if (nb_words_previous_best < nb_words_found):
+                    USER_DATA.classic_mode[self.act_name][self.lvl_name][NB_WORDS_KEY] = nb_words_found
+            else:
+                USER_DATA.classic_mode[self.act_name][self.lvl_name][NB_WORDS_KEY] = nb_words_found
+            previous_xp_fraction: float = nb_words_previous_best / nb_words_300k
+            # save quest word
+            QUEST_WORD_KEY: str = "quest_word_done"
+            award_quest_word_xp: bool = False
+            if (QUEST_WORD_KEY in USER_DATA.classic_mode[self.act_name][self.lvl_name]):
+                award_quest_word_xp = not(USER_DATA.classic_mode[self.act_name][self.lvl_name][QUEST_WORD_KEY]) and quest_word_done
+                USER_DATA.classic_mode[self.act_name][self.lvl_name][QUEST_WORD_KEY] = USER_DATA.classic_mode[self.act_name][self.lvl_name][QUEST_WORD_KEY] or quest_word_done
+            else:
+                award_quest_word_xp = quest_word_done
+                USER_DATA.classic_mode[self.act_name][self.lvl_name][QUEST_WORD_KEY] = quest_word_done
+
+            # award newly acquired xp
+            XP_KEY: str = "experience"
+            USER_DATA.user_profile[XP_KEY] += int((xp_fraction - previous_xp_fraction) * XP_SCALE)
+            if (award_quest_word_xp):
+                USER_DATA.user_profile[XP_KEY] += XP_SCALE
+
+            # save changes
+            USER_DATA.save_changes()
+            
+        return
 
 
 if __name__ == "__main__":

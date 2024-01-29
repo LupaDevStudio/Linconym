@@ -57,6 +57,9 @@ BACK_ARROW_SIZE = 0.2
 
 ### Data loading ###
 
+# scale for experience awarded to the user
+XP_SCALE: int = 10
+
 # Create the user data json if it does not exist
 if not os.path.exists(PATH_USER_DATA):
     default_user_data = {
