@@ -2,7 +2,7 @@
 
 ## Design
 
-- [ ] add the link to the lupadevstudio website
+- [x] add the link to the lupadevstudio website
 
 ## Back
 
