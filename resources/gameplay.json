@@ -83,10 +83,150 @@
         }
     },
     "Act2": {
-        "name": "Act 2 - Haunted Forest"
+        "name": "Act 1 - Childhood",
+        "1": {
+            "start_word": "joy",
+            "end_word": "toy",
+            "10k_sol": 2,
+            "34k_sol": 2,
+            "88k_sol": 2,
+            "375k_sol": 2
+        },
+        "2": {
+            "start_word": "toy",
+            "end_word": "toys",
+            "10k_sol": 2,
+            "34k_sol": 2,
+            "88k_sol": 2,
+            "375k_sol": 2
+        },
+        "3": {
+            "start_word": "toys",
+            "end_word": "joy",
+            "10k_sol": 3,
+            "34k_sol": 3,
+            "88k_sol": 3,
+            "375k_sol": 3
+        },
+        "4": {
+            "start_word": "ball",
+            "end_word": "doll",
+            "10k_sol": 4,
+            "34k_sol": 3,
+            "88k_sol": 3,
+            "375k_sol": 3
+        },
+        "5": {
+            "start_word": "doll",
+            "end_word": "bear",
+            "10k_sol": 5,
+            "34k_sol": 5,
+            "88k_sol": 5,
+            "375k_sol": 5
+        },
+        "6": {
+            "start_word": "bear",
+            "end_word": "care",
+            "10k_sol": 2,
+            "34k_sol": 2,
+            "88k_sol": 2,
+            "375k_sol": 2
+        },
+        "7": {
+            "start_word": "care",
+            "end_word": "share",
+            "10k_sol": 3,
+            "34k_sol": 3,
+            "88k_sol": 3,
+            "375k_sol": 3
+        }
     },
     "Act3": {
-        "name": "Act 3 - The Cruise"
+        "name": "Act 3 - 20.000 leagues under the sea",
+        "1": {
+            "start_word": "ocean",
+            "end_word": "diver",
+            "10k_sol": null,
+            "34k_sol": 5,
+            "88k_sol": 5,
+            "375k_sol": 5
+        },
+        "2": {
+            "start_word": "diver",
+            "end_word": "submarine"
+        },
+        "3": {
+            "start_word": "submarine",
+            "end_word": "adventure"
+        },
+        "4": {
+            "start_word": "adventure",
+            "end_word": "exploration"
+        },
+        "5": {
+            "start_word": "exploration",
+            "end_word": "mysterious"
+        },
+        "6": {
+            "start_word": "mysterious",
+            "end_word": "creatures"
+        },
+        "7": {
+            "start_word": "creatures",
+            "end_word": "leviathan"
+        },
+        "8": {
+            "start_word": "leviathan",
+            "end_word": "deep"
+        },
+        "9": {
+            "start_word": "deep",
+            "end_word": "sea"
+        },
+        "10": {
+            "start_word": "sea",
+            "end_word": "nautical"
+        },
+        "11": {
+            "start_word": "nautical",
+            "end_word": "voyage"
+        },
+        "12": {
+            "start_word": "voyage",
+            "end_word": "underwater"
+        },
+        "13": {
+            "start_word": "underwater",
+            "end_word": "pressure"
+        },
+        "14": {
+            "start_word": "pressure",
+            "end_word": "sailor"
+        },
+        "15": {
+            "start_word": "sailor",
+            "end_word": "marine"
+        },
+        "16": {
+            "start_word": "marine",
+            "end_word": "oceanic"
+        },
+        "17": {
+            "start_word": "oceanic",
+            "end_word": "coral"
+        },
+        "18": {
+            "start_word": "coral",
+            "end_word": "depths"
+        },
+        "19": {
+            "start_word": "depths",
+            "end_word": "mariner"
+        },
+        "20": {
+            "start_word": "mariner",
+            "end_word": "subaquatic"
+        }
     },
     "Act4": {
         "name": "Act 4 - Space Exploration"

@@ -256,7 +256,7 @@ def fill_daily_games_with_solutions():
                     end_word=end_word,
                     english_words=ENGLISH_WORDS_DICTS["375k"])
             DAILY_DICT[date]["best_solution"] = solution
-    save_json_file(PATH_RESOURCES_FOLDER + "daily_games.json", DAILY_DICT)
+        save_json_file(PATH_RESOURCES_FOLDER + "daily_games.json", DAILY_DICT)
 
 
 def fill_gameplay_dict_with_solutions():
@@ -282,7 +282,7 @@ def fill_gameplay_dict_with_solutions():
                     else:
                         GAMEPLAY_DICT[act][level][f"{resolution}_sol"] = None
 
-    save_json_file(PATH_GAMEPLAY, GAMEPLAY_DICT)
+            save_json_file(PATH_GAMEPLAY, GAMEPLAY_DICT)
 
 #############
 ### Class ###
@@ -375,4 +375,4 @@ if __name__ == "__main__":
     # fill_gameplay_dict_with_solutions()
     # fill_daily_games_with_solutions()
     # print(is_valid("boy", "joy"))
-    find_solutions("boy", "girl", ENGLISH_WORDS_DICTS["10k"])
+    find_solutions("smile", "laugh", ENGLISH_WORDS_DICTS["88k"])
