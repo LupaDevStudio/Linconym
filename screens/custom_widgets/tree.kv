@@ -1,7 +1,22 @@
 #:kivy 2.2.1
-#:import MAIN_BUTTON_FONT_SIZE tools.constants.MAIN_BUTTON_FONT_SIZE
+#:import CONTENT_LABEL_FONT_SIZE tools.constants.CONTENT_LABEL_FONT_SIZE
 
-<ColoredRoundedButton>:
+<WordLink>:
+    # canvas.before:
+    #     Color:
+    #         rgba: (1,1,1,0.5)
+    #     Rectangle:
+    #         pos:self.pos
+    #         size:self.size
+    canvas:
+        Color:
+            rgba: self.color
+        Line:
+            width: 2
+            bezier: [self.x, self.y,self.center_x, self.y,self.center_x, self.top]
+            cap: "none"
+
+<WordButton>:
 
     # Background
     canvas.before:
@@ -24,7 +39,7 @@
     # Main text
     Label:
         text: root.text
-        font_size: root.font_ratio * MAIN_BUTTON_FONT_SIZE
+        font_size: root.font_ratio * CONTENT_LABEL_FONT_SIZE
         pos: (1*root.font_ratio,0)
         size: self.size
         shorten: False
@@ -43,12 +58,13 @@
     do_scroll_x: True
     do_scroll_y: True
 
-    canvas.after:
+    canvas.before:
         Color:
             rgba: (0,0,0,0.5)
         Rectangle:
             pos: self.pos
             size: self.size
+    canvas.after:
         Color:
             rgba: (1,1,1,1)
         Line:

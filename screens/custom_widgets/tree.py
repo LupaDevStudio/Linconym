@@ -15,6 +15,7 @@ from typing import (
 
 ### Kivy imports ###
 
+from kivy.uix.widget import Widget
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.behaviors import ButtonBehavior
@@ -34,7 +35,19 @@ from tools.path import (
 )
 from tools.constants import (
     MAIN_BUTTON_FONT_SIZE,
+    WORD_BUTTON_WIDTH_HINT,
+    WORD_BUTTON_HEIGHT_HINT,
+    WORD_BUTTON_HSPACING,
+    WORD_BUTTON_VSPACING,
+    WORD_BUTTON_SIDE_OFFSET
 )
+
+test_words_found = ["sea", "sale", "sell", "shell", "sail", "snail",
+                    "see", "bee", "tea", "pea", "peak", "keep", "tape", "pelt", "apes"]
+
+test_position_to_word_id = {"0": 0, "0,0": 1, "0,0,0": 2,
+                            "0,0,0,0": 3, "0,0,1": 4, "0,0,1,0": 5, "0,1": 6, "0,1,0": 7, "0,2": 8, "0,3": 9, "0,3,0": 10, "0,3,0,0": 11, "0,3,1": 12, "0,3,1,0": 13, "0,3,2": 14}
+
 
 #################
 ### Functions ###
@@ -89,6 +102,10 @@ def build_sorted_positions_list(position_to_word_id: Dict[str, int]):
 ###############
 
 
+class WordLink(Widget):
+    color = ColorProperty()
+
+
 class WordButton(ButtonBehavior, RelativeLayout):
     """
     A custom button with a colored round rectangle background.
@@ -134,6 +151,7 @@ class TreeScrollview(ScrollView):
     """
     Class containing the scrollview to scroll over the tree.
     """
+    font_ratio = NumericProperty(1)
 
 
 class TreeLayout(RelativeLayout):
@@ -143,6 +161,7 @@ class TreeLayout(RelativeLayout):
 
     primary_color = ListProperty([0.5, 0.5, 0.5, 1.])
     secondary_color = ListProperty([1., 1., 1., 1.])
+    font_ratio = NumericProperty(1)
 
     def __init__(
             self,
@@ -152,19 +171,55 @@ class TreeLayout(RelativeLayout):
         self.size_hint_x = (None)
         self.bind(primary_color=self.on_primary_color_change)
         self.on_primary_color_change()
+        self.bind(secondary_color=self.on_secondary_color_change)
+        self.on_secondary_color_change()
+        self.build_layout()
 
     def on_primary_color_change(self, base=None, widget=None, value=None):
         self.transparent_primary_color = (
             self.primary_color[0], self.primary_color[1], self.primary_color[2], 0.7)
 
+    def on_secondary_color_change(self, base=None, widget=None, value=None):
+        self.transparent_secondary_color = (
+            self.secondary_color[0], self.secondary_color[1], self.secondary_color[2], 0.7)
+
     def change_current_position():
         pass
 
+    def compute_word_button_pos_hint(self, current_rank, current_vertical_offset):
+        """
+        Compute the pos hint of the word button given its rank and offset.
+
+        Parameters
+        ----------
+        current_rank : int
+            Current rank of the word, indicate how far it is from the start word.
+        current_vertical_offset : int
+            Current vertical offset of the word.
+
+        Returns
+        -------
+        dict
+            Pos hint for the word button.
+        """
+
+        top = 1 - (WORD_BUTTON_SIDE_OFFSET +
+                   (WORD_BUTTON_HEIGHT_HINT + WORD_BUTTON_VSPACING) *
+                   current_vertical_offset) / (WORD_BUTTON_SIDE_OFFSET +
+                                               (WORD_BUTTON_HEIGHT_HINT + WORD_BUTTON_VSPACING) *
+                                               self.max_vertical_offset) * (1 - WORD_BUTTON_HSPACING - WORD_BUTTON_HEIGHT_HINT / 2)
+        left = (WORD_BUTTON_SIDE_OFFSET +
+                (WORD_BUTTON_WIDTH_HINT + WORD_BUTTON_HSPACING) * (current_rank - 1)) / (WORD_BUTTON_SIDE_OFFSET +
+                                                                                         (WORD_BUTTON_WIDTH_HINT + WORD_BUTTON_HSPACING) * self.max_rank) * (1 - WORD_BUTTON_SIDE_OFFSET - WORD_BUTTON_WIDTH_HINT / 2)
+        pos_hint = {"top": top, "x": left}
+
+        return pos_hint
+
     def build_layout(
             self,
-            position_to_word_id: Dict[str, int],
-            words_found: List[str],
-            current_position: str):
+            position_to_word_id: Dict[str, int] = test_position_to_word_id,
+            words_found: List[str] = test_words_found,
+            current_position: str = "0,0"):
         """
         Build the layout of the tree.
 
@@ -178,8 +233,32 @@ class TreeLayout(RelativeLayout):
             _description_
         """
 
+        # Reorder the positions
         sorted_positions_list = build_sorted_positions_list(
             position_to_word_id)
+
+        # Find the max rank
+        max_rank = 0
+        previous_rank = -1
+        for position in sorted_positions_list:
+            current_rank = len(position.split(","))
+            if current_rank > max_rank:
+                max_rank = current_rank
+        self.max_rank = max_rank - 1
+
+        # Find the max vertical offset
+        current_vertical_offset = 0
+        for position in sorted_positions_list:
+            current_rank = len(position.split(","))
+            if current_rank <= previous_rank:
+                current_vertical_offset += 1
+            previous_rank = current_rank
+        self.max_vertical_offset = current_vertical_offset
+
+        # Define the size of the layout
+        self.size = (self.max_rank * 180 * self.font_ratio,
+                     self.max_vertical_offset * 60 * self.font_ratio)
+        print(self.size)
 
         # Define the initial vertical offset
         current_vertical_offset = 0
@@ -189,6 +268,13 @@ class TreeLayout(RelativeLayout):
 
         # Create a dict to store the grid positions to plot the links
         position_to_grid_position = {}
+
+        # Compute the appropriate size
+        current_word_button_width_hint = WORD_BUTTON_WIDTH_HINT / (0.1 +
+                                                                   (WORD_BUTTON_WIDTH_HINT + WORD_BUTTON_HSPACING) * self.max_rank) * (1 - WORD_BUTTON_HSPACING - WORD_BUTTON_WIDTH_HINT / 2)
+        current_word_button_height_hint = WORD_BUTTON_HEIGHT_HINT / (WORD_BUTTON_SIDE_OFFSET +
+                                                                     (WORD_BUTTON_HEIGHT_HINT + WORD_BUTTON_VSPACING) *
+                                                                     self.max_vertical_offset) * (1 - WORD_BUTTON_HSPACING - WORD_BUTTON_HEIGHT_HINT / 2)
 
         # Iterate over the positions to display the widgets
         for position in sorted_positions_list:
@@ -203,12 +289,21 @@ class TreeLayout(RelativeLayout):
             word_id = position_to_word_id[position]
             word = words_found[word_id]
 
+            # Compute the pos hint of the word button
+            word_button_pos_hint = self.compute_word_button_pos_hint(
+                current_rank=current_rank,
+                current_vertical_offset=current_vertical_offset)
+
             # Add the word widget
             word_widget = WordButton(
                 text=word,
                 background_color=self.primary_color,
-                touch_color=self.transparent_primary_color
-            )
+                touch_color=self.transparent_primary_color,
+                size_hint=(current_word_button_width_hint,
+                           current_word_button_height_hint),
+                pos_hint=word_button_pos_hint,
+                font_ratio=self.font_ratio)
+            self.add_widget(word_widget)
 
             # Add the link with the parent
             ...
@@ -224,12 +319,6 @@ class TreeLayout(RelativeLayout):
 ### Testing ###
 ###############
 
-
-test_words_found = ["sea", "sale", "sell", "shell", "sail", "snail",
-                    "see", "bee", "tea", "pea", "peak", "keep", "tape", "pelt", "apes"]
-
-test_position_to_word_id = {"0": 0, "0,0": 1, "0,0,0": 2,
-                            "0,0,0,0": 3, "0,0,1": 4, "0,0,1,0": 5, "0,1": 6, "0,1,0": 7, "0,2": 8, "0,3": 9, "0,3,0": 10, "0,3,0,0": 11, "0,3,1": 12, "0,3,1,0": 13, "0,3,2": 14}
 
 if __name__ == "__main__":
     print(build_sorted_positions_list(test_position_to_word_id))
