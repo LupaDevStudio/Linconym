@@ -101,5 +101,9 @@ class ClassicModeScreen(ImprovedScreen):
             scrollview_layout.add_widget(self.ACT_BUTTON_DICT[act])
 
     def open_levels_screen(self, act_id):
-        self.manager.get_screen("levels").current_act_id = act_id
-        self.manager.current = "levels"
+        dict_kwargs = {
+                "current_act_id": act_id
+            }
+        self.manager.go_to_next_screen(
+            next_screen_name="levels",
+            next_dict_kwargs=dict_kwargs)

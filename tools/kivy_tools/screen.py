@@ -41,7 +41,6 @@ class ImprovedScreen(Screen):
     """
     Improved Screen class based on the kivy one.
     """
-
     # Create the back image properties
     back_image_width = NumericProperty(Window.size[0])
     back_image_height = NumericProperty(Window.size[1])
@@ -222,9 +221,6 @@ class ImprovedScreen(Screen):
         # Bind to update attributes when the size of the window is changed
         Window.bind(on_resize=self.on_resize)
 
-        # Add the screen name to the list of former screens
-        self.manager.list_former_screens.append(self.name)
-
         # Update the back image size
         self.update_back_image_size()
 
@@ -324,3 +320,6 @@ class ImprovedScreen(Screen):
             else:
                 Clock.unschedule(self.change_background_opacity, 1/FPS)
                 self.opacity_state = "main"
+
+    def reload_kwargs(self, dict_kwargs):
+        pass

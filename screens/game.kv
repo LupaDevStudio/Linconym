@@ -7,6 +7,7 @@
 #:import LETTER_FONT_SIZE tools.constants.LETTER_FONT_SIZE
 #:import TEXT_FONT_COLOR tools.constants.TEXT_FONT_COLOR
 #:import POS_HINT_BACK_ARROW tools.constants.POS_HINT_BACK_ARROW
+#:import POS_HINT_RIGHT_TOP_BUTTON tools.constants.POS_HINT_RIGHT_TOP_BUTTON
 
 <GameScreen>:
     Label:
@@ -26,6 +27,15 @@
         height: self.width
         colors: root.primary_color
         on_release: root.go_backwards()
+
+    # Button for the quests
+    RoundedButtonImage:
+        image_path: PATH_IMAGES + "quests.png"
+        pos_hint: POS_HINT_RIGHT_TOP_BUTTON
+        size_hint: (0.1, None)
+        height: self.width
+        colors: root.primary_color
+        on_release: root.go_to_quests_screen()
 
     # Stars
     ThreeStars:

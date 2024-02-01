@@ -46,7 +46,10 @@ class LevelsScreen(ImprovedScreen):
             back_image_path=PATH_BACKGROUNDS +
             THEMES_DICT[current_theme_image]["image"],
             **kwargs)
-        self.current_act_id = ""
+        self.current_act_id : str
+
+    def reload_kwargs(self, dict_kwargs):
+        self.current_act_id = dict_kwargs["current_act_id"]
 
     def on_pre_enter(self, *args):
         current_theme_colors = USER_DATA.settings["current_theme_colors"]
@@ -63,6 +66,16 @@ class LevelsScreen(ImprovedScreen):
         self.ids.level_layout.clear_widgets()
         return super().on_leave(*args)
 
-    def open_game_screen(self):
-        self.manager.get_screen("game").current_act_id = self.current_act_id
-        self.manager.current = "game"
+    def open_game_screen(self, level_id):
+        current_dict_kwargs = {
+            "current_act_id": self.current_act_id
+        }
+        next_dict_kwargs = {
+            "current_act_id": self.current_act_id,
+            "current_level_id": level_id
+        }
+        self.manager.go_to_next_screen(
+            next_screen_name="game",
+            current_dict_kwargs=current_dict_kwargs,
+            next_dict_kwargs=next_dict_kwargs
+        )
