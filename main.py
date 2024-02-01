@@ -53,7 +53,7 @@ class WindowManager(ScreenManager):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.transition = NoTransition()
-        self.list_former_screens = []
+        self.list_previous_screens = []
         current_screen = Screen(name="temp")
         self.add_widget(current_screen)
         self.current = "temp"
@@ -64,6 +64,18 @@ class WindowManager(ScreenManager):
                 screen = self.get_screen(screen_name)
                 screen.set_back_image_path(new_image_path)
 
+    def go_to_previous_screen(self):
+        if len(self.list_previous_screens) != 0:
+            previous_screen = self.list_previous_screens.pop()
+            screen_name = previous_screen[0]
+            self.get_screen(screen_name).reload_kwargs(previous_screen[1])
+            self.current = screen_name
+
+    def go_to_next_screen(self, next_screen_name, current_dict_kwargs={}, next_dict_kwargs={}):
+        current_screen_name = self.current
+        self.list_previous_screens.append((current_screen_name, current_dict_kwargs))
+        self.get_screen(next_screen_name).reload_kwargs(next_dict_kwargs)
+        self.current = next_screen_name
 
 class MainApp(App, Widget):
     """

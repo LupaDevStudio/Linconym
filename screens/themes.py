@@ -69,12 +69,10 @@ class ThemesScreen(ImprovedScreen):
             self.THEME_LAYOUT_DICT[act].font_ratio = self.font_ratio
         return super().on_resize(*args)
 
-    def go_backwards(self):
-        self.manager.current = "customization"
-
     def go_to_boosters(self):
-        self.manager.get_screen("boosters").former_screen = "themes"
-        self.manager.current = "boosters"
+        self.manager.go_to_next_screen(
+            next_screen_name="boosters"
+        )
 
     def update_coins(self):
         self.coins_count = USER_DATA.user_profile["coins"]

@@ -10,7 +10,7 @@ Module to create the profile screen.
 
 from kivy.properties import (
     StringProperty,
-    NumericProperty
+    ColorProperty
 )
 
 ### Local imports ###
@@ -33,16 +33,13 @@ from tools.kivy_tools import (
 #############
 
 
-class ProfileScreen(ImprovedScreen):
+class QuestsScreen(ImprovedScreen):
     """
     Class to manage the screen that contains the profile information.
     """
 
-    user_status = StringProperty()
-    user_status_image = StringProperty()
-    user_level = StringProperty()
-    coins_count = NumericProperty()
-    theme_colors = StringProperty()
+    primary_color = ColorProperty((0, 0, 0, 1))
+    secondary_color = ColorProperty((0, 0, 0, 1))
 
     def __init__(self, **kwargs) -> None:
         current_theme_image = USER_DATA.settings["current_theme_image"]
@@ -50,17 +47,18 @@ class ProfileScreen(ImprovedScreen):
             back_image_path=PATH_BACKGROUNDS +
             THEMES_DICT[current_theme_image]["image"],
             **kwargs)
+        self.current_act_id: str
+        self.current_level_id: str | None
+
+    def reload_kwargs(self, dict_kwargs):
+        self.current_act_id = dict_kwargs["current_act_id"]
+        self.current_level_id = dict_kwargs["current_level_id"]
 
     def on_enter(self, *args):
-        self.coins_count = USER_DATA.user_profile["coins"]
-        self.user_level = "Level " + str(USER_DATA.user_profile["level"])
         current_theme_image = USER_DATA.settings["current_theme_image"]
-        self.theme_colors = USER_DATA.settings["current_theme_colors"]
-        self.user_status = USER_DATA.user_profile["status"]
-        self.user_status_image = PATH_BADGES + self.user_status.lower() + ".png"
+        current_theme_colors = USER_DATA.settings["current_theme_colors"]
+        self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
+        self.secondary_color = THEMES_DICT[current_theme_colors]["secondary"]
         self.set_back_image_path(
             PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
         return super().on_enter(*args)
-
-    def go_to_boosters(self):
-        self.manager.go_to_next_screen(next_screen_name="boosters")

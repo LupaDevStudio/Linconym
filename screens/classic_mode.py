@@ -65,17 +65,10 @@ class ClassicModeScreen(ImprovedScreen):
             self.ACT_BUTTON_DICT[act].secondary_color = self.secondary_color
         return super().on_pre_enter(*args)
 
-    # def on_leave(self, *args):
-    #     self.ids["scrollview_layout"].clear_widgets
-    #     return super().on_leave(*args)
-
     def on_resize(self, *args):
         for act in self.ACT_BUTTON_DICT:
             self.ACT_BUTTON_DICT[act].font_ratio = self.font_ratio
         return super().on_resize(*args)
-
-    def go_backwards(self):
-        self.manager.current = "home"
 
     def fill_scrollview(self):
         scrollview_layout = self.ids["scrollview_layout"]
@@ -101,5 +94,9 @@ class ClassicModeScreen(ImprovedScreen):
             scrollview_layout.add_widget(self.ACT_BUTTON_DICT[act])
 
     def open_levels_screen(self, act_id):
-        self.manager.get_screen("levels").current_act_id = act_id
-        self.manager.current = "levels"
+        dict_kwargs = {
+                "current_act_id": act_id
+            }
+        self.manager.go_to_next_screen(
+            next_screen_name="levels",
+            next_dict_kwargs=dict_kwargs)

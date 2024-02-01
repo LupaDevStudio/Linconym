@@ -10,6 +10,7 @@ Module to create the settings screen.
 
 import os
 import random
+import webbrowser
 
 ### Kivy imports ###
 
@@ -97,3 +98,17 @@ class SettingsScreen(ImprovedScreen):
         music_volume = value
         music_mixer.change_volume(music_volume)
         USER_DATA.settings["music_volume"] = music_volume
+
+    def open_lupa_website(self):
+        """
+        Open LupaDevStudio website.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        None
+        """
+        webbrowser.open("https://lupadevstudio.com", 2)

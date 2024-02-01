@@ -100,11 +100,7 @@ class LevelButton(ButtonBehavior, RelativeLayout):
         if not self.disable_button:
             self.opacity = 1
             self.get_root_window().children[0].get_screen(
-                "game").current_act_id = self.parent.act_id
-            self.get_root_window().children[0].get_screen(
-                "game").current_level_id = str(self.level_id)
-            self.get_root_window().children[0].current = "game"
-
+                "levels").open_game_screen(str(self.level_id))
 
 class LevelBranch(RelativeLayout):
 

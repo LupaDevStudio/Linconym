@@ -19,4 +19,6 @@ The following list includes all the references of the assets used by this applic
 - <a href="https://www.flaticon.com/free-icons/google-play-music" title="google play music icons">Google play music icons created by Pixel perfect - Flaticon</a>
 - <a href="https://www.flaticon.com/free-icons/art" title="art icons">Art icons created by Freepik - Flaticon</a>
 - <a href="https://www.flaticon.com/free-icons/backspace" title="backspace icons">Backspace icons created by Icon Smart - Flaticon</a>
+- <a href="https://www.flaticon.com/free-icons/quest" title="quest icons">Quest icons created by Vitaly Gorbachev - Flaticon</a>
+- <a href="https://www.flaticon.com/free-icons/achievement" title="achievement icons">Achievement icons created by VectorPortal - Flaticon</a>
 - Music by <a href="https://pixabay.com/fr/users/arturaravidimusic-37133175/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=160360">Artur Aravidi</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=160360">Pixabay</a>

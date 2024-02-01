@@ -71,6 +71,10 @@ class GameScreen(ImprovedScreen):
         self.current_act_id: str
         self.current_level_id: str
 
+    def reload_kwargs(self, dict_kwargs):
+        self.current_act_id = dict_kwargs["current_act_id"]
+        self.current_level_id = dict_kwargs["current_level_id"]
+
     def on_pre_enter(self, *args):
         # Initialise the current word
         self.current_word = self.start_word
@@ -274,9 +278,15 @@ class GameScreen(ImprovedScreen):
         # self.ids.submit_button.opacity = 0
         self.ids.submit_button.disable_button = True
 
-    def go_backwards(self):
-        self.manager.get_screen("levels").current_act_id = self.current_act_id
-        self.manager.current = "levels"
+    def go_to_quests_screen(self):
+        dict_kwargs = {
+            "current_level_id": self.current_level_id,
+            "current_act_id": self.current_act_id
+        }
+        self.manager.go_to_next_screen(
+            next_screen_name="quests", 
+            current_dict_kwargs=dict_kwargs,
+            next_dict_kwargs=dict_kwargs)
 
     def go_to_previous_level(self):
         print("TODO go to previous level if possible")
