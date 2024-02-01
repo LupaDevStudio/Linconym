@@ -127,5 +127,6 @@ class MainApp(App, Widget):
 
 # Run the application
 if __name__ == "__main__":
-    Window.size = (480, 854)
+    if not MOBILE_MODE:
+        Window.size = (480, 854)
     MainApp().run()
