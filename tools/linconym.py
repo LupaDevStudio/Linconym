@@ -6,6 +6,15 @@ Module containing the core of Linconym.
 ### Imports ###
 ###############
 
+### Python imports ###
+
+from typing import (
+    Dict,
+    List
+)
+
+### Local imports ###
+
 from tools.path import (
     PATH_GAMEPLAY,
     PATH_RESOURCES_FOLDER
@@ -50,6 +59,55 @@ def get_parent_position(position: str):
             parent_pos += parent_splitted_pos[i] + ","
         parent_pos += parent_splitted_pos[-1]
         return parent_pos
+
+
+def is_parent_of(position, child_position):
+    """
+    Check if the given position is parent of the given child position.
+
+    Parameters
+    ----------
+    position : _type_
+        Position to check.
+    child_position : _type_
+        Position of the potential child.
+
+    Returns
+    -------
+    bool
+        Boolean indication if the given position is parent or not.
+    """
+
+    sliced_child_position = child_position[:len(position)]
+
+    return sliced_child_position == position
+
+
+def get_word_position(input_word: str, position_to_word_id: Dict[str, int], words_found: List[str]):
+    """
+    Get the position of the given word.
+
+    Parameters
+    ----------
+    input_word : str
+        Input word.
+    position_to_word_id : Dict[str, int]
+        Dictionnary containing positions for each word index.
+    words_found : List[str]
+        List of all words founds.
+
+    Returns
+    -------
+    str or None
+        Position or None if the word is not included in the list.
+    """
+    for i, word in enumerate(words_found):
+        if input_word == word:
+            word_index = i
+    for index, position in enumerate(position_to_word_id):
+        if index == word_index:
+            return position
+    return None
 
 
 def is_in_english_words(word: str):
