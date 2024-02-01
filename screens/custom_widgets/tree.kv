@@ -35,6 +35,14 @@
         RoundedRectangle:
             pos:(0, 0)
             size:self.size
+        # Border
+        Color:
+            rgba: root.outline_color
+        Line:
+            dash_offset: 4
+            dash_length: 7
+            width: OUTLINE_RECTANGLE_COLORED_ROUNDED_BUTTON
+            rounded_rectangle: (-OUTLINE_RECTANGLE_COLORED_ROUNDED_BUTTON/2, -OUTLINE_RECTANGLE_COLORED_ROUNDED_BUTTON/2, self.size[0]+OUTLINE_RECTANGLE_COLORED_ROUNDED_BUTTON,self.size[1]+OUTLINE_RECTANGLE_COLORED_ROUNDED_BUTTON, 12, 12, 12, 12)
 
     # Main text
     Label:

@@ -30,6 +30,7 @@ from kivy.properties import (
 ### Local imports ###
 
 from tools.basic_tools import argsort
+from tools.kivy_tools import change_color_opacity
 from tools.path import (
     PATH_TEXT_FONT
 )
@@ -40,7 +41,11 @@ from tools.constants import (
     WORD_BUTTON_VSPACING,
     WORD_BUTTON_SIDE_OFFSET
 )
-from tools.linconym import get_parent_position
+from tools.linconym import (
+    get_parent_position,
+    is_parent_of,
+    get_word_position
+)
 
 test_words_found = ["sea", "sale", "sell", "shell", "sail", "snail",
                     "see", "bee", "tea", "pea", "peak", "keep", "tape", "pelt", "apes"]
@@ -118,13 +123,11 @@ class WordButton(ButtonBehavior, RelativeLayout):
             self,
             text_font_name=PATH_TEXT_FONT,
             text_filling_ratio=0.8,
-            release_function=lambda: 1 + 1,
             font_ratio=None,
             **kwargs):
         if font_ratio is not None:
             self.font_ratio = font_ratio
         super().__init__(**kwargs)
-        self.release_function = release_function
         self.always_release = True
         self.text_font_name = text_font_name
         self.text_filling_ratio = text_filling_ratio
@@ -137,7 +140,7 @@ class WordButton(ButtonBehavior, RelativeLayout):
     def on_release(self):
         if not self.disable_button:
             self.background_color = self.temp_color
-            self.release_function()
+            self.parent.change_to_word(self.text)
 
 
 class TreeScrollview(ScrollView):
@@ -171,15 +174,50 @@ class TreeLayout(RelativeLayout):
         self.on_secondary_color_change()
 
     def on_primary_color_change(self, base=None, widget=None, value=None):
-        self.transparent_primary_color = (
-            self.primary_color[0], self.primary_color[1], self.primary_color[2], 0.7)
+        self.transparent_primary_color = change_color_opacity(
+            self.primary_color, 0.7)
 
     def on_secondary_color_change(self, base=None, widget=None, value=None):
-        self.transparent_secondary_color = (
-            self.secondary_color[0], self.secondary_color[1], self.secondary_color[2], 0.7)
+        self.transparent_secondary_color = change_color_opacity(
+            self.secondary_color, 0.7)
 
-    def change_current_position():
-        pass
+    def change_to_word(self, current_word):
+        current_position = get_word_position(
+            current_word, self.position_to_word_id, self.words_found)
+        print(current_position)
+        if current_position is not None:
+            self.change_current_position(current_position)
+
+    def change_current_position(self, current_position):
+        self.current_position = current_position
+        for position in self.position_to_word_id.keys():
+            # Determine if the word is in the main branch
+            is_main_branch = is_parent_of(
+                position, child_position=current_position)
+            is_selected = current_position == position
+
+            if is_main_branch:
+                main_color = self.primary_color
+                touch_color = self.transparent_primary_color
+                if is_selected:
+                    outline_color = (1, 1, 1, 1)
+                else:
+                    outline_color = self.primary_color
+            else:
+                main_color = self.secondary_color
+                outline_color = self.secondary_color
+                touch_color = self.transparent_secondary_color
+
+            # Apply the color changes to the word button
+            word_button = self.word_button_dict[position]
+            word_button.background_color = main_color
+            word_button.outline_color = outline_color
+            word_button.touch_color = touch_color
+
+            # Apply the color changes to the word link
+            if position in self.word_link_dict:
+                word_link = self.word_link_dict[position]
+                word_link.color = main_color
 
     def compute_word_button_pos_hint(self, current_rank, current_vertical_offset):
         """
@@ -259,7 +297,7 @@ class TreeLayout(RelativeLayout):
             self,
             position_to_word_id: Dict[str, int] = test_position_to_word_id,
             words_found: List[str] = test_words_found,
-            current_position: str = "0,0"):
+            current_position: str = "0,0,1,0"):
         """
         Build the layout of the tree.
 
@@ -272,6 +310,17 @@ class TreeLayout(RelativeLayout):
         current_position : str
             _description_
         """
+
+        # Store the tree infos
+        self.position_to_word_id = position_to_word_id
+        self.words_found = words_found
+        self.current_position = current_position
+
+        # Init a word button pile
+        self.word_button_dict = {}
+
+        # Init a word link pile
+        self.word_link_dict = {}
 
         # Reorder the positions
         sorted_positions_list = build_sorted_positions_list(
@@ -331,21 +380,38 @@ class TreeLayout(RelativeLayout):
             word_id = position_to_word_id[position]
             word = words_found[word_id]
 
+            # Determine if the word is in the main branch
+            is_main_branch = is_parent_of(
+                position, child_position=current_position)
+            is_selected = current_position == position
+
+            if is_main_branch:
+                main_color = self.primary_color
+                touch_color = self.transparent_primary_color
+                if is_selected:
+                    outline_color = (1, 1, 1, 1)
+                else:
+                    outline_color = self.primary_color
+            else:
+                main_color = self.secondary_color
+                outline_color = self.secondary_color
+                touch_color = self.transparent_secondary_color
+
             # Compute the pos hint of the word button
             word_button_pos_hint = self.compute_word_button_pos_hint(
                 current_rank=current_rank,
                 current_vertical_offset=current_vertical_offset)
 
             # Add the word widget
-            word_widget = WordButton(
+            word_button = WordButton(
                 text=word,
-                background_color=self.primary_color,
-                touch_color=self.transparent_primary_color,
+                background_color=main_color,
+                outline_color=outline_color,
+                touch_color=touch_color,
                 size_hint=(current_word_button_width_hint,
                            current_word_button_height_hint),
                 pos_hint=word_button_pos_hint,
                 font_ratio=self.font_ratio)
-            self.add_widget(word_widget)
 
             # Recover the parent position
             parent_position = get_parent_position(position)
@@ -361,10 +427,12 @@ class TreeLayout(RelativeLayout):
 
                 # Add the link with the parent
                 word_link = WordLink(
-                    color=self.primary_color,
+                    color=main_color,
                     pos_hint=word_link_pos_hint,
                     size_hint=word_link_size_hint)
-                self.add_widget(word_link)
+                self.word_link_dict[position] = word_link
+
+            self.word_button_dict[position] = word_button
 
             # Store the grid position
             position_to_grid_position[position] = (
@@ -372,6 +440,12 @@ class TreeLayout(RelativeLayout):
 
             # Update the previous rank
             previous_rank = current_rank
+
+        for pos in self.word_link_dict:
+            self.add_widget(self.word_link_dict[pos])
+
+        for pos in self.word_button_dict:
+            self.add_widget(self.word_button_dict[pos])
 
 ###############
 ### Testing ###

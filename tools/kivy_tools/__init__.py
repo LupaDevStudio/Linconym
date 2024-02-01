@@ -18,6 +18,7 @@ from tools.kivy_tools.screen import ImprovedScreen
 from tools.kivy_tools.image_with_text import ImageWithText
 from tools.kivy_tools.image_with_text_button import ImageWithTextButton
 from tools.kivy_tools.image_button import ImageButton
+from tools.kivy_tools.colors import change_color_opacity
 
 ###############
 ### Process ###
