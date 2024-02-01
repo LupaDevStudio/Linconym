@@ -62,6 +62,3 @@ class QuestsScreen(ImprovedScreen):
         self.set_back_image_path(
             PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
         return super().on_enter(*args)
-
-    def go_backwards(self):
-        self.manager.go_to_previous_screen()

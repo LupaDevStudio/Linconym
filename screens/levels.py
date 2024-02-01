@@ -8,7 +8,10 @@ Module to create the levels screen.
 
 ### Kivy imports ###
 
-from kivy.properties import ColorProperty
+from kivy.properties import (
+    ColorProperty,
+    StringProperty
+)
 
 ### Local imports ###
 
@@ -39,6 +42,7 @@ class LevelsScreen(ImprovedScreen):
 
     primary_color = ColorProperty((0, 0, 0, 1))
     secondary_color = ColorProperty((0, 0, 0, 1))
+    current_act_name = StringProperty()
 
     def __init__(self, **kwargs) -> None:
         current_theme_image = USER_DATA.settings["current_theme_image"]
@@ -57,6 +61,7 @@ class LevelsScreen(ImprovedScreen):
         self.secondary_color = THEMES_DICT[current_theme_colors]["secondary"]
         self.ids.level_layout.act_id = self.current_act_id
         self.ids.level_layout.build_layout()
+        self.current_act_name = "Act " + self.current_act_id.replace("Act", "")
         return super().on_pre_enter(*args)
 
     def on_enter(self, *args):
@@ -65,6 +70,20 @@ class LevelsScreen(ImprovedScreen):
     def on_leave(self, *args):
         self.ids.level_layout.clear_widgets()
         return super().on_leave(*args)
+
+    def go_to_quests_screen(self):
+        current_dict_kwargs = {
+            "current_act_id": self.current_act_id
+        }
+        next_dict_kwargs = {
+            "current_act_id": self.current_act_id,
+            "current_level_id": None
+        }
+        self.manager.go_to_next_screen(
+            next_screen_name="quests",
+            current_dict_kwargs=current_dict_kwargs,
+            next_dict_kwargs=next_dict_kwargs
+        )
 
     def open_game_screen(self, level_id):
         current_dict_kwargs = {

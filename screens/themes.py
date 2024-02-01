@@ -69,9 +69,6 @@ class ThemesScreen(ImprovedScreen):
             self.THEME_LAYOUT_DICT[act].font_ratio = self.font_ratio
         return super().on_resize(*args)
 
-    def go_backwards(self):
-        self.manager.go_to_previous_screen()
-
     def go_to_boosters(self):
         self.manager.go_to_next_screen(
             next_screen_name="boosters"

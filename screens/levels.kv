@@ -11,7 +11,7 @@
 
 <LevelsScreen>:
     Label:
-        text: "Classic Mode"
+        text: root.current_act_name
         font_name: PATH_TITLE_FONT
         font_size: TITLE_FONT_SIZE * root.font_ratio
         pos_hint: {"center_x":0.5, "center_y":0.9}
@@ -23,6 +23,24 @@
         size_hint: (1, BOTTOM_BAR_HEIGHT)
         pos_hint: {"bottom":0,"left":0}
         selected: "none"
+
+    # Back button
+    RoundedButtonImage:
+        image_path: PATH_IMAGES + "left_arrow.png"
+        pos_hint: POS_HINT_BACK_ARROW
+        size_hint: (0.1, None)
+        height: self.width
+        colors: root.primary_color
+        on_release: root.go_backwards()
+
+    # Button for the quests
+    RoundedButtonImage:
+        image_path: PATH_IMAGES + "quests.png"
+        pos_hint: POS_HINT_RIGHT_TOP_BUTTON
+        size_hint: (0.1, None)
+        height: self.width
+        colors: root.primary_color
+        on_release: root.go_to_quests_screen()
 
     CustomScrollview:
         id: custom_scrollview

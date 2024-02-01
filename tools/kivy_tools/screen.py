@@ -323,3 +323,6 @@ class ImprovedScreen(Screen):
 
     def reload_kwargs(self, dict_kwargs):
         pass
+
+    def go_backwards(self):
+        self.manager.go_to_previous_screen()

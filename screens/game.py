@@ -288,10 +288,6 @@ class GameScreen(ImprovedScreen):
             current_dict_kwargs=dict_kwargs,
             next_dict_kwargs=dict_kwargs)
 
-    def go_backwards(self):
-        self.manager.get_screen("levels").current_act_id = self.current_act_id
-        self.manager.current = "levels"
-
     def go_to_previous_level(self):
         print("TODO go to previous level if possible")
 

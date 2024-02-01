@@ -122,6 +122,3 @@ class BoostersScreen(ImprovedScreen):
         None
         """
         pass
-
-    def go_backwards(self):
-        self.manager.go_to_previous_screen()
