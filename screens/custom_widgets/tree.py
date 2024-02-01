@@ -34,13 +34,13 @@ from tools.path import (
     PATH_TEXT_FONT
 )
 from tools.constants import (
-    MAIN_BUTTON_FONT_SIZE,
     WORD_BUTTON_WIDTH_HINT,
     WORD_BUTTON_HEIGHT_HINT,
     WORD_BUTTON_HSPACING,
     WORD_BUTTON_VSPACING,
     WORD_BUTTON_SIDE_OFFSET
 )
+from tools.linconym import get_parent_position
 
 test_words_found = ["sea", "sale", "sell", "shell", "sail", "snail",
                     "see", "bee", "tea", "pea", "peak", "keep", "tape", "pelt", "apes"]
@@ -84,13 +84,6 @@ def build_sorted_positions_list(position_to_word_id: Dict[str, int]):
     """
 
     positions_list = list(position_to_word_id.keys())
-
-    print(positions_list)
-
-    def key(x: str):
-        print(x)
-        return (len(x[1].split(",")), convert_str_position_to_tuple_position(x[1]))
-    # sorted_positions_indices = argsort(positions_list, key=key)
     sorted_positions_indices = argsort(positions_list)
     sorted_positions_list = [positions_list[i]
                              for i in sorted_positions_indices]
@@ -151,7 +144,10 @@ class TreeScrollview(ScrollView):
     """
     Class containing the scrollview to scroll over the tree.
     """
+
     font_ratio = NumericProperty(1)
+    primary_color = ListProperty([0.5, 0.5, 0.5, 1.])
+    secondary_color = ListProperty([1., 1., 1., 1.])
 
 
 class TreeLayout(RelativeLayout):
@@ -173,7 +169,6 @@ class TreeLayout(RelativeLayout):
         self.on_primary_color_change()
         self.bind(secondary_color=self.on_secondary_color_change)
         self.on_secondary_color_change()
-        self.build_layout()
 
     def on_primary_color_change(self, base=None, widget=None, value=None):
         self.transparent_primary_color = (
@@ -203,17 +198,62 @@ class TreeLayout(RelativeLayout):
             Pos hint for the word button.
         """
 
-        top = 1 - (WORD_BUTTON_SIDE_OFFSET +
-                   (WORD_BUTTON_HEIGHT_HINT + WORD_BUTTON_VSPACING) *
-                   current_vertical_offset) / (WORD_BUTTON_SIDE_OFFSET +
-                                               (WORD_BUTTON_HEIGHT_HINT + WORD_BUTTON_VSPACING) *
-                                               self.max_vertical_offset) * (1 - WORD_BUTTON_HSPACING - WORD_BUTTON_HEIGHT_HINT / 2)
-        left = (WORD_BUTTON_SIDE_OFFSET +
-                (WORD_BUTTON_WIDTH_HINT + WORD_BUTTON_HSPACING) * (current_rank - 1)) / (WORD_BUTTON_SIDE_OFFSET +
-                                                                                         (WORD_BUTTON_WIDTH_HINT + WORD_BUTTON_HSPACING) * self.max_rank) * (1 - WORD_BUTTON_SIDE_OFFSET - WORD_BUTTON_WIDTH_HINT / 2)
+        top = 1 - \
+            (WORD_BUTTON_SIDE_OFFSET + (WORD_BUTTON_HEIGHT_HINT + WORD_BUTTON_VSPACING) * current_vertical_offset) /\
+            (WORD_BUTTON_SIDE_OFFSET + (WORD_BUTTON_HEIGHT_HINT + WORD_BUTTON_VSPACING) * self.max_vertical_offset) *\
+            (1 - WORD_BUTTON_HSPACING - WORD_BUTTON_HEIGHT_HINT / 2)
+        left = (WORD_BUTTON_SIDE_OFFSET + (WORD_BUTTON_WIDTH_HINT + WORD_BUTTON_HSPACING) * (current_rank - 1)) /\
+            (WORD_BUTTON_SIDE_OFFSET + (WORD_BUTTON_WIDTH_HINT + WORD_BUTTON_HSPACING) * self.max_rank) *\
+            (1 - WORD_BUTTON_SIDE_OFFSET - WORD_BUTTON_WIDTH_HINT / 2)
         pos_hint = {"top": top, "x": left}
 
         return pos_hint
+
+    def compute_word_link_pos_hint(
+            self,
+            current_rank: int,
+            current_vertical_offset: int,
+            parent_rank: int,
+            parent_vertical_offset: int):
+        """
+        Compute the pos hint for a word link.
+
+        Parameters
+        ----------
+        current_rank : int
+            Rank of the current word.
+        current_vertical_offset : int
+            Vertical offset of the current word.
+        parent_rank : int
+            Rank of the parent word.
+        parent_vertical_offset : int
+            Vertical offset of the parent word.
+
+        Returns
+        -------
+        dict
+            Pos hint of the word link.
+        """
+
+        top = 1 - \
+            (WORD_BUTTON_SIDE_OFFSET + WORD_BUTTON_HEIGHT_HINT / 2 + (WORD_BUTTON_HEIGHT_HINT + WORD_BUTTON_VSPACING) * parent_vertical_offset) /\
+            (WORD_BUTTON_SIDE_OFFSET + (WORD_BUTTON_HEIGHT_HINT + WORD_BUTTON_VSPACING) * self.max_vertical_offset) *\
+            (1 - WORD_BUTTON_HSPACING - WORD_BUTTON_HEIGHT_HINT / 2)
+        x = (WORD_BUTTON_SIDE_OFFSET + WORD_BUTTON_WIDTH_HINT + (WORD_BUTTON_WIDTH_HINT + WORD_BUTTON_HSPACING) * (parent_rank - 1)) /\
+            (WORD_BUTTON_SIDE_OFFSET + (WORD_BUTTON_WIDTH_HINT + WORD_BUTTON_HSPACING) * self.max_rank) *\
+            (1 - WORD_BUTTON_SIDE_OFFSET - WORD_BUTTON_WIDTH_HINT / 2)
+        y = top - (WORD_BUTTON_HEIGHT_HINT + WORD_BUTTON_VSPACING) * \
+            (current_vertical_offset - parent_vertical_offset) /\
+            (WORD_BUTTON_SIDE_OFFSET + (WORD_BUTTON_HEIGHT_HINT + WORD_BUTTON_VSPACING) * self.max_vertical_offset) *\
+            (1 - WORD_BUTTON_HSPACING - WORD_BUTTON_HEIGHT_HINT / 2)
+        right = (WORD_BUTTON_SIDE_OFFSET + (WORD_BUTTON_WIDTH_HINT + WORD_BUTTON_HSPACING) * (current_rank - 1)) /\
+            (WORD_BUTTON_SIDE_OFFSET + (WORD_BUTTON_WIDTH_HINT + WORD_BUTTON_HSPACING) * self.max_rank) *\
+            (1 - WORD_BUTTON_SIDE_OFFSET - WORD_BUTTON_WIDTH_HINT / 2)
+
+        pos_hint = {"top": top, "x": x}
+        size_hint = (right - x, top - y)
+
+        return pos_hint, size_hint
 
     def build_layout(
             self,
@@ -258,7 +298,6 @@ class TreeLayout(RelativeLayout):
         # Define the size of the layout
         self.size = (self.max_rank * 180 * self.font_ratio,
                      self.max_vertical_offset * 60 * self.font_ratio)
-        print(self.size)
 
         # Define the initial vertical offset
         current_vertical_offset = 0
@@ -270,11 +309,14 @@ class TreeLayout(RelativeLayout):
         position_to_grid_position = {}
 
         # Compute the appropriate size
-        current_word_button_width_hint = WORD_BUTTON_WIDTH_HINT / (0.1 +
-                                                                   (WORD_BUTTON_WIDTH_HINT + WORD_BUTTON_HSPACING) * self.max_rank) * (1 - WORD_BUTTON_HSPACING - WORD_BUTTON_WIDTH_HINT / 2)
-        current_word_button_height_hint = WORD_BUTTON_HEIGHT_HINT / (WORD_BUTTON_SIDE_OFFSET +
-                                                                     (WORD_BUTTON_HEIGHT_HINT + WORD_BUTTON_VSPACING) *
-                                                                     self.max_vertical_offset) * (1 - WORD_BUTTON_HSPACING - WORD_BUTTON_HEIGHT_HINT / 2)
+        current_word_button_width_hint =\
+            WORD_BUTTON_WIDTH_HINT /\
+            (0.1 + (WORD_BUTTON_WIDTH_HINT + WORD_BUTTON_HSPACING) * self.max_rank) \
+            * (1 - WORD_BUTTON_HSPACING - WORD_BUTTON_WIDTH_HINT / 2)
+        current_word_button_height_hint =\
+            WORD_BUTTON_HEIGHT_HINT /\
+            (WORD_BUTTON_SIDE_OFFSET + (WORD_BUTTON_HEIGHT_HINT + WORD_BUTTON_VSPACING) * self.max_vertical_offset) *\
+            (1 - WORD_BUTTON_HSPACING - WORD_BUTTON_HEIGHT_HINT / 2)
 
         # Iterate over the positions to display the widgets
         for position in sorted_positions_list:
@@ -305,8 +347,24 @@ class TreeLayout(RelativeLayout):
                 font_ratio=self.font_ratio)
             self.add_widget(word_widget)
 
-            # Add the link with the parent
-            ...
+            # Recover the parent position
+            parent_position = get_parent_position(position)
+            if parent_position is not None:
+                parent_rank, parent_vertical_offset = position_to_grid_position[parent_position]
+
+                # Compute the pos hint of the link
+                word_link_pos_hint, word_link_size_hint = self.compute_word_link_pos_hint(
+                    current_rank=current_rank,
+                    current_vertical_offset=current_vertical_offset,
+                    parent_rank=parent_rank,
+                    parent_vertical_offset=parent_vertical_offset)
+
+                # Add the link with the parent
+                word_link = WordLink(
+                    color=self.primary_color,
+                    pos_hint=word_link_pos_hint,
+                    size_hint=word_link_size_hint)
+                self.add_widget(word_link)
 
             # Store the grid position
             position_to_grid_position[position] = (

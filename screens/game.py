@@ -83,6 +83,8 @@ class GameScreen(ImprovedScreen):
         self.ids.keyboard_layout.build_keyboard()
 
         self.nb_stars = USER_DATA.classic_mode[self.current_act_id][self.current_level_id]["nb_stars"]
+
+        self.ids["tree_layout"].build_layout()
         return super().on_pre_enter(*args)
 
     def on_enter(self, *args):

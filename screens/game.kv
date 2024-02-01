@@ -98,12 +98,13 @@
         pos_hint: {"center_x":0.5, "center_y":0.585}
         size_hint: (1,0.365)
         bar_color: root.primary_color
-        bar_inactive_color: root.secondary_color
+        bar_inactive_color: (0,0,0,0)
         font_ratio: root.font_ratio
+        primary_color: root.primary_color
+        secondary_color: root.secondary_color
 
         TreeLayout:
             id: tree_layout
-            # size_hint: (2,2)
-            # size: (800,800)
-            pos: (0,0)
             font_ratio: root.font_ratio
+            primary_color: root.primary_color
+            secondary_color: root.secondary_color
