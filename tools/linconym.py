@@ -25,6 +25,33 @@ from tools.basic_tools import (
 #################
 
 
+def get_parent_position(position: str):
+    """
+    Compute the parent position of the given position.
+
+    Parameters
+    ----------
+    position : str
+        Position of the word in the tree.
+
+    Returns
+    -------
+    str or None
+        Position of the parent word or None if the root position is given in input.
+    """
+
+    splitted_pos = position.split(",")
+    parent_splitted_pos = splitted_pos[:-1]
+    if len(parent_splitted_pos) == 0:
+        return None
+    else:
+        parent_pos = ""
+        for i in range(len(parent_splitted_pos) - 1):
+            parent_pos += parent_splitted_pos[i] + ","
+        parent_pos += parent_splitted_pos[-1]
+        return parent_pos
+
+
 def is_in_english_words(word: str):
     """
     Indicates whether a word belongs to the english words dictionnary or not.
