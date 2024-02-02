@@ -18,24 +18,28 @@
     "settings": {
         "music_volume": 0.0,
         "sound_volume": 0.46621621621621623,
-        "current_theme_image": "japanese_1",
+        "current_theme_image": "beach_hammock",
         "current_music": "kids_party",
-        "current_theme_colors": "japanese_1"
+        "current_theme_colors": "beach_hammock"
     },
     "unlocked_themes": {
-        "japanese_1": {
+        "japanese_etching": {
             "image": true,
             "colors": true
         },
-        "lake": {
+        "retro_race": {
             "image": true,
             "colors": false
         },
-        "japanese_2": {
-            "image": false,
-            "colors": true
+        "westerlund_2": {
+            "image": true,
+            "colors": false
         },
-        "japanese_3": {
+        "desert_sunset": {
+            "image": true,
+            "colors": false
+        },
+        "beach_hammock": {
             "image": true,
             "colors": true
         }
@@ -47,7 +51,7 @@
         "status": "Beginner",
         "level": 1,
         "experience": 0,
-        "coins": 1800
+        "coins": 890
     },
     "ads": {
         "1": true,

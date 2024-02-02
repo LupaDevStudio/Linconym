@@ -1,5 +1,5 @@
 {
-    "japanese_1": {
+    "japanese_etching": {
         "primary": [
             1,
             0.49,
@@ -10,28 +10,28 @@
             0.4,
             0.4
         ],
-        "image": "pagode.jpg",
+        "image": "japanese_etching.jpg",
         "image_price": 100,
         "colors_price": 200,
-        "name": "Cerisier"
+        "name": "Etching"
     },
-    "lake": {
+    "beach_hammock": {
         "primary": [
-            0.5,
-            1,
-            0.62
+            0.310,
+            0.620,
+            0.741
         ],
         "secondary": [
-            0.4,
-            0.4,
-            0.4
+            0.933,
+            0.906,
+            0.882
         ],
-        "image": "lake_sunset.jpg",
-        "image_price": 2100,
-        "colors_price": 4000,
-        "name": "Coucher de soleil"
+        "image": "beach_hammock.jpg",
+        "image_price": 210,
+        "colors_price": 400,
+        "name": "Holidays"
     },
-    "japanese_2": {
+    "flowered_garden": {
         "primary": [
             0.25,
             0.21,
@@ -42,12 +42,12 @@
             0.4,
             0.4
         ],
-        "image": "japanese_garden.jpg",
+        "image": "flowered_garden.jpg",
         "image_price": 10000,
-        "colors_price": 0,
+        "colors_price": 100,
         "name": "Garden"
     },
-    "japanese_3": {
+    "desert_sunset": {
         "primary": [
             1,
             0.49,
@@ -58,9 +58,249 @@
             0.4,
             0.4
         ],
-        "image": "japanese_garden_2.jpg",
-        "image_price": 0,
-        "colors_price": 0,
-        "name": "Garden 2"
+        "image": "desert_sunset.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Desert"
+    },
+    "beach_sunset": {
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
+        "image": "beach_sunset.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Beach"
+    },
+    "diskopolys": {
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
+        "image": "diskopolys.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Diskopolys"
+    },
+    "dream": {
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
+        "image": "dream.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Dream"
+    },
+    "galaxy_messier_96": {
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
+        "image": "galaxy_messier_96.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Galaxy"
+    },
+    "japanese_temple": {
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
+        "image": "japanese_temple.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Temple"
+    },
+    "london_street": {
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
+        "image": "london_street.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "London"
+    },
+    "magic_forest": {
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
+        "image": "magic_forest.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Magic forest"
+    },
+    "mushroom_planet": {
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
+        "image": "mushroom_planet.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Freotopia"
+    },
+    "mystic_mountain": {
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
+        "image": "mystic_mountain.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Mystic mountain"
+    },
+    "polar_fox": {
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
+        "image": "polar_fox.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Polar fox"
+    },
+    "retro_race": {
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
+        "image": "retro_race.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Retro race"
+    },
+    "snow_covered_chalet": {
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
+        "image": "snow_covered_chalet.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Chalet"
+    },
+    "space_clocks": {
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
+        "image": "space_clocks.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Space & Time"
+    },
+    "sunflower": {
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
+        "image": "sunflower.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Sunflowers"
+    },
+    "westerlund_2": {
+        "primary": [
+            1,
+            0.49,
+            0.62
+        ],
+        "secondary": [
+            0.4,
+            0.4,
+            0.4
+        ],
+        "image": "westerlund_2.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Westerlund"
     }
 }
