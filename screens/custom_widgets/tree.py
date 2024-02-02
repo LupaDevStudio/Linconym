@@ -184,7 +184,6 @@ class TreeLayout(RelativeLayout):
     def change_to_word(self, current_word):
         current_position = get_word_position(
             current_word, self.position_to_word_id, self.words_found)
-        print(current_position)
         if current_position is not None:
             self.change_current_position(current_position)
 

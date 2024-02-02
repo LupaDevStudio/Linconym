@@ -60,24 +60,41 @@ BACK_ARROW_SIZE = 0.2
 # Create the user data json if it does not exist
 if not os.path.exists(PATH_USER_DATA):
     default_user_data = {
-        "classic_mode": {},
+        "classic_mode": {
+            "Act1": {
+                "1": {
+                    "nb_stars": 3,
+                    "best_solution_nb_words": 5,
+                    "words_found": [],
+                    "position_to_word_id": {},
+                    "current_position": ""
+                }
+            }
+        },
         "daily_mode": {
             "start_word": "",
             "end_word": ""
         },
         "history": {},
-        "items": {
-            "coins": 0,
-            "unlocked_backgrounds": [],
-            "unlocked_palettes": [],
-            "unlocked_musics": []
-        },
         "settings": {
             "sound_volume": 0.5,
             "music_volume": 0.5,
-            "current_background": "",
-            "current_music": "",
-            "current_palette": ""
+            "current_theme_image": "japanese_1",
+            "current_music": "kids_party",
+            "current_theme_colors": "japanese_1"
+        },
+        "unlocked_themes": {},
+        "unlocked_musics": {},
+        "user_profile": {
+            "status": "Beginner",
+            "level": 1,
+            "experience": 0,
+            "coins": 0
+        },
+        "ads": {
+            "1": False,
+            "2": False,
+            "3": False
         }
     }
     save_json_file(PATH_USER_DATA, default_user_data)
