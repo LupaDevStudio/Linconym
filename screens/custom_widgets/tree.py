@@ -310,6 +310,9 @@ class TreeLayout(RelativeLayout):
             _description_
         """
 
+        # Clear the layout
+        self.clear_widgets()
+
         # Store the tree infos
         self.position_to_word_id = position_to_word_id
         self.words_found = words_found

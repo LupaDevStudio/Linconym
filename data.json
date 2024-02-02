@@ -18,9 +18,9 @@
     "settings": {
         "music_volume": 0.0,
         "sound_volume": 0.46621621621621623,
-        "current_theme_image": "dream",
+        "current_theme_image": "westerlund_2",
         "current_music": "kids_party",
-        "current_theme_colors": "dream"
+        "current_theme_colors": "westerlund_2"
     },
     "unlocked_themes": {
         "japanese_etching": {
@@ -29,11 +29,11 @@
         },
         "retro_race": {
             "image": true,
-            "colors": false
+            "colors": true
         },
         "westerlund_2": {
             "image": true,
-            "colors": false
+            "colors": true
         },
         "desert_sunset": {
             "image": true,
@@ -58,6 +58,46 @@
         "dream": {
             "image": true,
             "colors": true
+        },
+        "galaxy_messier_96": {
+            "image": true,
+            "colors": true
+        },
+        "sunflower": {
+            "image": true,
+            "colors": true
+        },
+        "space_clocks": {
+            "image": true,
+            "colors": true
+        },
+        "snow_covered_chalet": {
+            "image": true,
+            "colors": true
+        },
+        "polar_fox": {
+            "image": true,
+            "colors": true
+        },
+        "mystic_mountain": {
+            "image": true,
+            "colors": true
+        },
+        "mushroom_planet": {
+            "image": true,
+            "colors": true
+        },
+        "magic_forest": {
+            "image": true,
+            "colors": true
+        },
+        "london_street": {
+            "image": true,
+            "colors": true
+        },
+        "japanese_temple": {
+            "image": true,
+            "colors": true
         }
     },
     "unlocked_musics": {
@@ -67,7 +107,7 @@
         "status": "Beginner",
         "level": 1,
         "experience": 0,
-        "coins": 879200
+        "coins": 877000
     },
     "ads": {
         "1": true,

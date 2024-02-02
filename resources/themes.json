@@ -113,14 +113,14 @@
     },
     "galaxy_messier_96": {
         "primary": [
-            1,
-            0.49,
-            0.62
+            0.855,
+            0.808,
+            0.765
         ],
         "secondary": [
-            0.4,
-            0.4,
-            0.4
+            0.525,
+            0.494,
+            0.608
         ],
         "image": "galaxy_messier_96.jpg",
         "image_price": 100,
@@ -129,14 +129,14 @@
     },
     "japanese_temple": {
         "primary": [
-            1,
-            0.49,
-            0.62
+            0.863,
+            0.706,
+            0.541
         ],
         "secondary": [
-            0.4,
-            0.4,
-            0.4
+            0.38,
+            0.086,
+            0.122
         ],
         "image": "japanese_temple.jpg",
         "image_price": 100,
@@ -145,14 +145,14 @@
     },
     "london_street": {
         "primary": [
-            1,
-            0.49,
-            0.62
+            0.976,
+            0.710,
+            0.251
         ],
         "secondary": [
-            0.4,
-            0.4,
-            0.4
+            0.271,
+            0.137,
+            0.106
         ],
         "image": "london_street.jpg",
         "image_price": 100,
@@ -161,14 +161,14 @@
     },
     "magic_forest": {
         "primary": [
-            1,
-            0.49,
-            0.62
+            0.494,
+            0.502,
+            0.212
         ],
         "secondary": [
-            0.4,
-            0.4,
-            0.4
+            0.129,
+            0.204,
+            0.235
         ],
         "image": "magic_forest.jpg",
         "image_price": 100,
@@ -177,14 +177,14 @@
     },
     "mushroom_planet": {
         "primary": [
-            1,
-            0.49,
-            0.62
+            0.745,
+            0.839,
+            0.831
         ],
         "secondary": [
-            0.4,
-            0.4,
-            0.4
+            0.078,
+            0.169,
+            0.224
         ],
         "image": "mushroom_planet.jpg",
         "image_price": 100,
@@ -193,14 +193,14 @@
     },
     "mystic_mountain": {
         "primary": [
-            1,
-            0.49,
-            0.62
+            0.992,
+            0.616,
+            0.298
         ],
         "secondary": [
-            0.4,
-            0.4,
-            0.4
+            0.490,
+            0.486,
+            0.620
         ],
         "image": "mystic_mountain.jpg",
         "image_price": 100,
@@ -209,14 +209,14 @@
     },
     "polar_fox": {
         "primary": [
-            1,
-            0.49,
-            0.62
+            0.600,
+            0.639,
+            0.698
         ],
         "secondary": [
-            0.4,
-            0.4,
-            0.4
+            0.259,
+            0.239,
+            0.263
         ],
         "image": "polar_fox.jpg",
         "image_price": 100,
@@ -225,14 +225,14 @@
     },
     "retro_race": {
         "primary": [
-            1,
-            0.49,
-            0.62
+            0.718,
+            0.200,
+            0.102
         ],
         "secondary": [
-            0.4,
-            0.4,
-            0.4
+            0.871,
+            0.643,
+            0.224
         ],
         "image": "retro_race.jpg",
         "image_price": 100,
@@ -241,14 +241,14 @@
     },
     "snow_covered_chalet": {
         "primary": [
-            1,
-            0.49,
-            0.62
+            0.678,
+            0.722,
+            0.784
         ],
         "secondary": [
-            0.4,
-            0.4,
-            0.4
+            0.333,
+            0.212,
+            0.157
         ],
         "image": "snow_covered_chalet.jpg",
         "image_price": 100,
@@ -257,14 +257,14 @@
     },
     "space_clocks": {
         "primary": [
-            1,
-            0.49,
-            0.62
+            0.788,
+            0.518,
+            0.212
         ],
         "secondary": [
-            0.4,
-            0.4,
-            0.4
+            0.737,
+            0.396,
+            0.459
         ],
         "image": "space_clocks.jpg",
         "image_price": 100,
@@ -273,14 +273,14 @@
     },
     "sunflower": {
         "primary": [
-            1,
-            0.49,
-            0.62
+            0.420,
+            0.173,
+            0.078
         ],
         "secondary": [
-            0.4,
-            0.4,
-            0.4
+            0.898,
+            0.565,
+            0.110
         ],
         "image": "sunflower.jpg",
         "image_price": 100,
@@ -289,14 +289,14 @@
     },
     "westerlund_2": {
         "primary": [
-            1,
-            0.49,
-            0.62
+            0.525,
+            0.498,
+            0.776
         ],
         "secondary": [
-            0.4,
-            0.4,
-            0.4
+            0.173,
+            0.090,
+            0.176
         ],
         "image": "westerlund_2.jpg",
         "image_price": 100,
