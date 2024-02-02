@@ -1,14 +1,6 @@
 #:kivy 2.2.1
-#:import PATH_IMAGES tools.path.PATH_IMAGES
-#:import PATH_TITLE_FONT tools.path.PATH_TITLE_FONT
-#:import TITLE_FONT_SIZE tools.constants.TITLE_FONT_SIZE
-#:import TITLE_OUTLINE_WIDTH tools.constants.TITLE_OUTLINE_WIDTH
-#:import TITLE_OUTLINE_COLOR tools.constants.TITLE_OUTLINE_COLOR
-#:import PATH_TEXT_FONT tools.path.PATH_TEXT_FONT
-#:import TEXT_FONT_COLOR tools.constants.TEXT_FONT_COLOR
-#:import BOTTOM_BAR_HEIGHT tools.constants.BOTTOM_BAR_HEIGHT
 #:import USER_DATA tools.constants.USER_DATA
-
+#:import PATH_BADGES tools.path.PATH_BADGES
 
 <SettingsScreen>:
     Label:
@@ -60,12 +52,13 @@
         size_hint: (0.7, 0.06)
         pos_hint: {"center_x":0.5, "center_y":0.59}
 
-    CustomContentLabel:
+    CustomContentButton:
         size_hint: (0.8,0.2)
         pos_hint: {"center_x":0.5, "center_y":0.425}
         font_ratio: root.font_ratio
         title:"Credits"
-        content:"This game has been developed by LupaDevStudio.\n\nClick here to see the full list."
+        content:"This game has been developed by LupaDevStudio.\n\nClick here to see the full credits list."
+        release_function: root.open_credits
 
     SideImageButton:
         size_hint: (0.8,0.1)

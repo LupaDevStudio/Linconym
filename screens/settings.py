@@ -99,6 +99,9 @@ class SettingsScreen(ImprovedScreen):
         music_mixer.change_volume(music_volume)
         USER_DATA.settings["music_volume"] = music_volume
 
+    def open_credits(self):
+        self.manager.go_to_next_screen("credits")
+
     def open_lupa_website(self):
         """
         Open LupaDevStudio website.
