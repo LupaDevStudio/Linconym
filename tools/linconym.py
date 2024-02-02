@@ -125,7 +125,7 @@ def is_in_english_words(word: str):
         True if the word is in the dictionnary, False otherwise.
     """
 
-    return dichotomy(word, ENGLISH_WORDS_DICTS["375k"]) is not None
+    return dichotomy(word, ENGLISH_WORDS_DICTS["280k"]) is not None
 
 
 def count_different_letters(word1: str, word2: str):
@@ -240,7 +240,7 @@ def convert_position_to_wordlist(position: tuple, position_to_word_id, words_fou
     return wordlist
 
 
-def find_solutions(start_word: str, end_word: str, english_words: list = ENGLISH_WORDS_DICTS["375k"]):
+def find_solutions(start_word: str, end_word: str, english_words: list = ENGLISH_WORDS_DICTS["280k"]):
     """
     Find solutions for the given start and end words by using a score based on proximity to the end word.
 
@@ -251,7 +251,7 @@ def find_solutions(start_word: str, end_word: str, english_words: list = ENGLISH
     end_word : str
         End word.
     english_words : list, optional
-        Database to use to create the path, by default ENGLISH_WORDS_DICTS["375k"]
+        Database to use to create the path, by default ENGLISH_WORDS_DICTS["280k"]
 
     Returns
     -------
@@ -335,11 +335,11 @@ def fill_daily_games_with_solutions():
                     DAILY_DICT[date]["simplest_solution"] = solution
                     break
         if "best_solution" not in date:
-            if resolution != "375k":
+            if resolution != "280k":
                 solution = find_solutions(
                     start_word=start_word,
                     end_word=end_word,
-                    english_words=ENGLISH_WORDS_DICTS["375k"])
+                    english_words=ENGLISH_WORDS_DICTS["280k"])
             DAILY_DICT[date]["best_solution"] = solution
         save_json_file(PATH_RESOURCES_FOLDER + "daily_games.json", DAILY_DICT)
 

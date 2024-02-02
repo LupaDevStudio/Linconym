@@ -6,7 +6,7 @@
             "end_word": "pink",
             "10k_sol": 2,
             "88k_sol": 2,
-            "375k_sol": 2,
+            "280k_sol": 2,
             "34k_sol": 2
         },
         "2": {
@@ -15,7 +15,7 @@
             "10k_sol": 2,
             "34k_sol": 2,
             "88k_sol": 2,
-            "375k_sol": 2
+            "280k_sol": 2
         },
         "3": {
             "start_word": "pin",
@@ -23,7 +23,7 @@
             "10k_sol": 2,
             "34k_sol": 2,
             "88k_sol": 2,
-            "375k_sol": 2
+            "280k_sol": 2
         },
         "4": {
             "start_word": "pain",
@@ -31,7 +31,7 @@
             "10k_sol": 3,
             "34k_sol": 3,
             "88k_sol": 3,
-            "375k_sol": 3
+            "280k_sol": 3
         },
         "5": {
             "start_word": "brain",
@@ -39,7 +39,7 @@
             "10k_sol": null,
             "34k_sol": 3,
             "88k_sol": 3,
-            "375k_sol": 3
+            "280k_sol": 3
         },
         "6": {
             "start_word": "crane",
@@ -47,7 +47,7 @@
             "10k_sol": 3,
             "34k_sol": 3,
             "88k_sol": 3,
-            "375k_sol": 3
+            "280k_sol": 3
         },
         "7": {
             "start_word": "chain",
@@ -55,7 +55,7 @@
             "10k_sol": 4,
             "34k_sol": 4,
             "88k_sol": 4,
-            "375k_sol": 4
+            "280k_sol": 4
         },
         "8": {
             "start_word": "name",
@@ -63,7 +63,7 @@
             "10k_sol": 5,
             "34k_sol": 5,
             "88k_sol": 4,
-            "375k_sol": 4
+            "280k_sol": 4
         },
         "9": {
             "start_word": "chance",
@@ -71,7 +71,7 @@
             "10k_sol": 4,
             "34k_sol": 4,
             "88k_sol": 4,
-            "375k_sol": 4
+            "280k_sol": 4
         },
         "10": {
             "start_word": "heart",
@@ -79,7 +79,7 @@
             "10k_sol": 3,
             "34k_sol": 3,
             "88k_sol": 3,
-            "375k_sol": 3
+            "280k_sol": 3
         }
     },
     "Act2": {
@@ -90,7 +90,7 @@
             "10k_sol": 2,
             "34k_sol": 2,
             "88k_sol": 2,
-            "375k_sol": 2
+            "280k_sol": 2
         },
         "2": {
             "start_word": "toy",
@@ -98,7 +98,7 @@
             "10k_sol": 2,
             "34k_sol": 2,
             "88k_sol": 2,
-            "375k_sol": 2
+            "280k_sol": 2
         },
         "3": {
             "start_word": "toys",
@@ -106,7 +106,7 @@
             "10k_sol": 3,
             "34k_sol": 3,
             "88k_sol": 3,
-            "375k_sol": 3
+            "280k_sol": 3
         },
         "4": {
             "start_word": "ball",
@@ -114,7 +114,7 @@
             "10k_sol": 4,
             "34k_sol": 3,
             "88k_sol": 3,
-            "375k_sol": 3
+            "280k_sol": 3
         },
         "5": {
             "start_word": "doll",
@@ -122,7 +122,7 @@
             "10k_sol": 5,
             "34k_sol": 5,
             "88k_sol": 5,
-            "375k_sol": 5
+            "280k_sol": 5
         },
         "6": {
             "start_word": "bear",
@@ -130,7 +130,7 @@
             "10k_sol": 2,
             "34k_sol": 2,
             "88k_sol": 2,
-            "375k_sol": 2
+            "280k_sol": 2
         },
         "7": {
             "start_word": "care",
@@ -138,7 +138,7 @@
             "10k_sol": 3,
             "34k_sol": 3,
             "88k_sol": 3,
-            "375k_sol": 3
+            "280k_sol": 3
         }
     },
     "Act3": {
@@ -149,7 +149,7 @@
             "10k_sol": null,
             "34k_sol": 5,
             "88k_sol": 5,
-            "375k_sol": 5
+            "280k_sol": 5
         },
         "2": {
             "start_word": "diver",

@@ -30,7 +30,7 @@ from tools.path import (
     PATH_WORDS_10K,
     PATH_WORDS_34K,
     PATH_WORDS_88K,
-    PATH_WORDS_375K,
+    PATH_WORDS_280K,
     PATH_GAMEPLAY,
     PATH_THEMES
 )
@@ -283,16 +283,16 @@ with open(PATH_WORDS_88K) as file:
     for i, line in enumerate(file):
         ENGLISH_WORDS_88K.append(line.replace("\n", ""))
 
-with open(PATH_WORDS_375K) as file:
-    ENGLISH_WORDS_375K = []
+with open(PATH_WORDS_280K) as file:
+    ENGLISH_WORDS_280K = []
     for i, line in enumerate(file):
-        ENGLISH_WORDS_375K.append(line.replace("\n", ""))
+        ENGLISH_WORDS_280K.append(line.replace("\n", ""))
 
 ENGLISH_WORDS_DICTS = {
     "10k": ENGLISH_WORDS_10K,
     "34k": ENGLISH_WORDS_34K,
     "88k": ENGLISH_WORDS_88K,
-    "375k": ENGLISH_WORDS_375K
+    "280k": ENGLISH_WORDS_280K
 }
 
 ### Levels ###
