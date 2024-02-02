@@ -18,9 +18,9 @@
     "settings": {
         "music_volume": 0.0,
         "sound_volume": 0.46621621621621623,
-        "current_theme_image": "beach_hammock",
+        "current_theme_image": "dream",
         "current_music": "kids_party",
-        "current_theme_colors": "beach_hammock"
+        "current_theme_colors": "dream"
     },
     "unlocked_themes": {
         "japanese_etching": {
@@ -37,9 +37,25 @@
         },
         "desert_sunset": {
             "image": true,
-            "colors": false
+            "colors": true
         },
         "beach_hammock": {
+            "image": true,
+            "colors": true
+        },
+        "flowered_garden": {
+            "image": true,
+            "colors": true
+        },
+        "beach_sunset": {
+            "image": true,
+            "colors": true
+        },
+        "diskopolys": {
+            "image": true,
+            "colors": true
+        },
+        "dream": {
             "image": true,
             "colors": true
         }
@@ -51,7 +67,7 @@
         "status": "Beginner",
         "level": 1,
         "experience": 0,
-        "coins": 890
+        "coins": 879200
     },
     "ads": {
         "1": true,
