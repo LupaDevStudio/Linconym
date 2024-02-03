@@ -209,14 +209,14 @@
     },
     "polar_fox": {
         "primary": [
+            0.082,
+            0.416,
+            0.6
+        ],
+        "secondary": [
             0.600,
             0.639,
             0.698
-        ],
-        "secondary": [
-            0.259,
-            0.239,
-            0.263
         ],
         "image": "polar_fox.jpg",
         "image_price": 100,
@@ -310,9 +310,9 @@
             0.835
         ],
         "secondary": [
-            0.600,
-            0.557,
-            0.576
+            0.905,
+            0.647,
+            0.639
         ],
         "image": "lake.jpg",
         "image_price": 100,

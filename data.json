@@ -18,9 +18,9 @@
     "settings": {
         "music_volume": 0.0,
         "sound_volume": 0.46621621621621623,
-        "current_theme_image": "beach_hammock",
+        "current_theme_image": "lake",
         "current_music": "kids_party",
-        "current_theme_colors": "beach_hammock"
+        "current_theme_colors": "lake"
     },
     "unlocked_themes": {
         "japanese_etching": {
@@ -98,6 +98,10 @@
         "japanese_temple": {
             "image": true,
             "colors": true
+        },
+        "lake": {
+            "image": true,
+            "colors": true
         }
     },
     "unlocked_musics": {
@@ -107,7 +111,7 @@
         "status": "Beginner",
         "level": 1,
         "experience": 0,
-        "coins": 877000
+        "coins": 876800
     },
     "ads": {
         "1": true,
