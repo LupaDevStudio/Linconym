@@ -302,5 +302,21 @@
         "image_price": 100,
         "colors_price": 100,
         "name": "Westerlund"
+    },
+    "lake": {
+        "primary": [
+            0.243,
+            0.710,
+            0.835
+        ],
+        "secondary": [
+            0.600,
+            0.557,
+            0.576
+        ],
+        "image": "lake.jpg",
+        "image_price": 100,
+        "colors_price": 100,
+        "name": "Lake"
     }
 }

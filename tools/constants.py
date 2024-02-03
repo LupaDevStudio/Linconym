@@ -79,9 +79,9 @@ if not os.path.exists(PATH_USER_DATA):
         "settings": {
             "sound_volume": 0.5,
             "music_volume": 0.5,
-            "current_theme_image": "japanese_1",
+            "current_theme_image": "japanese_etching",
             "current_music": "kids_party",
-            "current_theme_colors": "japanese_1"
+            "current_theme_colors": "japanese_etching"
         },
         "unlocked_themes": {},
         "unlocked_musics": {},
@@ -89,7 +89,7 @@ if not os.path.exists(PATH_USER_DATA):
             "status": "Beginner",
             "level": 1,
             "experience": 0,
-            "coins": 0
+            "coins": 100000
         },
         "ads": {
             "1": False,
