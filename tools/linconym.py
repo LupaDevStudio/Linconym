@@ -441,27 +441,39 @@ class Game():
         else:
             print("Word not valid")
     
-    def award_stars_xp(self, nb_words_10k: int, nb_words_300k: int) -> None:
+    def award_stars_xp(self, solution_10k_exists: bool, nb_words_10k: int, nb_words_300k: int) -> None:
         # Only receive stars and xp if the level was completed
         if (self.current_word == self.end_word):
             solution_found: list[str] = self.get_word_path(self.current_position)
 
-            # Stars: one for finishing the level, one for doing as good as the 10k dictionary solution, and one for doing better
-            nb_stars: int = 1
+            # Stars
+            nb_stars: int = 1 # first star is awarded for finishing the level
             nb_words_found: int = len(solution_found)
-            if (nb_words_found >= nb_words_10k):
-                nb_stars += 1
-            if (nb_words_found > nb_words_10k):
-                nb_stars += 1
+            if (solution_10k_exists): # easy levels have a solution in the 10k dictionary 
+                if (nb_words_found >= (1.25)*nb_words_10k):
+                    nb_stars += 1 # second star for doing as well as the 10k dictionary + 25%
+                if (nb_words_found >= nb_words_10k):
+                    nb_stars += 1 # third star for doing as well as the 10k dictionary
+            else: # harder levels don't have a solution in the 10k dictionary, and their stars are defined differently
+                if (nb_words_found >= (1.30)*nb_words_300k):
+                    nb_stars += 1 # second star for doing as well as the 300k dictionary + 30%
+                if (nb_words_found >= (1.10)*nb_words_300k):
+                    nb_stars += 1 # third star for doing as well as the 300k dictionary + 10%
             
             # xp: get a percentage of a certain constant amount depending on proximity to the 300k dictionary solution...
-            xp_fraction: float = nb_words_found / nb_words_300k
+            xp_fraction: float = nb_words_300k / nb_words_found
             if (xp_fraction > 1):
                 xp_fraction = 1.0
             # ... and get a bonus for passing through the quest word
             quest_word_done: bool = ((self.quest_word != None) and (self.quest_word in solution_found))
 
-            # save level progress (TEMP: only for classic mode, should probably make subclasses for classic and daily mode)
+            ### save level progress (TEMP: only for classic mode, should probably make subclasses for classic and daily mode)
+            # check that the current act has save data
+            if (not(self.act_name in USER_DATA.classic_mode)):
+                USER_DATA.classic_mode[self.act_name] = {}
+            # check that current level has save data
+            if (not(self.lvl_name in USER_DATA.classic_mode[self.act_name])):
+                USER_DATA.classic_mode[self.act_name][self.lvl_name] = {}
             # save stars
             STARS_KEY: str = "nb_stars"
             if (STARS_KEY in USER_DATA.classic_mode[self.act_name][self.lvl_name]):
@@ -478,7 +490,9 @@ class Game():
                     USER_DATA.classic_mode[self.act_name][self.lvl_name][NB_WORDS_KEY] = nb_words_found
             else:
                 USER_DATA.classic_mode[self.act_name][self.lvl_name][NB_WORDS_KEY] = nb_words_found
-            previous_xp_fraction: float = nb_words_previous_best / nb_words_300k
+            previous_xp_fraction: float = 0.0
+            if (nb_words_previous_best > 0):
+                previous_xp_fraction =  nb_words_300k / nb_words_previous_best
             # save quest word
             QUEST_WORD_KEY: str = "quest_word_done"
             award_quest_word_xp: bool = False
