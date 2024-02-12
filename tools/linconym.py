@@ -151,7 +151,7 @@ def find_all_next_words(current_word: str, english_words):
     return next_words
 
 
-def convert_position_to_wordlist(position: tuple, position_to_word_id, words_found):
+def convert_position_to_wordlist(position: str, position_to_word_id, words_found):
     wordlist = []
     for i in range(1, len(position) + 1):
         word = words_found[position_to_word_id[position[:i]]]
@@ -307,18 +307,18 @@ class Game():
         self.quest_word: str = quest_word
         self.act_name = act_name
         self.lvl_name = lvl_name
-        self.current_position: tuple[int] = (0,) # (0,) is a one-element tuple while (0) is just an int
-        self.position_to_word_id = {self.current_position: 0} # A dictionary to map a tuple[int] position to the index of its word in the words_found list[str]
+        self.current_position: str = "0" # Positions are strings of comma-separated integers which indicate a path in the nodes
+        self.position_to_word_id = {self.current_position: 0} # A dictionary to map a (str) position to the index of its word in the words_found list[str]
         self.words_found: list[str] = [start_word]
         self.current_word: str = start_word
 
-    def get_word(self, position: tuple[int]) -> str:
+    def get_word(self, position: str) -> str:
         """
         Get the word at given position.
 
         Parameters
         ----------
-        position : tuple[int]
+        position : str
             Position to use.
 
         Returns
@@ -329,13 +329,13 @@ class Game():
 
         return self.words_found[self.position_to_word_id[position]]
     
-    def get_word_path(self, position: tuple[int]) -> list[str]:
+    def get_word_path(self, position: str) -> list[str]:
         """
         Get a list of the words forming the path to the given position.
 
         Parameters
         ----------
-        position : tuple[int]
+        position : str
             Position to use.
 
         Returns
@@ -346,18 +346,18 @@ class Game():
 
         word_path: list[str] = []
         for i in range(len(position)):
-            previous_pos: tuple[int] = position[:(i+1)]
+            previous_pos: str = position[:(i+1)]
             word_path += [self.get_word(previous_pos)]
         return word_path
 
-    def get_nb_next_words(self, position: tuple[int]) -> int:
+    def get_nb_next_words(self, position: str) -> int:
         """
         Get the number of words deriving directly from the given position.
         In tree jargon, get the number of children of the node corresponding to the input position.
 
         Parameters
         ----------
-        position : tuple[int]
+        position : str
             Position to use.
 
         Returns
@@ -377,13 +377,13 @@ class Game():
 
         return nb_next_words
 
-    def change_position(self, new_position: tuple[int]) -> None:
+    def change_position(self, new_position: str) -> None:
         """
         Change the position of the cursor from one word (node) to another.
 
         Parameters
         ----------
-        new_position : tuple[int]
+        new_position : str
             New position to set.
         """
 
