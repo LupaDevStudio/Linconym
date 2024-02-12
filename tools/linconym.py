@@ -14,7 +14,7 @@ from tools.constants import (
     ENGLISH_WORDS_DICTS,
     GAMEPLAY_DICT,
     USER_DATA,
-    XP_SCALE
+    XP_PER_LEVEL
 )
 from tools.basic_tools import (
     dichotomy,
@@ -518,9 +518,9 @@ class Game():
 
             # award newly acquired xp
             XP_KEY: str = "experience"
-            USER_DATA.user_profile[XP_KEY] += int((xp_fraction - previous_xp_fraction) * XP_SCALE)
+            USER_DATA.user_profile[XP_KEY] += int((xp_fraction - previous_xp_fraction) * XP_PER_LEVEL)
             if (award_quest_word_xp):
-                USER_DATA.user_profile[XP_KEY] += XP_SCALE
+                USER_DATA.user_profile[XP_KEY] += XP_PER_LEVEL
 
             # save changes
             USER_DATA.save_changes()
