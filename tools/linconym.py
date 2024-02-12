@@ -390,33 +390,6 @@ class Game():
         self.current_position = new_position
         self.current_word = self.get_word(self.current_position)
     
-    def is_valid_and_new(self, new_word: str, skip_dictionary_check: bool = False) -> bool:
-        """
-        Checks whether a new word is absent from the WHOLE tree and is a valid successor to the current word.
-        This is probably not the right method to use to check user input, because if a word is used as a part of a very long path, 
-        then it cannot be used to create a shorter path anymore.
-
-        Example: in a level asking to go from "sea" to "shell", the path "sea, seal, sell, shell" is the shortest. However, if the user already
-        built the path "sea, tea, teal, seal", then they won't be able to create the shortest path anymore: all they can do is pick up from the 
-        word "seal" in their already-way-too-long current path. 
-
-        Parameters
-        ----------
-        new_word: str
-            New word to be checked.
-        skip_dictionary_check: bool = False
-            If True, new_word can be valid even if it isn't in any dictionary.
-
-        Returns
-        -------
-        bool
-            True if new_word wasn't previously found and is valid, False otherwise.
-        """
-
-        word_is_valid: bool = is_valid(new_word, self.current_word, skip_dictionary_check)
-        word_is_new: bool = not(new_word in self.words_found)
-        return word_is_valid and word_is_new
-    
     def is_valid_and_new_in_path(self, new_word: str, skip_dictionary_check: bool = False) -> bool:
         """
         Checks whether a new word is absent from the path leading to the current word and is a valid successor to the current word.
