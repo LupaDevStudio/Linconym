@@ -552,7 +552,7 @@ class Game():
 
             # Get the number of words of the solution
             nb_words_sol = current_level_sol_data[dict_id]
-            nb_words_300k = current_level_sol_data["300k"]
+            nb_words_280k = current_level_sol_data["280k"]
 
             # Stars
             nb_stars: int = 1  # first star is awarded for finishing the level
@@ -568,8 +568,8 @@ class Game():
                 if (nb_words_found >= (1.10) * nb_words_sol):
                     nb_stars += 1  # third star for doing as well as the first solution dictionary + 10%
 
-            # xp: get a percentage of a certain constant amount depending on proximity to the 300k dictionary solution...
-            xp_fraction: float = nb_words_300k / nb_words_found
+            # xp: get a percentage of a certain constant amount depending on proximity to the 280k dictionary solution...
+            xp_fraction: float = nb_words_280k / nb_words_found
             if (xp_fraction > 1):
                 xp_fraction = 1.0
             # ... and get a bonus for passing through the quest word
@@ -602,7 +602,7 @@ class Game():
                 USER_DATA.classic_mode[self.act_id][self.lvl_id][NB_WORDS_KEY] = nb_words_found
             previous_xp_fraction: float = 0.0
             if (nb_words_previous_best > 0):
-                previous_xp_fraction = nb_words_300k / nb_words_previous_best
+                previous_xp_fraction = nb_words_280k / nb_words_previous_best
             # save quest word
             QUEST_WORD_KEY: str = "quest_word_done"
             award_quest_word_xp: bool = False
