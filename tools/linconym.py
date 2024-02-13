@@ -307,8 +307,10 @@ class Game():
         self.quest_word: str = quest_word
         self.act_name = act_name
         self.lvl_name = lvl_name
-        self.current_position: str = "0" # Positions are strings of comma-separated integers which indicate a path in the nodes
-        self.position_to_word_id = {self.current_position: 0} # A dictionary to map a (str) position to the index of its word in the words_found list[str]
+        # Positions are strings of comma-separated integers which indicate a path in the nodes
+        self.current_position: str = "0"
+        # A dictionary to map a (str) position to the index of its word in the words_found list[str]
+        self.position_to_word_id = {self.current_position: 0}
         self.words_found: list[str] = [start_word]
         self.current_word: str = start_word
 
@@ -328,7 +330,7 @@ class Game():
         """
 
         return self.words_found[self.position_to_word_id[position]]
-    
+
     def get_word_path(self, position: str) -> list[str]:
         """
         Get a list of the words forming the path to the given position.
@@ -345,8 +347,12 @@ class Game():
         """
 
         word_path: list[str] = []
-        for i in range(len(position)):
-            previous_pos: str = position[:(i+1)]
+        splitted_position = position.split(",")
+        for i in range(len(splitted_position)):
+            splitted_previous_pos: str = splitted_position[:(i + 1)]
+            previous_pos = splitted_previous_pos[0]
+            for j in range(1, len(splitted_previous_pos)):
+                previous_pos += "," + splitted_previous_pos[j]
             word_path += [self.get_word(previous_pos)]
         return word_path
 
@@ -389,7 +395,7 @@ class Game():
 
         self.current_position = new_position
         self.current_word = self.get_word(self.current_position)
-    
+
     def is_valid_and_new_in_path(self, new_word: str, skip_dictionary_check: bool = False) -> bool:
         """
         Checks whether a new word is absent from the path leading to the current word and is a valid successor to the current word.
@@ -407,8 +413,10 @@ class Game():
             True if new_word isn't in the path leading to the current word and is valid, False otherwise.
         """
 
-        word_is_valid: bool = is_valid(new_word, self.current_word, skip_dictionary_check)
-        word_is_new_in_path: bool = not(new_word in self.get_word_path(self.current_position))
+        word_is_valid: bool = is_valid(
+            new_word, self.current_word, skip_dictionary_check)
+        word_is_new_in_path: bool = not (
+            new_word in self.get_word_path(self.current_position))
         return word_is_valid and word_is_new_in_path
 
     def submit_word(self, new_word: str) -> None:
@@ -440,39 +448,41 @@ class Game():
 
         else:
             print("Word not valid")
-    
+
     def award_stars_xp(self, solution_10k_exists: bool, nb_words_10k: int, nb_words_300k: int) -> None:
         # Only receive stars and xp if the level was completed
         if (self.current_word == self.end_word):
-            solution_found: list[str] = self.get_word_path(self.current_position)
+            solution_found: list[str] = self.get_word_path(
+                self.current_position)
 
             # Stars
-            nb_stars: int = 1 # first star is awarded for finishing the level
+            nb_stars: int = 1  # first star is awarded for finishing the level
             nb_words_found: int = len(solution_found)
-            if (solution_10k_exists): # easy levels have a solution in the 10k dictionary 
-                if (nb_words_found >= (1.25)*nb_words_10k):
-                    nb_stars += 1 # second star for doing as well as the 10k dictionary + 25%
+            if (solution_10k_exists):  # easy levels have a solution in the 10k dictionary
+                if (nb_words_found >= (1.25) * nb_words_10k):
+                    nb_stars += 1  # second star for doing as well as the 10k dictionary + 25%
                 if (nb_words_found >= nb_words_10k):
-                    nb_stars += 1 # third star for doing as well as the 10k dictionary
-            else: # harder levels don't have a solution in the 10k dictionary, and their stars are defined differently
-                if (nb_words_found >= (1.30)*nb_words_300k):
-                    nb_stars += 1 # second star for doing as well as the 300k dictionary + 30%
-                if (nb_words_found >= (1.10)*nb_words_300k):
-                    nb_stars += 1 # third star for doing as well as the 300k dictionary + 10%
-            
+                    nb_stars += 1  # third star for doing as well as the 10k dictionary
+            else:  # harder levels don't have a solution in the 10k dictionary, and their stars are defined differently
+                if (nb_words_found >= (1.30) * nb_words_300k):
+                    nb_stars += 1  # second star for doing as well as the 300k dictionary + 30%
+                if (nb_words_found >= (1.10) * nb_words_300k):
+                    nb_stars += 1  # third star for doing as well as the 300k dictionary + 10%
+
             # xp: get a percentage of a certain constant amount depending on proximity to the 300k dictionary solution...
             xp_fraction: float = nb_words_300k / nb_words_found
             if (xp_fraction > 1):
                 xp_fraction = 1.0
             # ... and get a bonus for passing through the quest word
-            quest_word_done: bool = ((self.quest_word != None) and (self.quest_word in solution_found))
+            quest_word_done: bool = ((self.quest_word != None) and (
+                self.quest_word in solution_found))
 
-            ### save level progress (TEMP: only for classic mode, should probably make subclasses for classic and daily mode)
+            # save level progress (TEMP: only for classic mode, should probably make subclasses for classic and daily mode)
             # check that the current act has save data
-            if (not(self.act_name in USER_DATA.classic_mode)):
+            if (not (self.act_name in USER_DATA.classic_mode)):
                 USER_DATA.classic_mode[self.act_name] = {}
             # check that current level has save data
-            if (not(self.lvl_name in USER_DATA.classic_mode[self.act_name])):
+            if (not (self.lvl_name in USER_DATA.classic_mode[self.act_name])):
                 USER_DATA.classic_mode[self.act_name][self.lvl_name] = {}
             # save stars
             STARS_KEY: str = "nb_stars"
@@ -485,33 +495,37 @@ class Game():
             NB_WORDS_KEY: str = "best_solution_nb_words"
             nb_words_previous_best: int = 0
             if (NB_WORDS_KEY in USER_DATA.classic_mode[self.act_name][self.lvl_name]):
-                nb_words_previous_best = USER_DATA.classic_mode[self.act_name][self.lvl_name][NB_WORDS_KEY]
+                nb_words_previous_best = USER_DATA.classic_mode[
+                    self.act_name][self.lvl_name][NB_WORDS_KEY]
                 if (nb_words_previous_best < nb_words_found):
                     USER_DATA.classic_mode[self.act_name][self.lvl_name][NB_WORDS_KEY] = nb_words_found
             else:
                 USER_DATA.classic_mode[self.act_name][self.lvl_name][NB_WORDS_KEY] = nb_words_found
             previous_xp_fraction: float = 0.0
             if (nb_words_previous_best > 0):
-                previous_xp_fraction =  nb_words_300k / nb_words_previous_best
+                previous_xp_fraction = nb_words_300k / nb_words_previous_best
             # save quest word
             QUEST_WORD_KEY: str = "quest_word_done"
             award_quest_word_xp: bool = False
             if (QUEST_WORD_KEY in USER_DATA.classic_mode[self.act_name][self.lvl_name]):
-                award_quest_word_xp = not(USER_DATA.classic_mode[self.act_name][self.lvl_name][QUEST_WORD_KEY]) and quest_word_done
-                USER_DATA.classic_mode[self.act_name][self.lvl_name][QUEST_WORD_KEY] = USER_DATA.classic_mode[self.act_name][self.lvl_name][QUEST_WORD_KEY] or quest_word_done
+                award_quest_word_xp = not (
+                    USER_DATA.classic_mode[self.act_name][self.lvl_name][QUEST_WORD_KEY]) and quest_word_done
+                USER_DATA.classic_mode[self.act_name][self.lvl_name][QUEST_WORD_KEY] = USER_DATA.classic_mode[
+                    self.act_name][self.lvl_name][QUEST_WORD_KEY] or quest_word_done
             else:
                 award_quest_word_xp = quest_word_done
                 USER_DATA.classic_mode[self.act_name][self.lvl_name][QUEST_WORD_KEY] = quest_word_done
 
             # award newly acquired xp
             XP_KEY: str = "experience"
-            USER_DATA.user_profile[XP_KEY] += int((xp_fraction - previous_xp_fraction) * XP_PER_LEVEL)
+            USER_DATA.user_profile[XP_KEY] += int(
+                (xp_fraction - previous_xp_fraction) * XP_PER_LEVEL)
             if (award_quest_word_xp):
                 USER_DATA.user_profile[XP_KEY] += XP_PER_LEVEL
 
             # save changes
             USER_DATA.save_changes()
-            
+
         return
 
 
