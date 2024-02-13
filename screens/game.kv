@@ -1,12 +1,5 @@
 #:kivy 2.2.1
-#:import PATH_TITLE_FONT tools.path.PATH_TITLE_FONT
-#:import PATH_IMAGES tools.path.PATH_IMAGES
-#:import TITLE_FONT_SIZE tools.constants.TITLE_FONT_SIZE
-#:import TITLE_OUTLINE_WIDTH tools.constants.TITLE_OUTLINE_WIDTH
-#:import TITLE_OUTLINE_COLOR tools.constants.TITLE_OUTLINE_COLOR
 #:import LETTER_FONT_SIZE tools.constants.LETTER_FONT_SIZE
-#:import TEXT_FONT_COLOR tools.constants.TEXT_FONT_COLOR
-#:import POS_HINT_BACK_ARROW tools.constants.POS_HINT_BACK_ARROW
 
 <GameScreen>:
     Label:
@@ -27,18 +20,29 @@
         colors: root.primary_color
         on_release: root.go_backwards()
 
+    # Button for the quests
+    RoundedButtonImage:
+        image_path: PATH_IMAGES + "quests.png"
+        pos_hint: POS_HINT_RIGHT_TOP_BUTTON
+        size_hint: (0.1, None)
+        height: self.width
+        colors: root.primary_color
+        on_release: root.go_to_quests_screen()
+
     # Stars
     ThreeStars:
         id: three_stars
         pos_hint: {"center_x":0.25, "center_y":0.8}
         size_hint: (0.3, 0.075)
         nb_stars: root.nb_stars
+        primary_color: root.primary_color
+        secondary_color: root.secondary_color
 
     # Previous word
     ColoredRoundedButton:
         text: root.current_word
         background_color: (1,1,1,1)
-        pos_hint: {"center_x": 0.5,"y": 0.425}
+        pos_hint: {"center_x": 0.5,"y": 0.335}
         font_ratio: root.font_ratio
         font_size: LETTER_FONT_SIZE
         size_hint: (len(root.current_word)*0.05, 0.05)
@@ -50,7 +54,7 @@
     KeyboardLayout:
         id: keyboard_layout
         pos_hint: {"x": 0.05, "y": 0.1}
-        size_hint: (0.9, 0.2)
+        size_hint: (0.9, 0.17)
         touch_function: root.touch_letter
         touch_color: root.primary_color
         background_color: root.secondary_color
@@ -90,3 +94,19 @@
         release_function: root.go_to_next_level
         opacity: 0
         disable_button: True
+
+    TreeScrollview:
+        id: tree_scrollview
+        pos_hint: {"center_x":0.5, "center_y":0.585}
+        size_hint: (1,0.365)
+        bar_color: root.primary_color
+        bar_inactive_color: (0,0,0,0)
+        font_ratio: root.font_ratio
+        primary_color: root.primary_color
+        secondary_color: root.secondary_color
+
+        TreeLayout:
+            id: tree_layout
+            font_ratio: root.font_ratio
+            primary_color: root.primary_color
+            secondary_color: root.secondary_color

@@ -30,7 +30,7 @@ from tools.path import (
     PATH_WORDS_10K,
     PATH_WORDS_34K,
     PATH_WORDS_88K,
-    PATH_WORDS_375K,
+    PATH_WORDS_280K,
     PATH_GAMEPLAY,
     PATH_THEMES
 )
@@ -63,24 +63,41 @@ XP_PER_LEVEL: int = 10
 # Create the user data json if it does not exist
 if not os.path.exists(PATH_USER_DATA):
     default_user_data = {
-        "classic_mode": {},
+        "classic_mode": {
+            "Act1": {
+                "1": {
+                    "nb_stars": 3,
+                    "best_solution_nb_words": 5,
+                    "words_found": [],
+                    "position_to_word_id": {},
+                    "current_position": ""
+                }
+            }
+        },
         "daily_mode": {
             "start_word": "",
             "end_word": ""
         },
         "history": {},
-        "items": {
-            "coins": 0,
-            "unlocked_backgrounds": [],
-            "unlocked_palettes": [],
-            "unlocked_musics": []
-        },
         "settings": {
             "sound_volume": 0.5,
             "music_volume": 0.5,
-            "current_background": "",
-            "current_music": "",
-            "current_palette": ""
+            "current_theme_image": "japanese_etching",
+            "current_music": "kids_party",
+            "current_theme_colors": "japanese_etching"
+        },
+        "unlocked_themes": {},
+        "unlocked_musics": {},
+        "user_profile": {
+            "status": "Beginner",
+            "level": 1,
+            "experience": 0,
+            "coins": 100000
+        },
+        "ads": {
+            "1": False,
+            "2": False,
+            "3": False
         }
     }
     save_json_file(PATH_USER_DATA, default_user_data)
@@ -204,6 +221,7 @@ BOTTOM_BAR_HEIGHT = 0.12
 CUSTOM_BUTTON_BACKGROUND_COLOR = (1, 1, 1, 0.7)
 OPACITY_ON_BUTTON_PRESS = 0.8
 POS_HINT_BACK_ARROW = {"x": 0.02, "top": 0.99}
+POS_HINT_RIGHT_TOP_BUTTON = {"right": 0.98, "top": 0.99}
 RATE_CHANGE_OPACITY = 0.05
 DISABLE_BUTTON_COLOR = (0.15, 0.15, 0.15, 1)
 
@@ -214,6 +232,11 @@ LEVEL_BRANCH_RELATIVE_HEIGHT = 0.2
 LEVEL_BUTTON_SPACING = (1 - (MAX_NB_LEVELS_PER_BRANCH + 1)
                         * LEVEL_BUTTON_SIZE_HINT) / MAX_NB_LEVELS_PER_BRANCH
 LEVEL_BUTTON_SIDE_OFFSET = LEVEL_BUTTON_SIZE_HINT + LEVEL_BUTTON_SPACING
+WORD_BUTTON_WIDTH_HINT = 0.3
+WORD_BUTTON_HEIGHT_HINT = 0.1
+WORD_BUTTON_VSPACING = 0.05
+WORD_BUTTON_HSPACING = 0.1
+WORD_BUTTON_SIDE_OFFSET = 0.1
 
 ### Musics ###
 
@@ -263,16 +286,16 @@ with open(PATH_WORDS_88K) as file:
     for i, line in enumerate(file):
         ENGLISH_WORDS_88K.append(line.replace("\n", ""))
 
-with open(PATH_WORDS_375K) as file:
-    ENGLISH_WORDS_375K = []
+with open(PATH_WORDS_280K) as file:
+    ENGLISH_WORDS_280K = []
     for i, line in enumerate(file):
-        ENGLISH_WORDS_375K.append(line.replace("\n", ""))
+        ENGLISH_WORDS_280K.append(line.replace("\n", ""))
 
 ENGLISH_WORDS_DICTS = {
     "10k": ENGLISH_WORDS_10K,
     "34k": ENGLISH_WORDS_34K,
     "88k": ENGLISH_WORDS_88K,
-    "375k": ENGLISH_WORDS_375K
+    "280k": ENGLISH_WORDS_280K
 }
 
 DICT_ID_TO_NB_WORDS = {

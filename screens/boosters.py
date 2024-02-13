@@ -44,7 +44,6 @@ class BoostersScreen(ImprovedScreen):
     coins_count = NumericProperty()
     primary_color = ColorProperty((0, 0, 0, 1))
     secondary_color = ColorProperty((0, 0, 0, 1))
-    former_screen = StringProperty()
     list_ads = ListProperty()
     list_buy = ListProperty()
 
@@ -66,9 +65,6 @@ class BoostersScreen(ImprovedScreen):
         self.build_list_ads()
         self.build_list_buy()
         return super().on_enter(*args)
-
-    def go_backwards(self):
-        self.manager.current = self.former_screen
 
     def build_list_ads(self):
         self.list_ads = []

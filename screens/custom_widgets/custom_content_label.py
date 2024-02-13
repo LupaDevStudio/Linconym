@@ -30,7 +30,7 @@ from tools.constants import (
 #############
 
 
-class CustomContentLabel(ButtonBehavior, RelativeLayout):
+class CustomContentButton(ButtonBehavior, RelativeLayout):
     """
     A custom button with a white round rectangle background.
     """

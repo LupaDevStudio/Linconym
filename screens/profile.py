@@ -63,5 +63,4 @@ class ProfileScreen(ImprovedScreen):
         return super().on_enter(*args)
 
     def go_to_boosters(self):
-        self.manager.get_screen("boosters").former_screen = "profile"
-        self.manager.current = "boosters"
+        self.manager.go_to_next_screen(next_screen_name="boosters")

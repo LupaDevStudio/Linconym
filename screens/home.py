@@ -51,4 +51,4 @@ class HomeScreen(ImprovedScreen):
         """
         Open the classic mode screen.
         """
-        self.manager.current = "classic_mode"
+        self.manager.go_to_next_screen(next_screen_name="classic_mode")

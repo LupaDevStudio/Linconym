@@ -45,4 +45,4 @@ class CustomizationScreen(ImprovedScreen):
         pass
 
     def open_themes_screen(self, *_):
-        self.manager.current = "themes"
+        self.manager.go_to_next_screen(next_screen_name="themes")

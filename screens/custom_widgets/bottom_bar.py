@@ -51,22 +51,22 @@ class BottomBar(RelativeLayout):
         """
         Open the home screen.
         """
-        self.parent.manager.current = "home"
+        self.parent.manager.go_to_next_screen(next_screen_name="home")
 
     def open_settings(self):
         """
         Open the settings screen.
         """
-        self.parent.manager.current = "settings"
+        self.parent.manager.go_to_next_screen(next_screen_name="settings")
 
     def open_customization(self):
         """
         Open the customization screen.
         """
-        self.parent.manager.current = "customization"
+        self.parent.manager.go_to_next_screen(next_screen_name="customization")
 
     def open_profile(self):
         """
         Open the profile screen.
         """
-        self.parent.manager.current = "profile"
+        self.parent.manager.go_to_next_screen(next_screen_name="profile")

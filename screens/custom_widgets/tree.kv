@@ -1,0 +1,85 @@
+#:kivy 2.2.1
+#:import CONTENT_LABEL_FONT_SIZE tools.constants.CONTENT_LABEL_FONT_SIZE
+
+<WordLink>:
+    # canvas.before:
+    #     Color:
+    #         rgba: (1,1,1,0.5)
+    #     Rectangle:
+    #         pos:self.pos
+    #         size:self.size
+    canvas:
+        Color:
+            rgba: self.color
+        Line:
+            width: 2
+            bezier: [self.x, self.top, self.right, self.top,self.x, self.y, self.right, self.y]
+            cap: "none"
+
+<WordButton>:
+
+    # Background
+    canvas.before:
+        # Shadow
+        Color:
+            rgba: (0, 0, 0, 1) if not self.disable_button else (0,0,0,0)
+        BoxShadow:
+            pos: (0, 0)
+            size: self.size
+            offset: 5, -5
+            spread_radius: -10, -10
+            blur_radius: 30
+        # Rounded rectangle
+        Color:
+            rgba: root.background_color
+        RoundedRectangle:
+            pos:(0, 0)
+            size:self.size
+        # Border
+        Color:
+            rgba: root.outline_color
+        Line:
+            dash_offset: 4
+            dash_length: 7
+            width: OUTLINE_RECTANGLE_COLORED_ROUNDED_BUTTON
+            rounded_rectangle: (-OUTLINE_RECTANGLE_COLORED_ROUNDED_BUTTON/2, -OUTLINE_RECTANGLE_COLORED_ROUNDED_BUTTON/2, self.size[0]+OUTLINE_RECTANGLE_COLORED_ROUNDED_BUTTON,self.size[1]+OUTLINE_RECTANGLE_COLORED_ROUNDED_BUTTON, 12, 12, 12, 12)
+
+    # Main text
+    Label:
+        text: root.text
+        font_size: root.font_ratio * CONTENT_LABEL_FONT_SIZE
+        pos: (1*root.font_ratio,0)
+        size: self.size
+        shorten: False
+        text_size: (root.width*root.text_filling_ratio,None)
+        font_name: root.text_font_name
+        halign: "center"
+        valign: "center"
+        line_height: 1
+        color: (1,1,1,1)
+
+
+<TreeScrollview>:
+    bar_margin: 0
+    bar_width: 6
+    scroll_type:['bars', 'content']
+    do_scroll_x: True
+    do_scroll_y: True
+
+    canvas.before:
+        Color:
+            rgba: (0,0,0,0.5)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    canvas.after:
+        Color:
+            rgba: (1,1,1,1)
+        Line:
+            points: [self.pos[0],self.pos[1]-3,self.pos[0] + self.width,self.pos[1]-3]
+            width: 2
+        Line:
+            points: [self.pos[0],self.pos[1]+self.height,self.pos[0] + self.width,self.pos[1]+self.height]
+            width: 2
+
+<TreeLayout>:

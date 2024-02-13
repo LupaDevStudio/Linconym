@@ -6,6 +6,15 @@ Module containing the core of Linconym.
 ### Imports ###
 ###############
 
+### Python imports ###
+
+from typing import (
+    Dict,
+    List
+)
+
+### Local imports ###
+
 from tools.path import (
     PATH_GAMEPLAY,
     PATH_RESOURCES_FOLDER
@@ -28,7 +37,83 @@ from tools.basic_tools import (
 #################
 
 
-def is_in_english_words(word: str) -> bool:
+def get_parent_position(position: str):
+    """
+    Compute the parent position of the given position.
+
+    Parameters
+    ----------
+    position : str
+        Position of the word in the tree.
+
+    Returns
+    -------
+    str or None
+        Position of the parent word or None if the root position is given in input.
+    """
+
+    splitted_pos = position.split(",")
+    parent_splitted_pos = splitted_pos[:-1]
+    if len(parent_splitted_pos) == 0:
+        return None
+    else:
+        parent_pos = ""
+        for i in range(len(parent_splitted_pos) - 1):
+            parent_pos += parent_splitted_pos[i] + ","
+        parent_pos += parent_splitted_pos[-1]
+        return parent_pos
+
+
+def is_parent_of(position, child_position):
+    """
+    Check if the given position is parent of the given child position.
+
+    Parameters
+    ----------
+    position : _type_
+        Position to check.
+    child_position : _type_
+        Position of the potential child.
+
+    Returns
+    -------
+    bool
+        Boolean indication if the given position is parent or not.
+    """
+
+    sliced_child_position = child_position[:len(position)]
+
+    return sliced_child_position == position
+
+
+def get_word_position(input_word: str, position_to_word_id: Dict[str, int], words_found: List[str]):
+    """
+    Get the position of the given word.
+
+    Parameters
+    ----------
+    input_word : str
+        Input word.
+    position_to_word_id : Dict[str, int]
+        Dictionnary containing positions for each word index.
+    words_found : List[str]
+        List of all words founds.
+
+    Returns
+    -------
+    str or None
+        Position or None if the word is not included in the list.
+    """
+    for i, word in enumerate(words_found):
+        if input_word == word:
+            word_index = i
+    for index, position in enumerate(position_to_word_id):
+        if index == word_index:
+            return position
+    return None
+
+
+def is_in_english_words(word: str):
     """
     Indicates whether a word belongs to the english words dictionnary or not.
 
@@ -43,7 +128,7 @@ def is_in_english_words(word: str) -> bool:
         True if the word is in the dictionnary, False otherwise.
     """
 
-    return dichotomy(word, ENGLISH_WORDS_DICTS["375k"]) is not None
+    return dichotomy(word, ENGLISH_WORDS_DICTS["280k"]) is not None
 
 
 def count_different_letters(word1: str, word2: str) -> int:
@@ -160,7 +245,7 @@ def convert_position_to_wordlist(position: str, position_to_word_id, words_found
     return wordlist
 
 
-def find_solutions(start_word: str, end_word: str, english_words: list = ENGLISH_WORDS_DICTS["375k"]):
+def find_solutions(start_word: str, end_word: str, english_words: list = ENGLISH_WORDS_DICTS["280k"]):
     """
     Find solutions for the given start and end words by using a score based on proximity to the end word.
 
@@ -171,7 +256,7 @@ def find_solutions(start_word: str, end_word: str, english_words: list = ENGLISH
     end_word : str
         End word.
     english_words : list, optional
-        Database to use to create the path, by default ENGLISH_WORDS_DICTS["375k"]
+        Database to use to create the path, by default ENGLISH_WORDS_DICTS["280k"]
 
     Returns
     -------
@@ -255,13 +340,13 @@ def fill_daily_games_with_solutions():
                     DAILY_DICT[date]["simplest_solution"] = solution
                     break
         if "best_solution" not in date:
-            if resolution != "375k":
+            if resolution != "280k":
                 solution = find_solutions(
                     start_word=start_word,
                     end_word=end_word,
-                    english_words=ENGLISH_WORDS_DICTS["375k"])
+                    english_words=ENGLISH_WORDS_DICTS["280k"])
             DAILY_DICT[date]["best_solution"] = solution
-    save_json_file(PATH_RESOURCES_FOLDER + "daily_games.json", DAILY_DICT)
+        save_json_file(PATH_RESOURCES_FOLDER + "daily_games.json", DAILY_DICT)
 
 
 def fill_gameplay_dict_with_solutions():
@@ -287,7 +372,7 @@ def fill_gameplay_dict_with_solutions():
                     else:
                         GAMEPLAY_DICT[act][level][f"{resolution}_sol"] = None
 
-    save_json_file(PATH_GAMEPLAY, GAMEPLAY_DICT)
+            save_json_file(PATH_GAMEPLAY, GAMEPLAY_DICT)
 
 #############
 ### Class ###
@@ -434,7 +519,7 @@ class Game():
 
             # Compute the new position
             new_word_id = self.get_nb_next_words(self.current_position)
-            new_position = self.current_position + (new_word_id,)
+            new_position = self.current_position + "," + str(new_word_id)
 
             # Add the word to the list of words found
             self.position_to_word_id[new_position] = len(self.words_found)
@@ -544,7 +629,10 @@ class Game():
 
 
 if __name__ == "__main__":
+    import sys
+    sys.path.append("../")
+    sys.path.append("./")
     # fill_gameplay_dict_with_solutions()
     # fill_daily_games_with_solutions()
     # print(is_valid("boy", "joy"))
-    find_solutions("boy", "girl", ENGLISH_WORDS_DICTS["10k"])
+    find_solutions("fish", "shark", ENGLISH_WORDS_DICTS["10k"])

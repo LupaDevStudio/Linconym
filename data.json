@@ -18,24 +18,84 @@
     "settings": {
         "music_volume": 0.0,
         "sound_volume": 0.46621621621621623,
-        "current_theme_image": "japanese_1",
+        "current_theme_image": "beach_hammock",
         "current_music": "kids_party",
-        "current_theme_colors": "japanese_1"
+        "current_theme_colors": "beach_hammock"
     },
     "unlocked_themes": {
-        "japanese_1": {
+        "japanese_etching": {
             "image": true,
             "colors": true
         },
-        "lake": {
+        "retro_race": {
             "image": true,
-            "colors": false
-        },
-        "japanese_2": {
-            "image": false,
             "colors": true
         },
-        "japanese_3": {
+        "westerlund_2": {
+            "image": true,
+            "colors": true
+        },
+        "desert_sunset": {
+            "image": true,
+            "colors": true
+        },
+        "beach_hammock": {
+            "image": true,
+            "colors": true
+        },
+        "flowered_garden": {
+            "image": true,
+            "colors": true
+        },
+        "beach_sunset": {
+            "image": true,
+            "colors": true
+        },
+        "diskopolys": {
+            "image": true,
+            "colors": true
+        },
+        "dream": {
+            "image": true,
+            "colors": true
+        },
+        "galaxy_messier_96": {
+            "image": true,
+            "colors": true
+        },
+        "sunflower": {
+            "image": true,
+            "colors": true
+        },
+        "space_clocks": {
+            "image": true,
+            "colors": true
+        },
+        "snow_covered_chalet": {
+            "image": true,
+            "colors": true
+        },
+        "polar_fox": {
+            "image": true,
+            "colors": true
+        },
+        "mystic_mountain": {
+            "image": true,
+            "colors": true
+        },
+        "mushroom_planet": {
+            "image": true,
+            "colors": true
+        },
+        "magic_forest": {
+            "image": true,
+            "colors": true
+        },
+        "london_street": {
+            "image": true,
+            "colors": true
+        },
+        "japanese_temple": {
             "image": true,
             "colors": true
         }
@@ -47,7 +107,7 @@
         "status": "Beginner",
         "level": 1,
         "experience": 0,
-        "coins": 1800
+        "coins": 877000
     },
     "ads": {
         "1": true,

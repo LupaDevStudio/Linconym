@@ -2,11 +2,13 @@
 
 ## Design
 
-- [ ] add the link to the lupadevstudio website
+- [x] add the link to the lupadevstudio website
 
 ## Back
 
 ## Front
+
+- [ ] Create the tree display layout
 
 ## Ideas
 
