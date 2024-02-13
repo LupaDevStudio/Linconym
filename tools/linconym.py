@@ -14,7 +14,8 @@ from tools.constants import (
     ENGLISH_WORDS_DICTS,
     GAMEPLAY_DICT,
     USER_DATA,
-    XP_PER_LEVEL
+    XP_PER_LEVEL,
+    DICT_ID_LIST
 )
 from tools.basic_tools import (
     dichotomy,
@@ -301,12 +302,12 @@ class Game():
     may be added as children of the node "pointed to" by this cursor if they are valid successors.
     """
 
-    def __init__(self, start_word: str, end_word: str, quest_word: str = None, act_name: str = "Act1", lvl_name: str = "1") -> None:
+    def __init__(self, start_word: str, end_word: str, quest_word: str = None, act_id: str = "Act1", lvl_id: str = "1") -> None:
         self.start_word: str = start_word
         self.end_word: str = end_word
         self.quest_word: str = quest_word
-        self.act_name = act_name
-        self.lvl_name = lvl_name
+        self.act_id = act_id
+        self.lvl_id = lvl_id
         # Positions are strings of comma-separated integers which indicate a path in the nodes
         self.current_position: str = "0"
         # A dictionary to map a (str) position to the index of its word in the words_found list[str]
@@ -449,25 +450,38 @@ class Game():
         else:
             print("Word not valid")
 
-    def award_stars_xp(self, solution_10k_exists: bool, nb_words_10k: int, nb_words_300k: int) -> None:
+    def award_stars_xp(self) -> None:
         # Only receive stars and xp if the level was completed
         if (self.current_word == self.end_word):
             solution_found: list[str] = self.get_word_path(
                 self.current_position)
 
+            # Get the first possible optimal path
+            current_level_sol_data = GAMEPLAY_DICT[self.act_id][self.lvl_id]
+            for dict_id in DICT_ID_LIST:
+                if current_level_sol_data[dict_id] is not None:
+                    first_sol_dict_id = dict_id
+                    break
+            else:
+                return ValueError("The solution dict does not contain any valid solution.", current_level_sol_data)
+
+            # Get the number of words of the solution
+            nb_words_sol = current_level_sol_data[dict_id]
+            nb_words_300k = current_level_sol_data["300k"]
+
             # Stars
             nb_stars: int = 1  # first star is awarded for finishing the level
             nb_words_found: int = len(solution_found)
-            if (solution_10k_exists):  # easy levels have a solution in the 10k dictionary
-                if (nb_words_found >= (1.25) * nb_words_10k):
+            if first_sol_dict_id == "10k":  # easy levels have a solution in the 10k dictionary
+                if (nb_words_found >= (1.25) * nb_words_sol):
                     nb_stars += 1  # second star for doing as well as the 10k dictionary + 25%
-                if (nb_words_found >= nb_words_10k):
+                if (nb_words_found >= nb_words_sol):
                     nb_stars += 1  # third star for doing as well as the 10k dictionary
             else:  # harder levels don't have a solution in the 10k dictionary, and their stars are defined differently
-                if (nb_words_found >= (1.30) * nb_words_300k):
-                    nb_stars += 1  # second star for doing as well as the 300k dictionary + 30%
-                if (nb_words_found >= (1.10) * nb_words_300k):
-                    nb_stars += 1  # third star for doing as well as the 300k dictionary + 10%
+                if (nb_words_found >= (1.30) * nb_words_sol):
+                    nb_stars += 1  # second star for doing as well as the first solution dictionary + 30%
+                if (nb_words_found >= (1.10) * nb_words_sol):
+                    nb_stars += 1  # third star for doing as well as the first solution dictionary + 10%
 
             # xp: get a percentage of a certain constant amount depending on proximity to the 300k dictionary solution...
             xp_fraction: float = nb_words_300k / nb_words_found
@@ -479,42 +493,42 @@ class Game():
 
             # save level progress (TEMP: only for classic mode, should probably make subclasses for classic and daily mode)
             # check that the current act has save data
-            if (not (self.act_name in USER_DATA.classic_mode)):
-                USER_DATA.classic_mode[self.act_name] = {}
+            if (not (self.act_id in USER_DATA.classic_mode)):
+                USER_DATA.classic_mode[self.act_id] = {}
             # check that current level has save data
-            if (not (self.lvl_name in USER_DATA.classic_mode[self.act_name])):
-                USER_DATA.classic_mode[self.act_name][self.lvl_name] = {}
+            if (not (self.lvl_id in USER_DATA.classic_mode[self.act_id])):
+                USER_DATA.classic_mode[self.act_id][self.lvl_id] = {}
             # save stars
             STARS_KEY: str = "nb_stars"
-            if (STARS_KEY in USER_DATA.classic_mode[self.act_name][self.lvl_name]):
-                if (USER_DATA.classic_mode[self.act_name][self.lvl_name][STARS_KEY] < nb_stars):
-                    USER_DATA.classic_mode[self.act_name][self.lvl_name][STARS_KEY] = nb_stars
+            if (STARS_KEY in USER_DATA.classic_mode[self.act_id][self.lvl_id]):
+                if (USER_DATA.classic_mode[self.act_id][self.lvl_id][STARS_KEY] < nb_stars):
+                    USER_DATA.classic_mode[self.act_id][self.lvl_id][STARS_KEY] = nb_stars
             else:
-                USER_DATA.classic_mode[self.act_name][self.lvl_name][STARS_KEY] = nb_stars
+                USER_DATA.classic_mode[self.act_id][self.lvl_id][STARS_KEY] = nb_stars
             # save number of words
             NB_WORDS_KEY: str = "best_solution_nb_words"
             nb_words_previous_best: int = 0
-            if (NB_WORDS_KEY in USER_DATA.classic_mode[self.act_name][self.lvl_name]):
+            if (NB_WORDS_KEY in USER_DATA.classic_mode[self.act_id][self.lvl_id]):
                 nb_words_previous_best = USER_DATA.classic_mode[
-                    self.act_name][self.lvl_name][NB_WORDS_KEY]
+                    self.act_id][self.lvl_id][NB_WORDS_KEY]
                 if (nb_words_previous_best < nb_words_found):
-                    USER_DATA.classic_mode[self.act_name][self.lvl_name][NB_WORDS_KEY] = nb_words_found
+                    USER_DATA.classic_mode[self.act_id][self.lvl_id][NB_WORDS_KEY] = nb_words_found
             else:
-                USER_DATA.classic_mode[self.act_name][self.lvl_name][NB_WORDS_KEY] = nb_words_found
+                USER_DATA.classic_mode[self.act_id][self.lvl_id][NB_WORDS_KEY] = nb_words_found
             previous_xp_fraction: float = 0.0
             if (nb_words_previous_best > 0):
                 previous_xp_fraction = nb_words_300k / nb_words_previous_best
             # save quest word
             QUEST_WORD_KEY: str = "quest_word_done"
             award_quest_word_xp: bool = False
-            if (QUEST_WORD_KEY in USER_DATA.classic_mode[self.act_name][self.lvl_name]):
+            if (QUEST_WORD_KEY in USER_DATA.classic_mode[self.act_id][self.lvl_id]):
                 award_quest_word_xp = not (
-                    USER_DATA.classic_mode[self.act_name][self.lvl_name][QUEST_WORD_KEY]) and quest_word_done
-                USER_DATA.classic_mode[self.act_name][self.lvl_name][QUEST_WORD_KEY] = USER_DATA.classic_mode[
-                    self.act_name][self.lvl_name][QUEST_WORD_KEY] or quest_word_done
+                    USER_DATA.classic_mode[self.act_id][self.lvl_id][QUEST_WORD_KEY]) and quest_word_done
+                USER_DATA.classic_mode[self.act_id][self.lvl_id][QUEST_WORD_KEY] = USER_DATA.classic_mode[
+                    self.act_id][self.lvl_id][QUEST_WORD_KEY] or quest_word_done
             else:
                 award_quest_word_xp = quest_word_done
-                USER_DATA.classic_mode[self.act_name][self.lvl_name][QUEST_WORD_KEY] = quest_word_done
+                USER_DATA.classic_mode[self.act_id][self.lvl_id][QUEST_WORD_KEY] = quest_word_done
 
             # award newly acquired xp
             XP_KEY: str = "experience"
