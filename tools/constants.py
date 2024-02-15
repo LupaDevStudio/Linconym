@@ -291,21 +291,22 @@ with open(PATH_WORDS_280K) as file:
     for i, line in enumerate(file):
         ENGLISH_WORDS_280K.append(line.replace("\n", ""))
 
+DICT_ID_LIST: list[str] = ["10k", "34k", "88k", "280k"]
+NB_DICTS: int = len(DICT_ID_LIST)
+
 ENGLISH_WORDS_DICTS = {
-    "10k": ENGLISH_WORDS_10K,
-    "34k": ENGLISH_WORDS_34K,
-    "88k": ENGLISH_WORDS_88K,
-    "280k": ENGLISH_WORDS_280K
+    DICT_ID_LIST[0]: ENGLISH_WORDS_10K,
+    DICT_ID_LIST[1]: ENGLISH_WORDS_34K,
+    DICT_ID_LIST[2]: ENGLISH_WORDS_88K,
+    DICT_ID_LIST[3]: ENGLISH_WORDS_280K
 }
 
 DICT_ID_TO_NB_WORDS = {
-    "10k": 10000,
-    "34k": 34000,
-    "88k": 88000,
-    "280k": 375000
+    DICT_ID_LIST[0]: 10000,
+    DICT_ID_LIST[1]: 34000,
+    DICT_ID_LIST[2]: 88000,
+    DICT_ID_LIST[3]: 375000
 }
-
-DICT_ID_LIST = ["10k", "34k", "88k", "280k"]
 
 ### Levels ###
 

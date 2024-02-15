@@ -356,21 +356,22 @@ def fill_gameplay_dict_with_solutions():
     for act in GAMEPLAY_DICT:
         for level in GAMEPLAY_DICT[act]:
             if level == "name":
+                # GAMEPLAY_DICT[act] has one key called "name" to store the act's title. All other keys are the ids of the levels in the act.
                 continue
             start_word = GAMEPLAY_DICT[act][level]["start_word"]
             end_word = GAMEPLAY_DICT[act][level]["end_word"]
-            for resolution in ENGLISH_WORDS_DICTS:
-                if f"{resolution}_sol" not in GAMEPLAY_DICT[act][level]:
+            for resolution in DICT_ID_LIST:
+                if resolution not in GAMEPLAY_DICT[act][level]:
                     print(resolution)
                     solution = find_solutions(
                         start_word=start_word,
                         end_word=end_word,
                         english_words=ENGLISH_WORDS_DICTS[resolution])
                     if solution is not None:
-                        GAMEPLAY_DICT[act][level][f"{resolution}_sol"] = len(
+                        GAMEPLAY_DICT[act][level][resolution] = len(
                             solution)
                     else:
-                        GAMEPLAY_DICT[act][level][f"{resolution}_sol"] = None
+                        GAMEPLAY_DICT[act][level][resolution] = None
 
             save_json_file(PATH_GAMEPLAY, GAMEPLAY_DICT)
 
@@ -387,12 +388,10 @@ class Game():
     may be added as children of the node "pointed to" by this cursor if they are valid successors.
     """
 
-    def __init__(self, start_word: str, end_word: str, quest_word: str = None, act_id: str = "Act1", lvl_id: str = "1") -> None:
+    def __init__(self, start_word: str, end_word: str, quest_word: str = None) -> None:
         self.start_word: str = start_word
         self.end_word: str = end_word
         self.quest_word: str = quest_word
-        self.act_id = act_id
-        self.lvl_id = lvl_id
         # Positions are strings of comma-separated integers which indicate a path in the nodes
         self.current_position: str = "0"
         # A dictionary to map a (str) position to the index of its word in the words_found list[str]
@@ -534,91 +533,228 @@ class Game():
 
         else:
             print("Word not valid")
+    
+    def get_nb_words_2nd_star(self) -> int:
+        """
+        Returns
+        -------
+        int
+            Maximum number of words in a solution to get the level's second star
+        """
+        # This is supposed to be an abstract method. It'll be overridden by Game's subclasses.
 
+        return 0
+    
+    def get_nb_words_3rd_star(self) -> int:
+        """
+        Returns
+        -------
+        int
+            Maximum number of words in a solution to get the level's third star
+        """
+        # This is supposed to be an abstract method. It'll be overridden by Game's subclasses.
+    
+        return 0
+
+    def get_nb_stars(self, nb_words_found: int) -> int:
+        """
+        Computes how many stars are awarded for a given solution.
+
+        Parameters
+        ----------
+        nb_words_found: int
+            Length (in words) of one of the level's solutions.
+
+        Returns
+        -------
+        int
+            Number of stars awarded for finding said solution.
+        """
+
+        nb_stars: int = 1  # first star is awarded for finishing the level
+        if (nb_words_found <= self.get_nb_words_2nd_star()):
+            nb_stars += 1
+            if (nb_words_found <= self.get_nb_words_3rd_star()):
+                nb_stars += 1
+        return nb_stars
+    
+    def get_xp_fraction(self, nb_words_found: int) -> float:
+        """
+        Computes the fraction of XP awarded for a given solution.
+
+        Parameters
+        ----------
+        nb_words_found: int
+            Length (in words) of one of the level's solutions.
+
+        Returns
+        -------
+        float
+            Fraction of XP awarded for finding said solution.
+        """
+        # This is supposed to be an abstract method. It'll be overridden by Game's subclasses.
+    
+        return 0.0
+    
     def award_stars_xp(self) -> None:
+        """
+        Saves the number of stars and the amount of XP earned in this level in the user's data, and increases the user's XP in their profile accordingly.
+        """
+        # This is supposed to be an abstract method. It'll be overridden by Game's subclasses.
+    
+        return
+
+
+
+class ClassicGame(Game):
+    def __init__(self, act_id: str, lvl_id: str, quest_word: str = None) -> None:
+        self.act_id: str = act_id
+        self.lvl_id: str = lvl_id
+
+        # Load level data from GAMEPLAY_DICT
+        self.sol_data: dict = None
+        if ((self.act_id in GAMEPLAY_DICT) and (self.lvl_id in GAMEPLAY_DICT[self.act_id])):
+            self.sol_data = GAMEPLAY_DICT[self.act_id][self.lvl_id]
+        else:
+            raise ValueError("Level data absent from gameplay dict:", act_id + "," + lvl_id)
+        
+        # Load first possible solution length and 280k solution length from GAMEPLAY_DICT
+        has_sol: bool = False
+        self.first_sol_dict_id: str = ""
+        self.nb_words_first_sol: int = 0
+        self.nb_words_280k_sol: int = 0
+
+        for dict_id in DICT_ID_LIST:
+            if (not(self.sol_data[dict_id] is None)):
+                self.first_sol_dict_id = dict_id
+                has_sol = True
+                break
+
+        if (not(has_sol)):
+            raise ValueError("The solution dict does not contain any valid solution:", self.sol_data)
+        else:
+            self.nb_words_first_sol = self.sol_data[self.first_sol_dict_id]
+            self.nb_words_280k_sol = self.sol_data[DICT_ID_LIST[-1]]
+
+        super().__init__(self.sol_data["start_word"], self.sol_data["end_word"], quest_word)
+    
+    def get_nb_words_2nd_star(self) -> int:
+        """
+        Returns
+        -------
+        int
+            Maximum number of words in a solution to get the level's second star
+        """
+
+        nb_words_2nd_star: int = 0
+        if (self.first_sol_dict_id == DICT_ID_LIST[0]):
+            # In easy levels (those which have a solution in the 10k dict), the second star is awarded for doing as well as the 10k dict + a margin (25%)
+            nb_words_2nd_star = int(1.25 * self.nb_words_first_sol)
+        else:
+            # In harder levels (no solution in the 10k dict), the second star is awarded for doing as well as the first solution dict + a wider margin (30%)
+            nb_words_2nd_star = int(1.30 * self.nb_words_first_sol)
+        return nb_words_2nd_star
+    
+    def get_nb_words_3rd_star(self) -> int:
+        """
+        Returns
+        -------
+        int
+            Maximum number of words in a solution to get the level's third star
+        """
+    
+        nb_words_3rd_star: int = 0
+        if (self.first_sol_dict_id == DICT_ID_LIST[0]):
+            # In easy levels (those which have a solution in the 10k dict), the second star is awarded for doing as well as the 10k dict
+            nb_words_3rd_star = self.nb_words_first_sol
+        else:
+            # In harder levels (no solution in the 10k dict), the second star is awarded for doing as well as the first solution dict + a small margin (10%)
+            nb_words_3rd_star = int(1.10 * self.nb_words_first_sol)
+        return nb_words_3rd_star
+    
+    def get_xp_fraction(self, nb_words_found: int) -> float:
+        """
+        Computes the fraction of XP awarded for a given solution.
+
+        Parameters
+        ----------
+        nb_words_found: int
+            Length (in words) of one of the level's solutions.
+
+        Returns
+        -------
+        float
+            Fraction of XP awarded for finding said solution.
+        """
+
+        xp_fraction: float = self.nb_words_280k_sol / nb_words_found # There's probably a smoother way to compute this, but that's a problem for later
+        if (xp_fraction > 1):
+            xp_fraction = 1.0
+        return xp_fraction
+    
+    def award_stars_xp(self) -> None:
+        """
+        Saves the number of stars and the amount of XP earned in this level in the user's data, and increases the user's XP in their profile accordingly.
+        """
+
         # Only receive stars and xp if the level was completed
         if (self.current_word == self.end_word):
-            solution_found: list[str] = self.get_word_path(
-                self.current_position)
-
-            # Get the first possible optimal path
-            current_level_sol_data = GAMEPLAY_DICT[self.act_id][self.lvl_id]
-            for dict_id in DICT_ID_LIST:
-                if current_level_sol_data[dict_id] is not None:
-                    first_sol_dict_id = dict_id
-                    break
-            else:
-                return ValueError("The solution dict does not contain any valid solution.", current_level_sol_data)
-
-            # Get the number of words of the solution
-            nb_words_sol = current_level_sol_data[dict_id]
-            nb_words_280k = current_level_sol_data["280k"]
+            
+            # Solution found by the user
+            solution_found: list[str] = self.get_word_path(self.current_position)
 
             # Stars
-            nb_stars: int = 1  # first star is awarded for finishing the level
             nb_words_found: int = len(solution_found)
-            if first_sol_dict_id == "10k":  # easy levels have a solution in the 10k dictionary
-                if (nb_words_found >= (1.25) * nb_words_sol):
-                    nb_stars += 1  # second star for doing as well as the 10k dictionary + 25%
-                if (nb_words_found >= nb_words_sol):
-                    nb_stars += 1  # third star for doing as well as the 10k dictionary
-            else:  # harder levels don't have a solution in the 10k dictionary, and their stars are defined differently
-                if (nb_words_found >= (1.30) * nb_words_sol):
-                    nb_stars += 1  # second star for doing as well as the first solution dictionary + 30%
-                if (nb_words_found >= (1.10) * nb_words_sol):
-                    nb_stars += 1  # third star for doing as well as the first solution dictionary + 10%
+            nb_stars: int = self.get_nb_stars(nb_words_found)
 
-            # xp: get a percentage of a certain constant amount depending on proximity to the 280k dictionary solution...
-            xp_fraction: float = nb_words_280k / nb_words_found
-            if (xp_fraction > 1):
-                xp_fraction = 1.0
+            # xp: get a percentage of a certain constant amount depending on the solution's quality...
+            xp_fraction: float = self.get_xp_fraction(nb_words_found)
             # ... and get a bonus for passing through the quest word
-            quest_word_done: bool = ((self.quest_word != None) and (
-                self.quest_word in solution_found))
+            quest_word_done: bool = (not(self.quest_word is None) and (self.quest_word in solution_found))
 
-            # save level progress (TEMP: only for classic mode, should probably make subclasses for classic and daily mode)
             # check that the current act has save data
             if (not (self.act_id in USER_DATA.classic_mode)):
                 USER_DATA.classic_mode[self.act_id] = {}
+
             # check that current level has save data
             if (not (self.lvl_id in USER_DATA.classic_mode[self.act_id])):
                 USER_DATA.classic_mode[self.act_id][self.lvl_id] = {}
-            # save stars
-            STARS_KEY: str = "nb_stars"
-            if (STARS_KEY in USER_DATA.classic_mode[self.act_id][self.lvl_id]):
-                if (USER_DATA.classic_mode[self.act_id][self.lvl_id][STARS_KEY] < nb_stars):
-                    USER_DATA.classic_mode[self.act_id][self.lvl_id][STARS_KEY] = nb_stars
-            else:
-                USER_DATA.classic_mode[self.act_id][self.lvl_id][STARS_KEY] = nb_stars
-            # save number of words
+
+            # keys to access user data
             NB_WORDS_KEY: str = "best_solution_nb_words"
-            nb_words_previous_best: int = 0
-            if (NB_WORDS_KEY in USER_DATA.classic_mode[self.act_id][self.lvl_id]):
-                nb_words_previous_best = USER_DATA.classic_mode[
-                    self.act_id][self.lvl_id][NB_WORDS_KEY]
-                if (nb_words_previous_best < nb_words_found):
-                    USER_DATA.classic_mode[self.act_id][self.lvl_id][NB_WORDS_KEY] = nb_words_found
-            else:
-                USER_DATA.classic_mode[self.act_id][self.lvl_id][NB_WORDS_KEY] = nb_words_found
-            previous_xp_fraction: float = 0.0
-            if (nb_words_previous_best > 0):
-                previous_xp_fraction = nb_words_280k / nb_words_previous_best
-            # save quest word
+            STARS_KEY: str = "nb_stars"
+            XP_KEY: str = "experience"
             QUEST_WORD_KEY: str = "quest_word_done"
+
+            # recover previous best number of words
+            nb_words_previous_best: int = 0
+            previous_best_exists: bool = False
+            if (NB_WORDS_KEY in USER_DATA.classic_mode[self.act_id][self.lvl_id]):
+                nb_words_previous_best = USER_DATA.classic_mode[self.act_id][self.lvl_id][NB_WORDS_KEY]
+                previous_best_exists = True
+
+            # If the user did better than last time, overwrite everything
+            if ((nb_words_found < nb_words_previous_best) or not(previous_best_exists)): 
+                # save best number of words
+                USER_DATA.classic_mode[self.act_id][self.lvl_id][NB_WORDS_KEY] = nb_words_found
+                # save stars
+                USER_DATA.classic_mode[self.act_id][self.lvl_id][STARS_KEY] = nb_stars
+                # recover previous xp fraction
+                previous_xp_fraction: float = 0.0
+                if (previous_best_exists):
+                    previous_xp_fraction = self.get_xp_fraction(nb_words_previous_best)
+                # award newly acquired xp
+                USER_DATA.user_profile[XP_KEY] += int((xp_fraction - previous_xp_fraction) * XP_PER_LEVEL)
+                
+            # If the user passed through the quest word (if any) for the first time, award bonus xp
             award_quest_word_xp: bool = False
             if (QUEST_WORD_KEY in USER_DATA.classic_mode[self.act_id][self.lvl_id]):
-                award_quest_word_xp = not (
-                    USER_DATA.classic_mode[self.act_id][self.lvl_id][QUEST_WORD_KEY]) and quest_word_done
-                USER_DATA.classic_mode[self.act_id][self.lvl_id][QUEST_WORD_KEY] = USER_DATA.classic_mode[
-                    self.act_id][self.lvl_id][QUEST_WORD_KEY] or quest_word_done
+                already_did_quest_word: bool = USER_DATA.classic_mode[self.act_id][self.lvl_id][QUEST_WORD_KEY]
+                award_quest_word_xp = quest_word_done and not(already_did_quest_word)
+                USER_DATA.classic_mode[self.act_id][self.lvl_id][QUEST_WORD_KEY] = already_did_quest_word or quest_word_done
             else:
                 award_quest_word_xp = quest_word_done
                 USER_DATA.classic_mode[self.act_id][self.lvl_id][QUEST_WORD_KEY] = quest_word_done
-
-            # award newly acquired xp
-            XP_KEY: str = "experience"
-            USER_DATA.user_profile[XP_KEY] += int(
-                (xp_fraction - previous_xp_fraction) * XP_PER_LEVEL)
             if (award_quest_word_xp):
                 USER_DATA.user_profile[XP_KEY] += XP_PER_LEVEL
 
