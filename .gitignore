@@ -2,6 +2,7 @@
 *.xar
 
 # Ignore the reports folder
+reports
 report.html
 
 # Ignore screenshots
