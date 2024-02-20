@@ -25,3 +25,4 @@ from screens.custom_widgets.colored_rounded_button_image import ColoredRoundedBu
 from screens.custom_widgets.keyboard_layout import KeyboardLayout
 from screens.custom_widgets.levels_branchs import LevelBranch
 from screens.custom_widgets.tree import TreeLayout, TreeScrollview
+from screens.custom_widgets.music_layout import MusicLayout

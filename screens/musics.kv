@@ -1,4 +1,5 @@
 #:kivy 2.2.1
+#:import MUSICS_DICT tools.constants.MUSICS_DICT
 
 <MusicsScreen>:
     Label:
@@ -30,3 +31,19 @@
         font_ratio: root.font_ratio
         coins_count: root.coins_count
         release_function: root.go_to_boosters
+
+    # Musics scrollview
+    CustomScrollview:
+        id: scrollview
+        pos_hint: {"center_x":0.49, "center_y":0.44}
+        size_hint: (0.98,0.63)
+        bar_color: root.primary_color
+        bar_inactive_color: root.secondary_color
+
+        MyScrollViewLayout:
+            id: scrollview_layout
+            cols:1
+            spacing:40
+            height:0.15*root.height * len(MUSICS_DICT)*1.08
+            padding: (0.05*root.width, 10,0.05*root.width,40)
+
