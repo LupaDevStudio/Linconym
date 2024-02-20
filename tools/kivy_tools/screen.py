@@ -326,3 +326,9 @@ class ImprovedScreen(Screen):
 
     def go_backwards(self):
         self.manager.go_to_previous_screen()
+
+    def go_to_next_screen(self, screen_name, current_dict_kwargs={}, next_dict_kwargs={}):
+        self.manager.go_to_next_screen(
+            next_screen_name=screen_name,
+            current_dict_kwargs=current_dict_kwargs,
+            next_dict_kwargs=next_dict_kwargs)

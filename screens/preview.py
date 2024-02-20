@@ -1,5 +1,5 @@
 """
-Module to create the quests screen.
+Module to create the preview screen.
 """
 
 ###############
@@ -16,8 +16,7 @@ from kivy.properties import (
 ### Local imports ###
 
 from tools.path import (
-    PATH_BACKGROUNDS,
-    PATH_BADGES
+    PATH_BACKGROUNDS
 )
 from tools.constants import (
     USER_DATA,
@@ -33,26 +32,25 @@ from tools.kivy_tools import (
 #############
 
 
-class QuestsScreen(ImprovedScreen):
+class PreviewScreen(ImprovedScreen):
     """
     Class to manage the screen that contains the profile information.
     """
 
     primary_color = ColorProperty((0, 0, 0, 1))
     secondary_color = ColorProperty((0, 0, 0, 1))
+    theme_key = StringProperty()
 
     def __init__(self, **kwargs) -> None:
+        # TODO : to change with the theme_key
         current_theme_image = USER_DATA.settings["current_theme_image"]
         super().__init__(
             back_image_path=PATH_BACKGROUNDS +
             THEMES_DICT[current_theme_image]["image"],
             **kwargs)
-        self.current_act_id: str
-        self.current_level_id: str | None
 
     def reload_kwargs(self, dict_kwargs):
-        self.current_act_id = dict_kwargs["current_act_id"]
-        self.current_level_id = dict_kwargs["current_level_id"]
+        self.theme_key = dict_kwargs["theme_key"]
 
     def on_enter(self, *args):
         current_theme_image = USER_DATA.settings["current_theme_image"]

@@ -1,5 +1,5 @@
 """
-Module to create the quests screen.
+Module to create the musics screen.
 """
 
 ###############
@@ -9,15 +9,14 @@ Module to create the quests screen.
 ### Kivy imports ###
 
 from kivy.properties import (
-    StringProperty,
+    NumericProperty,
     ColorProperty
 )
 
 ### Local imports ###
 
 from tools.path import (
-    PATH_BACKGROUNDS,
-    PATH_BADGES
+    PATH_BACKGROUNDS
 )
 from tools.constants import (
     USER_DATA,
@@ -33,11 +32,12 @@ from tools.kivy_tools import (
 #############
 
 
-class QuestsScreen(ImprovedScreen):
+class MusicsScreen(ImprovedScreen):
     """
     Class to manage the screen that contains the profile information.
     """
 
+    coins_count = NumericProperty()
     primary_color = ColorProperty((0, 0, 0, 1))
     secondary_color = ColorProperty((0, 0, 0, 1))
 
@@ -47,14 +47,9 @@ class QuestsScreen(ImprovedScreen):
             back_image_path=PATH_BACKGROUNDS +
             THEMES_DICT[current_theme_image]["image"],
             **kwargs)
-        self.current_act_id: str
-        self.current_level_id: str | None
-
-    def reload_kwargs(self, dict_kwargs):
-        self.current_act_id = dict_kwargs["current_act_id"]
-        self.current_level_id = dict_kwargs["current_level_id"]
 
     def on_enter(self, *args):
+        self.coins_count = USER_DATA.user_profile["coins"]
         current_theme_image = USER_DATA.settings["current_theme_image"]
         current_theme_colors = USER_DATA.settings["current_theme_colors"]
         self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
@@ -62,3 +57,6 @@ class QuestsScreen(ImprovedScreen):
         self.set_back_image_path(
             PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
         return super().on_enter(*args)
+
+    def go_to_boosters(self):
+        self.go_to_next_screen(screen_name="boosters")

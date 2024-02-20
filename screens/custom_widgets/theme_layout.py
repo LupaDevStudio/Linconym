@@ -11,9 +11,7 @@ from kivy.uix.image import Image
 from kivy.properties import (
     StringProperty,
     NumericProperty,
-    ObjectProperty,
     BooleanProperty,
-    ListProperty,
     ColorProperty
 )
 
@@ -138,3 +136,7 @@ class ThemeLayout(Image):
         self.update_display()
         self.get_root_window().children[0].get_screen(
             "themes").update_theme_layouts_display()
+
+    def open_preview(self):
+        self.get_root_window().children[0].get_screen(
+            "themes").open_preview(self.theme_key)

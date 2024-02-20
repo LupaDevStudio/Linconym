@@ -42,7 +42,7 @@ class CustomizationScreen(ImprovedScreen):
         return super().on_enter(*args)
 
     def open_musics_screen(self, *_):
-        pass
+        self.go_to_next_screen(screen_name="musics")
 
     def open_themes_screen(self, *_):
-        self.manager.go_to_next_screen(next_screen_name="themes")
+        self.go_to_next_screen(screen_name="themes")

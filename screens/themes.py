@@ -70,9 +70,7 @@ class ThemesScreen(ImprovedScreen):
         return super().on_resize(*args)
 
     def go_to_boosters(self):
-        self.manager.go_to_next_screen(
-            next_screen_name="boosters"
-        )
+        self.go_to_next_screen(screen_name="boosters")
 
     def update_coins(self):
         self.coins_count = USER_DATA.user_profile["coins"]
@@ -139,3 +137,9 @@ class ThemesScreen(ImprovedScreen):
             current_theme_button.update_display()
             self.THEME_LAYOUT_DICT[theme] = current_theme_button
             scrollview_layout.add_widget(self.THEME_LAYOUT_DICT[theme])
+
+    def open_preview(self, theme_key):
+        self.go_to_next_screen(
+            screen_name="preview",
+            next_dict_kwargs={"theme_key": theme_key}
+        )
