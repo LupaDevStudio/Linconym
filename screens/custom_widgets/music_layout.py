@@ -6,18 +6,16 @@ Module to create the act button.
 ### Imports ###
 ###############
 
-### Python imports ###
-
-from typing import Literal
-
 ### Kivy imports ###
 
 from kivy.uix.relativelayout import RelativeLayout
+from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import (
     StringProperty,
     NumericProperty,
     ColorProperty,
-    BooleanProperty
+    BooleanProperty,
+    ObjectProperty
 )
 
 ### Local imports ###
@@ -28,7 +26,8 @@ from tools.path import (
 from tools.constants import (
     CUSTOM_BUTTON_BACKGROUND_COLOR,
     MUSICS_DICT,
-    LABEL_FONT_SIZE
+    LABEL_FONT_SIZE,
+    OPACITY_ON_BUTTON_PRESS
 )
 
 #############
@@ -36,9 +35,11 @@ from tools.constants import (
 #############
 
 
-class MusicLayout(RelativeLayout):
+class MusicLayout(ButtonBehavior, RelativeLayout):
     """
-    A custom button with a white round rectangle background.
+    The music layout with a white round rectangle background.
+    It is composed of a play/pause button on the left, a title.
+    It can all be comprised of a buy/select button on the right.
     """
 
     background_color = CUSTOM_BUTTON_BACKGROUND_COLOR
@@ -53,6 +54,8 @@ class MusicLayout(RelativeLayout):
     is_playing = BooleanProperty(False)
     has_bought_music = BooleanProperty(False)
     is_using_music = BooleanProperty(False)
+    release_function = ObjectProperty()
+    disable_button = BooleanProperty(False)
 
     def __init__(
             self,
@@ -66,8 +69,10 @@ class MusicLayout(RelativeLayout):
 
         self.release_function = release_function
         self.always_release = True
+
         self.music_title = MUSICS_DICT[music_key]["name"]
         self.music_price = MUSICS_DICT[music_key]["price"]
+
         super().__init__(**kwargs)
 
     def update_display(self):
@@ -83,6 +88,21 @@ class MusicLayout(RelativeLayout):
             self.ids.buy_music_button.disable_button = False
             self.ids.select_music_button.opacity = 0
             self.ids.select_music_button.disable_button = True
+
+    def disable_buy_select(self):
+        """
+        Disable the right part of the layout (for the credits screen).
+        
+        Parameters
+        ----------
+        None
+        
+        Returns
+        -------
+        None
+        """
+        self.remove_widget(self.ids.buy_music_button)
+        self.remove_widget(self.ids.select_music_button)
 
     def play_sound(self):
         if self.is_playing:
@@ -100,3 +120,12 @@ class MusicLayout(RelativeLayout):
     def choose_music(self):
         # TODO change the checks and update the music
         self.is_using_music = True
+
+    def on_press(self):
+        if not self.disable_button:
+            self.opacity = OPACITY_ON_BUTTON_PRESS
+
+    def on_release(self):
+        if not self.disable_button:
+            self.release_function()
+            self.opacity = 1

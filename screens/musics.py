@@ -79,7 +79,8 @@ class MusicsScreen(ImprovedScreen):
                 font_ratio=self.font_ratio * 0.8,
                 primary_color=THEMES_DICT[current_theme_colors]["primary"],
                 has_bought_music=has_bought_music,
-                is_using_music=is_using_music)
+                is_using_music=is_using_music,
+                disable_button=True)
             current_music_layout.update_display()
             self.MUSICS_LAYOUT_DICT[music] = current_music_layout
-            scrollview_layout.add_widget(self.MUSICS_LAYOUT_DICT[music])
+            scrollview_layout.add_widget(current_music_layout)

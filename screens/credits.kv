@@ -22,3 +22,18 @@
         height: self.width
         colors: root.primary_color
         on_release: root.go_backwards()
+
+    # Musics scrollview
+    CustomScrollview:
+        id: scrollview
+        pos_hint: {"center_x":0.49, "center_y":0.44}
+        size_hint: (0.98,0.63)
+        bar_color: root.primary_color
+        bar_inactive_color: root.secondary_color
+
+        MyScrollViewLayout:
+            id: scrollview_layout
+            cols:1
+            spacing:20
+            height:0.1*root.height*root.number_lines_credits*1.08
+            padding: (0.05*root.width, 10,0.05*root.width,40)
