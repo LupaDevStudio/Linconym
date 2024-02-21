@@ -36,23 +36,13 @@
         valign: "center"
 
     # To select the music
-    # Widget:
-    #     id: selection_circle
-    #     size: root.size
-    #     pos: (0,0)
-    #     canvas.before:
-    #         Color:
-    #             rgba: (0,0,0,1)
-    #         Line:
-    #             ellipse:(self.width/2-self.height*CIRCLE_HEIGHT_RATIO/2,self.height/10,self.height*CIRCLE_HEIGHT_RATIO,self.height*CIRCLE_HEIGHT_RATIO)
-    #             width: 1.5
-
-    # Image:
-    #     id: activated_image
-    #     pos_hint: {"center_x":0.5, "center_y":0.3}
-    #     size_hint: (0.4,0.4)
-    #     source: PATH_IMAGES + "check.png"
-    #     fit_mode: "contain"
+    SelectCircleButton:
+        id: select_music_button
+        pos_hint: {"right":0.975,"center_y":0.5}
+        size_hint: (None,0.6)
+        font_ratio: root.font_ratio
+        is_using: root.is_using_music
+        release_function: root.choose_music
 
     # To buy the music
     BuyRectangleButton:

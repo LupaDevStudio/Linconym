@@ -105,7 +105,9 @@
         }
     },
     "unlocked_musics": {
-        "music_name": true
+        "kids_party": true,
+        "music_2": true,
+        "music_3": false
     },
     "user_profile": {
         "status": "Beginner",

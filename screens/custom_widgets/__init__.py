@@ -27,3 +27,4 @@ from screens.custom_widgets.levels_branchs import LevelBranch
 from screens.custom_widgets.tree import TreeLayout, TreeScrollview
 from screens.custom_widgets.music_layout import MusicLayout
 from screens.custom_widgets.buy_rectangle_button import BuyRectangleButton
+from screens.custom_widgets.select_circle_button import SelectCircleButton
