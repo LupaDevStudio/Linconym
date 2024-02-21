@@ -50,6 +50,9 @@ class MusicLayout(RelativeLayout):
     radius = NumericProperty(40)
     music_key = StringProperty()
     is_playing = BooleanProperty(False)
+    has_bought_music = BooleanProperty(False)
+    is_using_music = BooleanProperty(False)
+    music_price = NumericProperty()
 
     def __init__(
             self,
@@ -65,6 +68,7 @@ class MusicLayout(RelativeLayout):
         self.release_function = release_function
         self.always_release = True
         self.music_title = MUSICS_DICT[music_key]["name"]
+        self.music_price = MUSICS_DICT[music_key]["price"]
 
     def play_sound(self):
         if self.is_playing:
@@ -73,3 +77,9 @@ class MusicLayout(RelativeLayout):
         else:
             # TODO play the new music
             self.is_playing = True
+
+    def buy_music(self):
+        print("Buy music")
+
+    def choose_music(self):
+        print("Choose music")
