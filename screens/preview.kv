@@ -10,6 +10,14 @@
         outline_color: TITLE_OUTLINE_COLOR
         color: TEXT_FONT_COLOR
 
+    # Coins counter
+    CoinsCounter:
+        size_hint: (0.6, 0.07)
+        pos_hint: {"center_x":0.5, "center_y":0.81}
+        font_ratio: root.font_ratio
+        coins_count: root.coins_count
+        release_function: root.go_to_boosters
+
     BottomBar:
         size_hint: (1, BOTTOM_BAR_HEIGHT)
         pos_hint: {"bottom":0,"left":0}
