@@ -240,6 +240,12 @@ WORD_BUTTON_VSPACING = 0.05
 WORD_BUTTON_HSPACING = 0.1
 WORD_BUTTON_SIDE_OFFSET = 0.1
 
+### Screens ###
+
+SCREEN_TITLE = "has_title"
+SCREEN_BACK_ARROW = "has_back_arrow"
+SCREEN_BOTTOM_BAR = "has_bottom_bar_"
+
 ### Musics ###
 
 SOUND_LIST = []
@@ -314,7 +320,7 @@ DICT_ID_TO_NB_WORDS = {
 
 GAMEPLAY_DICT = load_json_file(PATH_GAMEPLAY)
 
-### Themes ###
+### Customization with themes and musics ###
 
 CUSTOMIZATION_DICT = load_json_file(PATH_CUSTOMIZATION)
 THEMES_DICT = CUSTOMIZATION_DICT["themes"]

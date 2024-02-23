@@ -24,10 +24,12 @@ from tools.path import (
 from tools.constants import (
     USER_DATA,
     THEMES_DICT,
-    GAMEPLAY_DICT
+    GAMEPLAY_DICT,
+    SCREEN_TITLE,
+    SCREEN_BOTTOM_BAR
 )
 from tools.kivy_tools import (
-    ImprovedScreen
+    LinconymScreen
 )
 from screens.custom_widgets import (
     ActButton
@@ -38,32 +40,24 @@ from screens.custom_widgets import (
 #############
 
 
-class ClassicModeScreen(ImprovedScreen):
+class ClassicModeScreen(LinconymScreen):
 
-    primary_color = ColorProperty((0, 0, 0, 1))
-    secondary_color = ColorProperty((0, 0, 0, 1))
+    dict_type_screen = {
+        SCREEN_TITLE : "Classic Mode",
+        SCREEN_BOTTOM_BAR : "none"
+    }
 
     def __init__(self, **kwargs) -> None:
-        current_theme_image = USER_DATA.settings["current_theme_image"]
-        super().__init__(
-            back_image_path=PATH_BACKGROUNDS +
-            THEMES_DICT[current_theme_image]["image"],
-            **kwargs)
+        super().__init__(**kwargs)
         self.ACT_BUTTON_DICT = {}
         self.on_resize()
         self.fill_scrollview()
 
-    def on_pre_enter(self, *args):
-        current_theme_image = USER_DATA.settings["current_theme_image"]
-        current_theme_colors = USER_DATA.settings["current_theme_colors"]
-        self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
-        self.secondary_color = THEMES_DICT[current_theme_colors]["secondary"]
-        self.set_back_image_path(
-            PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
+    def on_enter(self, *args):
+        super().on_enter(*args)
         for act in self.ACT_BUTTON_DICT:
             self.ACT_BUTTON_DICT[act].primary_color = self.primary_color
             self.ACT_BUTTON_DICT[act].secondary_color = self.secondary_color
-        return super().on_pre_enter(*args)
 
     def on_resize(self, *args):
         for act in self.ACT_BUTTON_DICT:

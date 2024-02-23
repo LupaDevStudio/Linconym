@@ -13,9 +13,6 @@ from kivy.properties import (
     ObjectProperty
 )
 
-### Local imports ###
-from tools.kivy_tools import ImageButton
-
 #############
 ### Class ###
 #############
@@ -35,7 +32,11 @@ class BottomBar(RelativeLayout):
     selected_rect_pos = ObjectProperty((0, 0))
     selected_rect_size = ObjectProperty((0, 0))
 
-    def on_kv_post(self, base_widget):
+    def __init__(self, **kw):
+        self.bind(selected=self.on_kv_post)
+        super().__init__(**kw)
+
+    def on_kv_post(self, base_widget, value=None):
         if self.selected + "_button" in self.ids.keys():
             self.selected_rect_pos = self.ids[self.selected +
                                               "_button"].pos_hint
