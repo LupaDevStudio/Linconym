@@ -21,13 +21,14 @@ from kivy.properties import StringProperty
 from tools.constants import (
     USER_DATA,
     THEMES_DICT,
-    __version__
+    __version__,
+    SCREEN_TITLE,
+    SCREEN_BOTTOM_BAR
 )
 from tools.kivy_tools import (
-    ImprovedScreen,
+    LinconymScreen
 )
 from tools.path import (
-    PATH_BACKGROUNDS,
     PATH_TEMP_IMAGES
 )
 from tools.generate_texture import (
@@ -38,27 +39,26 @@ from tools import (
     music_mixer,
     sound_mixer
 )
-from screens.custom_widgets import CustomSlider
 
 #############
 ### Class ###
 #############
 
 
-class SettingsScreen(ImprovedScreen):
+class SettingsScreen(LinconymScreen):
     """
     Class to manage the settings screen.
     """
 
+    dict_type_screen = {
+        SCREEN_TITLE : "Settings",
+        SCREEN_BOTTOM_BAR : "settings"
+    }
     version_text = StringProperty()
 
     def __init__(self, **kwargs) -> None:
-        current_theme_image = USER_DATA.settings["current_theme_image"]
+        super().__init__(**kwargs)
         self.version_text = "Version " + str(__version__)
-        super().__init__(
-            back_image_path=PATH_BACKGROUNDS +
-            THEMES_DICT[current_theme_image]["image"],
-            **kwargs)
         self.ids.sound_slider.bind(value=self.update_sound_volume)
         self.ids.music_slider.bind(value=self.update_music_volume)
 
@@ -76,12 +76,6 @@ class SettingsScreen(ImprovedScreen):
         self.ids["sound_slider"].update_textures(save_int=current_save_int)
         self.ids["music_slider"].update_textures(save_int=current_save_int)
         return super().on_pre_enter(*args)
-
-    def on_enter(self, *args):
-        current_theme_image = USER_DATA.settings["current_theme_image"]
-        self.set_back_image_path(
-            PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
-        return super().on_enter(*args)
 
     def on_leave(self, *args):
         USER_DATA.save_changes()

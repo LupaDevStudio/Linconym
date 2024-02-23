@@ -21,10 +21,12 @@ from tools.path import (
 )
 from tools.constants import (
     USER_DATA,
-    THEMES_DICT
+    THEMES_DICT,
+    SCREEN_BOTTOM_BAR,
+    SCREEN_TITLE
 )
 from tools.kivy_tools import (
-    ImprovedScreen
+    LinconymScreen
 )
 
 
@@ -33,10 +35,15 @@ from tools.kivy_tools import (
 #############
 
 
-class ProfileScreen(ImprovedScreen):
+class ProfileScreen(LinconymScreen):
     """
     Class to manage the screen that contains the profile information.
     """
+
+    dict_type_screen = {
+        SCREEN_TITLE : "Profile",
+        SCREEN_BOTTOM_BAR : "profile"
+    }
 
     user_status = StringProperty()
     user_status_image = StringProperty()
@@ -45,21 +52,14 @@ class ProfileScreen(ImprovedScreen):
     theme_colors = StringProperty()
 
     def __init__(self, **kwargs) -> None:
-        current_theme_image = USER_DATA.settings["current_theme_image"]
-        super().__init__(
-            back_image_path=PATH_BACKGROUNDS +
-            THEMES_DICT[current_theme_image]["image"],
-            **kwargs)
+        super().__init__(**kwargs)
 
     def on_enter(self, *args):
         self.coins_count = USER_DATA.user_profile["coins"]
         self.user_level = "Level " + str(USER_DATA.user_profile["level"])
-        current_theme_image = USER_DATA.settings["current_theme_image"]
         self.theme_colors = USER_DATA.settings["current_theme_colors"]
         self.user_status = USER_DATA.user_profile["status"]
         self.user_status_image = PATH_BADGES + self.user_status.lower() + ".png"
-        self.set_back_image_path(
-            PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
         return super().on_enter(*args)
 
     def go_to_boosters(self):

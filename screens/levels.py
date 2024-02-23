@@ -9,21 +9,20 @@ Module to create the levels screen.
 ### Kivy imports ###
 
 from kivy.properties import (
-    ColorProperty,
     StringProperty
 )
 
 ### Local imports ###
 
-from tools.path import (
-    PATH_BACKGROUNDS
-)
 from tools.constants import (
     USER_DATA,
-    THEMES_DICT
+    THEMES_DICT,
+    SCREEN_BACK_ARROW,
+    SCREEN_BOTTOM_BAR,
+    SCREEN_TITLE
 )
 from tools.kivy_tools import (
-    ImprovedScreen
+    LinconymScreen
 )
 from tools import (
     music_mixer
@@ -35,37 +34,29 @@ from tools import (
 #############
 
 
-class LevelsScreen(ImprovedScreen):
+class LevelsScreen(LinconymScreen):
     """
     Class to manage the levels screen which allow the user to select a level inside an act.
     """
 
-    primary_color = ColorProperty((0, 0, 0, 1))
-    secondary_color = ColorProperty((0, 0, 0, 1))
     current_act_name = StringProperty()
+    dict_type_screen = {
+        SCREEN_BOTTOM_BAR : "none",
+        SCREEN_BACK_ARROW : ""
+    }
 
     def __init__(self, **kwargs) -> None:
-        current_theme_image = USER_DATA.settings["current_theme_image"]
-        super().__init__(
-            back_image_path=PATH_BACKGROUNDS +
-            THEMES_DICT[current_theme_image]["image"],
-            **kwargs)
+        super().__init__(**kwargs)
         self.current_act_id : str
 
     def reload_kwargs(self, dict_kwargs):
         self.current_act_id = dict_kwargs["current_act_id"]
 
-    def on_pre_enter(self, *args):
-        current_theme_colors = USER_DATA.settings["current_theme_colors"]
-        self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
-        self.secondary_color = THEMES_DICT[current_theme_colors]["secondary"]
+    def on_enter(self, *args):
+        super().on_enter(*args)
         self.ids.level_layout.act_id = self.current_act_id
         self.ids.level_layout.build_layout()
         self.current_act_name = "Act " + self.current_act_id.replace("Act", "")
-        return super().on_pre_enter(*args)
-
-    def on_enter(self, *args):
-        return super().on_enter(*args)
 
     def on_leave(self, *args):
         self.ids.level_layout.clear_widgets()
