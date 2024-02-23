@@ -54,7 +54,6 @@ class ClassicModeScreen(LinconymScreen):
         self.fill_scrollview()
 
     def on_enter(self, *args):
-        super().on_enter(*args)
         for act in self.ACT_BUTTON_DICT:
             self.ACT_BUTTON_DICT[act].primary_color = self.primary_color
             self.ACT_BUTTON_DICT[act].secondary_color = self.secondary_color

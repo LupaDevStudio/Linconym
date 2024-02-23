@@ -9,9 +9,7 @@ Module to create the profile screen.
 ### Kivy imports ###
 
 from kivy.properties import (
-    ColorProperty,
     NumericProperty,
-    StringProperty,
     ListProperty
 )
 
@@ -24,10 +22,13 @@ from tools.constants import (
     USER_DATA,
     THEMES_DICT,
     DICT_AMOUNT_ADS,
-    DICT_AMOUNT_BUY
+    DICT_AMOUNT_BUY,
+    SCREEN_BACK_ARROW,
+    SCREEN_BOTTOM_BAR,
+    SCREEN_TITLE
 )
 from tools.kivy_tools import (
-    ImprovedScreen
+    LinconymScreen
 )
 
 
@@ -36,35 +37,28 @@ from tools.kivy_tools import (
 #############
 
 
-class BoostersScreen(ImprovedScreen):
+class BoostersScreen(LinconymScreen):
     """
     Class to manage the screen with the coins boosters.
     """
 
+    dict_type_screen = {
+        SCREEN_TITLE : "Boosters",
+        SCREEN_BOTTOM_BAR : "none",
+        SCREEN_BACK_ARROW : ""
+    }
+
     coins_count = NumericProperty()
-    primary_color = ColorProperty((0, 0, 0, 1))
-    secondary_color = ColorProperty((0, 0, 0, 1))
     list_ads = ListProperty()
     list_buy = ListProperty()
 
     def __init__(self, **kwargs) -> None:
-        current_theme_image = USER_DATA.settings["current_theme_image"]
-        super().__init__(
-            back_image_path=PATH_BACKGROUNDS +
-            THEMES_DICT[current_theme_image]["image"],
-            **kwargs)
+        super().__init__(**kwargs)
 
     def on_enter(self, *args):
         self.coins_count = USER_DATA.user_profile["coins"]
-        current_theme_image = USER_DATA.settings["current_theme_image"]
-        current_theme_colors = USER_DATA.settings["current_theme_colors"]
-        self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
-        self.secondary_color = THEMES_DICT[current_theme_colors]["secondary"]
-        self.set_back_image_path(
-            PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
         self.build_list_ads()
         self.build_list_buy()
-        return super().on_enter(*args)
 
     def build_list_ads(self):
         self.list_ads = []

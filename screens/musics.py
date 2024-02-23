@@ -51,6 +51,10 @@ class MusicsScreen(LinconymScreen):
         super().__init__(**kwargs)
         self.fill_scrollview()
 
+    def on_pre_enter(self, *args):
+        self.coins_count = USER_DATA.user_profile["coins"]
+        return super().on_pre_enter(*args)
+
     def go_to_boosters(self):
         self.go_to_next_screen(screen_name="boosters")
 

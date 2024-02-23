@@ -11,15 +11,6 @@
         outline_color: TITLE_OUTLINE_COLOR
         color: TEXT_FONT_COLOR
 
-    # Left arrow
-    RoundedButtonImage:
-        image_path: PATH_IMAGES + "left_arrow.png"
-        pos_hint: POS_HINT_BACK_ARROW
-        size_hint: (0.1, None)
-        height: self.width
-        colors: root.primary_color
-        on_release: root.go_backwards()
-
     # Button for the quests
     RoundedButtonImage:
         image_path: PATH_IMAGES + "quests.png"

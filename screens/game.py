@@ -27,10 +27,11 @@ from tools.path import (
 from tools.constants import (
     USER_DATA,
     THEMES_DICT,
-    LETTER_FONT_SIZE
+    LETTER_FONT_SIZE,
+    SCREEN_BACK_ARROW
 )
 from tools.kivy_tools import (
-    ImprovedScreen,
+    LinconymScreen
 )
 from tools import (
     music_mixer
@@ -47,15 +48,17 @@ from tools.linconym import (
 #############
 
 
-class GameScreen(ImprovedScreen):
+class GameScreen(LinconymScreen):
     """
     Class to manage the game screen.
     """
 
     current_level_name = StringProperty()
+    dict_type_screen = {
+        SCREEN_BACK_ARROW : ""
+    }
+
     nb_stars = NumericProperty()
-    primary_color = ColorProperty((0, 0, 0, 1))
-    secondary_color = ColorProperty((0, 0, 0, 1))
     start_word = StringProperty("BOY")
     current_word = StringProperty("")
     new_word = StringProperty("")
@@ -63,11 +66,7 @@ class GameScreen(ImprovedScreen):
     list_widgets_letters = []
 
     def __init__(self, **kwargs) -> None:
-        current_theme_image = USER_DATA.settings["current_theme_image"]
-        super().__init__(
-            back_image_path=PATH_BACKGROUNDS +
-            THEMES_DICT[current_theme_image]["image"],
-            **kwargs)
+        super().__init__(**kwargs)
         self.current_act_id: str
         self.current_level_id: str
 
@@ -76,12 +75,10 @@ class GameScreen(ImprovedScreen):
         self.current_level_id = dict_kwargs["current_level_id"]
 
     def on_pre_enter(self, *args):
+        super().on_pre_enter(*args)
         # Initialise the current word
         self.current_word = self.start_word
 
-        current_theme_colors = USER_DATA.settings["current_theme_colors"]
-        self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
-        self.secondary_color = THEMES_DICT[current_theme_colors]["secondary"]
         self.transparent_secondary_color = [
             self.secondary_color[0], self.secondary_color[1], self.secondary_color[2], 0.3]
         self.ids.keyboard_layout.build_keyboard()
@@ -89,9 +86,7 @@ class GameScreen(ImprovedScreen):
         self.nb_stars = USER_DATA.classic_mode[self.current_act_id][self.current_level_id]["nb_stars"]
 
         self.ids["tree_layout"].build_layout()
-        return super().on_pre_enter(*args)
 
-    def on_enter(self, *args):
         temp = self.current_act_id.replace("Act", "")
         self.current_level_name = "Act " + temp + " – " + self.current_level_id
         self.load_game_play()
@@ -99,7 +94,6 @@ class GameScreen(ImprovedScreen):
         self.build_word()
         self.check_disable_keyboard()
         self.check_enable_submit_button()
-        return super().on_enter(*args)
 
     def on_pre_leave(self, *args):
         self.ids.keyboard_layout.destroy_keyboard()

@@ -381,11 +381,11 @@ class LinconymScreen(ImprovedScreen):
         if not SCREEN_BACK_ARROW in self.dict_type_screen:
             self.remove_widget(self.ids.back_arrow)
 
-    def on_enter(self, *args):
+    def on_pre_enter(self, *args):
         current_theme_image = USER_DATA.settings["current_theme_image"]
         current_theme_colors = USER_DATA.settings["current_theme_colors"]
         self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
         self.secondary_color = THEMES_DICT[current_theme_colors]["secondary"]
         self.set_back_image_path(
             PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
-        return super().on_enter(*args)
+        return super().on_pre_enter(*args)
