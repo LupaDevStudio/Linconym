@@ -9,6 +9,7 @@ Module to create the profile screen.
 ### Python imports ###
 
 from functools import partial
+import webbrowser
 
 ### Kivy imports ###
 
@@ -78,4 +79,16 @@ class CreditsScreen(LinconymScreen):
             scrollview_layout.add_widget(music_credit_layout)
 
     def open_url(self, url):
-        print(url)
+        """
+        Open the url given as argument.
+
+        Parameters
+        ----------
+        url : str
+            Url of the credit item.
+
+        Returns
+        -------
+        None
+        """
+        webbrowser.open(url, 2)
