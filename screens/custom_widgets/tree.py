@@ -174,21 +174,56 @@ class TreeLayout(RelativeLayout):
         self.on_secondary_color_change()
 
     def on_primary_color_change(self, base=None, widget=None, value=None):
+        """
+        Compute a transparent version of the primary color.
+        """
+
         self.transparent_primary_color = change_color_opacity(
             self.primary_color, 0.7)
 
     def on_secondary_color_change(self, base=None, widget=None, value=None):
+        """
+        Compute a transparent version of the secondary color.
+        """
+
         self.transparent_secondary_color = change_color_opacity(
             self.secondary_color, 0.7)
 
     def change_to_word(self, current_word):
+        """
+        Manage the word change when the user clicks on a word button on the tree.
+
+        Parameters
+        ----------
+        current_word : str
+            New current word.
+        """
+
         current_position = get_word_position(
             current_word, self.position_to_word_id, self.words_found)
         if current_position is not None:
             self.change_current_position(current_position)
 
     def change_current_position(self, current_position):
+        """
+        Change the user position on the tree and update the display.
+
+        Parameters
+        ----------
+        current_position : str
+            String giving the new current position.
+        """
+
+        # Initialise two lists to store selected and unselected widgets
+        selected_link_widgets = []
+        unselected_link_widgets = []
+        selected_word_widgets = []
+        unselected_word_widgets = []
+
+        # Update the current position variable
         self.current_position = current_position
+
+        # Iterate over the stored positions
         for position in self.position_to_word_id.keys():
             # Determine if the word is in the main branch
             is_main_branch = is_parent_of(
@@ -217,6 +252,48 @@ class TreeLayout(RelativeLayout):
             if position in self.word_link_dict:
                 word_link = self.word_link_dict[position]
                 word_link.color = main_color
+
+            # Store the widgets in the corresponding list
+            if is_selected:
+                selected_word_widgets.append(self.word_button_dict[position])
+                if position in self.word_link_dict:
+                    selected_link_widgets.append(self.word_link_dict[position])
+            else:
+                unselected_word_widgets.append(self.word_button_dict[position])
+                if position in self.word_link_dict:
+                    unselected_link_widgets.append(
+                        self.word_link_dict[position])
+
+        # Clear the current widgets
+        self.clear_widgets()
+
+        # Add all widgets in the appropriate order
+        self.add_link_and_word_widgets()
+
+    def add_link_and_word_widgets(self):
+        """
+        Add all the widgets in the appropriate order for a nice display with selected items above.
+        """
+
+        # Add the unselected links
+        for position in self.word_link_dict:
+            if not is_parent_of(position, child_position=self.current_position):
+                self.add_widget(self.word_link_dict[position])
+
+        # Add the selected links
+        for position in self.word_link_dict:
+            if is_parent_of(position, child_position=self.current_position):
+                self.add_widget(self.word_link_dict[position])
+
+        # Add the unselected links
+        for position in self.word_button_dict:
+            if not is_parent_of(position, child_position=self.current_position):
+                self.add_widget(self.word_button_dict[position])
+
+        # Add the selected links
+        for position in self.word_button_dict:
+            if is_parent_of(position, child_position=self.current_position):
+                self.add_widget(self.word_button_dict[position])
 
     def compute_word_button_pos_hint(self, current_rank, current_vertical_offset):
         """
@@ -309,9 +386,6 @@ class TreeLayout(RelativeLayout):
         current_position : str
             _description_
         """
-
-        # Clear the layout
-        self.clear_widgets()
 
         # Store the tree infos
         self.position_to_word_id = position_to_word_id
@@ -443,11 +517,11 @@ class TreeLayout(RelativeLayout):
             # Update the previous rank
             previous_rank = current_rank
 
-        for pos in self.word_link_dict:
-            self.add_widget(self.word_link_dict[pos])
+        # Clear the layout
+        self.clear_widgets()
 
-        for pos in self.word_button_dict:
-            self.add_widget(self.word_button_dict[pos])
+        # Add all the widgets in the correct order
+        self.add_link_and_word_widgets()
 
 ###############
 ### Testing ###
