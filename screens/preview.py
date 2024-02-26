@@ -52,8 +52,7 @@ class PreviewScreen(ImprovedScreen):
             **kwargs)
 
     def reload_kwargs(self, dict_kwargs):
-        if "theme_key" in dict_kwargs:
-            self.theme_key = dict_kwargs["theme_key"]
+        self.theme_key = dict_kwargs["theme_key"]
 
     def on_enter(self, *args):
         self.coins_count = USER_DATA.user_profile["coins"]
@@ -66,4 +65,6 @@ class PreviewScreen(ImprovedScreen):
         return super().on_enter(*args)
     
     def go_to_boosters(self):
-        self.go_to_next_screen(screen_name="boosters")
+        self.go_to_next_screen(
+            screen_name="boosters",
+            current_dict_kwargs={"theme_key": self.theme_key})
