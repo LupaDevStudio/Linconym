@@ -51,6 +51,9 @@ class ProfileScreen(LinconymScreen):
     coins_count = NumericProperty()
     theme_colors = StringProperty()
 
+    classic_mode_achievements = StringProperty()
+    daily_mode_achievements = StringProperty()
+
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
@@ -60,7 +63,17 @@ class ProfileScreen(LinconymScreen):
         self.theme_colors = USER_DATA.settings["current_theme_colors"]
         self.user_status = USER_DATA.user_profile["status"]
         self.user_status_image = PATH_BADGES + self.user_status.lower() + ".png"
+
+        self.classic_mode_achievements = "Completed levels: %i\nCompleted acts: %i\nStars won: %i\n\nClick to see all achievements."%(14, 1, 32)
+        self.daily_mode_achievements = "Completed levels: %i\n\nClick to see all achievements."%(14)
+
         return super().on_enter(*args)
 
     def go_to_boosters(self):
-        self.manager.go_to_next_screen(next_screen_name="boosters")
+        self.go_to_next_screen(screen_name="boosters")
+
+    def open_achievements_classic(self):
+        self.go_to_next_screen(screen_name="achievements")
+
+    def open_achievements_daily(self):
+        self.go_to_next_screen(screen_name="achievements")

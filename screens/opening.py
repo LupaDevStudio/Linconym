@@ -69,7 +69,8 @@ class OpeningScreen(ImprovedScreen):
             CreditsScreen,
             PreviewScreen,
             MusicsScreen,
-            ConfigureTreeScreen
+            ConfigureTreeScreen,
+            AchievementsScreen
         )
 
         screen_files = [file for file in os.listdir(
@@ -96,6 +97,7 @@ class OpeningScreen(ImprovedScreen):
         self.PreviewScreen = PreviewScreen
         self.MusicsScreen = MusicsScreen
         self.ConfigureTreeScreen = ConfigureTreeScreen
+        self.AchievementsScreen = AchievementsScreen
 
         Clock.schedule_once(self.load_other_screens)
 
@@ -133,4 +135,6 @@ class OpeningScreen(ImprovedScreen):
         self.manager.add_widget(musics_screen)
         configure_tree_screen = self.ConfigureTreeScreen(name="configure_tree")
         self.manager.add_widget(configure_tree_screen)
+        achievements_screen = self.AchievementsScreen(name="achievements")
+        self.manager.add_widget(achievements_screen)
         Clock.schedule_once(self.switch_to_menu)

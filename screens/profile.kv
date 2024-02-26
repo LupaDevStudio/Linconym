@@ -5,7 +5,7 @@
     # Badge for the status
     CircleIconButton:
         source: root.user_status_image
-        pos_hint: {"center_x":0.2, "center_y":0.75}
+        pos_hint: {"center_x":0.2, "center_y":0.775}
         size_hint: (None, 0.15)
         width: self.height
         disable_button: True
@@ -15,7 +15,7 @@
         text: root.user_status
         font_name: PATH_TITLE_FONT
         font_size: 20 * root.font_ratio
-        pos_hint: {"x":0.4, "center_y":0.825}
+        pos_hint: {"x":0.4, "center_y":0.85}
         size_hint: (0.25, 0.1)
         text_size: self.size
         outline_width: TITLE_OUTLINE_WIDTH
@@ -26,7 +26,7 @@
         text: root.user_level
         font_name: PATH_TITLE_FONT
         font_size: 20 * root.font_ratio
-        pos_hint: {"x":0.675, "center_y":0.825}
+        pos_hint: {"x":0.675, "center_y":0.85}
         size_hint: (0.25, 0.1)
         text_size: self.size
         outline_width: TITLE_OUTLINE_WIDTH
@@ -37,7 +37,7 @@
     # Experience counter
     ExperienceCounter:
         size_hint: (0.525, 0.07)
-        pos_hint: {"x":0.4, "center_y":0.72}
+        pos_hint: {"x":0.4, "center_y":0.745}
         font_ratio: root.font_ratio
         experience_left: 10
         percentage_experience: 0.7
@@ -46,7 +46,25 @@
     # Coins counter
     CoinsCounter:
         size_hint: (0.6, 0.07)
-        pos_hint: {"center_x":0.5, "center_y":0.61}
+        pos_hint: {"center_x":0.5, "center_y":0.635}
         font_ratio: root.font_ratio
         coins_count: root.coins_count
         release_function: root.go_to_boosters
+
+    # Classic mode achievements
+    CustomContentButton:
+        size_hint: (0.8,0.2)
+        pos_hint: {"center_x":0.5, "center_y":0.475}
+        font_ratio: root.font_ratio
+        title: "Classic mode"
+        content: root.classic_mode_achievements
+        release_function: root.open_achievements_classic
+
+    # Daily mode achievements
+    CustomContentButton:
+        size_hint: (0.8,0.2)
+        pos_hint: {"center_x":0.5, "center_y":0.25}
+        font_ratio: root.font_ratio
+        title: "Daily mode"
+        content: root.daily_mode_achievements
+        release_function: root.open_achievements_daily
