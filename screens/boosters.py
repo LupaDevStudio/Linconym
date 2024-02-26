@@ -15,12 +15,9 @@ from kivy.properties import (
 
 ### Local imports ###
 
-from tools.path import (
-    PATH_BACKGROUNDS
-)
 from tools.constants import (
     USER_DATA,
-    THEMES_DICT,
+    SCREEN_TUTORIAL,
     DICT_AMOUNT_ADS,
     DICT_AMOUNT_BUY,
     SCREEN_BACK_ARROW,
@@ -45,7 +42,8 @@ class BoostersScreen(LinconymScreen):
     dict_type_screen = {
         SCREEN_TITLE : "Boosters",
         SCREEN_BOTTOM_BAR : "none",
-        SCREEN_BACK_ARROW : ""
+        SCREEN_BACK_ARROW : "",
+        SCREEN_TUTORIAL : ""
     }
 
     coins_count = NumericProperty()

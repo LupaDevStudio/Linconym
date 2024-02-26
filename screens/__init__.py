@@ -37,3 +37,4 @@ from screens.quests import QuestsScreen
 from screens.credits import CreditsScreen
 from screens.preview import PreviewScreen
 from screens.musics import MusicsScreen
+from screens.configure_tree import ConfigureTreeScreen

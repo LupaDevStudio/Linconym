@@ -20,7 +20,8 @@ from tools.constants import (
     MUSICS_DICT,
     SCREEN_TITLE,
     SCREEN_BACK_ARROW,
-    SCREEN_BOTTOM_BAR
+    SCREEN_BOTTOM_BAR,
+    SCREEN_TUTORIAL
 )
 from tools.kivy_tools import (
     LinconymScreen
@@ -42,7 +43,8 @@ class MusicsScreen(LinconymScreen):
     dict_type_screen = {
         SCREEN_TITLE : "Musics",
         SCREEN_BOTTOM_BAR : "none",
-        SCREEN_BACK_ARROW : ""
+        SCREEN_BACK_ARROW : "",
+        SCREEN_TUTORIAL : ""
     }
 
     coins_count = NumericProperty()

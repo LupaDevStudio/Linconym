@@ -16,14 +16,13 @@ from kivy.properties import (
 ### Local imports ###
 
 from tools.path import (
-    PATH_BACKGROUNDS,
     PATH_BADGES
 )
 from tools.constants import (
     USER_DATA,
-    THEMES_DICT,
     SCREEN_BOTTOM_BAR,
-    SCREEN_TITLE
+    SCREEN_TITLE,
+    SCREEN_TUTORIAL
 )
 from tools.kivy_tools import (
     LinconymScreen
@@ -42,7 +41,8 @@ class ProfileScreen(LinconymScreen):
 
     dict_type_screen = {
         SCREEN_TITLE : "Profile",
-        SCREEN_BOTTOM_BAR : "profile"
+        SCREEN_BOTTOM_BAR : "profile",
+        SCREEN_TUTORIAL : ""
     }
 
     user_status = StringProperty()

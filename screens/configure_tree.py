@@ -16,9 +16,7 @@ from kivy.properties import (
 
 from tools.constants import (
     SCREEN_TUTORIAL,
-    SCREEN_BOTTOM_BAR,
-    SCREEN_BACK_ARROW,
-    SCREEN_TITLE
+    SCREEN_BACK_ARROW
 )
 from tools.kivy_tools import (
     LinconymScreen
@@ -30,14 +28,12 @@ from tools.kivy_tools import (
 #############
 
 
-class QuestsScreen(LinconymScreen):
+class ConfigureTreeScreen(LinconymScreen):
     """
     Class to manage the screen that contains the profile information.
     """
 
     dict_type_screen = {
-        SCREEN_TITLE : "Quests",
-        SCREEN_BOTTOM_BAR : "none",
         SCREEN_BACK_ARROW : "",
         SCREEN_TUTORIAL : ""
     }

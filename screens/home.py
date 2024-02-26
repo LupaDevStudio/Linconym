@@ -8,7 +8,8 @@ Module to create the home screen.
 
 from tools.constants import (
     SCREEN_TITLE,
-    SCREEN_BOTTOM_BAR
+    SCREEN_BOTTOM_BAR,
+    SCREEN_TUTORIAL
 )
 from tools.kivy_tools import (
     LinconymScreen
@@ -30,7 +31,8 @@ class HomeScreen(LinconymScreen):
 
     dict_type_screen = {
         SCREEN_TITLE : "Linconym",
-        SCREEN_BOTTOM_BAR : "home"
+        SCREEN_BOTTOM_BAR : "home",
+        SCREEN_TUTORIAL : ""
     }
 
     def open_classic_mode(self):

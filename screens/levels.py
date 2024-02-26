@@ -15,11 +15,9 @@ from kivy.properties import (
 ### Local imports ###
 
 from tools.constants import (
-    USER_DATA,
-    THEMES_DICT,
     SCREEN_BACK_ARROW,
     SCREEN_BOTTOM_BAR,
-    SCREEN_TITLE
+    SCREEN_TUTORIAL
 )
 from tools.kivy_tools import (
     LinconymScreen
@@ -42,7 +40,8 @@ class LevelsScreen(LinconymScreen):
     current_act_name = StringProperty()
     dict_type_screen = {
         SCREEN_BOTTOM_BAR : "none",
-        SCREEN_BACK_ARROW : ""
+        SCREEN_BACK_ARROW : "",
+        SCREEN_TUTORIAL : ""
     }
 
     def __init__(self, **kwargs) -> None:

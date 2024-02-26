@@ -28,8 +28,7 @@ from tools.path import (
 )
 from tools.constants import (
     CUSTOMIZATION_LAYOUT_FONT_SIZE,
-    LETTER_FONT_SIZE,
-    DISABLE_BUTTON_COLOR
+    LETTER_FONT_SIZE
 )
 from screens.custom_widgets import (
     ColoredRoundedButton,

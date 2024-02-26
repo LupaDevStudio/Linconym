@@ -17,7 +17,6 @@ MOBILE_MODE : bool
 ### Python imports ###
 
 import os
-from typing import Literal
 
 ### Kivy imports ###
 
@@ -32,7 +31,8 @@ from tools.path import (
     PATH_WORDS_88K,
     PATH_WORDS_280K,
     PATH_GAMEPLAY,
-    PATH_CUSTOMIZATION
+    PATH_CUSTOMIZATION,
+    PATH_RESOURCES
 )
 from tools.basic_tools import (
     load_json_file,
@@ -188,6 +188,10 @@ class UserData():
 
 USER_DATA = UserData()
 
+### Tutorial ###
+
+TUTORIAL = load_json_file(PATH_RESOURCES + "tutorial.json")
+
 ### Colors ###
 
 
@@ -214,6 +218,7 @@ EXPERIENCE_FONT_SIZE = 15
 LEVEL_ID_FONT_SIZE = 22
 LETTER_FONT_SIZE = 18
 LABEL_FONT_SIZE = 30
+SMALL_BUTTON_FONT_SIZE = 15
 
 TEXT_FONT_COLOR = (0, 0, 0, 1)
 TITLE_OUTLINE_WIDTH = 2
@@ -221,8 +226,9 @@ TITLE_OUTLINE_COLOR = (1, 1, 1, 1)
 BOTTOM_BAR_HEIGHT = 0.12
 CUSTOM_BUTTON_BACKGROUND_COLOR = (1, 1, 1, 0.7)
 OPACITY_ON_BUTTON_PRESS = 0.8
-POS_HINT_BACK_ARROW = {"x": 0.02, "top": 0.99}
+POS_HINT_LEFT_TOP_BUTTON = {"x": 0.02, "top": 0.99}
 POS_HINT_RIGHT_TOP_BUTTON = {"right": 0.98, "top": 0.99}
+POS_HINT_RIGHT_BOTTOM_BUTTON = {"right": 0.98, "y": 0.01}
 RATE_CHANGE_OPACITY = 0.05
 DISABLE_BUTTON_COLOR = (0.15, 0.15, 0.15, 1)
 BUTTON_OUTLINE_WIDTH = 1.5
@@ -245,6 +251,7 @@ WORD_BUTTON_SIDE_OFFSET = 0.1
 SCREEN_TITLE = "has_title"
 SCREEN_BACK_ARROW = "has_back_arrow"
 SCREEN_BOTTOM_BAR = "has_bottom_bar_"
+SCREEN_TUTORIAL = "has_tutorial"
 
 ### Musics ###
 
