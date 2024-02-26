@@ -11,8 +11,7 @@ from tools.path import (
 )
 
 from tools.constants import (
-    USER_DATA,
-    SOUND_LIST,
+    USER_DATA
 )
 from tools.game_tools import (
     MusicMixer,
