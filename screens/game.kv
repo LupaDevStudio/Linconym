@@ -14,13 +14,21 @@
     # Stars
     ThreeStars:
         id: three_stars
-        pos_hint: {"center_x":0.5, "center_y":0.85}
+        pos_hint: {"center_x":0.5, "center_y":0.845}
         size_hint: (0.3, 0.05)
         nb_stars: root.nb_stars
         primary_color: root.primary_color
         secondary_color: root.secondary_color
 
     # Words to connect
+    Label:
+        text: root.start_word + " › " + root.end_word
+        font_name: PATH_TITLE_FONT
+        font_size: SMALL_LABEL_FONT_SIZE * root.font_ratio
+        pos_hint: {"center_x":0.5, "center_y":0.795}
+        outline_width: BUTTON_OUTLINE_WIDTH * root.font_ratio
+        outline_color: TITLE_OUTLINE_COLOR
+        color: TEXT_FONT_COLOR
 
     # Tree
     TreeScrollview:
@@ -38,6 +46,15 @@
             font_ratio: root.font_ratio
             primary_color: root.primary_color
             secondary_color: root.secondary_color
+
+    # Full screen tree
+    RoundedButtonImage:
+        image_path: PATH_ICONS + "full_screen.png"
+        pos_hint: {"x": 0.02, "y": 0.4125}
+        size_hint: (0.1, None)
+        height: self.width
+        colors: root.primary_color
+        on_release: root.go_to_quests_tree_screen("configure_tree")
 
     # Previous word
     ColoredRoundedButton:
@@ -69,15 +86,15 @@
         text: "Submit"
         release_function: root.submit_word
         font_ratio: root.font_ratio
-        font_size: 15
+        font_size: SMALL_BUTTON_FONT_SIZE
         radius: 15
 
     # Quests arrow
     RoundedButtonImage:
         id: back_arrow
-        image_path: PATH_IMAGES + "quests.png"
+        image_path: PATH_ICONS + "quests.png"
         pos_hint: POS_HINT_RIGHT_BOTTOM_BUTTON
         size_hint: (0.1, None)
         height: self.width
         colors: root.primary_color
-        on_release: go_to_quests_screen()
+        on_release: root.go_to_quests_tree_screen("quests")

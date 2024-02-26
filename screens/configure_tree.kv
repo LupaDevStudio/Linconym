@@ -1,3 +1,47 @@
 #:kivy 2.2.1
 
 <ConfigureTreeScreen>:
+    Label:
+        text: root.current_level_name
+        font_name: PATH_TITLE_FONT
+        font_size: TITLE_FONT_SIZE * root.font_ratio
+        pos_hint: {"center_x":0.5, "center_y":0.9}
+        outline_width: TITLE_OUTLINE_WIDTH
+        outline_color: TITLE_OUTLINE_COLOR
+        color: TEXT_FONT_COLOR
+
+    # Stars
+    ThreeStars:
+        id: three_stars
+        pos_hint: {"center_x":0.5, "center_y":0.845}
+        size_hint: (0.3, 0.05)
+        nb_stars: root.nb_stars
+        primary_color: root.primary_color
+        secondary_color: root.secondary_color
+
+    # Words to connect
+    Label:
+        text: root.start_word + " › " + root.end_word
+        font_name: PATH_TITLE_FONT
+        font_size: SMALL_LABEL_FONT_SIZE * root.font_ratio
+        pos_hint: {"center_x":0.5, "center_y":0.795}
+        outline_width: BUTTON_OUTLINE_WIDTH * root.font_ratio
+        outline_color: TITLE_OUTLINE_COLOR
+        color: TEXT_FONT_COLOR
+
+    # Tree
+    TreeScrollview:
+        id: tree_scrollview
+        pos_hint: {"center_x":0.5, "top":0.7675}
+        size_hint: (1,0.6)
+        bar_color: root.primary_color
+        bar_inactive_color: (0,0,0,0)
+        font_ratio: root.font_ratio
+        primary_color: root.primary_color
+        secondary_color: root.secondary_color
+
+        TreeLayout:
+            id: tree_layout
+            font_ratio: root.font_ratio
+            primary_color: root.primary_color
+            secondary_color: root.secondary_color

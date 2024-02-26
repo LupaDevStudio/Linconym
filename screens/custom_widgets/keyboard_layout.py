@@ -24,7 +24,7 @@ from kivy.properties import (
 
 from tools.path import (
     PATH_TEXT_FONT,
-    PATH_IMAGES
+    PATH_ICONS
 )
 from tools.constants import (
     CUSTOMIZATION_LAYOUT_FONT_SIZE,
@@ -188,7 +188,7 @@ class KeyboardLayout(RelativeLayout):
 
         # DELETE key
         self.delete_key = ColoredRoundedButtonImage(
-            image_path=PATH_IMAGES + "delete.png",
+            image_path=PATH_ICONS + "delete.png",
             background_color=self.background_color,
             touch_color=self.touch_color,
             pos_hint={

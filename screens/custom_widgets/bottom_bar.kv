@@ -19,7 +19,7 @@
 
     Image:
         id: selected_cursor
-        source: PATH_IMAGES + "cursor.png"
+        source: PATH_ICONS + "cursor.png"
         pos_hint: root.selected_rect_pos
         fit_mode: "contain"
         size_hint: root.selected_rect_size
@@ -28,7 +28,7 @@
     # Home button
     ImageButton:
         id: home_button
-        source: PATH_IMAGES + "home.png"
+        source: PATH_ICONS + "home.png"
         size_hint: root.button_width, root.button_height
         pos_hint: {"center_x":0.125, "center_y":0.5}
         release_function: root.open_home
@@ -36,7 +36,7 @@
     # Customization button
     ImageButton:
         id: customization_button
-        source: PATH_IMAGES + "customization.png"
+        source: PATH_ICONS + "customization.png"
         size_hint: root.button_width, root.button_height
         pos_hint: {"center_x":0.375, "center_y":0.5}
         release_function: root.open_customization
@@ -44,7 +44,7 @@
     # Profile button
     ImageButton:
         id: profile_button
-        source: PATH_IMAGES + "profile.png"
+        source: PATH_ICONS + "profile.png"
         size_hint: root.button_width, root.button_height
         pos_hint: {"center_x":0.625, "center_y":0.5}
         release_function: root.open_profile
@@ -52,7 +52,7 @@
     # Settings button
     ImageButton:
         id: settings_button
-        source: PATH_IMAGES + "settings.png"
+        source: PATH_ICONS + "settings.png"
         size_hint: root.button_width, root.button_height
         pos_hint: {"center_x":0.875, "center_y":0.5}
         release_function: root.open_settings

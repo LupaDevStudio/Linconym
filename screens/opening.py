@@ -68,7 +68,8 @@ class OpeningScreen(ImprovedScreen):
             QuestsScreen,
             CreditsScreen,
             PreviewScreen,
-            MusicsScreen
+            MusicsScreen,
+            ConfigureTreeScreen
         )
 
         screen_files = [file for file in os.listdir(
@@ -94,6 +95,7 @@ class OpeningScreen(ImprovedScreen):
         self.CreditsScreen = CreditsScreen
         self.PreviewScreen = PreviewScreen
         self.MusicsScreen = MusicsScreen
+        self.ConfigureTreeScreen = ConfigureTreeScreen
 
         Clock.schedule_once(self.load_other_screens)
 
@@ -129,4 +131,6 @@ class OpeningScreen(ImprovedScreen):
         self.manager.add_widget(preview_screen)
         musics_screen = self.MusicsScreen(name="musics")
         self.manager.add_widget(musics_screen)
+        configure_tree_screen = self.ConfigureTreeScreen(name="configure_tree")
+        self.manager.add_widget(configure_tree_screen)
         Clock.schedule_once(self.switch_to_menu)

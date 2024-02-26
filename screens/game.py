@@ -258,18 +258,12 @@ class GameScreen(LinconymScreen):
         # self.ids.submit_button.opacity = 0
         self.ids.submit_button.disable_button = True
 
-    def go_to_quests_screen(self):
+    def go_to_quests_tree_screen(self, screen_name: Literal["quests", "configure_tree"]):
         dict_kwargs = {
             "current_level_id": self.current_level_id,
             "current_act_id": self.current_act_id
         }
-        self.manager.go_to_next_screen(
-            next_screen_name="quests", 
+        self.go_to_next_screen(
+            screen_name=screen_name, 
             current_dict_kwargs=dict_kwargs,
             next_dict_kwargs=dict_kwargs)
-
-    def go_to_previous_level(self):
-        print("TODO go to previous level if possible")
-
-    def go_to_next_level(self):
-        print("TODO go to next level if possible")
