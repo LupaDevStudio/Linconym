@@ -39,10 +39,6 @@ class CircleIconButton(ButtonBehavior, Image):
         super().__init__(**kwargs)
         self.always_release = True
         self.release_function = release_function
-        self.bind(disable_button=self.bind_function)
-
-    def bind_function(self, base_widget, value):
-        pass
 
     def on_press(self):
         if not self.disable_button:

@@ -33,7 +33,7 @@
     TreeScrollview:
         id: tree_scrollview
         pos_hint: {"center_x":0.5, "top":0.7675}
-        size_hint: (1,0.6)
+        size_hint: (1,0.525)
         bar_color: root.primary_color
         bar_inactive_color: (0,0,0,0)
         font_ratio: root.font_ratio
@@ -45,3 +45,23 @@
             font_ratio: root.font_ratio
             primary_color: root.primary_color
             secondary_color: root.secondary_color
+
+    # Reset screen button
+    CustomButton:
+        text:"Reset the tree"
+        size_hint: (0.4,0.185)
+        pos_hint: {"center_x":0.25, "y":0.025}
+        release_function: root.ask_reset_tree
+        font_size: SMALL_LABEL_FONT_SIZE
+        text_font_name: PATH_TITLE_FONT
+        font_ratio: root.font_ratio
+
+    # Display / hide completed paths
+    SelectCircleButtonWithText:
+        text: "Completed paths"
+        pos_hint: {"center_x":0.75,"y":0.025}
+        size_hint: (0.4,0.185)
+        font_size: SMALL_LABEL_FONT_SIZE
+        font_ratio: root.font_ratio
+        is_using: root.display_paths
+        release_function: root.display_hide_path

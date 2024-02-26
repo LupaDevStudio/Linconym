@@ -10,7 +10,8 @@ Module to create the quests screen.
 
 from kivy.properties import (
     StringProperty,
-    NumericProperty
+    NumericProperty,
+    BooleanProperty
 )
 
 ### Local imports ###
@@ -48,6 +49,7 @@ class ConfigureTreeScreen(LinconymScreen):
     nb_stars = NumericProperty()
     start_word = StringProperty("BOY")
     end_word = StringProperty("TOYS")
+    display_paths = BooleanProperty(False)
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
@@ -68,3 +70,13 @@ class ConfigureTreeScreen(LinconymScreen):
         # Create the title of the screen
         temp = self.current_act_id.replace("Act", "")
         self.current_level_name = "Act " + temp + " – " + self.current_level_id
+
+    def display_hide_path(self):
+        # TODO save in the USER DATA
+        if self.display_paths:
+            self.display_paths = False
+        else:
+            self.display_paths = True
+
+    def ask_reset_tree(self):
+        print("TODO popup")

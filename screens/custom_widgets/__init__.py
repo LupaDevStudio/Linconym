@@ -15,6 +15,7 @@ from screens.custom_widgets.colored_rounded_button import ColoredRoundedButton
 from screens.custom_widgets.colored_rounded_button_image import ColoredRoundedButtonImage
 from screens.custom_widgets.buy_rectangle_button import BuyRectangleButton
 from screens.custom_widgets.select_circle_button import SelectCircleButton
+from screens.custom_widgets.select_circle_button_with_text import SelectCircleButtonWithText
 
 ### Other widgets ###
 
