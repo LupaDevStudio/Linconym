@@ -59,7 +59,8 @@ class QuestsScreen(LinconymScreen):
         self.fill_scrollview()
 
     def fill_scrollview(self):
-        scrollview_layout = self.ids["scrollview_layout"]
+        scrollview_layout = self.ids.scrollview_layout
+
         # Load the widgets
         self.QUESTS_LAYOUT_DICT = {}
         dict_act_quests = QUESTS_DICT[self.current_act_id]
@@ -107,7 +108,9 @@ class QuestsScreen(LinconymScreen):
             reward=quest["reward"],
             font_ratio=self.font_ratio,
             primary_color=self.primary_color,
-            secondary_color=self.secondary_color)
+            secondary_color=self.secondary_color,
+            size_hint=(0.8, None),
+            height=150*self.font_ratio)
         current_quest_layout.has_completed = has_completed
         current_quest_layout.has_got_reward = has_got_reward
         
@@ -118,4 +121,4 @@ class QuestsScreen(LinconymScreen):
 
         # Reset scrollview
         self.number_quests = 0
-        self.ids.scrollview_layout.reset_screen()
+        self.ids.scrollview_layout.reset_scrollview()
