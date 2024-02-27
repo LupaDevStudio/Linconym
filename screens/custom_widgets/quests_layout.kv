@@ -9,7 +9,17 @@
         RoundedRectangle:
             pos:(0,0)
             size:self.size
-            radius:[40,]
+            radius:[30*self.font_ratio,]
+
+    # Badge icon
+    Image:
+        source: PATH_ICONS + "success.png"
+        pos_hint: {"x": -0.025,"center_y":0.9}
+        size_hint: (None,0.35)
+        width: self.height
+        opacity: 1 if root.has_completed else 0
+        color: root.primary_color
+        fit_mode: "contain"
 
     # Title
     Label:
