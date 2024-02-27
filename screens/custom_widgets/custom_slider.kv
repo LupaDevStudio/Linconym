@@ -4,12 +4,18 @@
 
     # Background
     canvas.before:
+        # Back
         Color:
-            rgba: self.background_color
+            rgba: self.secondary_color
         RoundedRectangle:
             pos:(0,0)
             size:self.size
             radius:[20,]
+        # Line
+        Color:
+            rgba: self.primary_color
+
+
 
     # Slider
     Slider:
