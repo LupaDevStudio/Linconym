@@ -9,7 +9,7 @@ Module to create the quests screen.
 ### Kivy imports ###
 
 from kivy.properties import (
-    NumericProperty
+    StringProperty
 )
 
 ### Local imports ###
@@ -20,7 +20,8 @@ from tools.constants import (
     SCREEN_BACK_ARROW,
     SCREEN_TITLE,
     QUESTS_DICT,
-    USER_DATA
+    USER_DATA,
+    GAMEPLAY_DICT
 )
 from tools.kivy_tools import (
     LinconymScreen
@@ -46,7 +47,7 @@ class QuestsScreen(LinconymScreen):
         SCREEN_BACK_ARROW : "",
         SCREEN_TUTORIAL : ""
     }
-    number_quests = NumericProperty()
+    current_act_name : str = StringProperty()
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
@@ -56,6 +57,7 @@ class QuestsScreen(LinconymScreen):
     def reload_kwargs(self, dict_kwargs):
         self.current_act_id = dict_kwargs["current_act_id"]
         self.current_level_id = dict_kwargs["current_level_id"]
+        self.current_act_name = GAMEPLAY_DICT[self.current_act_id]["name"]
 
     def on_pre_enter(self, *args):
         super().on_pre_enter(*args)
@@ -92,10 +94,10 @@ class QuestsScreen(LinconymScreen):
                     scrollview_layout.add_widget(current_quest_layout)
 
     def create_quest_layout(self, level_id: str, quest_id: str):
-        self.number_quests += 1
 
         quest = QUESTS_DICT[self.current_act_id][level_id][quest_id]
 
+        # Get the data of the user
         has_completed = False
         has_got_reward = False
         user_data_quests_act = USER_DATA.quests[self.current_act_id]
@@ -105,6 +107,7 @@ class QuestsScreen(LinconymScreen):
                 if user_data_quests_act[level_id][quest_id]["has_got_reward"]:
                     has_got_reward = True
 
+        # Create the quest layout
         current_quest_layout = QuestsLayout(
             level_id=int(level_id),
             description=quest["quest_content"],
@@ -123,5 +126,4 @@ class QuestsScreen(LinconymScreen):
         super().on_leave(*args)
 
         # Reset scrollview
-        self.number_quests = 0
         self.ids.scrollview_layout.reset_scrollview()

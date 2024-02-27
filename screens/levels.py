@@ -37,12 +37,12 @@ class LevelsScreen(LinconymScreen):
     Class to manage the levels screen which allow the user to select a level inside an act.
     """
 
-    current_act_name = StringProperty()
     dict_type_screen = {
         SCREEN_BOTTOM_BAR : "none",
         SCREEN_BACK_ARROW : "",
         SCREEN_TUTORIAL : ""
     }
+    current_act_name = StringProperty()
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
