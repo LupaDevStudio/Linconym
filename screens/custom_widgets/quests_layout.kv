@@ -1,0 +1,49 @@
+#:kivy 2.2.1
+
+<QuestsLayout>:
+
+    # Background
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            pos:(0,0)
+            size:self.size
+            radius:[40,]
+
+    # Title
+    Label:
+        text: "Level " + str(root.level_id)
+        pos_hint: {"center_x":0.5, "center_y":0.8}
+        size_hint: (1, None)
+        shorten: False
+        text_size: (root.width*root.text_filling_ratio,self.size[1])
+        font_size: root.font_ratio * root.font_size_title
+        font_name: root.text_font_name
+        halign: "center"
+        valign: "center"
+        line_height: 1
+        color: (0,0,0,1)
+
+    # Content
+    Label:
+        text: root.description
+        font_size: root.font_ratio * root.font_size_content
+        pos_hint: {"center_x":0.5, "center_y":0.6}
+        size_hint: (1, None)
+        shorten: False
+        text_size: (root.width*root.text_filling_ratio,None)
+        font_name: root.text_font_name
+        line_height: 1
+        color: (0,0,0,1)
+
+    # Go to quest or claim reward
+    ColoredRoundedButton:
+        text: root.button_text
+        background_color: root.secondary_color if root.has_got_reward else root.primary_color
+        pos_hint: {"center_x": 0.75,"y": 0.1}
+        font_ratio: root.font_ratio
+        font_size: SMALL_BUTTON_FONT_SIZE
+        size_hint: (0.4, 0.3)
+        color_label: (1,1,1,1)
+        outline_color: (1,1,1,1)

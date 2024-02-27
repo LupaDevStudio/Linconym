@@ -370,6 +370,10 @@ class LinconymScreen(ImprovedScreen):
             THEMES_DICT[current_theme_image]["image"],
             **kw)
 
+        current_theme_colors = USER_DATA.settings["current_theme_colors"]
+        self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
+        self.secondary_color = THEMES_DICT[current_theme_colors]["secondary"]
+
         # Display the title or not
         if SCREEN_TITLE in self.dict_type_screen:
             self.title_screen = self.dict_type_screen[SCREEN_TITLE]

@@ -6,7 +6,7 @@ Package to manage the custom widgets included in the screens.
 
 from screens.custom_widgets.custom_button import CustomButton
 from screens.custom_widgets.side_image_button import SideImageButton
-from screens.custom_widgets.custom_content_label import CustomContentButton
+from screens.custom_widgets.custom_content_button import CustomContentButton
 from screens.custom_widgets.buy_button import BuyButton
 from screens.custom_widgets.round_button import RoundButton
 from screens.custom_widgets.circle_icon_button import CircleIconButton
@@ -36,6 +36,7 @@ from screens.custom_widgets.keyboard_layout import KeyboardLayout
 from screens.custom_widgets.levels_branchs import LevelBranch
 from screens.custom_widgets.tree import TreeLayout, TreeScrollview
 from screens.custom_widgets.music_layout import MusicLayout
+from screens.custom_widgets.quests_layout import QuestsLayout
 
 ### Popups ###
 

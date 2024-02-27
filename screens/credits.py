@@ -59,7 +59,6 @@ class CreditsScreen(LinconymScreen):
     def fill_scrollview(self):
         # Load the widgets
         self.number_lines_credits = 0
-        current_theme_colors = USER_DATA.settings["current_theme_colors"]
         scrollview_layout = self.ids["scrollview_layout"]
 
         self.CREDITS_LAYOUT_DICT = {}
@@ -70,7 +69,7 @@ class CreditsScreen(LinconymScreen):
             music_credit_layout = MusicLayout(
                 music_key=music,
                 font_ratio=self.font_ratio * 0.8,
-                primary_color=THEMES_DICT[current_theme_colors]["primary"],
+                primary_color=self.primary_color,
                 radius=20)
             music_credit_layout.disable_buy_select()
             music_credit_layout.release_function = partial(

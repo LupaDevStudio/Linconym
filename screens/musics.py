@@ -64,14 +64,13 @@ class MusicsScreen(LinconymScreen):
         scrollview_layout = self.ids["scrollview_layout"]
         # Load the widgets
         self.MUSICS_LAYOUT_DICT = {}
-        current_theme_colors = USER_DATA.settings["current_theme_colors"]
         for music in MUSICS_DICT:
             has_bought_music = USER_DATA.unlocked_musics[music]
             is_using_music = USER_DATA.settings["current_music"] == music
             current_music_layout = MusicLayout(
                 music_key=music,
                 font_ratio=self.font_ratio * 0.8,
-                primary_color=THEMES_DICT[current_theme_colors]["primary"],
+                primary_color=self.primary_color,
                 has_bought_music=has_bought_music,
                 is_using_music=is_using_music,
                 disable_button=True)

@@ -32,7 +32,8 @@ from tools.path import (
     PATH_WORDS_280K,
     PATH_GAMEPLAY,
     PATH_CUSTOMIZATION,
-    PATH_RESOURCES
+    PATH_RESOURCES,
+    PATH_QUESTS
 )
 from tools.basic_tools import (
     load_json_file,
@@ -78,7 +79,10 @@ if not os.path.exists(PATH_USER_DATA):
             "start_word": "",
             "end_word": ""
         },
-        "history": {},
+        "achievements": {},
+        "quests": {
+            "Act1": {}
+        },
         "settings": {
             "sound_volume": 0.5,
             "music_volume": 0.5,
@@ -114,7 +118,8 @@ class UserData():
         data = load_json_file(PATH_USER_DATA)
         self.classic_mode = data["classic_mode"]
         self.daily_mode = data["daily_mode"]
-        self.history = data["history"]
+        self.quests = data["quests"]
+        self.achievements = data["achievements"]
         self.settings = data["settings"]
         self.unlocked_themes = data["unlocked_themes"]
         self.unlocked_musics = data["unlocked_musics"]
@@ -138,7 +143,8 @@ class UserData():
         data = {}
         data["classic_mode"] = self.classic_mode
         data["daily_mode"] = self.daily_mode
-        data["history"] = self.history
+        data["quests"] = self.quests
+        data["achievements"] = self.achievements
         data["settings"] = self.settings
         data["unlocked_themes"] = self.unlocked_themes
         data["unlocked_musics"] = self.unlocked_musics
@@ -214,7 +220,7 @@ TITLE_FONT_SIZE = 45
 TITLE_OUTLINE_COLOR = (1, 1, 1, 1)
 TITLE_OUTLINE_WIDTH = 2
 
-LABEL_FONT_SIZE = 30
+LABEL_FONT_SIZE = 28
 SMALL_LABEL_FONT_SIZE = 22
 CONTENT_LABEL_FONT_SIZE = 17
 
@@ -329,9 +335,10 @@ DICT_ID_TO_NB_WORDS = {
     DICT_ID_LIST[3]: 375000
 }
 
-### Levels ###
+### Levels, quests and achievements ###
 
 GAMEPLAY_DICT = load_json_file(PATH_GAMEPLAY)
+QUESTS_DICT = load_json_file(PATH_QUESTS)
 
 ### Customization with themes and musics ###
 

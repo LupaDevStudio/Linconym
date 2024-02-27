@@ -22,7 +22,8 @@ from tools.constants import (
     CUSTOM_BUTTON_BACKGROUND_COLOR,
     MAIN_BUTTON_FONT_SIZE,
     OPACITY_ON_BUTTON_PRESS,
-    CONTENT_LABEL_FONT_SIZE
+    CONTENT_LABEL_FONT_SIZE,
+    LABEL_FONT_SIZE
 )
 
 #############
@@ -38,8 +39,8 @@ class CustomContentButton(ButtonBehavior, RelativeLayout):
     background_color = CUSTOM_BUTTON_BACKGROUND_COLOR
     title = StringProperty()
     content = StringProperty()
-    text_filling_ratio = NumericProperty()
-    font_size_title = NumericProperty()
+    text_filling_ratio = NumericProperty(0.8)
+    font_size_title = NumericProperty(LABEL_FONT_SIZE)
     font_size_content = NumericProperty()
     font_ratio = NumericProperty()
 
@@ -49,8 +50,6 @@ class CustomContentButton(ButtonBehavior, RelativeLayout):
             content="",
             button_mode=True,
             text_font_name=PATH_TEXT_FONT,
-            text_filling_ratio=0.8,
-            font_size_title=MAIN_BUTTON_FONT_SIZE,
             font_size_content=CONTENT_LABEL_FONT_SIZE,
             release_function=lambda: 1 + 1,
             font_ratio=None,
@@ -64,8 +63,6 @@ class CustomContentButton(ButtonBehavior, RelativeLayout):
         self.text_font_name = text_font_name
         self.title = title
         self.content = content
-        self.text_filling_ratio = text_filling_ratio
-        self.font_size_title = font_size_title
         self.font_size_content = font_size_content
 
     def on_press(self):
