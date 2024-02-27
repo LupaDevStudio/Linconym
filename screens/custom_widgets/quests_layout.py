@@ -23,7 +23,8 @@ from tools.path import (
 from tools.constants import (
     CUSTOM_BUTTON_BACKGROUND_COLOR,
     LABEL_FONT_SIZE,
-    CONTENT_LABEL_FONT_SIZE
+    CONTENT_LABEL_FONT_SIZE,
+    SMALL_LABEL_FONT_SIZE
 )
 
 #############
@@ -43,6 +44,7 @@ class QuestsLayout(RelativeLayout):
     text_font_name = StringProperty(PATH_TEXT_FONT)
     font_size_title = NumericProperty(LABEL_FONT_SIZE)
     font_size_content = NumericProperty(CONTENT_LABEL_FONT_SIZE)
+    font_size_reward = NumericProperty(SMALL_LABEL_FONT_SIZE)
     font_ratio = NumericProperty(1)
     level_id = NumericProperty(1)
     description = StringProperty()

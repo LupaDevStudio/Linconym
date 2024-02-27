@@ -56,6 +56,9 @@ class QuestsScreen(LinconymScreen):
     def reload_kwargs(self, dict_kwargs):
         self.current_act_id = dict_kwargs["current_act_id"]
         self.current_level_id = dict_kwargs["current_level_id"]
+
+    def on_pre_enter(self, *args):
+        super().on_pre_enter(*args)
         self.fill_scrollview()
 
     def fill_scrollview(self):
