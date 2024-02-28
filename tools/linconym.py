@@ -8,6 +8,11 @@ Module containing the core of Linconym.
 
 ### Python imports ###
 
+if __name__ == "__main__":
+    import sys
+    sys.path.append("../")
+    sys.path.append("./")
+
 from typing import (
     Dict,
     List
@@ -765,10 +770,8 @@ class ClassicGame(Game):
 
 
 if __name__ == "__main__":
-    import sys
-    sys.path.append("../")
-    sys.path.append("./")
+
     # fill_gameplay_dict_with_solutions()
     # fill_daily_games_with_solutions()
     # print(is_valid("boy", "joy"))
-    find_solutions("fish", "shark", ENGLISH_WORDS_DICTS["10k"])
+    find_solutions("Abyssal", "fiction", ENGLISH_WORDS_DICTS["10k"])

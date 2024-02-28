@@ -33,7 +33,8 @@ from tools.path import (
     PATH_GAMEPLAY,
     PATH_CUSTOMIZATION,
     PATH_RESOURCES,
-    PATH_QUESTS
+    PATH_QUESTS,
+    PATH_CREDITS
 )
 from tools.basic_tools import (
     load_json_file,
@@ -339,6 +340,7 @@ DICT_ID_TO_NB_WORDS = {
 
 GAMEPLAY_DICT = load_json_file(PATH_GAMEPLAY)
 QUESTS_DICT = load_json_file(PATH_QUESTS)
+CREDITS_DICT = load_json_file(PATH_CREDITS)
 
 ### Customization with themes and musics ###
 

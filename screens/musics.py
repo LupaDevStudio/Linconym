@@ -68,7 +68,8 @@ class MusicsScreen(LinconymScreen):
             has_bought_music = USER_DATA.unlocked_musics[music]
             is_using_music = USER_DATA.settings["current_music"] == music
             current_music_layout = MusicLayout(
-                music_key=music,
+                music_title=MUSICS_DICT[music]["name"],
+                music_price=MUSICS_DICT[music]["price"],
                 font_ratio=self.font_ratio * 0.8,
                 primary_color=self.primary_color,
                 has_bought_music=has_bought_music,

@@ -20,12 +20,11 @@ from kivy.properties import (
 ### Local imports ###
 
 from tools.constants import (
-    USER_DATA,
-    THEMES_DICT,
-    MUSICS_DICT,
+    CREDITS_DICT,
     SCREEN_TITLE,
     SCREEN_BACK_ARROW,
-    SCREEN_BOTTOM_BAR
+    SCREEN_BOTTOM_BAR,
+    SMALL_LABEL_FONT_SIZE
 )
 from tools.kivy_tools import (
     LinconymScreen
@@ -64,16 +63,19 @@ class CreditsScreen(LinconymScreen):
         self.CREDITS_LAYOUT_DICT = {}
 
         # Add the musics
-        for music in MUSICS_DICT:
+        musics_dict = CREDITS_DICT["musics"]
+        for music in musics_dict:
             self.number_lines_credits += 1
+            title = musics_dict[music]["name"] + " – " + musics_dict[music]["author"]
             music_credit_layout = MusicLayout(
-                music_key=music,
+                music_title=title,
                 font_ratio=self.font_ratio * 0.8,
                 primary_color=self.primary_color,
-                radius=20)
+                radius=20,
+                font_size=SMALL_LABEL_FONT_SIZE)
             music_credit_layout.disable_buy_select()
             music_credit_layout.release_function = partial(
-                self.open_url, MUSICS_DICT[music]["license"])
+                self.open_url, musics_dict[music]["license"])
             self.CREDITS_LAYOUT_DICT[music] = music_credit_layout
             scrollview_layout.add_widget(music_credit_layout)
 
