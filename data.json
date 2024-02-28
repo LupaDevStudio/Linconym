@@ -17,30 +17,21 @@
     "quests": {
         "Act1": {
             "1": {
-                "1": {
-                    "has_completed": true,
-                    "has_got_reward": false
-                }
+                "1": false
             },
             "2": {
-                "2": {
-                    "has_completed": true,
-                    "has_got_reward": true
-                }
+                "2": true
             },
             "3": {
-                "1": {
-                    "has_completed": true,
-                    "has_got_reward": false
-                },
-                "2": {
-                    "has_completed": true,
-                    "has_got_reward": true
-                }
+                "1": false,
+                "2": true
             }
         }
     },
-    "achievements": {},
+    "achievements": {
+        "beginner": true,
+        "ach2": false
+    },
     "settings": {
         "music_volume": 0.0,
         "sound_volume": 0.46621621621621623,

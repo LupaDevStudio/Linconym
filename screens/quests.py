@@ -104,7 +104,7 @@ class QuestsScreen(LinconymScreen):
         if level_id in user_data_quests_act:
             if quest_id in user_data_quests_act[level_id]:
                 has_completed = True
-                if user_data_quests_act[level_id][quest_id]["has_got_reward"]:
+                if user_data_quests_act[level_id][quest_id]:
                     has_got_reward = True
 
         # Create the quest layout
