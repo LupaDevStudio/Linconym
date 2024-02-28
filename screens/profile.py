@@ -77,3 +77,6 @@ class ProfileScreen(LinconymScreen):
 
     def open_achievements_daily(self):
         self.go_to_next_screen(screen_name="achievements")
+
+    def open_badges(self):
+        print("TODO open badges")

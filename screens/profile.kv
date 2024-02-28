@@ -8,7 +8,8 @@
         pos_hint: {"center_x":0.2, "center_y":0.775}
         size_hint: (None, 0.15)
         width: self.height
-        disable_button: True
+        exterior_color: root.primary_color
+        release_function: root.open_badges
 
     # Status and level
     Label:
