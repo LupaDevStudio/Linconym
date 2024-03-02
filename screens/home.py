@@ -17,6 +17,9 @@ from tools.kivy_tools import (
 from tools import (
     music_mixer
 )
+from tools.constants import (
+    USER_DATA
+)
 
 
 #############
@@ -30,10 +33,16 @@ class HomeScreen(LinconymScreen):
     """
 
     dict_type_screen = {
-        SCREEN_TITLE : "Linconym",
-        SCREEN_BOTTOM_BAR : "home",
-        SCREEN_TUTORIAL : ""
+        SCREEN_TITLE: "Linconym",
+        SCREEN_BOTTOM_BAR: "home",
+        SCREEN_TUTORIAL: ""
     }
+
+    def on_enter(self, *args):
+        current_music = USER_DATA.settings["current_music"]
+        if music_mixer.musics[current_music].state == "stop":
+            music_mixer.play(current_music, loop=True)
+        return super().on_enter(*args)
 
     def open_classic_mode(self):
         """
