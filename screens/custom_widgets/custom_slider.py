@@ -32,13 +32,18 @@ class CustomSlider(Slider):
     A custom slider.
     """
 
-    primary_color = ColorProperty(0, 0, 0, 1)
-    secondary_color = ColorProperty(1, 1, 1, 1)
+    primary_color = ColorProperty((0, 0, 0, 1))
+    secondary_color = ColorProperty((1, 1, 1, 1))
+
+    font_ratio = NumericProperty(1)
 
     def __init__(
             self,
             **kwargs):
         super().__init__(**kwargs)
+        self.cursor_width = 0
+        self.cursor_height = 0
+        self.border_horizontal = [0, 0, 0, 0]
 
-    def func(self):
-        pass
+    # def func(self):
+    #     pass

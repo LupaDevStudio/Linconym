@@ -19,8 +19,11 @@
         max: 1
         value: USER_DATA.settings["music_volume"]
         slider_value: 0.5
-        size_hint: (0.7, 0.06)
+        size_hint: (0.6, 0.03)
         pos_hint: {"center_x":0.5, "center_y":0.74}
+        font_ratio: root.font_ratio
+        primary_color: root.primary_color
+        secondary_color: root.secondary_color
 
     Label:
         text: "Sound effects volume"
@@ -36,8 +39,11 @@
         min: 0
         max: 1
         value: USER_DATA.settings["sound_volume"]
-        size_hint: (0.7, 0.06)
+        size_hint: (0.6, 0.03)
         pos_hint: {"center_x":0.5, "center_y":0.59}
+        font_ratio: root.font_ratio
+        primary_color: root.primary_color
+        secondary_color: root.secondary_color
 
     CustomContentButton:
         size_hint: (0.8,0.2)
