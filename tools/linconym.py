@@ -8,6 +8,11 @@ Module containing the core of Linconym.
 
 ### Python imports ###
 
+if __name__ == "__main__":
+    import sys
+    sys.path.append("../")
+    sys.path.append("./")
+
 from typing import (
     Dict,
     List
@@ -17,7 +22,7 @@ from typing import (
 
 from tools.path import (
     PATH_GAMEPLAY,
-    PATH_RESOURCES_FOLDER
+    PATH_RESOURCES
 )
 from tools.constants import (
     ENGLISH_WORDS_DICTS,
@@ -326,7 +331,7 @@ def fill_daily_games_with_solutions():
     """
     Fill all the empty lines of the daily games json with the solutions.
     """
-    DAILY_DICT = load_json_file(PATH_RESOURCES_FOLDER + "daily_games.json")
+    DAILY_DICT = load_json_file(PATH_RESOURCES + "daily_games.json")
     for date in DAILY_DICT:
         start_word = DAILY_DICT[date]["start_word"]
         end_word = DAILY_DICT[date]["end_word"]
@@ -346,7 +351,7 @@ def fill_daily_games_with_solutions():
                     end_word=end_word,
                     english_words=ENGLISH_WORDS_DICTS["280k"])
             DAILY_DICT[date]["best_solution"] = solution
-        save_json_file(PATH_RESOURCES_FOLDER + "daily_games.json", DAILY_DICT)
+        save_json_file(PATH_RESOURCES + "daily_games.json", DAILY_DICT)
 
 
 def fill_gameplay_dict_with_solutions():
@@ -765,10 +770,8 @@ class ClassicGame(Game):
 
 
 if __name__ == "__main__":
-    import sys
-    sys.path.append("../")
-    sys.path.append("./")
+
     # fill_gameplay_dict_with_solutions()
     # fill_daily_games_with_solutions()
     # print(is_valid("boy", "joy"))
-    find_solutions("fish", "shark", ENGLISH_WORDS_DICTS["10k"])
+    find_solutions("Abyssal", "fiction", ENGLISH_WORDS_DICTS["10k"])

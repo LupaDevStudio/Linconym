@@ -21,7 +21,7 @@ else:
     PATH_APP_FOLDER = "./"
 
 # Path for the folders
-PATH_RESOURCES_FOLDER = "resources/"
+PATH_RESOURCES = "resources/"
 
 # Path for the user data
 PATH_USER_DATA = PATH_APP_FOLDER + "data.json"
@@ -30,16 +30,19 @@ PATH_USER_DATA = PATH_APP_FOLDER + "data.json"
 PATH_SCREENS = "screens/"
 
 # Path for the resources
-PATH_IMAGES = PATH_RESOURCES_FOLDER + "images/"
-PATH_TEMP_IMAGES = PATH_IMAGES + "temp/"
+PATH_IMAGES = PATH_RESOURCES + "images/"
 PATH_BACKGROUNDS = PATH_IMAGES + "backgrounds/"
 PATH_BADGES = PATH_IMAGES + "badges/"
-PATH_SOUNDS = PATH_RESOURCES_FOLDER + "sounds/"
-PATH_MUSICS = PATH_RESOURCES_FOLDER + "musics/"
-PATH_FONTS = PATH_RESOURCES_FOLDER + "fonts/"
-PATH_GAMEPLAY = PATH_RESOURCES_FOLDER + "gameplay.json"
-PATH_CUSTOMIZATION = PATH_RESOURCES_FOLDER + "customization.json"
-PATH_DICTIONNARIES = PATH_RESOURCES_FOLDER + "dictionnaries/"
+PATH_ICONS = PATH_IMAGES + "icons/"
+PATH_TEMP_IMAGES = PATH_IMAGES + "temp/"
+PATH_SOUNDS = PATH_RESOURCES + "sounds/"
+PATH_MUSICS = PATH_RESOURCES + "musics/"
+PATH_FONTS = PATH_RESOURCES + "fonts/"
+PATH_GAMEPLAY = PATH_RESOURCES + "gameplay.json"
+PATH_QUESTS = PATH_RESOURCES + "quests.json"
+PATH_CUSTOMIZATION = PATH_RESOURCES + "customization.json"
+PATH_DICTIONNARIES = PATH_RESOURCES + "dictionnaries/"
+PATH_CREDITS = "licenses/credits.json"
 PATH_WORDS_280K = PATH_DICTIONNARIES + "english_words_280k.txt"
 PATH_WORDS_10K = PATH_DICTIONNARIES + "english_words_10k.txt"
 PATH_WORDS_34K = PATH_DICTIONNARIES + "english_words_34k.txt"

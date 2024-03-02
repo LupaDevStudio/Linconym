@@ -10,19 +10,11 @@
         outline_color: TITLE_OUTLINE_COLOR
         color: TEXT_FONT_COLOR
 
-    # Button for the quests
-    RoundedButtonImage:
-        image_path: PATH_IMAGES + "quests.png"
-        pos_hint: POS_HINT_RIGHT_TOP_BUTTON
-        size_hint: (0.1, None)
-        height: self.width
-        colors: root.primary_color
-        on_release: root.go_to_quests_screen()
-
     CustomScrollview:
         id: custom_scrollview
         pos_hint: {"center_x":0.5, "center_y":0.475}
         size_hint: (1,0.7)
+        bar_width: 7*root.font_ratio
         bar_color: root.primary_color
         bar_inactive_color: root.secondary_color
 
@@ -31,3 +23,12 @@
             height: 0.15*root.height * self.nb_branches
             primary_color: root.primary_color
             secondary_color: root.secondary_color
+
+    # Button for the quests
+    RoundedButtonImage:
+        image_path: PATH_ICONS + "quests.png"
+        pos_hint: {"right": 0.98, "y": BOTTOM_BAR_HEIGHT + 0.01}
+        size_hint: (0.1, None)
+        height: self.width
+        colors: root.primary_color
+        on_release: root.go_to_quests_screen()

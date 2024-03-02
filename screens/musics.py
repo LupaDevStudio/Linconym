@@ -20,7 +20,8 @@ from tools.constants import (
     MUSICS_DICT,
     SCREEN_TITLE,
     SCREEN_BACK_ARROW,
-    SCREEN_BOTTOM_BAR
+    SCREEN_BOTTOM_BAR,
+    SCREEN_TUTORIAL
 )
 from tools.kivy_tools import (
     LinconymScreen
@@ -42,7 +43,8 @@ class MusicsScreen(LinconymScreen):
     dict_type_screen = {
         SCREEN_TITLE : "Musics",
         SCREEN_BOTTOM_BAR : "none",
-        SCREEN_BACK_ARROW : ""
+        SCREEN_BACK_ARROW : "",
+        SCREEN_TUTORIAL : ""
     }
 
     coins_count = NumericProperty()
@@ -62,14 +64,14 @@ class MusicsScreen(LinconymScreen):
         scrollview_layout = self.ids["scrollview_layout"]
         # Load the widgets
         self.MUSICS_LAYOUT_DICT = {}
-        current_theme_colors = USER_DATA.settings["current_theme_colors"]
         for music in MUSICS_DICT:
             has_bought_music = USER_DATA.unlocked_musics[music]
             is_using_music = USER_DATA.settings["current_music"] == music
             current_music_layout = MusicLayout(
-                music_key=music,
+                music_title=MUSICS_DICT[music]["name"],
+                music_price=MUSICS_DICT[music]["price"],
                 font_ratio=self.font_ratio * 0.8,
-                primary_color=THEMES_DICT[current_theme_colors]["primary"],
+                primary_color=self.primary_color,
                 has_bought_music=has_bought_music,
                 is_using_music=is_using_music,
                 disable_button=True)

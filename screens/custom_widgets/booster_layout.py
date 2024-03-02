@@ -71,12 +71,7 @@ class BoosterLayout(RelativeLayout):
 
         self.text_font_name = text_font_name
         self.font_size = font_size
-        self.bind(mode=self.bind_function)
-        self.bind(booster_title=self.bind_function)
         self.bind(list_ads_buy=self.update_colors_disabled)
-
-    def bind_function(self, base_widget, value):
-        pass
 
     def update_colors_disabled(self, base_widget, value):
         for counter in range(len(self.list_ads_buy)):

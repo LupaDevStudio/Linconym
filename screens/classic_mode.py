@@ -10,20 +10,11 @@ Module to create the home screen.
 
 from functools import partial
 
-### Kivy imports ###
-
-from kivy.properties import (
-    ColorProperty
-)
-
 ### Local imports ###
 
-from tools.path import (
-    PATH_BACKGROUNDS
-)
 from tools.constants import (
     USER_DATA,
-    THEMES_DICT,
+    SCREEN_TUTORIAL,
     GAMEPLAY_DICT,
     SCREEN_TITLE,
     SCREEN_BOTTOM_BAR
@@ -44,7 +35,8 @@ class ClassicModeScreen(LinconymScreen):
 
     dict_type_screen = {
         SCREEN_TITLE : "Classic Mode",
-        SCREEN_BOTTOM_BAR : "none"
+        SCREEN_BOTTOM_BAR : "none",
+        SCREEN_TUTORIAL : ""
     }
 
     def __init__(self, **kwargs) -> None:

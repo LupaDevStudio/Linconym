@@ -43,7 +43,6 @@ class MusicLayout(ButtonBehavior, RelativeLayout):
     """
 
     background_color = CUSTOM_BUTTON_BACKGROUND_COLOR
-    music_key = StringProperty()
     music_title = StringProperty()
     music_price = NumericProperty()
     font_size = NumericProperty(LABEL_FONT_SIZE)
@@ -59,7 +58,6 @@ class MusicLayout(ButtonBehavior, RelativeLayout):
 
     def __init__(
             self,
-            music_key: str = "",
             release_function=lambda: 1 + 1,
             font_ratio=None,
             **kwargs):
@@ -69,9 +67,6 @@ class MusicLayout(ButtonBehavior, RelativeLayout):
 
         self.release_function = release_function
         self.always_release = True
-
-        self.music_title = MUSICS_DICT[music_key]["name"]
-        self.music_price = MUSICS_DICT[music_key]["price"]
 
         super().__init__(**kwargs)
 

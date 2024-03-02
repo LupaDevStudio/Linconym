@@ -15,20 +15,16 @@ from typing import Literal
 
 from kivy.properties import (
     StringProperty,
-    NumericProperty,
-    ColorProperty
+    NumericProperty
 )
 
 ### Local imports ###
 
-from tools.path import (
-    PATH_BACKGROUNDS
-)
 from tools.constants import (
     USER_DATA,
-    THEMES_DICT,
     LETTER_FONT_SIZE,
-    SCREEN_BACK_ARROW
+    SCREEN_BACK_ARROW,
+    SCREEN_TUTORIAL
 )
 from tools.kivy_tools import (
     LinconymScreen
@@ -55,7 +51,8 @@ class GameScreen(LinconymScreen):
 
     current_level_name = StringProperty()
     dict_type_screen = {
-        SCREEN_BACK_ARROW : ""
+        SCREEN_BACK_ARROW : "",
+        SCREEN_TUTORIAL : ""
     }
 
     nb_stars = NumericProperty()
@@ -250,19 +247,8 @@ class GameScreen(LinconymScreen):
             self.current_word = self.start_word
             self.ids.keyboard_layout.disable_whole_keyboard()
             self.disable_submit_button()
-            self.enable_arrow(mode="right")
             return True
         return False
-
-    def enable_arrow(self, mode: Literal["left", "right"]):
-        # Enable the right arrow to go to the next level
-        if mode == "right":
-            self.ids.right_arrow.opacity = 1
-            self.ids.right_arrow.disable_button = False
-        # Enable the left arrow to go to the next level
-        if mode == "left":
-            self.ids.left_arrow.opacity = 1
-            self.ids.left_arrow.disable_button = False
 
     def enable_submit_button(self):
         # self.ids.submit_button.opacity = 1
@@ -272,18 +258,12 @@ class GameScreen(LinconymScreen):
         # self.ids.submit_button.opacity = 0
         self.ids.submit_button.disable_button = True
 
-    def go_to_quests_screen(self):
+    def go_to_quests_tree_screen(self, screen_name: Literal["quests", "configure_tree"]):
         dict_kwargs = {
             "current_level_id": self.current_level_id,
             "current_act_id": self.current_act_id
         }
-        self.manager.go_to_next_screen(
-            next_screen_name="quests", 
+        self.go_to_next_screen(
+            screen_name=screen_name, 
             current_dict_kwargs=dict_kwargs,
             next_dict_kwargs=dict_kwargs)
-
-    def go_to_previous_level(self):
-        print("TODO go to previous level if possible")
-
-    def go_to_next_level(self):
-        print("TODO go to next level if possible")

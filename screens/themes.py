@@ -25,7 +25,8 @@ from tools.constants import (
     FPS,
     SCREEN_TITLE,
     SCREEN_BOTTOM_BAR,
-    SCREEN_BACK_ARROW
+    SCREEN_BACK_ARROW,
+    SCREEN_TUTORIAL
 )
 from tools.kivy_tools import (
     LinconymScreen
@@ -48,7 +49,8 @@ class ThemesScreen(LinconymScreen):
     dict_type_screen = {
         SCREEN_TITLE : "Themes",
         SCREEN_BOTTOM_BAR : "none",
-        SCREEN_BACK_ARROW: ""
+        SCREEN_BACK_ARROW: "",
+        SCREEN_TUTORIAL : ""
     }
 
     coins_count = NumericProperty()

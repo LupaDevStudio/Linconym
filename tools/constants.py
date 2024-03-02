@@ -17,7 +17,6 @@ MOBILE_MODE : bool
 ### Python imports ###
 
 import os
-from typing import Literal
 
 ### Kivy imports ###
 
@@ -32,7 +31,10 @@ from tools.path import (
     PATH_WORDS_88K,
     PATH_WORDS_280K,
     PATH_GAMEPLAY,
-    PATH_CUSTOMIZATION
+    PATH_CUSTOMIZATION,
+    PATH_RESOURCES,
+    PATH_QUESTS,
+    PATH_CREDITS
 )
 from tools.basic_tools import (
     load_json_file,
@@ -78,7 +80,10 @@ if not os.path.exists(PATH_USER_DATA):
             "start_word": "",
             "end_word": ""
         },
-        "history": {},
+        "achievements": {},
+        "quests": {
+            "Act1": {}
+        },
         "settings": {
             "sound_volume": 0.5,
             "music_volume": 0.5,
@@ -114,7 +119,8 @@ class UserData():
         data = load_json_file(PATH_USER_DATA)
         self.classic_mode = data["classic_mode"]
         self.daily_mode = data["daily_mode"]
-        self.history = data["history"]
+        self.quests = data["quests"]
+        self.achievements = data["achievements"]
         self.settings = data["settings"]
         self.unlocked_themes = data["unlocked_themes"]
         self.unlocked_musics = data["unlocked_musics"]
@@ -138,7 +144,8 @@ class UserData():
         data = {}
         data["classic_mode"] = self.classic_mode
         data["daily_mode"] = self.daily_mode
-        data["history"] = self.history
+        data["quests"] = self.quests
+        data["achievements"] = self.achievements
         data["settings"] = self.settings
         data["unlocked_themes"] = self.unlocked_themes
         data["unlocked_musics"] = self.unlocked_musics
@@ -188,8 +195,11 @@ class UserData():
 
 USER_DATA = UserData()
 
-### Colors ###
+### Tutorial ###
 
+TUTORIAL = load_json_file(PATH_RESOURCES + "tutorial.json")
+
+### Colors ###
 
 class ColorPalette():
     """
@@ -200,33 +210,45 @@ class ColorPalette():
         self.PRIMARY = (0, 0, 0, 1)
         self.SECONDARY = (0, 0, 0, 1)
 
-### Graphics ###
+CUSTOM_BUTTON_BACKGROUND_COLOR = (1, 1, 1, 0.7)
+DISABLE_BUTTON_COLOR = (0.15, 0.15, 0.15, 1)
+OPACITY_ON_BUTTON_PRESS = 0.8
+RATE_CHANGE_OPACITY = 0.05
 
+### Font sizes, outlines and colors ###
 
-# Font sizes
 TITLE_FONT_SIZE = 45
-MAIN_BUTTON_FONT_SIZE = 30
+TITLE_OUTLINE_COLOR = (1, 1, 1, 1)
+TITLE_OUTLINE_WIDTH = 2
+
+LABEL_FONT_SIZE = 28
+SMALL_LABEL_FONT_SIZE = 22
 CONTENT_LABEL_FONT_SIZE = 17
+
+MAIN_BUTTON_FONT_SIZE = 30
+BUTTON_FONT_SIZE = 20
+SMALL_BUTTON_FONT_SIZE = 15
+BUTTON_OUTLINE_WIDTH = 1.5
+
 ACT_BUTTON_FONT_SIZE = 25
 CUSTOMIZATION_LAYOUT_FONT_SIZE = 20
 COINS_COUNT_FONT_SIZE = 22
 EXPERIENCE_FONT_SIZE = 15
 LEVEL_ID_FONT_SIZE = 22
 LETTER_FONT_SIZE = 18
-LABEL_FONT_SIZE = 30
 
 TEXT_FONT_COLOR = (0, 0, 0, 1)
-TITLE_OUTLINE_WIDTH = 2
-TITLE_OUTLINE_COLOR = (1, 1, 1, 1)
-BOTTOM_BAR_HEIGHT = 0.12
-CUSTOM_BUTTON_BACKGROUND_COLOR = (1, 1, 1, 0.7)
-OPACITY_ON_BUTTON_PRESS = 0.8
-POS_HINT_BACK_ARROW = {"x": 0.02, "top": 0.99}
-POS_HINT_RIGHT_TOP_BUTTON = {"right": 0.98, "top": 0.99}
-RATE_CHANGE_OPACITY = 0.05
-DISABLE_BUTTON_COLOR = (0.15, 0.15, 0.15, 1)
-BUTTON_OUTLINE_WIDTH = 1.5
 
+### Spacing and heights ###
+
+BOTTOM_BAR_HEIGHT = 0.12
+
+# Pos hints for icon buttons
+POS_HINT_LEFT_TOP_BUTTON = {"x": 0.02, "top": 0.99}
+POS_HINT_RIGHT_TOP_BUTTON = {"right": 0.98, "top": 0.99}
+POS_HINT_RIGHT_BOTTOM_BUTTON = {"right": 0.98, "y": 0.01}
+
+# Levels configuration
 MAX_NB_LEVELS_PER_BRANCH = 4
 LEVEL_BUTTON_SIZE_HINT = 0.15
 LEVEL_BUTTON_RELATIVE_HEIGHT = 0.4
@@ -234,6 +256,7 @@ LEVEL_BRANCH_RELATIVE_HEIGHT = 0.2
 LEVEL_BUTTON_SPACING = (1 - (MAX_NB_LEVELS_PER_BRANCH + 1)
                         * LEVEL_BUTTON_SIZE_HINT) / MAX_NB_LEVELS_PER_BRANCH
 LEVEL_BUTTON_SIDE_OFFSET = LEVEL_BUTTON_SIZE_HINT + LEVEL_BUTTON_SPACING
+
 WORD_BUTTON_WIDTH_HINT = 0.3
 WORD_BUTTON_HEIGHT_HINT = 0.1
 WORD_BUTTON_VSPACING = 0.05
@@ -245,10 +268,7 @@ WORD_BUTTON_SIDE_OFFSET = 0.1
 SCREEN_TITLE = "has_title"
 SCREEN_BACK_ARROW = "has_back_arrow"
 SCREEN_BOTTOM_BAR = "has_bottom_bar_"
-
-### Musics ###
-
-SOUND_LIST = []
+SCREEN_TUTORIAL = "has_tutorial"
 
 ### Ads code ###
 
@@ -316,9 +336,11 @@ DICT_ID_TO_NB_WORDS = {
     DICT_ID_LIST[3]: 375000
 }
 
-### Levels ###
+### Levels, quests and achievements ###
 
 GAMEPLAY_DICT = load_json_file(PATH_GAMEPLAY)
+QUESTS_DICT = load_json_file(PATH_QUESTS)
+CREDITS_DICT = load_json_file(PATH_CREDITS)
 
 ### Customization with themes and musics ###
 

@@ -1,0 +1,74 @@
+#:kivy 2.2.1
+
+<QuestsLayout>:
+
+    # Background
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            pos:(0,0)
+            size:self.size
+            radius:[30*self.font_ratio,]
+
+    # Badge icon
+    Image:
+        source: PATH_ICONS + "success.png"
+        pos_hint: {"x": -0.025,"center_y":0.9}
+        size_hint: (None,0.35)
+        width: self.height
+        opacity: 1 if root.has_completed else 0
+        color: root.primary_color
+        fit_mode: "contain"
+
+    # Title
+    Label:
+        text: "Level " + str(root.level_id)
+        pos_hint: {"center_x":0.5, "center_y":0.8}
+        size_hint: (1, None)
+        shorten: False
+        text_size: (root.width*root.text_filling_ratio,self.size[1])
+        font_size: root.font_ratio * root.font_size_title
+        font_name: root.text_font_name
+        halign: "center"
+        valign: "center"
+        line_height: 1
+        color: (0,0,0,1)
+
+    # Description of the quest
+    Label:
+        text: root.description
+        font_size: root.font_ratio * root.font_size_content
+        pos_hint: {"center_x":0.5, "center_y":0.55}
+        size_hint: (1, None)
+        shorten: False
+        text_size: (root.width*root.text_filling_ratio,None)
+        font_name: root.text_font_name
+        line_height: 1
+        color: (0,0,0,1)
+
+    # Reward in XP of the quest
+    Label:
+        text: str(root.reward) + " XP"
+        font_size: root.font_ratio * root.font_size_reward
+        font_name: root.text_font_name
+        pos_hint: {"center_x":0.25, "center_y":0.25}
+        size_hint: (0.3, 0.3)
+        text_size: self.size
+        line_height: 1
+        color: (0,0,0,1)
+        halign: "left"
+        valign: "center"
+        
+    # Go to quest or claim reward
+    ColoredRoundedButton:
+        text: root.button_text
+        background_color: root.disable_color if root.has_got_reward else root.primary_color
+        pos_hint: {"center_x": 0.7,"center_y": 0.25}
+        font_ratio: root.font_ratio
+        font_size: SMALL_BUTTON_FONT_SIZE
+        size_hint: (0.4, 0.275)
+        color_label: (1,1,1,1)
+        outline_color: (1,1,1,1)
+        disable_button: True if root.has_got_reward else False
+        touch_color: root.secondary_color

@@ -1,0 +1,17 @@
+{
+    "beginner": {
+        "achievement_title": "Beginner",
+        "achievement_content": "Description de la quête qui est plus longue que les autres.",
+        "reward": 10
+    },
+    "ach2": {
+        "achievement_title": "Titre",
+        "achievement_content": "Description de la quête.",
+        "reward": 10
+    },
+    "ach3": {
+        "achievement_title": "Titre",
+        "achievement_content": "Description de la quête qui est plus longue que les autres.",
+        "reward": 10
+    }
+}

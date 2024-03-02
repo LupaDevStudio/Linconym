@@ -23,7 +23,8 @@ from tools.constants import (
     THEMES_DICT,
     __version__,
     SCREEN_TITLE,
-    SCREEN_BOTTOM_BAR
+    SCREEN_BOTTOM_BAR,
+    SCREEN_TUTORIAL
 )
 from tools.kivy_tools import (
     LinconymScreen
@@ -48,7 +49,8 @@ class SettingsScreen(LinconymScreen):
 
     dict_type_screen = {
         SCREEN_TITLE: "Settings",
-        SCREEN_BOTTOM_BAR: "settings"
+        SCREEN_BOTTOM_BAR: "settings",
+        SCREEN_TUTORIAL: ""
     }
     version_text = StringProperty()
 

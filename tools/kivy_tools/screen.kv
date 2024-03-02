@@ -45,9 +45,18 @@
 
     RoundedButtonImage:
         id: back_arrow
-        image_path: PATH_IMAGES + "left_arrow.png"
-        pos_hint: POS_HINT_BACK_ARROW
+        image_path: PATH_ICONS + "left_arrow.png"
+        pos_hint: POS_HINT_LEFT_TOP_BUTTON
         size_hint: (0.1, None)
         height: self.width
         colors: root.primary_color
         on_release: root.go_backwards()
+
+    RoundedButtonImage:
+        id: tutorial_button
+        image_path: PATH_ICONS + "tutorial.png"
+        pos_hint: POS_HINT_RIGHT_TOP_BUTTON
+        size_hint: (0.1, None)
+        height: self.width
+        colors: root.primary_color
+        on_release: root.open_tutorial(root.manager.current)

@@ -12,20 +12,14 @@ Module to create buy and enable buttons
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import (
-    StringProperty,
     NumericProperty,
     BooleanProperty
 )
 
 ### Local imports ###
 
-from tools.path import (
-    PATH_TEXT_FONT
-)
 from tools.constants import (
-    CUSTOM_BUTTON_BACKGROUND_COLOR,
-    OPACITY_ON_BUTTON_PRESS,
-    ACT_BUTTON_FONT_SIZE
+    OPACITY_ON_BUTTON_PRESS
 )
 
 #############

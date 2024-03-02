@@ -9,6 +9,7 @@ Module to create the profile screen.
 ### Python imports ###
 
 from functools import partial
+import webbrowser
 
 ### Kivy imports ###
 
@@ -19,12 +20,11 @@ from kivy.properties import (
 ### Local imports ###
 
 from tools.constants import (
-    USER_DATA,
-    THEMES_DICT,
-    MUSICS_DICT,
+    CREDITS_DICT,
     SCREEN_TITLE,
     SCREEN_BACK_ARROW,
-    SCREEN_BOTTOM_BAR
+    SCREEN_BOTTOM_BAR,
+    SMALL_LABEL_FONT_SIZE
 )
 from tools.kivy_tools import (
     LinconymScreen
@@ -58,24 +58,38 @@ class CreditsScreen(LinconymScreen):
     def fill_scrollview(self):
         # Load the widgets
         self.number_lines_credits = 0
-        current_theme_colors = USER_DATA.settings["current_theme_colors"]
         scrollview_layout = self.ids["scrollview_layout"]
 
         self.CREDITS_LAYOUT_DICT = {}
 
         # Add the musics
-        for music in MUSICS_DICT:
+        musics_dict = CREDITS_DICT["musics"]
+        for music in musics_dict:
             self.number_lines_credits += 1
+            title = musics_dict[music]["name"] + " – " + musics_dict[music]["author"]
             music_credit_layout = MusicLayout(
-                music_key=music,
+                music_title=title,
                 font_ratio=self.font_ratio * 0.8,
-                primary_color=THEMES_DICT[current_theme_colors]["primary"],
-                radius=20)
+                primary_color=self.primary_color,
+                radius=20,
+                font_size=SMALL_LABEL_FONT_SIZE)
             music_credit_layout.disable_buy_select()
             music_credit_layout.release_function = partial(
-                self.open_url, MUSICS_DICT[music]["license"])
+                self.open_url, musics_dict[music]["license"])
             self.CREDITS_LAYOUT_DICT[music] = music_credit_layout
             scrollview_layout.add_widget(music_credit_layout)
 
     def open_url(self, url):
-        print(url)
+        """
+        Open the url given as argument.
+
+        Parameters
+        ----------
+        url : str
+            Url of the credit item.
+
+        Returns
+        -------
+        None
+        """
+        webbrowser.open(url, 2)

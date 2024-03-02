@@ -1,0 +1,33 @@
+#:kivy 2.2.1
+
+<SelectCircleButtonWithText>:
+
+    # Background
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            pos:(0,0)
+            size:self.size
+            radius:[self.radius*self.font_ratio,]
+
+    # Main text
+    Label:
+        text: root.text
+        font_size: root.font_ratio * root.font_size
+        pos_hint: {"center_x": 0.5, "center_y": 0.725}
+        shorten: False
+        text_size: (root.width*root.text_filling_ratio, None)
+        font_name: root.text_font_name
+        halign: "center"
+        valign: "center"
+        line_height: 1
+        color: (0,0,0,1)
+
+    # Button with check image
+    SelectCircleButton:
+        pos_hint: {"center_x":0.5,"center_y":0.275}
+        size_hint: (None,0.4)
+        font_ratio: root.font_ratio
+        is_using: root.is_using
+        release_function: root.on_release

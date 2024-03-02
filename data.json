@@ -14,13 +14,30 @@
         "start_word": "",
         "end_word": ""
     },
-    "history": {},
+    "quests": {
+        "Act1": {
+            "1": {
+                "1": false
+            },
+            "2": {
+                "2": true
+            },
+            "3": {
+                "1": false,
+                "2": true
+            }
+        }
+    },
+    "achievements": {
+        "beginner": true,
+        "ach2": false
+    },
     "settings": {
         "music_volume": 0.8151658767772512,
         "sound_volume": 0.7251184834123223,
         "current_theme_image": "japanese_etching",
         "current_music": "kids_party",
-        "current_theme_colors": "japanese_etching"
+        "current_theme_colors": "westerlund_2"
     },
     "unlocked_themes": {
         "japanese_etching": {

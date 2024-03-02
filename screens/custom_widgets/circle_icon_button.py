@@ -11,7 +11,9 @@ Module to create custom buttons with round transparent white background.
 from kivy.uix.image import Image
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import (
-    BooleanProperty
+    BooleanProperty,
+    ColorProperty,
+    ObjectProperty
 )
 
 ### Local imports ###
@@ -30,7 +32,10 @@ class CircleIconButton(ButtonBehavior, Image):
     A custom button with a white round rectangle background.
     """
 
-    disable_button = BooleanProperty()
+    disable_button = BooleanProperty(False)
+    release_function = ObjectProperty()
+    exterior_color = ColorProperty((0,0,0,1))
+    interior_color = ColorProperty((1,1,1,1))
 
     def __init__(
             self,
@@ -39,10 +44,6 @@ class CircleIconButton(ButtonBehavior, Image):
         super().__init__(**kwargs)
         self.always_release = True
         self.release_function = release_function
-        self.bind(disable_button=self.bind_function)
-
-    def bind_function(self, base_widget, value):
-        pass
 
     def on_press(self):
         if not self.disable_button:

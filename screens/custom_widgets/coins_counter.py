@@ -57,14 +57,9 @@ class CoinsCounter(ButtonBehavior, RelativeLayout):
         self.release_function = release_function
         self.always_release = True
         self.bind(coins_count=self.update_coins_count)
-        self.bind(display_plus=self.bind_function)
-        self.bind(disable_button=self.bind_function)
         self.coins_count = coins_count
         self.text_font_name = text_font_name
         self.font_size = font_size
-
-    def bind_function(self, base_widget, value):
-        pass
 
     def update_coins_count(self, base_widget, value):
         self.coins_count_text = str(self.coins_count)
