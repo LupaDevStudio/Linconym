@@ -38,12 +38,12 @@ class ConfigureTreeScreen(LinconymScreen):
 
     current_level_name = StringProperty()
     dict_type_screen = {
-        SCREEN_BACK_ARROW : "",
-        SCREEN_TUTORIAL : ""
+        SCREEN_BACK_ARROW: "",
+        SCREEN_TUTORIAL: ""
     }
     dict_type_screen = {
-        SCREEN_BACK_ARROW : "",
-        SCREEN_TUTORIAL : ""
+        SCREEN_BACK_ARROW: "",
+        SCREEN_TUTORIAL: ""
     }
 
     nb_stars = NumericProperty()
@@ -80,3 +80,9 @@ class ConfigureTreeScreen(LinconymScreen):
 
     def ask_reset_tree(self):
         print("TODO popup")
+
+    def open_game(self):
+        """
+        Open the game screen.
+        """
+        self.manager.go_to_previous_screen()

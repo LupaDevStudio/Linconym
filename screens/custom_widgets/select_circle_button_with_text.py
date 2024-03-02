@@ -40,13 +40,13 @@ class SelectCircleButtonWithText(RelativeLayout):
 
     background_color = ColorProperty(CUSTOM_BUTTON_BACKGROUND_COLOR)
     font_ratio = NumericProperty(1)
-    text_filling_ratio = NumericProperty(0.8)
+    text_filling_ratio = NumericProperty(0.6)
     font_size = NumericProperty()
     is_using = BooleanProperty(False)
     disable_button = BooleanProperty(False)
     text = StringProperty()
     text_font_name = StringProperty(PATH_TITLE_FONT)
-    radius = NumericProperty(40)
+    radius = NumericProperty(25)
 
     def __init__(
             self,

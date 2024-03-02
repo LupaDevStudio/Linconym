@@ -398,11 +398,10 @@ class LinconymScreen(ImprovedScreen):
             self.remove_widget(self.ids.tutorial_button)
 
     def on_pre_enter(self, *args):
-        current_theme_image = USER_DATA.settings["current_theme_image"]
+        # current_theme_image = USER_DATA.settings["current_theme_image"]
         current_theme_colors = USER_DATA.settings["current_theme_colors"]
         self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
         self.secondary_color = THEMES_DICT[current_theme_colors]["secondary"]
-        print(self.back_image_path)
         # self.set_back_image_path(
         #     PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
         return super().on_pre_enter(*args)

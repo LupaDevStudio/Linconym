@@ -43,7 +43,7 @@ class CustomButton(ButtonBehavior, Widget):
     text_filling_ratio = NumericProperty(0.8)
     font_size = NumericProperty(MAIN_BUTTON_FONT_SIZE)
     font_ratio = NumericProperty(1)
-    radius = NumericProperty(40)
+    radius = NumericProperty(25)
     disable_button = BooleanProperty(False)
     release_function = ObjectProperty()
 

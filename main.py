@@ -62,8 +62,6 @@ class WindowManager(ScreenManager):
         for screen_name in self.screen_names:
             if screen_name != "temp" and screen_name != "themes":
                 screen = self.get_screen(screen_name)
-                print(screen_name)
-                print(screen.ids.second_back_image.opacity)
                 screen.set_back_image_path(new_image_path)
 
     def go_to_previous_screen(self):

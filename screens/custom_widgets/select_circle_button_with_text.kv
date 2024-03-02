@@ -15,7 +15,8 @@
     Label:
         text: root.text
         font_size: root.font_ratio * root.font_size
-        pos_hint: {"center_x": 0.5, "center_y": 0.725}
+        pos_hint: {"x": -0.1, "center_y": 0.5}
+        size: self.texture_size
         shorten: False
         text_size: (root.width*root.text_filling_ratio, None)
         font_name: root.text_font_name
@@ -26,7 +27,7 @@
 
     # Button with check image
     SelectCircleButton:
-        pos_hint: {"center_x":0.5,"center_y":0.275}
+        pos_hint: {"center_x":0.82,"center_y":0.5}
         size_hint: (None,0.4)
         font_ratio: root.font_ratio
         is_using: root.is_using
