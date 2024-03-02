@@ -62,6 +62,8 @@ class WindowManager(ScreenManager):
         for screen_name in self.screen_names:
             if screen_name != "temp" and screen_name != "themes":
                 screen = self.get_screen(screen_name)
+                print(screen_name)
+                print(screen.ids.second_back_image.opacity)
                 screen.set_back_image_path(new_image_path)
 
     def go_to_previous_screen(self):
@@ -73,9 +75,11 @@ class WindowManager(ScreenManager):
 
     def go_to_next_screen(self, next_screen_name, current_dict_kwargs={}, next_dict_kwargs={}):
         current_screen_name = self.current
-        self.list_previous_screens.append((current_screen_name, current_dict_kwargs))
+        self.list_previous_screens.append(
+            (current_screen_name, current_dict_kwargs))
         self.get_screen(next_screen_name).reload_kwargs(next_dict_kwargs)
         self.current = next_screen_name
+
 
 class MainApp(App, Widget):
     """

@@ -71,7 +71,7 @@ class ImprovedScreen(Screen):
     font_name = StringProperty("Roboto")
     font_size_expand = 1
 
-    def __init__(self, font_name="Roboto", back_image_path=None, second_back_image_path=None, **kw):
+    def __init__(self, font_name="Roboto", back_image_path="", second_back_image_path="", **kw):
 
         # Create a dictionnary to store the positions of hidden widgets
         self.temp_pos = {}
@@ -83,8 +83,8 @@ class ImprovedScreen(Screen):
         self.font_name = font_name
 
         # Store the back image path
-        self.sto_back_image_path = back_image_path
-        self.sto_second_back_image_path = second_back_image_path
+        self.back_image_path = back_image_path
+        self.second_back_image_path = second_back_image_path
 
         # Define all variables
         self.back_image_disabled = False
@@ -108,8 +108,8 @@ class ImprovedScreen(Screen):
         self.is_loaded = True
 
         # Set the background image
-        if self.sto_back_image_path is not None:
-            self.set_back_image_path(self.sto_back_image_path)
+        if self.back_image_path != "":
+            self.set_back_image_path(self.back_image_path)
             self.back_image_opacity = 1
             self.back_image_disabled = False
         else:
@@ -118,8 +118,8 @@ class ImprovedScreen(Screen):
             self.back_image_disabled = True
 
         # Set the second background image
-        if self.sto_second_back_image_path is not None:
-            self.set_back_image_path(self.sto_second_back_image_path, "second")
+        if self.second_back_image_path != "":
+            self.set_back_image_path(self.second_back_image_path, "second")
             self.second_back_image_opacity = 0
             self.second_back_image_disabled = False
         else:
@@ -210,9 +210,11 @@ class ImprovedScreen(Screen):
         if mode in ["second", "both"]:
             if window_ratio > self.second_back_image_ratio:
                 self.second_back_image_width = Window.size[0]
-                self.second_back_image_height = Window.size[0] / self.second_back_image_ratio
+                self.second_back_image_height = Window.size[0] / \
+                    self.second_back_image_ratio
             else:
-                self.second_back_image_width = Window.size[1] * self.second_back_image_ratio
+                self.second_back_image_width = Window.size[1] * \
+                    self.second_back_image_ratio
                 self.second_back_image_height = Window.size[1]
 
     def on_pre_enter(self, *args):
@@ -307,11 +309,11 @@ class ImprovedScreen(Screen):
     def change_background_opacity(self, *args):
         """
         Change the opacity of both background images to change smoothly the background.
-        
+
         Parameters
         ----------
         None
-        
+
         Returns
         -------
         None
@@ -323,7 +325,7 @@ class ImprovedScreen(Screen):
                 self.ids.back_image.opacity -= RATE_CHANGE_OPACITY
                 self.ids.second_back_image.opacity += RATE_CHANGE_OPACITY
             else:
-                Clock.unschedule(self.change_background_opacity, 1/FPS)
+                Clock.unschedule(self.change_background_opacity, 1 / FPS)
                 self.opacity_state = "second"
 
         # If we have to display the background image
@@ -332,7 +334,7 @@ class ImprovedScreen(Screen):
                 self.ids.back_image.opacity += RATE_CHANGE_OPACITY
                 self.ids.second_back_image.opacity -= RATE_CHANGE_OPACITY
             else:
-                Clock.unschedule(self.change_background_opacity, 1/FPS)
+                Clock.unschedule(self.change_background_opacity, 1 / FPS)
                 self.opacity_state = "main"
 
     def reload_kwargs(self, dict_kwargs):
@@ -346,6 +348,7 @@ class ImprovedScreen(Screen):
             next_screen_name=screen_name,
             current_dict_kwargs=current_dict_kwargs,
             next_dict_kwargs=next_dict_kwargs)
+
 
 class LinconymScreen(ImprovedScreen):
     """
@@ -399,8 +402,9 @@ class LinconymScreen(ImprovedScreen):
         current_theme_colors = USER_DATA.settings["current_theme_colors"]
         self.primary_color = THEMES_DICT[current_theme_colors]["primary"]
         self.secondary_color = THEMES_DICT[current_theme_colors]["secondary"]
-        self.set_back_image_path(
-            PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
+        print(self.back_image_path)
+        # self.set_back_image_path(
+        #     PATH_BACKGROUNDS + THEMES_DICT[current_theme_image]["image"])
         return super().on_pre_enter(*args)
 
     def open_tutorial(self, screen_name):
