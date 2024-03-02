@@ -80,7 +80,6 @@ class AchievementsScreen(LinconymScreen):
 
         # Sort the list of achievements
         list_achievements_order.sort()
-        print(list_achievements_order)
 
         for tuple_achievement in list_achievements_order:
             achievement_id = tuple_achievement[2]

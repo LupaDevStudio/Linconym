@@ -144,88 +144,84 @@
     "Act3": {
         "name": "Act 3 - 20.000 leagues under the sea",
         "1": {
-            "start_word": "ocean",
-            "end_word": "diver",
-            "10k": null,
-            "34k": 5,
-            "88k": 5,
-            "280k": 5
+            "start_word": "creature",
+            "end_word": "treasures",
+            "10k": 3,
+            "34k": 3,
+            "88k": 3,
+            "280k": 3
         },
         "2": {
-            "start_word": "diver",
-            "end_word": "submarine"
+            "start_word": "treasures",
+            "end_word": "pressure",
+            "10k": 12,
+            "34k": 3,
+            "88k": 3,
+            "280k": 3
         },
         "3": {
-            "start_word": "submarine",
-            "end_word": "adventure"
+            "start_word": "pressure",
+            "end_word": "sailor",
+            "10k": null,
+            "34k": 7,
+            "88k": 7,
+            "280k": 7
         },
         "4": {
-            "start_word": "adventure",
-            "end_word": "exploration"
+            "start_word": "sailor",
+            "end_word": "deep",
+            "10k": 7,
+            "34k": 7,
+            "88k": 7,
+            "280k": 7
         },
         "5": {
-            "start_word": "exploration",
-            "end_word": "mysterious"
+            "start_word": "deep",
+            "end_word": "diver"
         },
         "6": {
-            "start_word": "mysterious",
-            "end_word": "creatures"
+            "start_word": "diver",
+            "end_word": "water"
         },
         "7": {
-            "start_word": "creatures",
-            "end_word": "leviathan"
+            "start_word": "water",
+            "end_word": "journey"
         },
         "8": {
-            "start_word": "leviathan",
-            "end_word": "deep"
+            "start_word": "journey",
+            "end_word": "under"
         },
         "9": {
-            "start_word": "deep",
-            "end_word": "sea"
+            "start_word": "under",
+            "end_word": "depth"
         },
         "10": {
-            "start_word": "sea",
-            "end_word": "nautical"
+            "start_word": "depth",
+            "end_word": "coral"
         },
         "11": {
-            "start_word": "nautical",
-            "end_word": "voyage"
+            "start_word": "coral",
+            "end_word": "captain"
         },
         "12": {
-            "start_word": "voyage",
-            "end_word": "underwater"
+            "start_word": "captain",
+            "end_word": "sea"
         },
         "13": {
-            "start_word": "underwater",
-            "end_word": "pressure"
+            "start_word": "sea",
+            "end_word": "world"
         },
         "14": {
-            "start_word": "pressure",
-            "end_word": "sailor"
+            "start_word": "world",
+            "end_word": "ocean"
         },
         "15": {
-            "start_word": "sailor",
+            "start_word": "ocean",
             "end_word": "marine"
         },
         "16": {
             "start_word": "marine",
-            "end_word": "oceanic"
-        },
-        "17": {
-            "start_word": "oceanic",
-            "end_word": "coral"
-        },
-        "18": {
-            "start_word": "coral",
-            "end_word": "depths"
-        },
-        "19": {
-            "start_word": "depths",
-            "end_word": "mariner"
-        },
-        "20": {
-            "start_word": "mariner",
-            "end_word": "subaquatic"
+            "end_word": "submarine"
         }
     },
     "Act4": {
