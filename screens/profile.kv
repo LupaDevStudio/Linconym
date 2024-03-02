@@ -3,13 +3,19 @@
 <ProfileScreen>:
 
     # Badge for the status
-    CircleIconButton:
+    # CircleIconButton:
+    #     source: root.user_status_image
+    #     pos_hint: {"center_x":0.2, "center_y":0.775}
+    #     size_hint: (None, 0.15)
+    #     width: self.height
+    #     exterior_color: root.primary_color
+    #     release_function: root.open_badges
+
+    Image:
         source: root.user_status_image
         pos_hint: {"center_x":0.2, "center_y":0.775}
         size_hint: (None, 0.15)
         width: self.height
-        exterior_color: root.primary_color
-        release_function: root.open_badges
 
     # Status and level
     Label:

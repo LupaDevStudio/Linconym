@@ -60,8 +60,9 @@ class AchievementsScreen(LinconymScreen):
     def fill_scrollview(self):
         scrollview_layout = self.ids.scrollview_layout
 
-        # Load the widgets
+        # Store the widgets
         self.ACHIEVEMENTS_LAYOUT_DICT = {}
+        list_achievements_order = []
 
         for achievement_id in ACHIEVEMENTS_DICT:
             achievement = ACHIEVEMENTS_DICT[achievement_id]
@@ -73,6 +74,19 @@ class AchievementsScreen(LinconymScreen):
                 has_completed = True
                 if USER_DATA.achievements[achievement_id]:
                     has_got_reward = True
+
+            list_achievements_order.append([
+                has_got_reward, not has_completed, achievement_id])
+
+        # Sort the list of achievements
+        list_achievements_order.sort()
+        print(list_achievements_order)
+
+        for tuple_achievement in list_achievements_order:
+            achievement_id = tuple_achievement[2]
+            has_completed = not tuple_achievement[1]
+            has_got_reward = tuple_achievement[0]
+            achievement = ACHIEVEMENTS_DICT[achievement_id]
 
             current_achievement_layout = AchievementsLayout(
                 achievement_title=achievement["achievement_title"],
