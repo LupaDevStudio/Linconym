@@ -37,6 +37,7 @@ from screens.custom_widgets.levels_branchs import LevelBranch
 from screens.custom_widgets.tree import TreeLayout, TreeScrollview
 from screens.custom_widgets.music_layout import MusicLayout
 from screens.custom_widgets.quests_layout import QuestsLayout
+from screens.custom_widgets.achievements_layout import AchievementsLayout
 
 ### Popups ###
 

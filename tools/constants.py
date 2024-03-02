@@ -34,7 +34,8 @@ from tools.path import (
     PATH_CUSTOMIZATION,
     PATH_RESOURCES,
     PATH_QUESTS,
-    PATH_CREDITS
+    PATH_CREDITS,
+    PATH_ACHIEVEMENTS
 )
 from tools.basic_tools import (
     load_json_file,
@@ -341,6 +342,7 @@ DICT_ID_TO_NB_WORDS = {
 GAMEPLAY_DICT = load_json_file(PATH_GAMEPLAY)
 QUESTS_DICT = load_json_file(PATH_QUESTS)
 CREDITS_DICT = load_json_file(PATH_CREDITS)
+ACHIEVEMENTS_DICT = load_json_file(PATH_ACHIEVEMENTS)
 
 ### Customization with themes and musics ###
 

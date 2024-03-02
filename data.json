@@ -37,7 +37,7 @@
         "sound_volume": 0.7251184834123223,
         "current_theme_image": "westerlund_2",
         "current_music": "kids_party",
-        "current_theme_colors": "westerlund_2"
+        "current_theme_colors": "japanese_etching"
     },
     "unlocked_themes": {
         "japanese_etching": {
@@ -127,7 +127,7 @@
         "music_3": false
     },
     "user_profile": {
-        "status": "Beginner",
+        "status": "Expert",
         "level": 1,
         "experience": 0,
         "coins": 876800
