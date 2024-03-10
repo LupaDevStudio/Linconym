@@ -2,6 +2,7 @@
 Package to create the layouts of Linconym.
 """
 
+
 from screens.custom_widgets.layout.custom_scrollview import CustomScrollview
 from screens.custom_widgets.layout.three_stars import ThreeStars
 from screens.custom_widgets.layout.bottom_bar import BottomBar

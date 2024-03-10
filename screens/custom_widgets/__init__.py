@@ -2,7 +2,6 @@
 Package to manage the custom widgets included in the screens.
 """
 
-from tools.kivy_tools.image_button import ImageButton
 
 ### Buttons ###
 

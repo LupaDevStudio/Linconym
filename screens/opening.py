@@ -82,6 +82,12 @@ class OpeningScreen(ImprovedScreen):
         for file in widget_files:
             Builder.load_file(
                 f"screens/custom_widgets/{file}", encoding="utf-8")
+        for package in ["button", "layout", "popup"]:
+            widget_files = [file for file in os.listdir(
+                f"screens/custom_widgets/{package}") if file.endswith(".kv")]
+            for file in widget_files:
+                Builder.load_file(
+                    f"screens/custom_widgets/{package}/{file}", encoding="utf-8")
 
         self.HomeScreen = HomeScreen
         self.SettingsScreen = SettingsScreen

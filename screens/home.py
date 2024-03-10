@@ -9,16 +9,14 @@ Module to create the home screen.
 from tools.constants import (
     SCREEN_TITLE,
     SCREEN_BOTTOM_BAR,
-    SCREEN_TUTORIAL
-)
-from screens.custom_widgets import (
-    LinconymScreen
+    SCREEN_TUTORIAL,
+    USER_DATA
 )
 from tools import (
     music_mixer
 )
-from tools.constants import (
-    USER_DATA
+from screens.custom_widgets import (
+    LinconymScreen
 )
 
 
