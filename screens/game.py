@@ -24,7 +24,8 @@ from tools.constants import (
     USER_DATA,
     LETTER_FONT_SIZE,
     SCREEN_BACK_ARROW,
-    SCREEN_TUTORIAL
+    SCREEN_TUTORIAL,
+    GAMEPLAY_DICT
 )
 from screens.custom_widgets import (
     LinconymScreen
@@ -36,8 +37,11 @@ from screens import (
     ColoredRoundedButton
 )
 from tools.linconym import (
-    is_valid
+    is_valid,
+    level_has_saved_data,
+    Game
 )
+from screens.custom_widgets import TreeLayout
 
 #############
 ### Class ###
@@ -56,10 +60,11 @@ class GameScreen(LinconymScreen):
     }
 
     nb_stars = NumericProperty()
-    start_word = StringProperty("BOY")
+    start_word = StringProperty("boy")
     current_word = StringProperty("")
     new_word = StringProperty("")
-    end_word = StringProperty("TOYS")
+    end_word = StringProperty("toys")
+    start_to_end_label = StringProperty("")
     list_widgets_letters = []
 
     def __init__(self, **kwargs) -> None:
@@ -73,8 +78,36 @@ class GameScreen(LinconymScreen):
 
     def on_pre_enter(self, *args):
         super().on_pre_enter(*args)
-        # Initialise the current word
-        self.current_word = self.start_word
+
+        # Store the dict containing the user progress
+        self.level_saved_data = USER_DATA.classic_mode[self.current_act_id][self.current_level_id]
+
+        # Save the dict containing the level instructions
+        self.level_info = GAMEPLAY_DICT[self.current_act_id][self.current_level_id]
+
+        # Extract start word and end word
+        self.start_word = self.level_info["start_word"]
+        self.end_word = self.level_info["end_word"]
+        self.start_to_end_label = (
+            self.start_word + " > " + self.end_word).upper()
+
+        # Load the save data if some are provided
+        if level_has_saved_data(self.level_saved_data):
+            current_position = self.level_saved_data["current_position"]
+            words_found = self.level_saved_data["words_found"]
+            position_to_word_id = self.level_saved_data["position_to_word_id"]
+        else:
+            current_position = "0"
+            words_found = [self.start_word]
+            position_to_word_id = {"0": 0}
+
+        # Create a game instance
+        game = Game(
+            start_word=self.start_word,
+            end_word=self.end_word,
+            current_position=current_position,
+            words_found=words_found,
+            position_to_word_id=position_to_word_id)
 
         self.transparent_secondary_color = [
             self.secondary_color[0], self.secondary_color[1], self.secondary_color[2], 0.3]
@@ -82,7 +115,11 @@ class GameScreen(LinconymScreen):
 
         self.nb_stars = USER_DATA.classic_mode[self.current_act_id][self.current_level_id]["nb_stars"]
 
-        self.ids["tree_layout"].build_layout()
+        # Build the tree with the saved data
+        self.ids["tree_layout"].build_layout(
+            position_to_word_id=position_to_word_id,
+            words_found=words_found,
+            current_position=current_position)
 
         temp = self.current_act_id.replace("Act", "")
         self.current_level_name = "Act " + temp + " – " + self.current_level_id

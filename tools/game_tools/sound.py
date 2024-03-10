@@ -101,7 +101,7 @@ class DynamicMusicMixer(MusicMixer):
         Parameters
         ----------
         sound_dict : dict
-            Dictionnary containing the sounds to add.
+            Dictionary containing the sounds to add.
         """
         for sound_name in sound_dict:
             self.dico_frame_state[sound_name] = 0
@@ -262,7 +262,7 @@ def load_sounds(music_list: str, foldername: str, volume: float) -> dict:
     Returns
     -------
     dict
-        Dictionnary with the loaded sounds.
+        Dictionary with the loaded sounds.
     """
     sound_dict = {}
     for file in music_list:

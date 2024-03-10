@@ -3,10 +3,7 @@
         "Act1": {
             "1": {
                 "nb_stars": 3,
-                "best_solution_nb_words": 5,
-                "words_found": [],
-                "position_to_word_id": {},
-                "current_position": ""
+                "best_solution_nb_words": 5
             }
         }
     },

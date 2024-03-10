@@ -54,7 +54,7 @@ def save_json_file(file_path: str, dict_to_save: dict) -> None:
         Path of the json file
 
     dict_to_save : dict
-        Dictionnary to save
+        Dictionary to save
 
     Returns
     -------
