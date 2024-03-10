@@ -29,7 +29,7 @@ from tools.constants import (
 from screens.custom_widgets import (
     AchievementsLayout
 )
-from tools.kivy_tools import (
+from screens.custom_widgets import (
     LinconymScreen
 )
 
@@ -45,13 +45,12 @@ class AchievementsScreen(LinconymScreen):
     """
 
     dict_type_screen = {
-        SCREEN_TITLE : "Achievements",
-        SCREEN_BOTTOM_BAR : "none",
-        SCREEN_BACK_ARROW : "",
-        SCREEN_TUTORIAL : ""
+        SCREEN_TITLE: "Achievements",
+        SCREEN_BOTTOM_BAR: "none",
+        SCREEN_BACK_ARROW: "",
+        SCREEN_TUTORIAL: ""
     }
-    mode : Literal["classic", "daily"] = StringProperty() 
-
+    mode: Literal["classic", "daily"] = StringProperty()
 
     def on_pre_enter(self, *args):
         super().on_pre_enter(*args)
@@ -95,7 +94,7 @@ class AchievementsScreen(LinconymScreen):
                 primary_color=self.primary_color,
                 secondary_color=self.secondary_color,
                 size_hint=(0.8, None),
-                height=150*self.font_ratio)
+                height=150 * self.font_ratio)
             current_achievement_layout.has_completed = has_completed
             current_achievement_layout.has_got_reward = has_got_reward
 

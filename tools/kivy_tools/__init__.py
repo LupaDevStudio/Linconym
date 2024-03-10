@@ -13,12 +13,13 @@ from kivy.lang import Builder
 
 ### Package imports ###
 
-from tools.kivy_tools.tools_kivy import MyScrollViewLayout
-from tools.kivy_tools.screen import ImprovedScreen, LinconymScreen
-from tools.kivy_tools.image_with_text import ImageWithText
 from tools.kivy_tools.image_with_text_button import ImageWithTextButton
 from tools.kivy_tools.image_button import ImageButton
+print("image button created")
 from tools.kivy_tools.colors import change_color_opacity
+from tools.kivy_tools.tools_kivy import MyScrollViewLayout
+from tools.kivy_tools.screen import ImprovedScreen
+from tools.kivy_tools.image_with_text import ImageWithText
 
 ###############
 ### Process ###

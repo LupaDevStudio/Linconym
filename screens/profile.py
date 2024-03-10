@@ -24,7 +24,7 @@ from tools.constants import (
     SCREEN_TITLE,
     SCREEN_TUTORIAL
 )
-from tools.kivy_tools import (
+from screens.custom_widgets import (
     LinconymScreen
 )
 
@@ -40,9 +40,9 @@ class ProfileScreen(LinconymScreen):
     """
 
     dict_type_screen = {
-        SCREEN_TITLE : "Profile",
-        SCREEN_BOTTOM_BAR : "profile",
-        SCREEN_TUTORIAL : ""
+        SCREEN_TITLE: "Profile",
+        SCREEN_BOTTOM_BAR: "profile",
+        SCREEN_TUTORIAL: ""
     }
 
     user_status = StringProperty()
@@ -64,8 +64,10 @@ class ProfileScreen(LinconymScreen):
         self.user_status = USER_DATA.user_profile["status"]
         self.user_status_image = PATH_BADGES + self.user_status.lower() + ".png"
 
-        self.classic_mode_achievements = "Completed levels: %i\nCompleted acts: %i\nStars won: %i\n\nClick to see all achievements."%(14, 1, 32)
-        self.daily_mode_achievements = "Completed levels: %i\n\nClick to see all achievements."%(14)
+        self.classic_mode_achievements = "Completed levels: %i\nCompleted acts: %i\nStars won: %i\n\nClick to see all achievements." % (
+            14, 1, 32)
+        self.daily_mode_achievements = "Completed levels: %i\n\nClick to see all achievements." % (
+            14)
 
         return super().on_enter(*args)
 

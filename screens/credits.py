@@ -26,7 +26,7 @@ from tools.constants import (
     SCREEN_BOTTOM_BAR,
     SMALL_LABEL_FONT_SIZE
 )
-from tools.kivy_tools import (
+from screens.custom_widgets import (
     LinconymScreen
 )
 from screens import (
@@ -45,9 +45,9 @@ class CreditsScreen(LinconymScreen):
     """
 
     dict_type_screen = {
-        SCREEN_TITLE : "Credits",
-        SCREEN_BACK_ARROW : "",
-        SCREEN_BOTTOM_BAR : "none"
+        SCREEN_TITLE: "Credits",
+        SCREEN_BACK_ARROW: "",
+        SCREEN_BOTTOM_BAR: "none"
     }
     number_lines_credits = NumericProperty()
 
@@ -66,7 +66,8 @@ class CreditsScreen(LinconymScreen):
         musics_dict = CREDITS_DICT["musics"]
         for music in musics_dict:
             self.number_lines_credits += 1
-            title = musics_dict[music]["name"] + " – " + musics_dict[music]["author"]
+            title = musics_dict[music]["name"] + \
+                " – " + musics_dict[music]["author"]
             music_credit_layout = MusicLayout(
                 music_title=title,
                 font_ratio=self.font_ratio * 0.8,

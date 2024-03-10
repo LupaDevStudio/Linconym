@@ -26,7 +26,7 @@ from tools.constants import (
     SCREEN_BOTTOM_BAR,
     SCREEN_TUTORIAL
 )
-from tools.kivy_tools import (
+from screens.custom_widgets import (
     LinconymScreen
 )
 from tools.path import (

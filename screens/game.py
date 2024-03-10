@@ -26,7 +26,7 @@ from tools.constants import (
     SCREEN_BACK_ARROW,
     SCREEN_TUTORIAL
 )
-from tools.kivy_tools import (
+from screens.custom_widgets import (
     LinconymScreen
 )
 from tools import (
@@ -51,8 +51,8 @@ class GameScreen(LinconymScreen):
 
     current_level_name = StringProperty()
     dict_type_screen = {
-        SCREEN_BACK_ARROW : "",
-        SCREEN_TUTORIAL : ""
+        SCREEN_BACK_ARROW: "",
+        SCREEN_TUTORIAL: ""
     }
 
     nb_stars = NumericProperty()
@@ -264,6 +264,6 @@ class GameScreen(LinconymScreen):
             "current_act_id": self.current_act_id
         }
         self.go_to_next_screen(
-            screen_name=screen_name, 
+            screen_name=screen_name,
             current_dict_kwargs=dict_kwargs,
             next_dict_kwargs=dict_kwargs)
