@@ -23,7 +23,7 @@ from tools.constants import (
     USER_DATA,
     GAMEPLAY_DICT
 )
-from tools.kivy_tools import (
+from screens.custom_widgets import (
     LinconymScreen
 )
 from screens.custom_widgets import (
@@ -42,12 +42,12 @@ class QuestsScreen(LinconymScreen):
     """
 
     dict_type_screen = {
-        SCREEN_TITLE : "Quests",
-        SCREEN_BOTTOM_BAR : "none",
-        SCREEN_BACK_ARROW : "",
-        SCREEN_TUTORIAL : ""
+        SCREEN_TITLE: "Quests",
+        SCREEN_BOTTOM_BAR: "none",
+        SCREEN_BACK_ARROW: "",
+        SCREEN_TUTORIAL: ""
     }
-    current_act_name : str = StringProperty()
+    current_act_name: str = StringProperty()
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
@@ -79,7 +79,8 @@ class QuestsScreen(LinconymScreen):
                         quest_id=quest_id
                     )
 
-                    self.QUESTS_LAYOUT_DICT[level_id + quest_id] = current_quest_layout
+                    self.QUESTS_LAYOUT_DICT[level_id +
+                                            quest_id] = current_quest_layout
                     scrollview_layout.add_widget(current_quest_layout)
 
         else:
@@ -90,7 +91,8 @@ class QuestsScreen(LinconymScreen):
                         quest_id=quest_id
                     )
 
-                    self.QUESTS_LAYOUT_DICT[level_id + quest_id] = current_quest_layout
+                    self.QUESTS_LAYOUT_DICT[level_id +
+                                            quest_id] = current_quest_layout
                     scrollview_layout.add_widget(current_quest_layout)
 
     def create_quest_layout(self, level_id: str, quest_id: str):
@@ -116,10 +118,10 @@ class QuestsScreen(LinconymScreen):
             primary_color=self.primary_color,
             secondary_color=self.secondary_color,
             size_hint=(0.8, None),
-            height=150*self.font_ratio)
+            height=150 * self.font_ratio)
         current_quest_layout.has_completed = has_completed
         current_quest_layout.has_got_reward = has_got_reward
-        
+
         return current_quest_layout
 
     def on_leave(self, *args):

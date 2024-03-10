@@ -19,7 +19,7 @@ from tools.constants import (
     SCREEN_BOTTOM_BAR,
     SCREEN_TUTORIAL
 )
-from tools.kivy_tools import (
+from screens.custom_widgets import (
     LinconymScreen
 )
 from tools import (
@@ -38,15 +38,15 @@ class LevelsScreen(LinconymScreen):
     """
 
     dict_type_screen = {
-        SCREEN_BOTTOM_BAR : "none",
-        SCREEN_BACK_ARROW : "",
-        SCREEN_TUTORIAL : ""
+        SCREEN_BOTTOM_BAR: "none",
+        SCREEN_BACK_ARROW: "",
+        SCREEN_TUTORIAL: ""
     }
     current_act_name = StringProperty()
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
-        self.current_act_id : str
+        self.current_act_id: str
 
     def reload_kwargs(self, dict_kwargs):
         self.current_act_id = dict_kwargs["current_act_id"]

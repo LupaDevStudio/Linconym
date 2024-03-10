@@ -21,7 +21,7 @@ from tools.constants import (
     SCREEN_BACK_ARROW,
     USER_DATA
 )
-from tools.kivy_tools import (
+from screens.custom_widgets import (
     LinconymScreen
 )
 

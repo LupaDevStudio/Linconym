@@ -16,7 +16,7 @@ from kivy.properties import (
 
 ### Local imports ###
 
-from screens.custom_widgets.custom_popup import CustomPopup
+from screens.custom_widgets.popup.custom_popup import CustomPopup
 
 #############
 ### Class ###

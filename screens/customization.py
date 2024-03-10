@@ -11,7 +11,7 @@ from tools.constants import (
     SCREEN_BOTTOM_BAR,
     SCREEN_TUTORIAL
 )
-from tools.kivy_tools import (
+from screens.custom_widgets import (
     LinconymScreen
 )
 from tools import (
@@ -30,9 +30,9 @@ class CustomizationScreen(LinconymScreen):
     """
 
     dict_type_screen = {
-        SCREEN_TITLE : "Customization",
-        SCREEN_BOTTOM_BAR : "customization",
-        SCREEN_TUTORIAL : ""
+        SCREEN_TITLE: "Customization",
+        SCREEN_BOTTOM_BAR: "customization",
+        SCREEN_TUTORIAL: ""
     }
 
     def open_musics_screen(self, *_):

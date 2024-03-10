@@ -24,7 +24,7 @@ from tools.constants import (
     SCREEN_BOTTOM_BAR,
     SCREEN_TITLE
 )
-from tools.kivy_tools import (
+from screens.custom_widgets import (
     LinconymScreen
 )
 
@@ -40,10 +40,10 @@ class BoostersScreen(LinconymScreen):
     """
 
     dict_type_screen = {
-        SCREEN_TITLE : "Boosters",
-        SCREEN_BOTTOM_BAR : "none",
-        SCREEN_BACK_ARROW : "",
-        SCREEN_TUTORIAL : ""
+        SCREEN_TITLE: "Boosters",
+        SCREEN_BOTTOM_BAR: "none",
+        SCREEN_BACK_ARROW: "",
+        SCREEN_TUTORIAL: ""
     }
 
     coins_count = NumericProperty()

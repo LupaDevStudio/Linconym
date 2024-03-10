@@ -19,7 +19,7 @@ from tools.constants import (
     SCREEN_TITLE,
     SCREEN_BOTTOM_BAR
 )
-from tools.kivy_tools import (
+from screens.custom_widgets import (
     LinconymScreen
 )
 from screens.custom_widgets import (
@@ -34,9 +34,9 @@ from screens.custom_widgets import (
 class ClassicModeScreen(LinconymScreen):
 
     dict_type_screen = {
-        SCREEN_TITLE : "Classic Mode",
-        SCREEN_BOTTOM_BAR : "none",
-        SCREEN_TUTORIAL : ""
+        SCREEN_TITLE: "Classic Mode",
+        SCREEN_BOTTOM_BAR: "none",
+        SCREEN_TUTORIAL: ""
     }
 
     def __init__(self, **kwargs) -> None:
@@ -80,8 +80,8 @@ class ClassicModeScreen(LinconymScreen):
 
     def open_levels_screen(self, act_id):
         dict_kwargs = {
-                "current_act_id": act_id
-            }
+            "current_act_id": act_id
+        }
         self.manager.go_to_next_screen(
             next_screen_name="levels",
             next_dict_kwargs=dict_kwargs)
