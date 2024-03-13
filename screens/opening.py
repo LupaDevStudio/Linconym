@@ -70,7 +70,8 @@ class OpeningScreen(ImprovedScreen):
             PreviewScreen,
             MusicsScreen,
             ConfigureTreeScreen,
-            AchievementsScreen
+            AchievementsScreen,
+            BadgesScreen
         )
 
         screen_files = [file for file in os.listdir(
@@ -104,6 +105,7 @@ class OpeningScreen(ImprovedScreen):
         self.MusicsScreen = MusicsScreen
         self.ConfigureTreeScreen = ConfigureTreeScreen
         self.AchievementsScreen = AchievementsScreen
+        self.BadgesScreen = BadgesScreen
 
         Clock.schedule_once(self.load_other_screens)
 
@@ -113,34 +115,53 @@ class OpeningScreen(ImprovedScreen):
     def load_other_screens(self, *args):
 
         ### Load the kv files of the screens ###
+
         home_screen = self.HomeScreen(name="home")
         self.manager.add_widget(home_screen)
+
         settings_screen = self.SettingsScreen(name="settings")
         self.manager.add_widget(settings_screen)
+
         profile_screen = self.ProfileScreen(name="profile")
         self.manager.add_widget(profile_screen)
+
         themes_screen = self.ThemesScreen(name="themes")
         self.manager.add_widget(themes_screen)
+
         classic_mode_screen = self.ClassicModeScreen(name="classic_mode")
         self.manager.add_widget(classic_mode_screen)
+
         boosters_screen = self.BoostersScreen(name="boosters")
         self.manager.add_widget(boosters_screen)
+
         levels_screen = self.LevelsScreen(name="levels")
         self.manager.add_widget(levels_screen)
+
         game_screen = self.GameScreen(name="game")
         self.manager.add_widget(game_screen)
+
         quests_screen = self.QuestsScreen(name="quests")
         self.manager.add_widget(quests_screen)
+
         customization_screen = self.CustomizationScreen(name="customization")
         self.manager.add_widget(customization_screen)
+        
         credits_screen = self.CreditsScreen(name="credits")
         self.manager.add_widget(credits_screen)
+
         preview_screen = self.PreviewScreen(name="preview")
         self.manager.add_widget(preview_screen)
+
         musics_screen = self.MusicsScreen(name="musics")
         self.manager.add_widget(musics_screen)
+
         configure_tree_screen = self.ConfigureTreeScreen(name="configure_tree")
         self.manager.add_widget(configure_tree_screen)
+
         achievements_screen = self.AchievementsScreen(name="achievements")
         self.manager.add_widget(achievements_screen)
+
+        badges_screen = self.BadgesScreen(name="badges")
+        self.manager.add_widget(badges_screen)
+
         Clock.schedule_once(self.switch_to_menu)

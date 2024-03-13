@@ -6,6 +6,10 @@ Module to create an improved kivy screen for Linconym.
 ### Imports ###
 ###############
 
+### Python imports ###
+
+from functools import partial
+
 ### Kivy imports ###
 
 from kivy.properties import (
@@ -76,9 +80,12 @@ class LinconymScreen(ImprovedScreen):
         if not SCREEN_BACK_ARROW in self.dict_type_screen:
             self.remove_widget(self.ids.back_arrow)
 
-        # Display the tutorial icon or not
+        # Display the tutorial icon or not, and set its associated function
         if not SCREEN_TUTORIAL in self.dict_type_screen:
             self.remove_widget(self.ids.tutorial_button)
+        else:
+            self.ids.tutorial_button.release_function = partial(
+                self.open_tutorial, self.name)
 
     def on_pre_enter(self, *args):
         # current_theme_image = USER_DATA.settings["current_theme_image"]

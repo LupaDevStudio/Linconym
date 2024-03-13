@@ -120,7 +120,7 @@ def get_word_position(input_word: str, position_to_word_id: Dict[str, int], word
 
 def is_in_english_words(word: str):
     """
-    Indicates whether a word belongs to the english words dictionnary or not.
+    Indicates whether a word belongs to the english words dictionary or not.
 
     Parameters
     ----------
@@ -130,7 +130,7 @@ def is_in_english_words(word: str):
     Returns
     -------
     bool
-        True if the word is in the dictionnary, False otherwise.
+        True if the word is in the dictionary, False otherwise.
     """
 
     return dichotomy(word, ENGLISH_WORDS_DICTS["280k"]) is not None
@@ -239,7 +239,7 @@ def is_valid(new_word: str, current_word: str, skip_in_english_words: bool = Fal
     else:
         derive_bool = False
 
-    # Check if the new word is in the english dictionnary
+    # Check if the new word is in the english dictionary
     if skip_in_english_words:
         english_words_bool = True
     else:

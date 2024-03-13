@@ -295,12 +295,22 @@ class GameScreen(LinconymScreen):
         # self.ids.submit_button.opacity = 0
         self.ids.submit_button.disable_button = True
 
-    def go_to_quests_tree_screen(self, screen_name: Literal["quests", "configure_tree"]):
+    def go_to_quests_screen(self):
         dict_kwargs = {
             "current_level_id": self.current_level_id,
             "current_act_id": self.current_act_id
         }
         self.go_to_next_screen(
-            screen_name=screen_name,
+            screen_name="quests",
+            current_dict_kwargs=dict_kwargs,
+            next_dict_kwargs=dict_kwargs)
+
+    def go_to_configure_tree_screen(self):
+        dict_kwargs = {
+            "current_level_id": self.current_level_id,
+            "current_act_id": self.current_act_id
+        }
+        self.go_to_next_screen(
+            screen_name="configure_tree",
             current_dict_kwargs=dict_kwargs,
             next_dict_kwargs=dict_kwargs)

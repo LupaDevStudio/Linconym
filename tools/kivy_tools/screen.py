@@ -59,7 +59,7 @@ class ImprovedScreen(Screen):
 
     def __init__(self, font_name="Roboto", back_image_path="", second_back_image_path="", **kw):
 
-        # Create a dictionnary to store the positions of hidden widgets
+        # Create a dictionary to store the positions of hidden widgets
         self.temp_pos = {}
 
         # Boolean to indicate whether the screen is loaded or no

@@ -25,17 +25,18 @@ from screens.custom_widgets import (
 
 # Import the screens
 from screens.home import HomeScreen
+from screens.customization import CustomizationScreen
 from screens.profile import ProfileScreen
-from screens.themes import ThemesScreen
 from screens.settings import SettingsScreen
 from screens.classic_mode import ClassicModeScreen
-from screens.boosters import BoostersScreen
 from screens.levels import LevelsScreen
-from screens.customization import CustomizationScreen
 from screens.game import GameScreen
+from screens.configure_tree import ConfigureTreeScreen
 from screens.quests import QuestsScreen
-from screens.credits import CreditsScreen
+from screens.themes import ThemesScreen
 from screens.preview import PreviewScreen
 from screens.musics import MusicsScreen
-from screens.configure_tree import ConfigureTreeScreen
+from screens.boosters import BoostersScreen
+from screens.badges import BadgesScreen
 from screens.achievements import AchievementsScreen
+from screens.credits import CreditsScreen

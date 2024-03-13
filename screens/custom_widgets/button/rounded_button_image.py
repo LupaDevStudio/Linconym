@@ -38,21 +38,16 @@ class RoundedButtonImage(ButtonBehavior, RelativeLayout):
 
     background_color = ColorProperty(CUSTOM_BUTTON_BACKGROUND_COLOR)
     image_path = StringProperty()
-    colors = ObjectProperty()
+    is_icon_color = BooleanProperty(True) # if it's an icon to be colored or not
+    colors = ColorProperty((0, 0, 0, 1))
+    font_ratio = NumericProperty(1)
     radius = NumericProperty(20)
+    release_function = ObjectProperty()
     disable_button = BooleanProperty(False)
 
-    def __init__(
-            self,
-            image_path:str="",
-            colors=(0, 0, 0, 1),
-            release_function=lambda: 1 + 1,
-            **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.release_function = release_function
-        self.image_path = image_path
-        self.colors = colors
         self.always_release = True
 
     def on_press(self):

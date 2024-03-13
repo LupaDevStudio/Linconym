@@ -9,7 +9,7 @@
         RoundedRectangle:
             pos:(0,0)
             size:self.size
-            radius:[self.radius,]
+            radius:[self.radius*self.font_ratio,]
 
     # Image
     Image:
@@ -17,4 +17,4 @@
         source: root.image_path
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
         size_hint: (0.6, 0.6)
-        color: root.colors
+        color: root.colors if root.is_icon_color else (1, 1, 1, 1)

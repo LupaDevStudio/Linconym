@@ -8,20 +8,6 @@
 
     canvas.before:
         Color:
-            rgba: self.exterior_color
-        RoundedRectangle:
-            pos: (self.pos[0]-OUTLINE_OUTSIDE_RECTANGLE//2, self.pos[1]-OUTLINE_OUTSIDE_RECTANGLE//2)
-            size: (self.size[0]+OUTLINE_OUTSIDE_RECTANGLE, self.size[1]+OUTLINE_OUTSIDE_RECTANGLE)
-            radius: [100]
-        Color:
-            rgba: self.interior_color
-        RoundedRectangle:
-            pos: (self.pos[0]-OUTLINE_INSIDE_RECTANGLE//2, self.pos[1]-OUTLINE_INSIDE_RECTANGLE//2)
-            size: (self.size[0]+OUTLINE_INSIDE_RECTANGLE, self.size[1]+OUTLINE_INSIDE_RECTANGLE)
-            radius: [100]
-
-    canvas:
-        Color:
             rgba: self.color
         StencilPush
         RoundedRectangle:

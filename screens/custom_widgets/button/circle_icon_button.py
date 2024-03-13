@@ -12,7 +12,6 @@ from kivy.uix.image import Image
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.properties import (
     BooleanProperty,
-    ColorProperty,
     ObjectProperty
 )
 
@@ -34,8 +33,6 @@ class CircleIconButton(ButtonBehavior, Image):
 
     disable_button = BooleanProperty(False)
     release_function = ObjectProperty()
-    exterior_color = ColorProperty((0,0,0,1))
-    interior_color = ColorProperty((1,1,1,1))
 
     def __init__(
             self,

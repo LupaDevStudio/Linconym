@@ -54,7 +54,7 @@
         size_hint: (0.1, None)
         height: self.width
         colors: root.primary_color
-        on_release: root.go_to_quests_tree_screen("configure_tree")
+        release_function: root.go_to_configure_tree_screen
 
     # Previous word
     ColoredRoundedButton:
@@ -97,4 +97,4 @@
         size_hint: (0.1, None)
         height: self.width
         colors: root.primary_color
-        on_release: root.go_to_quests_tree_screen("quests")
+        release_function: root.go_to_quests_screen
